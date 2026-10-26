@@ -1,0 +1,1 @@
+{"name":"nimasdiner-delivery","private":true,"type":"module","scripts":{"build":"bash scripts/build.sh"}}
