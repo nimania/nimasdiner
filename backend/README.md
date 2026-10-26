@@ -1,6 +1,10 @@
 # Private Gmail delivery backend
 
-Status: source tested locally; Google authorization, web-app deployment and production cutover are pending. The current public form still uses FormSubmit.
+Status: live. Google authorization and setup completed; web app deployed as owner with Anyone access. The public form posts to Apps Script. Live test verified confirmation email, confirmation POST, book email, private file response and recorded request count. Public PDF removed from the current published tree.
+
+Web app: https://script.google.com/macros/s/AKfycbyXa2319CfBEm2_CPmtSyymm1uLYZ1kMsOL18FrQG_GTD_ObbemQTUPjjhHltF7fI2Q/exec
+
+The remaining numbered steps document the setup/cutover procedure, already completed.
 
 Apps Script project: https://script.google.com/home/projects/1O_5QIjbkg7e52Vualbjqta8QZjNtZATyDfq9qF2rLPO-pXYN-STtPIfG/edit
 
