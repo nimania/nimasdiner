@@ -1,5 +1,5 @@
 /** Nima's Diner — Gmail / private Sheets / private Drive. */
-const ND = {site:'https://nimania.github.io/nimasdiner/', owner:'nimania@gmail.com', maxDailyRegistrations:60};
+const ND = {site:'https://nimania.github.io/nimasdiner/', owner:'nimania@gmail.com', delivery:'https://nimasdiner-delivery.iran.chatgpt.site/', maxDailyRegistrations:60};
 const COL=['id','created_at','name','email','phone','role','location_region','country','city','restaurant_type','instagram','marketing_consent','status','confirmed_at','confirm_hash','confirm_expires','download_hash','download_expires','download_requested_at','download_request_count','last_confirmation_queued_at'];
 const JOB=['id','created_at','recipient','subject','html','status','attempts','last_error','sent_at'];
 function setup(){
@@ -23,7 +23,7 @@ function rows_(){const sh=db_().getSheetByName('Subscribers');return sh.getLastR
 function save_(record){db_().getSheetByName('Subscribers').getRange(record.row,1,1,COL.length).setValues([COL.map(c=>cell_(record.data[c]))]);}
 function event_(id,type){db_().getSheetByName('Events').appendRow([now_(),id,type]);}
 function enqueue_(to,subject,html){db_().getSheetByName('Queue').appendRow([random_(),now_(),to,subject,html,'pending',0,'','']);}
-function url_(action,token){return ScriptApp.getService().getUrl()+'?action='+action+'&token='+encodeURIComponent(token);}
+function url_(action,token){return ND.delivery+'#action='+action+'&token='+encodeURIComponent(token);}
 function mail_(title,body){return '<div dir="rtl" style="font-family:Tahoma,Arial;background:#faf8f1;color:#1b2529;padding:28px;line-height:2"><div style="border-top:8px solid #ffcf22;padding-top:20px"><b>نیما داینر</b><h2>'+esc_(title)+'</h2>'+body+'<p style="font-size:12px">نیما افشارنادری · <a href="'+ND.site+'">نیما داینر</a></p></div></div>';}
 function button_(label,url){return '<p><a style="display:inline-block;background:#1b2529;color:#ffcf22;padding:12px 22px;text-decoration:none;border-radius:4px" href="'+esc_(url)+'">'+esc_(label)+'</a></p>';}
 function page_(title,body,script){return HtmlService.createHtmlOutput('<!doctype html><html lang="fa" dir="rtl"><head><base target="_top"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="'+ND.site+'style.css"><title>'+esc_(title)+' | نیما داینر</title></head><body><header class="header wrap"><a class="brand" href="'+ND.site+'"><span class="brand-fa">نیما داینر<span class="red-dot">.</span></span></a></header><main class="simple-page wrap"><h1>'+esc_(title)+'</h1>'+body+'</main><div class="checker"></div>'+(script?'<script>'+script+'</script>':'')+'</body></html>').setTitle(title+' | نیما داینر');}
@@ -38,6 +38,7 @@ function doGet(e){
 }
 function doPost(e){
  try{const p=e&&e.parameter||{};if(e&&e.contentLength>15000)return page_('درخواست نامعتبر','<p>لطفاً دوباره از فرم سایت اقدام کنید.</p>');
+  if(/^api_/.test(p.action||''))return api_(p);
   if(p.action==='confirm')return confirm_(String(p.token||''));
   return register_(p);
  }catch(err){console.error(String(err));return page_('ارسال انجام نشد','<p>مشکلی در ثبت درخواست پیش آمد. کمی بعد دوباره تلاش کنید. اطلاعاتی به عنوان تأییدشده ثبت نشده است.</p><a href="'+ND.site+'#get-book">بازگشت به فرم</a>');}
@@ -49,7 +50,12 @@ function register_(p){
  const lock=LockService.getScriptLock();lock.waitLock(20000);
  try{
   const rows=rows_();let record=rows.find(r=>r.data.email===email);const time=Date.now();
-  if(record){return page_('ایمیلتان را بررسی کنید','<p>اگر قبلاً درخواست داده‌اید، لینک ارسالی را در صندوق ورودی یا پوشهٔ هرزنامه پیدا کنید. برای کمک به <a href="mailto:'+ND.owner+'">'+ND.owner+'</a> پیام بدهید.</p>');}
+  if(record){
+   if(record.data.status==='pending'&&Date.now()-Date.parse(record.data.last_confirmation_queued_at)>3600000){
+    const token=random_();record.data.confirm_hash=hash_(token);record.data.confirm_expires=new Date(Date.now()+7*86400000).toISOString();record.data.last_confirmation_queued_at=now_();
+    save_(record);enqueue_(email,'لینک تازهٔ تأیید ایمیل | نیما داینر',mail_('یک قدم تا کتاب','<p>این لینک تازه جایگزین لینک قبلی است. برای تأیید ایمیل و دریافت کتاب بزنید:</p>'+button_('تأیید ایمیل',url_('confirm',token))));event_(record.data.id,'confirmation_requeued');
+   }
+   return page_('ایمیلتان را بررسی کنید','<p>اگر قبلاً درخواست داده‌اید، لینک ارسالی را در صندوق ورودی یا پوشهٔ هرزنامه پیدا کنید. برای کمک به <a href="mailto:'+ND.owner+'">'+ND.owner+'</a> پیام بدهید.</p>');}
   const today=now_().slice(0,10);if(rows.filter(r=>String(r.data.created_at).slice(0,10)===today).length>=ND.maxDailyRegistrations)return page_('ظرفیت امروز تکمیل شده','<p>برای حفظ امکان ارسال ایمیل‌ها، ثبت‌نام امروز به ظرفیت رسیده است. لطفاً فردا دوباره مراجعه کنید.</p>');
   const token=random_();const data={id:random_(),created_at:now_(),name,email,phone:text_(p.phone,30),role:text_(p.role,100),location_region:['iran','outside_iran'].includes(p.location_region)?p.location_region:'',country:p.location_region==='iran'?'ایران':text_(p.country,100),city:text_(p.city,100),restaurant_type:text_(p.restaurant_type,100),instagram:text_(p.instagram,200),marketing_consent:p.marketing_consent==='yes'?'yes':'no',status:'pending',confirmed_at:'',confirm_hash:hash_(token),confirm_expires:new Date(time+7*86400000).toISOString(),download_hash:'',download_expires:'',download_requested_at:'',download_request_count:0,last_confirmation_queued_at:now_()};
   db_().getSheetByName('Subscribers').appendRow(COL.map(c=>cell_(data[c])));event_(data.id,'registration');
@@ -85,3 +91,24 @@ function processQueue(){
 }
 
 function plainMail_(html){return html.replace(/<a[^>]*href="([^"\n]+)"[^>]*>([\s\S]*?)<\/a>/gi,'$2 ($1)').replace(/<[^>]+>/g,' ' ).replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/ +/g,' ');}
+
+function json_(data){return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);}
+function api_(p){
+ try{
+  if(p.action==='api_download')return json_({ok:true,...requestFile(String(p.token||''))});
+  if(p.action==='api_confirm'){
+   const result=confirm_(String(p.token||'')).getContent();
+   const token=(result.match(/action=download(?:&amp;|&)token=([a-f0-9]{64})/)||[])[1];
+   if(token)return json_({ok:true,token});
+   if(result.includes('ایمیل شما تأیید شده است'))return json_({ok:true,message:'ایمیل قبلاً تأیید شده است؛ لینک دریافت کتاب در ایمیل شماست.'});
+   return json_({ok:false,code:'INVALID_LINK'});
+  }
+  if(p.action==='api_register'){
+   const html=register_(p).getContent();
+   const title=(html.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||'ایمیلتان را بررسی کنید';
+   const messages={'اطلاعات را کامل کنید':'نام و ایمیل معتبر لازم است.','ظرفیت امروز تکمیل شده':'ظرفیت ثبت‌نام امروز تکمیل شده است؛ فردا دوباره مراجعه کنید.'};
+   return json_({ok:true,title,message:messages[title]||'برای تأیید ایمیل و دریافت کتاب، لینک داخل پیام ارسالی را باز کنید. اگر قبلاً ثبت‌نام کرده‌اید، از آخرین پیام استفاده کنید.'});
+  }
+  return json_({ok:false,code:'INVALID_ACTION'});
+ }catch(e){console.error(String(e));return json_({ok:false,code:'REQUEST_FAILED'});}
+}

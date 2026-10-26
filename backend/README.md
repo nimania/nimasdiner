@@ -19,3 +19,9 @@ Only name and email are required. Marketing updates require explicit yes consent
 Test: `node backend/tests/flow.cjs` (mock services, no real email).
 
 No account password, OAuth token or API secret is stored in this repository.
+
+## Mobile delivery fix
+
+The public form now posts to the public Nima Diner delivery Worker (`https://nimasdiner-delivery.iran.chatgpt.site/register`). Email links use this origin with fragment tokens; browser requests never navigate to Google. The Worker sends bounded server-side POST requests to Apps Script JSON actions, validates tokens, and returns the PDF with no-store and attachment headers. No subscriber directory or public PDF endpoint exists.
+
+The Worker source is held by Sites project `appgprj_6adf3c1cbcac81918e621e51eb6ee47f`. It preserves private Sheets, Gmail quota queue, POST confirmation and download request accounting. Existing emails retain old URLs. A pending subscriber can request a replacement after one hour by resubmitting the same address; replacements use the new origin and invalidate the older confirmation token. The queue sends them within its normal interval.
