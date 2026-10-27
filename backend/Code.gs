@@ -43,27 +43,37 @@ function doPost(e){
   return register_(p);
  }catch(err){console.error(String(err));return page_('ارسال انجام نشد','<p>مشکلی در ثبت درخواست پیش آمد. کمی بعد دوباره تلاش کنید. اطلاعاتی به عنوان تأییدشده ثبت نشده است.</p><a href="'+ND.site+'#get-book">بازگشت به فرم</a>');}
 }
-function register_(p){
- if(text_(p._honey))return page_('درخواست دریافت شد','<p>لطفاً ایمیلتان را بررسی کنید.</p>');
- const email=text_(p.email,254).toLowerCase(),name=text_(p.name,100);
- if(!name||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return page_('اطلاعات را کامل کنید','<p>نام و ایمیل معتبر لازم است.</p><a href="'+ND.site+'#get-book">بازگشت به فرم</a>');
- const lock=LockService.getScriptLock();lock.waitLock(20000);
+function registerDirect_(p){
+ if(text_(p._honey))return {ok:true,spam:true};
+ const email=text_(p.email,254).toLowerCase(),name=text_(p.name,100),phone=text_(p.phone,30);
+ if(!name||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return {ok:false,code:'INVALID_INPUT'};
+ const lock=LockService.getScriptLock();lock.waitLock(20000);let result,notify=null;
  try{
-  const rows=rows_();let record=rows.find(r=>r.data.email===email);const time=Date.now();
-  if(record){
-   if(record.data.status==='pending'&&Date.now()-Date.parse(record.data.last_confirmation_queued_at)>3600000){
-    const token=random_();record.data.confirm_hash=hash_(token);record.data.confirm_expires=new Date(Date.now()+7*86400000).toISOString();record.data.last_confirmation_queued_at=now_();
-    save_(record);enqueue_(email,'لینک تازهٔ تأیید ایمیل | نیما داینر',mail_('یک قدم تا کتاب','<p>این لینک تازه جایگزین لینک قبلی است. برای تأیید ایمیل و دریافت کتاب بزنید:</p>'+button_('تأیید ایمیل',url_('confirm',token))));event_(record.data.id,'confirmation_requeued');
-   }
-   return page_('ایمیلتان را بررسی کنید','<p>اگر قبلاً درخواست داده‌اید، لینک ارسالی را در صندوق ورودی یا پوشهٔ هرزنامه پیدا کنید. برای کمک به <a href="mailto:'+ND.owner+'">'+ND.owner+'</a> پیام بدهید.</p>');}
-  const today=now_().slice(0,10);if(rows.filter(r=>String(r.data.created_at).slice(0,10)===today).length>=ND.maxDailyRegistrations)return page_('ظرفیت امروز تکمیل شده','<p>برای حفظ امکان ارسال ایمیل‌ها، ثبت‌نام امروز به ظرفیت رسیده است. لطفاً فردا دوباره مراجعه کنید.</p>');
-  const token=random_();const data={id:random_(),created_at:now_(),name,email,phone:text_(p.phone,30),role:text_(p.role,100),location_region:['iran','outside_iran'].includes(p.location_region)?p.location_region:'',country:p.location_region==='iran'?'ایران':text_(p.country,100),city:text_(p.city,100),restaurant_type:text_(p.restaurant_type,100),instagram:text_(p.instagram,200),marketing_consent:p.marketing_consent==='yes'?'yes':'no',status:'pending',confirmed_at:'',confirm_hash:hash_(token),confirm_expires:new Date(time+7*86400000).toISOString(),download_hash:'',download_expires:'',download_requested_at:'',download_request_count:0,last_confirmation_queued_at:now_()};
-  db_().getSheetByName('Subscribers').appendRow(COL.map(c=>cell_(data[c])));event_(data.id,'registration');
-  enqueue_(email,'تأیید ایمیل برای دریافت کتاب نیما داینر',mail_('یک قدم تا کتاب','<p>سلام '+esc_(name)+'،</p><p>برای تأیید ایمیل و دریافت کتاب «مرجع جامع مدیریت رستوران» از دکمهٔ زیر استفاده کنید. لینک ۷ روز اعتبار دارد.</p>'+button_('تأیید ایمیل',url_('confirm',token))+'<p>اگر شما این درخواست را نداده‌اید، این پیام را نادیده بگیرید.</p>'));
-  enqueue_(ND.owner,'نیما داینر | ثبت‌نام تازه',mail_('مخاطب تازه در انتظار تأیید','<p>'+['name','email','phone','role','location_region','country','city','restaurant_type','instagram','marketing_consent'].map(k=>esc_(k)+': '+esc_(data[k])).join('<br>')+'</p><p><a href="'+db_().getUrl()+'">فهرست خصوصی مخاطبان</a></p>'));
+  const all=rows_();let record=all.find(r=>r.data.email===email);
+  if(!record){
+   const today=now_().slice(0,10);
+   if(all.filter(r=>String(r.data.created_at).slice(0,10)===today).length>=ND.maxDailyRegistrations)return {ok:false,code:'DAILY_LIMIT'};
+   const data={id:random_(),created_at:now_(),name,email,phone,role:'',location_region:'',country:'',city:'',restaurant_type:'',instagram:'',marketing_consent:p.marketing_consent==='yes'?'yes':'no',status:'registered',confirmed_at:'',confirm_hash:'',confirm_expires:'',download_hash:'',download_expires:'',download_requested_at:'',download_request_count:0,last_confirmation_queued_at:''};
+   const sh=db_().getSheetByName('Subscribers');sh.appendRow(COL.map(c=>cell_(data[c])));record={row:sh.getLastRow(),data};notify=data;event_(data.id,'registration');
+  }else{
+   record.data.name=name;if(phone)record.data.phone=phone;
+   if(p.marketing_consent==='yes')record.data.marketing_consent='yes';
+  }
+  const token=random_();
+  if(record.data.status!=='confirmed'){record.data.status='registered';record.data.confirmed_at='';}
+  record.data.confirm_hash='';record.data.confirm_expires='';
+  record.data.download_hash=hash_(token);record.data.download_expires=new Date(Date.now()+90*86400000).toISOString();
+  save_(record);event_(record.data.id,'download_link_issued');
+  if(notify)enqueue_(ND.owner,'نیما داینر | ثبت‌نام و دریافت کتاب',mail_('مخاطب تازه در فهرست نیما داینر','<p>'+['name','email','phone','marketing_consent'].map(k=>esc_(k)+': '+esc_(notify[k])).join('<br>')+'</p><p><a href="'+db_().getUrl()+'">فهرست خصوصی مخاطبان</a></p>'));
+  result={ok:true,download_token:token};
  }finally{lock.releaseLock();}
- processQueue();
- return page_('ایمیلتان را بررسی کنید','<div class="download-panel"><p>درخواست شما ثبت شد. برای دریافت کتاب، نشانی ایمیلتان را از طریق لینک ارسالی تأیید کنید.</p><p>پیام ممکن است با کمی تأخیر برسد. پوشهٔ هرزنامه را هم بررسی کنید. در صورت رسیدن به سقف Gmail، ارسال در صف می‌ماند.</p></div><p>اگر دریافت خبرها را انتخاب کرده باشید، نسخه‌های تازهٔ این کتاب و کتاب‌های بعدی نیما داینر را هم به شما اطلاع می‌دهیم.</p>');
+ processQueue();return result;
+}
+function register_(p){
+ const d=registerDirect_(p);
+ if(!d.ok)return page_(d.code==='DAILY_LIMIT'?'ظرفیت امروز تکمیل شده':'اطلاعات را کامل کنید',d.code==='DAILY_LIMIT'?'<p>لطفاً فردا دوباره برای دریافت کتاب اقدام کنید.</p>':'<p>نام و ایمیل معتبر لازم است.</p><a href="'+ND.site+'#get-book">بازگشت به فرم</a>');
+ if(d.spam)return page_('درخواست دریافت شد','<p>اگر درخواست شما واقعی است، از فرم سایت اقدام کنید.</p>');
+ return page_('کتابتان آماده است','<p>درخواست شما ثبت شد. برای دریافت نسخهٔ کامل روی دکمهٔ زیر بزنید.</p>'+button_('دانلود کتاب ↓',url_('download',d.download_token)));
 }
 function confirm_(token){
  if(!/^[a-f0-9]{64}$/.test(token))return page_('لینک نامعتبر','<p>لینک ایمیل را دوباره باز کنید.</p>');
@@ -75,7 +85,7 @@ function confirm_(token){
  }finally{lock.releaseLock();}
  processQueue();return page_('ایمیل شما تأیید شد','<p>لینک اختصاصی کتاب برایتان در صف ارسال قرار گرفت. از همین‌جا هم می‌توانید کتاب را دریافت کنید.</p><a class="button dark" href="'+esc_(url_('download',downloadToken))+'">دریافت کتاب ↓</a>');
 }
-function validDownload_(token){if(!/^[a-f0-9]{64}$/.test(token))throw Error('INVALID_LINK');const r=rows_().find(x=>x.data.download_hash===hash_(token));if(!r||r.data.status!=='confirmed'||Date.parse(r.data.download_expires)<Date.now())throw Error('INVALID_LINK');return r;}
+function validDownload_(token){if(!/^[a-f0-9]{64}$/.test(token))throw Error('INVALID_LINK');const r=rows_().find(x=>x.data.download_hash===hash_(token));if(!r||!['registered','confirmed'].includes(r.data.status)||Date.parse(r.data.download_expires)<Date.now())throw Error('INVALID_LINK');return r;}
 function downloadPage_(token){try{validDownload_(token);}catch(e){return page_('لینک دریافت معتبر نیست','<p>لینک اختصاصی داخل ایمیل را باز کنید. اگر لینک منقضی شده است، با '+ND.owner+' تماس بگیرید.</p>');}
  return page_('کتاب شما اینجاست','<p>مرجع جامع مدیریت رستوران · ۱۰۱ قانون طلایی · نیما افشارنادری</p><button class="button dark" id="get-file">دانلود نسخهٔ کامل ↓</button><p id="status" role="status"></p><p><a href="'+ND.site+'">بازگشت به نیما داینر</a></p>',`document.getElementById('get-file').addEventListener('click',function(){const b=this,s=document.getElementById('status');b.disabled=true;s.textContent='در حال آماده‌سازی فایل…';google.script.run.withSuccessHandler(function(r){const bytes=Uint8Array.from(atob(r.base64),c=>c.charCodeAt(0));const u=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));const a=document.createElement('a');a.href=u;a.download='NimasDiner-Restaurant-Handbook.pdf';a.textContent='اگر دانلود شروع نشد، اینجا بزنید';a.target='_blank';s.textContent='';s.appendChild(a);a.click();b.disabled=false;}).withFailureHandler(function(){s.textContent='دریافت انجام نشد؛ کمی بعد دوباره تلاش کنید.';b.disabled=false;}).requestFile('${token}');});`);
 }
@@ -103,12 +113,7 @@ function api_(p){
    if(result.includes('ایمیل شما تأیید شده است'))return json_({ok:true,message:'ایمیل قبلاً تأیید شده است؛ لینک دریافت کتاب در ایمیل شماست.'});
    return json_({ok:false,code:'INVALID_LINK'});
   }
-  if(p.action==='api_register'){
-   const html=register_(p).getContent();
-   const title=(html.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||'ایمیلتان را بررسی کنید';
-   const messages={'اطلاعات را کامل کنید':'نام و ایمیل معتبر لازم است.','ظرفیت امروز تکمیل شده':'ظرفیت ثبت‌نام امروز تکمیل شده است؛ فردا دوباره مراجعه کنید.'};
-   return json_({ok:true,title,message:messages[title]||'برای تأیید ایمیل و دریافت کتاب، لینک داخل پیام ارسالی را باز کنید. اگر قبلاً ثبت‌نام کرده‌اید، از آخرین پیام استفاده کنید.'});
-  }
+  if(p.action==='api_register')return json_(registerDirect_(p));
   return json_({ok:false,code:'INVALID_ACTION'});
  }catch(e){console.error(String(e));return json_({ok:false,code:'REQUEST_FAILED'});}
 }
