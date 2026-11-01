@@ -12,6 +12,6 @@ assert.equal(JSON.parse(ctx.api_({action:'api_download',token:api.download_token
 assert.equal(JSON.parse(ctx.api_({action:'api_confirm',token:'b'.repeat(64)}).value).ok,false);
 assert.throws(()=>ctx.requestFile('a'.repeat(64)));assert.equal(ctx.cell_('=IMPORTXML()'),"'=IMPORTXML()");
 quota=15;const queued=ctx.registerDirect_({name:'Queued',email:'queued@example.com'});assert.equal(queued.ok,true);assert.equal(tables.Queue.at(-1)[5],'pending');quota=100;ctx.processQueue();assert.equal(sent.length,3);
-for(let i=0;i<65;i++){const b=ctx.registerDirect_({name:'Additional reader '+i,email:'reader'+i+'@example.com'});assert.equal(b.ok,true,'daily signup cap must not return at reader '+i);}
+for(let i=0;i<65;i++){const b=ctx.registerDirect_({name:'Additional reader '+i,email:'fresh-reader-'+i+'@example.com'});assert.equal(b.ok,true,'daily signup cap must not return at reader '+i);}
 assert.equal(tables.Subscribers.length,68);
 console.log('PASS: direct private download, optional fields, consent, counts, duplicate protection, legacy confirmation API rejection, formula escaping, and mail quota queue, and more than 60 daily registrations.');
