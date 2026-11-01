@@ -1,5 +1,5 @@
 /** Nima's Diner — Gmail / private Sheets / private Drive. */
-const ND = {site:'https://nimania.github.io/nimasdiner/', owner:'nimania@gmail.com', delivery:'https://nimasdiner-delivery.iran.chatgpt.site/', maxDailyRegistrations:60};
+const ND = {site:'https://nimania.github.io/nimasdiner/', owner:'nimania@gmail.com', delivery:'https://nimasdiner-delivery.iran.chatgpt.site/'};
 const COL=['id','created_at','name','email','phone','role','location_region','country','city','restaurant_type','instagram','marketing_consent','status','confirmed_at','confirm_hash','confirm_expires','download_hash','download_expires','download_requested_at','download_request_count','last_confirmation_queued_at'];
 const JOB=['id','created_at','recipient','subject','html','status','attempts','last_error','sent_at'];
 function setup(){
@@ -51,8 +51,6 @@ function registerDirect_(p){
  try{
   const all=rows_();let record=all.find(r=>r.data.email===email);
   if(!record){
-   const today=now_().slice(0,10);
-   if(all.filter(r=>String(r.data.created_at).slice(0,10)===today).length>=ND.maxDailyRegistrations)return {ok:false,code:'DAILY_LIMIT'};
    const data={id:random_(),created_at:now_(),name,email,phone,role:'',location_region:'',country:'',city:'',restaurant_type:'',instagram:'',marketing_consent:p.marketing_consent==='yes'?'yes':'no',status:'registered',confirmed_at:'',confirm_hash:'',confirm_expires:'',download_hash:'',download_expires:'',download_requested_at:'',download_request_count:0,last_confirmation_queued_at:''};
    const sh=db_().getSheetByName('Subscribers');sh.appendRow(COL.map(c=>cell_(data[c])));record={row:sh.getLastRow(),data};notify=data;event_(data.id,'registration');
   }else{
@@ -71,7 +69,7 @@ function registerDirect_(p){
 }
 function register_(p){
  const d=registerDirect_(p);
- if(!d.ok)return page_(d.code==='DAILY_LIMIT'?'ظرفیت امروز تکمیل شده':'اطلاعات را کامل کنید',d.code==='DAILY_LIMIT'?'<p>لطفاً فردا دوباره برای دریافت کتاب اقدام کنید.</p>':'<p>نام و ایمیل معتبر لازم است.</p><a href="'+ND.site+'#get-book">بازگشت به فرم</a>');
+ if(!d.ok)return page_('اطلاعات را کامل کنید','<p>نام و ایمیل معتبر لازم است.</p><a href="'+ND.site+'#get-book">بازگشت به فرم</a>');
  if(d.spam)return page_('درخواست دریافت شد','<p>اگر درخواست شما واقعی است، از فرم سایت اقدام کنید.</p>');
  return page_('کتابتان آماده است','<p>درخواست شما ثبت شد. برای دریافت نسخهٔ کامل روی دکمهٔ زیر بزنید.</p>'+button_('دانلود کتاب ↓',url_('download',d.download_token)));
 }
