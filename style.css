@@ -8,3 +8,15 @@
 .nav-cta{background:#ffcf22;padding:10px 17px;border:1px solid #1b2529;border-radius:5px;box-shadow:0 3px 0 #1b2529}
 .actions .button,.submit{box-shadow:0 5px 0 #ad382b;transition:transform .18s,box-shadow .18s}.actions .button:hover,.submit:hover{transform:translateY(-2px);box-shadow:0 7px 0 #ad382b}.actions .button:active,.submit:active{transform:translateY(2px);box-shadow:0 2px 0 #ad382b}.submit{background:#ffcf22!important;color:#1b2529!important;border:2px solid #1b2529!important;font-weight:800}
 .author-portrait{max-width:330px}.author-portrait img{width:100%;height:auto;display:block;aspect-ratio:1;object-fit:cover;border-radius:8px;border:2px solid #1b2529}.author-portrait .checker{margin-top:18px}.author-title{font-weight:700}.author-title a{color:#ad382b;text-underline-offset:5px}.author-links{flex-wrap:wrap}
+
+/* Consultation shortcut: visible at the top of Nima's Diner on desktop and mobile. */
+.header nav .consulting-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 12px;border:1px solid var(--ink);border-radius:6px;background:#fff;font-weight:700;white-space:nowrap;line-height:1.4;transition:background .15s,transform .15s}
+.header nav .consulting-link:hover{background:#fff1ad;transform:translateY(-1px)}
+.header nav .consulting-link svg{flex:none}
+@media(max-width:700px){
+  .header nav{gap:8px}
+  .header nav>a.consulting-link{display:inline-flex}
+  .header nav .consulting-link{padding:9px;min-height:40px;min-width:40px}
+  .header nav .consulting-link .consulting-label{display:none}
+  .header nav .nav-cta{padding:7px 10px}
+}
