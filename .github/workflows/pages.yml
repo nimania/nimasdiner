@@ -21,6 +21,7 @@ jobs:
       - name: Validate book download code
         run: |
           node --check app.js
+          node --check consulting/consulting.js
           node --check services/delivery/worker/index.js
           node backend/tests/flow.cjs
   deploy:
@@ -40,6 +41,7 @@ jobs:
           mkdir _site
           cp index.html download.html privacy.html style.css app.js .nojekyll _site/
           cp -R assets _site/assets
+          cp -R consulting _site/consulting
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
