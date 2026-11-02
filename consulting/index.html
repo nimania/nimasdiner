@@ -7,10 +7,10 @@
   <meta name="theme-color" content="#ffcf22">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'self'">
   <title>میز مشاوره | نیما داینر</title>
-  <meta name="description" content="پروندهٔ خصوصی مشاوره، پرسش‌های گام‌به‌گام و تحلیل مقدماتی رستوران.">
+  <meta name="description" content="پروندهٔ مشاورهٔ محلی، ۲۱ سؤال گام‌به‌گام و تحلیل مقدماتی رستوران.">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="stylesheet" href="consulting.css">
-  <script src="consulting.js" defer></script>
+  <script src="open.js" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -25,47 +25,18 @@
   </header>
 
   <main class="shell">
-    <section id="gate" class="gate card" aria-labelledby="gate-title">
-      <div class="eyebrow">پرونده‌های مشاوره · نسخهٔ ۱</div>
-      <h1 id="gate-title">میز مشاورهٔ نیما داینر<span class="red">.</span></h1>
-      <p class="lead">۲۱ سؤال ساختاریافته برای شناسایی مشکل واقعی کسب‌وکار، هزینهٔ هر پرس، جریان نقدی، مهندسی منو و برنامهٔ اصلاح.</p>
-      <div id="crypto-warning" class="notice danger" hidden>مرورگر شما امکان رمزگذاری امن یا ذخیرهٔ محلی را ندارد. لطفاً از نسخهٔ به‌روز مرورگر در HTTPS استفاده کنید.</div>
-
-      <form id="create-form" class="gate-form" hidden>
-        <h2>ساخت صندوق خصوصی پرونده‌ها</h2>
-        <p>برای ذخیرهٔ رمزگذاری‌شدهٔ پاسخ‌ها در همین مرورگر، یک گذرواژه با حداقل ۸ نویسه انتخاب کنید. این رمز روی سرور ذخیره نمی‌شود.</p>
-        <label for="new-pass">گذرواژهٔ صندوق</label>
-        <input id="new-pass" type="password" autocomplete="new-password" minlength="8" required>
-        <label for="confirm-pass">تکرار گذرواژه</label>
-        <input id="confirm-pass" type="password" autocomplete="new-password" minlength="8" required>
-        <button type="submit" class="btn primary">ساخت صندوق و شروع جلسه ←</button>
-      </form>
-      <form id="unlock-form" class="gate-form" hidden>
-        <h2>بازکردن پرونده‌های این مرورگر</h2>
-        <p>برای دسترسی به یادداشت‌های قبلی، گذرواژهٔ صندوق را وارد کنید.</p>
-        <label for="unlock-pass">گذرواژهٔ صندوق</label>
-        <input id="unlock-pass" type="password" autocomplete="current-password" required>
-        <button type="submit" class="btn primary">بازکردن صندوق ←</button>
-      </form>
-      <p id="gate-message" class="feedback" role="status" aria-live="polite"></p>
-      <div class="notice">اطلاعات مشتری به GitHub، نیما داینر یا سرویس دیگری ارسال نمی‌شود. داده‌ها فقط به‌صورت رمزگذاری‌شده روی <strong>همین مرورگر و همین دستگاه</strong> ذخیره می‌شوند؛ برای دستگاه دیگر باید فایل پشتیبان را منتقل و بازیابی کنید.</div>
-      <div class="gate-import">
-        <label for="gate-file" class="btn secondary">بازیابی پشتیبان رمزگذاری‌شده</label>
-        <input id="gate-file" type="file" accept=".json,application/json" hidden>
-      </div>
-    </section>
-
-    <div id="workspace" hidden>
+    <div class="notice" role="note" style="margin:0 0 20px;border-right:4px solid #ffcf22"><strong>نسخهٔ ساده، بدون رمز و بدون ورود:</strong> پاسخ‌ها فقط در حافظهٔ همین مرورگر و <strong>بدون رمزگذاری</strong> ذخیره می‌شوند؛ نه در GitHub و نه روی سرور. خودِ صفحهٔ سایت عمومی است. روی دستگاه مشترک استفاده نکنید و مرتب فایل پشتیبان تهیه کنید.</div>
+    <div id="fatal" class="notice danger" role="alert" hidden></div>
+    <div id="workspace">
       <div class="workspace-head">
         <div>
           <div class="eyebrow">ابزار داخلی مشاوره · ۹۰ دقیقه</div>
           <h1>پروندهٔ زندهٔ مشاوره<span class="red">.</span></h1>
-          <p class="small-muted">اطلاعات در صندوق رمزگذاری‌شدهٔ مرورگر شما ذخیره می‌شود.</p>
+          <p class="small-muted">پاسخ‌ها در همین مرورگر، بدون رمز و بدون همگام‌سازی بین دستگاه‌ها ذخیره می‌شوند.</p>
         </div>
         <div class="head-actions">
           <span id="save-status" role="status" aria-live="polite">آماده</span>
           <button id="save-btn" type="button" class="btn secondary">ذخیرهٔ دستی</button>
-          <button id="lock-btn" type="button" class="btn dark">قفل پرونده</button>
         </div>
       </div>
 
@@ -131,9 +102,10 @@
               <button id="copy-btn" type="button" class="btn dark">کپی متن پرونده</button>
               <button id="text-btn" type="button" class="btn secondary">دریافت متن</button>
               <button id="json-btn" type="button" class="btn secondary">دریافت JSON پرونده</button>
-              <button id="backup-btn" type="button" class="btn secondary">پشتیبان رمزگذاری‌شده</button>
+              <button id="backup-btn" type="button" class="btn secondary">پشتیبان JSON پرونده‌ها</button>
               <label for="import-file" class="btn secondary">ورود پرونده / پشتیبان</label>
               <input id="import-file" type="file" accept=".json,application/json" hidden>
+              <a href="legacy.html" class="btn secondary">بازیابی پرونده‌های رمزدار قبلی</a>
             </div>
             <button id="delete-case" type="button" class="btn danger-btn">حذف پروندهٔ فعال</button>
           </div>
@@ -157,7 +129,7 @@
           </section>
         </div>
       </div>
-      <footer class="footer-note">نسخهٔ ۱ · داده‌های مشتری در مخزن GitHub قرار نمی‌گیرند. برای نگهداری بلندمدت، پشتیبان رمزگذاری‌شده را در محل امن ذخیره کنید. <a href="../">نیما داینر</a></footer>
+      <footer class="footer-note">نسخهٔ بدون رمز · داده‌های مشتری در مخزن GitHub قرار نمی‌گیرند. پشتیبان JSON رمزگذاری نشده است؛ آن را در محل امن نگهداری کنید. <a href="../">نیما داینر</a></footer>
     </div>
   </main>
 </body>
