@@ -4,6 +4,7 @@
 
 - [سایت کتاب](https://nimania.github.io/nimasdiner/)
 - [میز مشاوره و پرونده‌های رمزگذاری‌شده](https://nimania.github.io/nimasdiner/consulting/)
+- [اپ «برنامهٔ امروز»؛ محتوای روزانهٔ اینستاگرام](https://nimania.github.io/nimasdiner/app/)
 - [مستندات و نقطهٔ شروع نگهداری](docs/README.md)
 - [معماری و تصمیم‌های طراحی](docs/ARCHITECTURE.md)
 - [راه‌اندازی، انتشار و بازگشت نسخه](docs/OPERATIONS.md)
@@ -17,6 +18,7 @@
 |---|---|
 | `index.html`, `style.css`, `app.js` | صفحهٔ معرفی، فرم و هویت بصری |
 | `consulting/` | پرونده‌های مشاوره با ذخیرهٔ رمزگذاری‌شدهٔ محلی در مرورگر |
+| `app/` | اپ نصب‌شدنی (PWA) «برنامهٔ امروز»: ریلز، پست و استوری روزانه؛ ساخته‌شده با کیت nimasdiner-social |
 | `privacy.html`, `download.html` | حریم خصوصی و راهنمای دانلود مستقیم |
 | `assets/` | جلد نمایشی، عکس نویسنده، فونت و آیکون |
 | `services/delivery/worker/index.js` | سرویس عمومی دریافت، تأیید ایمیل و ارسال PDF به مرورگر |

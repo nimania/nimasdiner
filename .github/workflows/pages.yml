@@ -42,6 +42,7 @@ jobs:
           cp index.html download.html privacy.html style.css app.js .nojekyll _site/
           cp -R assets _site/assets
           cp -R consulting _site/consulting
+          cp -R app _site/app
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
