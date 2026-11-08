@@ -118,7 +118,10 @@ function renderSite(data, form, editorial = {articles: []}, keywordMap = {target
   const searchIndex=indexed.map(x=>({title:x.title,description:x.description,url:BASE+x.path.replace(/index\.html$/,""),body:x.searchText||""}));
   const sitemap=`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexed.map(x=>`  <url><loc>${esc(ORIGIN+"/"+x.path.replace(/index\.html$/,""))}</loc></url>`).join("\n")}\n</urlset>\n`;
   const robots=`User-agent: *\nAllow: /\nSitemap: ${ORIGIN}/sitemap.xml\n`;
-  return {pages,generated:[...pages,{path:"search-index.json",content:JSON.stringify(searchIndex,null,2)+"\n"},{path:"sitemap.xml",content:sitemap},{path:"robots.txt",content:robots}],count:indexed.length};
+  const feedItems=(editorial.articles||[]).filter(a=>a.status==="published").slice().sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt));
+  const rssEntry=a=>`<item><title>${esc(a.title)}</title><link>${ORIGIN}/reading/${a.slug}/</link><guid isPermaLink="true">${ORIGIN}/reading/${a.slug}/</guid><pubDate>${new Date(a.publishedAt+"T12:00:00Z").toUTCString()}</pubDate><description>${esc(a.excerpt)}</description></item>`;
+  const feed=`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>خواندنی‌های نیما داینر</title><link>${ORIGIN}/reading/</link><description>خبر، تحلیل و مطالب کسب‌وکار غذا</description><language>fa</language>${feedItems.map(rssEntry).join("")}</channel></rss>`;
+  return {pages,generated:[...pages,{path:"search-index.json",content:JSON.stringify(searchIndex,null,2)+"\n"},{path:"sitemap.xml",content:sitemap},{path:"robots.txt",content:robots},{path:"feed.xml",content:feed}],count:indexed.length};
 }
 
 const root=process.cwd();
