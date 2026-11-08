@@ -50,4 +50,13 @@ const editorial=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/edit
 assert.ok(editorial.articles.filter(a=>a.status==="published").every(a=>a.type!=="news"||(a.sourcePublishedAt&&a.sources?.length)),"unsourced published news");
 assert.match(read("get-book/index.html"),/href="\/nimasdiner\/privacy\.html"/,"privacy link broken");
 console.log("Editorial tests passed:",extraPages.length,"additional pages,",mapping.meta.keywords,"keywords");
+const reviews=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/reviews.json"),"utf8"));
+assert.ok(fs.existsSync(path.join(dist,"reviews/index.html")),"Reviews archive must exist");
+assert.match(read("reviews/index.html"),/نقدهای نیما/,"Archive title missing");
+assert.match(read("index.html"),/href="\/nimasdiner\/reviews\//,"Review link missing on homepage");
+if(!reviews.reviews.some(r=>r.status==="published")){
+  assert.match(read("reviews/index.html"),/noindex,follow/,"Unpopulated archive must not be indexed");
+  assert.doesNotMatch(read("sitemap.xml"),/\/nimasdiner\/reviews\//,"Empty archive should not enter sitemap");
+}
+console.log("Review archive tests passed");
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
