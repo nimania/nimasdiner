@@ -2,13 +2,15 @@ name: Deploy Nima's Diner to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
 concurrency:
-  group: pages
+  group: diner-pages-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   test:
@@ -18,13 +20,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate book download code
+      - name: Validate existing workflows
         run: |
           node --check app.js
           node --check consulting/consulting.js
           node --check services/delivery/worker/index.js
           node backend/tests/flow.cjs
+      - name: Build SEO content pages
+        run: |
+          node --check tools/build-site.mjs
+          node --check site-v2.js
+          node tools/build-site.mjs
+          node tools/test-site.mjs
+      - name: Upload preview artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: nimasdiner-preview
+          path: site-dist
   deploy:
+    if: github.event_name != 'pull_request'
     needs: test
     environment:
       name: github-pages
@@ -32,44 +47,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build
+        run: node tools/build-site.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Prepare public files
-        run: |
-          mkdir _site
-          cp index.html download.html privacy.html style.css app.js .nojekyll _site/
-          cp -R assets _site/assets
-          cp -R consulting _site/consulting
-          cp -R app _site/app
-      - name: Build isolated version 2 preview
-        run: |
-          # The public root remains from main; the feature branch builds only into /preview.
-          git fetch --no-tags --depth=1 origin feature/expandable-seo-library
-          git worktree add --detach "$RUNNER_TEMP/nimasdiner-preview" FETCH_HEAD
-          cd "$RUNNER_TEMP/nimasdiner-preview"
-          node tools/build-site.mjs
-          node tools/test-site.mjs
-          python3 - <<'PY'
-          from pathlib import Path
-          root=Path("site-dist")
-          for p in root.rglob("*"):
-              if not p.is_file() or p.suffix.lower() not in {".html",".js",".css",".json",".xml",".txt"}:
-                  continue
-              content=p.read_text(encoding="utf-8")
-              content=content.replace("/nimasdiner/","/nimasdiner/preview/")
-              if p.suffix.lower()==".html":
-                  content=content.replace("<head>","<head><meta name=\"robots\" content=\"noindex,nofollow\">",1)
-              p.write_text(content,encoding="utf-8")
-          assert '/nimasdiner/preview/library/' in (root/'index.html').read_text(encoding='utf-8')
-          assert 'noindex,nofollow' in (root/'index.html').read_text(encoding='utf-8')
-          PY
-          mkdir -p "$GITHUB_WORKSPACE/_site/preview"
-          cp -a site-dist/. "$GITHUB_WORKSPACE/_site/preview/"
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: site-dist
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
