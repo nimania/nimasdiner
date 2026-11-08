@@ -33,4 +33,21 @@ for(const p of mustExist.filter(x=>x.endsWith("index.html")&&!x.startsWith("app/
  assert.match(txt,/<meta name="description"/,"meta description missing "+p);
  assert.match(txt,/rel="canonical"/,"canonical missing "+p);
 }
+const extraPages=["reading/index.html","reading/news/index.html","reading/analysis/index.html","reading/restaurant-technology-connected-2026/index.html","reading/menu-trends-value-comfort-2026/index.html","reading/why-top-selling-menu-items-may-not-be-profitable/index.html","about/index.html","feed.xml","guides/restaurant-management/index.html","guides/menu-pricing/index.html","guides/restaurant-profit/index.html"];
+for(const p of extraPages)assert.ok(fs.existsSync(path.join(dist,p)),"Editorial/SEO page missing: "+p);
+assert.match(read("index.html"),/href="\/nimasdiner\/reading\//,"reading link missing in homepage");
+assert.match(read("reading/index.html"),/رادار صنعت/,"reading archive missing");
+assert.match(read("reading/restaurant-technology-connected-2026/index.html"),/۲۰۲۶-۱۱-۰۵|2026-11-05/,"news source date must be visible");
+assert.match(read("reading/restaurant-technology-connected-2026/index.html"),/restaurant\.org/,"official source link missing");
+assert.match(read("sitemap.xml"),/\/nimasdiner\/reading\//,"reading articles missing from sitemap");
+assert.match(read("feed.xml"),/<rss version="2\.0">/,"valid RSS root missing");
+assert.ok(items.some(i=>i.url.includes("/reading/")),"editorial article not searchable");
+assert.ok(items.some(i=>i.url.includes("/guides/restaurant-management/")),"SEO guide not searchable");
+const mapping=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/seo-keywords.json"),"utf8"));
+assert.equal(mapping.meta.keywords,305);
+assert.equal(mapping.meta.targets,44);
+const editorial=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/editorial.json"),"utf8"));
+assert.ok(editorial.articles.filter(a=>a.status==="published").every(a=>a.type!=="news"||(a.sourcePublishedAt&&a.sources?.length)),"unsourced published news");
+assert.match(read("get-book/index.html"),/href="\/nimasdiner\/privacy\.html"/,"privacy link broken");
+console.log("Editorial tests passed:",extraPages.length,"additional pages,",mapping.meta.keywords,"keywords");
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
