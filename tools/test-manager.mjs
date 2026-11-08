@@ -27,7 +27,7 @@ for(const r of reviews){
  assert.equal(squish(r.body.map(s=>s.p.join('\n')).join('\n')),squish(original.blocks.join('\n')),'Archive text changed: '+r.slug);
  assert.equal(r.photos.length,original.images.length);
  const html=fs.readFileSync('site-dist/reviews/'+r.slug+'/index.html','utf8');
- assert.ok(html.includes(r.sourceUrl));assert.ok(html.includes(r.publishedAt));assert.ok(html.includes('قیمت‌های متن تاریخی'));
+ assert.ok(html.includes(r.sourceUrl));assert.ok(html.includes(r.publishedAt));assert.ok(!html.includes('آرشیوی'));assert.ok(!html.includes('شناسنامهٔ آرشیو'));
  for(const p of r.photos){assert.ok(fs.existsSync('site-dist/'+p.src.replace('/nimasdiner/','')));photos++;}
 }
 assert.equal(photos,51);
