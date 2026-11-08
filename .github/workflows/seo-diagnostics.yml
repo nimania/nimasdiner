@@ -1,0 +1,49 @@
+name: Verify deployed Nima Diner SEO endpoints
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/seo-diagnostics.yml'
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test public homepage, sitemap and root sitemap
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import urllib.request, urllib.error, xml.etree.ElementTree as ET
+          base = "https://nimania.github.io/nimasdiner/"
+          urls = [
+            ("home",base),
+            ("sitemap",base+"sitemap.xml"),
+            ("robots",base+"robots.txt"),
+            ("domain-root-sitemap","https://nimania.github.io/sitemap.xml")
+          ]
+          for label,url in urls:
+              try:
+                  request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; NimasDinerHealthCheck/1.0)"})
+                  with urllib.request.urlopen(request,timeout=30) as r:
+                      content=r.read()
+                      print(f"{label}: status={r.status}, final_url={r.url}, type={r.headers.get('Content-Type')}, bytes={len(content)}")
+                      if label=="home":
+                          assert b'google-site-verification' in content,"Verification tag absent from published page"
+                          assert b'Dn8BoEITUIXrF7N1QXzz99mTvFvtI5sfz9t4YTVo38Q' in content,"Verification token mismatch"
+                      if label=="sitemap":
+                          x=ET.fromstring(content)
+                          assert x.tag=="{http://www.sitemaps.org/schemas/sitemap/0.9}urlset","Not a sitemap XML"
+                          locs=[el.text for el in x.iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+                          assert len(locs)>10,"Sitemap unexpectedly empty"
+                          assert all(u.startswith(base) for u in locs),"Sitemap references pages outside property prefix"
+                          assert len(locs)==len(set(locs)),"Duplicate sitemap URLs"
+                          print(f"SITEMAP XML VALID; URLs={len(locs)}; first={locs[:4]}")
+                      if label=="robots":
+                          assert (base+"sitemap.xml").encode() in content,"No sitemap line in robots file"
+              except Exception as e:
+                  print(f"{label}: ERROR {e}")
+                  if label!="domain-root-sitemap":
+                      raise
+          PY
