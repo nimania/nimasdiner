@@ -114,3 +114,8 @@ img{max-width:100%;height:auto}
 .article .pagehead{max-width:840px}
 .article-body h2{scroll-margin-top:140px}
 .editorial-card h3 a{overflow-wrap:anywhere}
+
+/* Personal and professional review archive */
+.review-photo{margin:24px 0;background:#fff;border:1px solid var(--edge);padding:10px;border-radius:12px}
+.review-photo img{display:block;max-height:610px;object-fit:contain;width:100%;border-radius:7px}
+.review-photo figcaption{color:var(--muted);font-size:12px;margin:8px}
