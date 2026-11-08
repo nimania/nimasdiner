@@ -12,6 +12,10 @@ assert.match(form,/https:\/\/nimasdiner-delivery\.iran\.chatgpt\.site\/register/
 for(const name of ["name","email","phone","marketing_consent","_honey"])assert.ok(form.includes('name="'+name+'"'),"missing form field "+name);
 assert.match(form,/name="marketing_consent"/);
 assert.match(form,/optional|اختیاری/);
+const verifyTag='<meta name="google-site-verification" content="Dn8BoEITUIXrF7N1QXzz99mTvFvtI5sfz9t4YTVo38Q">';
+const homeMeta=read("index.html");
+assert.ok(homeMeta.includes(verifyTag),"Google Search Console verification meta tag missing on public homepage");
+assert.equal(homeMeta.split('name="google-site-verification"').length-1,1,"Google verification tag must be unique");
 const home=read("index.html");
 assert.match(home,/id="get-book"/,"old hash deep link broken");
 assert.match(home,/href="\/nimasdiner\/get-book\/"/);
