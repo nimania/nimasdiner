@@ -35,3 +35,19 @@ assert.ok(reviews.find(r=>r.slug==='peleh-qazvin').photos.every(p=>p.credit==='�
 assert.ok(!fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/membership/'));
 for(const p of ['journal/index.html','kits/index.html','kits/shift-handover/index.html','kits/waste-log/index.html','kits/weekly-review/index.html'])assert.ok(fs.existsSync('site-dist/'+p));
 console.log('Manager checks passed: Persian numbers, cashflow, backup validation, CSV safety; 20 complete texts and 51 photos.');
+
+// Book sales and digital availability are separate product paths.
+for(const n of ['01','02','03']){
+ const html=fs.readFileSync('site-dist/library/'+n+'/index.html','utf8');
+ assert.ok(html.includes('href="https://t.me/nimaafsharnaderi"'));
+ assert.equal(html.includes('دریافت دیجیتال رایگان ۱۰۱ قانون'),n==='01');
+}
+const articleBooks=[['good-cook-or-restaurant-owner',1],['opening-budget-versus-survival-cash',2],['smaller-customer-bills-in-a-downturn',3]];
+for(const [slug,n] of articleBooks){
+ const html=fs.readFileSync('site-dist/reading/'+slug+'/index.html','utf8');
+ assert.ok(html.includes('برگرفته از کتاب'));
+ assert.ok(html.includes('href="https://t.me/nimaafsharnaderi"'));
+ assert.equal(html.includes('دریافت دیجیتال رایگان ۱۰۱ قانون'),n===1);
+ assert.ok(html.includes('فصل اول'));
+}
+console.log('Book attribution and print/digital CTA checks passed.');
