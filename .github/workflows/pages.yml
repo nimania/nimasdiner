@@ -32,6 +32,7 @@ jobs:
           node --check site-v2.js
           node tools/build-site.mjs
           node tools/test-site.mjs
+          node tools/test-manager.mjs
       - name: Upload preview artifact
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
