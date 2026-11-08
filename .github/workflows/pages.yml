@@ -2,13 +2,15 @@ name: Deploy Nima's Diner to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
 concurrency:
-  group: pages
+  group: diner-pages-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   test:
@@ -18,13 +20,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate book download code
+      - name: Validate existing workflows
         run: |
           node --check app.js
           node --check consulting/consulting.js
           node --check services/delivery/worker/index.js
           node backend/tests/flow.cjs
+      - name: Build SEO content pages
+        run: |
+          node --check tools/build-site.mjs
+          node --check site-v2.js
+          node tools/build-site.mjs
+          node tools/test-site.mjs
+      - name: Upload preview artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: nimasdiner-preview
+          path: site-dist
   deploy:
+    if: github.event_name != 'pull_request'
     needs: test
     environment:
       name: github-pages
@@ -32,20 +47,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build
+        run: node tools/build-site.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Prepare public files
-        run: |
-          mkdir _site
-          cp index.html download.html privacy.html style.css app.js .nojekyll _site/
-          cp -R assets _site/assets
-          cp -R consulting _site/consulting
-          cp -R app _site/app
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: site-dist
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
