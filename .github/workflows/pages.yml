@@ -43,6 +43,30 @@ jobs:
           cp -R assets _site/assets
           cp -R consulting _site/consulting
           cp -R app _site/app
+      - name: Build isolated version 2 preview
+        run: |
+          # The public root remains from main; the feature branch builds only into /preview.
+          git fetch --no-tags --depth=1 origin feature/expandable-seo-library
+          git worktree add --detach "$RUNNER_TEMP/nimasdiner-preview" FETCH_HEAD
+          cd "$RUNNER_TEMP/nimasdiner-preview"
+          node tools/build-site.mjs
+          node tools/test-site.mjs
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path("site-dist")
+          for p in root.rglob("*"):
+              if not p.is_file() or p.suffix.lower() not in {".html",".js",".css",".json",".xml",".txt"}:
+                  continue
+              content=p.read_text(encoding="utf-8")
+              content=content.replace("/nimasdiner/","/nimasdiner/preview/")
+              if p.suffix.lower()==".html":
+                  content=content.replace("<head>","<head><meta name=\"robots\" content=\"noindex,nofollow\">",1)
+              p.write_text(content,encoding="utf-8")
+          assert '/nimasdiner/preview/library/' in (root/'index.html').read_text(encoding='utf-8')
+          assert 'noindex,nofollow' in (root/'index.html').read_text(encoding='utf-8')
+          PY
+          mkdir -p "$GITHUB_WORKSPACE/_site/preview"
+          cp -a site-dist/. "$GITHUB_WORKSPACE/_site/preview/"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
