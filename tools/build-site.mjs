@@ -9,7 +9,7 @@ function renderSite(data, form) {
   const link=(path)=>BASE+path;
   const num=n=>String(n).padStart(2,"0");
   const ld=o=>JSON.stringify(o).replace(/</g,"\\u003c");
-  const nav=[["کتابخانه","library/"],["مجله داینر","magazine/"],["دانشنامه","guides/"],["ابزارها","tools/"],["ژورنال","journal/"],["عضویت","membership/"]];
+  const nav=[["کتابخانه","library/"],["مجله داینر","magazine/"],["دانشنامه","guides/"],["ابزارها","tools/"],["ژورنال","journal/"],["عضویت","membership/"],["جست‌وجو","search/"]];
   const navHTML=`<nav class="nav" aria-label="ناوبری اصلی">${nav.map(([l,p])=>`<a href="${link(p)}">${esc(l)}</a>`).join("")}</nav>`;
   const header=`<header class="topbar"><div class="wrap top-inner"><a class="brand" href="${BASE}" aria-label="خانه نیما داینر"><span>نیما داینر<span class="brand-dot">.</span></span><small dir="ltr">NIMA'S DINER</small></a>${navHTML}<a class="get-link" href="${link("get-book/")}">دریافت کتاب</a></div></header>`;
   const footer=`<footer class="footer"><div class="wrap footer-grid"><div><strong>نیما داینر</strong><p>دانش، ابزار و تصمیم بهتر برای کسب‌وکار غذا.</p></div><div><a href="${link("library/")}">کتابخانه</a><a href="${link("magazine/")}">مجله</a><a href="${link("guides/")}">دانشنامه</a><a href="${link("services/")}">خدمات مشاوره</a></div><div><a href="https://www.instagram.com/nimasdiner" rel="noopener">اینستاگرام</a><a href="https://t.me/nimasdiner" rel="noopener">تلگرام</a><a href="${link("privacy.html")}">حریم خصوصی</a><a href="mailto:nimania@gmail.com">تماس</a></div></div><div class="wrap footer-end">© نیما داینر · محتوای تخصصی برای صاحبان کسب‌وکار غذا</div></footer>`;
