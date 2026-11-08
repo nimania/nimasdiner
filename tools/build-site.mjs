@@ -2,14 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 
 // Generated pages are the source of deployed HTML. Do not edit site-dist by hand.
-function renderSite(data, form, editorial = {articles: []}, keywordMap = {targets: {}}) {
+function renderSite(data, form, editorial = {articles: []}, keywordMap = {targets: {}}, reviews = {reviews: []}) {
   const BASE="/nimasdiner/";
   const ORIGIN="https://nimania.github.io/nimasdiner";
   const esc=(s)=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   const link=(path)=>BASE+path;
   const num=n=>String(n).padStart(2,"0");
   const ld=o=>JSON.stringify(o).replace(/</g,"\\u003c");
-  const nav=[["کتابخانه","library/"],["مجله داینر","magazine/"],["دانشنامه","guides/"],["ابزارها","tools/"],["ژورنال","journal/"],["عضویت","membership/"],["خواندنی‌ها","reading/"],["جست‌وجو","search/"]];
+  const nav=[["کتابخانه","library/"],["مجله داینر","magazine/"],["دانشنامه","guides/"],["ابزارها","tools/"],["ژورنال","journal/"],["عضویت","membership/"],["خواندنی‌ها","reading/"],["نقدهای نیما","reviews/"],["جست‌وجو","search/"]];
   const navHTML=`<nav class="nav" aria-label="ناوبری اصلی">${nav.map(([l,p])=>`<a href="${link(p)}">${esc(l)}</a>`).join("")}</nav>`;
   const header=`<header class="topbar"><div class="wrap top-inner"><a class="brand" href="${BASE}" aria-label="خانه نیما داینر"><span>نیما داینر<span class="brand-dot">.</span></span><small dir="ltr">NIMA'S DINER</small></a>${navHTML}<a class="get-link" href="${link("get-book/")}">دریافت کتاب</a></div></header>`;
   const footer=`<footer class="footer"><div class="wrap footer-grid"><div><strong>نیما داینر</strong><p>دانش، ابزار و تصمیم بهتر برای کسب‌وکار غذا.</p></div><div><a href="${link("library/")}">کتابخانه</a><a href="${link("magazine/")}">مجله</a><a href="${link("guides/")}">دانشنامه</a><a href="${link("services/")}">خدمات مشاوره</a></div><div><a href="https://www.instagram.com/nimasdiner" rel="noopener">اینستاگرام</a><a href="https://t.me/nimasdiner" rel="noopener">تلگرام</a><a href="${link("about/")}">درباره داینر</a><a href="${link("privacy.html")}">حریم خصوصی</a><a href="mailto:nimania@gmail.com">تماس</a></div></div><div class="wrap footer-end">© نیما داینر · محتوای تخصصی برای صاحبان کسب‌وکار غذا</div></footer>`;
@@ -38,6 +38,7 @@ function renderSite(data, form, editorial = {articles: []}, keywordMap = {target
     + section("اکوسیستم داینر","چه چیزی در داینر پیدا می‌کنی؟",`<div class="cards three">${card("library/","کتابخانه در حال رشد","کتاب‌ها و جزوه‌های تخصصی","سه کتاب منتشرشده و برنامه‌ای برای گسترش موضوعات، از مهندسی منو تا ضوابط کسب‌وکار.")}${card("magazine/","شماره‌های پی‌درپی","مجله تک‌موضوعی داینر","هر شماره یک محصول یا مسئله، با پیوند تاریخ، فناوری، اقتصاد و مدیریت.")}${card("tools/","ابزار عملی","محاسبه و تصمیم‌گیری","محاسبه‌گرهای اولیه و مسیر ساخت چک‌لیست‌ها، کیت‌ها و ژورنال مدیریتی.")}</div>`)
     +section("خواندنی‌های داینر","خبر و تحلیل برای اهل کسب‌وکار غذا",`<div class="cards three">${readingCards}</div><p><a class="textlink" href="${link("reading/")}">همه خواندنی‌ها ←</a></p>`)
     +section("شروع با یک مسئله واقعی","پرطرفدارترین مسیرهای یادگیری",`<div class="cards three">${data.guides.map(g=>card(`guides/${g.slug}/`,"دانشنامه",g.title,g.summary)).join("")}</div>`)
+    +section("نقدهای نیما","دو دهه یادداشت شخصی درباره رستوران‌ها و کافه‌ها",`<p class="rich">تجربه مستقیم، عکس‌های نویسنده و نگاه شخصی و حرفه‌ای به غذا، سرویس، طراحی فضا و مدل کسب‌وکار. آرشیو نقدهای قدیمی و تجربه‌های تازه به‌تدریج پس از بازبینی منتشر می‌شوند.</p><p><a class="button button-outline" href="${link("reviews/")}">ورود به آرشیو نقدها</a></p>`)
     +section("توالی کتاب‌ها","کتابخانه‌ای که ادامه پیدا می‌کند",`<p class="muted">موضوعات آینده پیشنهادی‌اند و تعهدی درباره عنوان نهایی یا زمان انتشار نیستند. پس از تکمیل هر اثر، صفحه مستقل و محتوای مرتبط آن فعال خواهد شد.</p>${timeline}<p><a class="textlink" href="${link("library/")}">همه کتاب‌ها ←</a></p>`)
     +`<section class="cta-panel" id="get-book"><div class="wrap cta-inner"><div><span class="eyebrow">کتاب اول · دریافت رایگان</span><h2>از کتاب شروع کن، به اجرا برس.</h2><p>فرم دریافت کتاب در مسیر اختصاصی و پایدار قرار دارد. ثبت مخاطبان و تحویل فایل با همان سامانه قبلی انجام می‌شود.</p></div><a class="button button-dark" href="${link("get-book/")}">ورود به فرم دریافت کتاب ←</a></div></section>`;
   add("","نیما داینر؛ مدیریت رستوران، کافه و صنعت غذا","مرجع تخصصی فارسی مدیریت رستوران و کافه: کتابخانه، مجله داینر، مهندسی منو، فودکاست، ابزارهای مدیریتی و راه‌اندازی کسب‌وکار غذا.",home,{structured:{"@context":"https://schema.org","@type":"WebSite",name:"نیما داینر",url:ORIGIN+"/",inLanguage:"fa",publisher:{"@type":"Organization",name:"نیما داینر"}}});
@@ -117,6 +118,26 @@ function renderSite(data, form, editorial = {articles: []}, keywordMap = {target
     add(artPath(a),a.title,a.excerpt,body,{structured:articleSchema,keywords:a.keyword});
   }
 
+
+  // Firsthand reviews remain distinct from sponsored listings and ordinary reporting.
+  const reviewItems=(reviews.reviews||[]).filter(r=>r.status==="published");
+  const reviewPath=r=>"reviews/"+r.slug+"/";
+  const venueText=r=>[r.venue?.type,r.venue?.name,r.venue?.city].filter(Boolean).join(" · ");
+  const reviewCards=reviewItems.map(r=>card(reviewPath(r),venueText(r),r.title,r.summary)).join("");
+  const reviewIntro=`<section class="pagehead wrap">${crumbs([["نقدهای نیما",null]])}<p class="eyebrow">آرشیو شخصی و حرفه‌ای</p><h1>از پشت میز مهمان، با چشم مدیر</h1><p class="lead">گردآوری تجربه‌های شخصی و حرفه‌ای نیما افشارنادری از رستوران‌ها، کافه‌ها، نانوایی‌ها و دیگر کسب‌وکارهای غذا؛ بازدیدها و یادداشت‌هایی از حدود دو دهه گذشته تا امروز.</p></section>`;
+  const reviewBody=reviewIntro
+    +section("روش نقد","نه تبلیغ؛ نه رتبه‌بندی بی‌منبع",`<p class="rich">این بخش ثبت تجربه نویسنده است، نه فهرست تبلیغاتی یا ادعای بررسی مستقل همه مجموعه‌ها. هر نقد باید تاریخ بازدید را در صورت مشخص‌بودن، وضعیت دعوت یا پرداخت، عکس‌های دارای حق انتشار، و فاصله میان برداشت شخصی و اطلاعات قابل راستی‌آزمایی را نشان دهد.</p><p class="rich">نوشته‌های قدیمی با برچسب «آرشیوی» منتشر می‌شوند و نباید وضعیت امروز یک کسب‌وکار تلقی شوند. از امتیاز ساختگی و بازدید ادعایی استفاده نمی‌شود.</p>`)
+    +section("آرشیو نقدها","رستوران، کافه و فراتر از آن",reviewItems.length?`<div class="cards three">${reviewCards}</div>`:`<p class="rich">آرشیو در حال گردآوری است. نخستین نقدهای واقعی، پس از آماده‌سازی متن و عکس و تأیید جزئیات، در این قسمت قرار خواهند گرفت. هنوز نقدی در سایت منتشر نشده است.</p>`)
+    +section("پیشنهاد برای مرور","در نقدها چه چیزی اهمیت دارد؟",`<ol class="topics"><li>کیفیت و ثبات غذا یا نوشیدنی</li><li>تجربه مشتری و رفتار سرویس</li><li>فضا، طراحی و هویت مجموعه</li><li>تناسب ارزش و قیمت در زمان بازدید</li><li>مدل اقتصادی و عملیات قابل مشاهده</li><li>جمع‌بندی مستقل نویسنده</li></ol><p class="muted">نقدها گاهی روایتِ خاطره‌محورند و گاهی تحلیلی؛ روش مشاهده و تاریخ هر نوشته تعیین می‌کند از آن چه نتیجه‌ای می‌توان گرفت.</p>`);
+  add("reviews/","نقدهای نیما؛ بررسی رستوران‌ها، کافه‌ها و تجربه غذا","آرشیو شخصی و حرفه‌ای نقد رستوران، کافه، نانوایی و کسب‌وکار غذا به قلم نیما افشارنادری؛ با عکس، تاریخ بازدید و تحلیل.",reviewBody,{noindex:reviewItems.length===0});
+  for(const r of reviewItems){
+    if(!r.slug||!r.title||!r.venue?.name||!r.publishedAt||!r.summary||!r.body?.length)throw Error("Incomplete published review: "+(r.slug||"missing-slug"));
+    if(!/^[a-z0-9-]+$/.test(r.slug))throw Error("Invalid review slug: "+r.slug);
+    const imgs=(r.photos||[]).map(p=>`<figure class="review-photo"><img loading="lazy" src="${esc(p.src)}" alt="${esc(p.alt||r.venue.name)}"><figcaption>${esc(p.caption||"")}${p.credit?` · عکس: ${esc(p.credit)}`:""}</figcaption></figure>`).join("");
+    const full=`<section class="pagehead wrap">${crumbs([["نقدهای نیما","reviews/"],[r.title,null]])}<p class="eyebrow">${esc(venueText(r))}</p><h1>${esc(r.title)}</h1><p class="lead">${esc(r.summary)}</p><div class="chips"><span class="chip">نویسنده: ${esc(r.author||"نیما افشارنادری")}</span><span class="chip">تاریخ انتشار: ${esc(r.publishedAt)}</span>${r.visitedAt?`<span class="chip">تاریخ بازدید: ${esc(r.visitedAt)}</span>`:""}${r.historical?`<span class="chip">نقد آرشیوی؛ نه وضعیت فعلی</span>`:""}</div></section><article class="article wrap"><div class="article-body">${imgs}${r.body.map(p=>`<section><h2>${esc(p.h)}</h2>${p.p.map(t=>`<p>${esc(t)}</p>`).join("")}</section>`).join("")}<aside class="source-note"><strong>درباره استقلال و محدوده نقد</strong><p>${esc(r.disclosure||"وضعیت پرداخت یا دعوت در این پرونده ثبت نشده است.")}</p><p>داوری‌های این متن برداشت حرفه‌ای نویسنده در زمان تجربه‌اند و ممکن است وضعیت کسب‌وکار تغییر کرده باشد.</p></aside>${comment(r.title)}</div></article>`;
+    add(reviewPath(r),r.title,r.summary,full,{structured:{"@context":"https://schema.org","@type":"Article",headline:r.title,description:r.summary,inLanguage:"fa",datePublished:r.publishedAt,author:{"@type":"Person",name:r.author||"نیما افشارنادری"},publisher:{"@type":"Organization",name:"نیما داینر"}}});
+  }
+  
   // No separate indexable pages for keywords without complete content.
   const indexed=pages.filter(x=>x.index);
   const searchIndex=indexed.map(x=>({title:x.title,description:x.description,url:BASE+x.path.replace(/index\.html$/,""),body:x.searchText||""}));
@@ -147,6 +168,9 @@ for(const a of editorial.articles.filter(a=>a.status==="published")){
  activeSlugs.add(a.slug);
  if(a.type==="news"&&(!a.sources?.length||!a.sourcePublishedAt))throw Error("News requires verifiable dated source: "+a.slug);
 }
-const result=renderSite(data,form,editorial,seo);
+const reviews=JSON.parse(fs.readFileSync(path.join(root,"content/reviews.json"),"utf8"));
+const reviewSlugs=new Set();
+for(const r of reviews.reviews){if(reviewSlugs.has(r.slug))throw Error("Duplicate review slug: "+r.slug);reviewSlugs.add(r.slug);}
+const result=renderSite(data,form,editorial,seo,reviews);
 for(const item of result.generated){const target=path.join(out,item.path);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,item.content,"utf8");}
 console.log("Built",result.generated.length,"files,",result.count,"indexable pages");
