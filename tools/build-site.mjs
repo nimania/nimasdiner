@@ -11,7 +11,7 @@ function renderSite(data, form, editorial = {articles: []}, keywordMap = {target
   const link=(path)=>BASE+path;
   const num=n=>String(n).padStart(2,"0");
   const ld=o=>JSON.stringify(o).replace(/</g,"\\u003c");
-  const nav=[["کتابخانه","library/"],["مجله داینر","magazine/"],["دانشنامه","guides/"],["ابزارها","tools/"],["ژورنال","journal/"],["کاربرگ‌ها","kits/"],["خواندنی‌ها","reading/"],["نقدهای نیما","reviews/"],["جست‌وجو","search/"]];
+  const nav=[["خانه",""],["کتابخانه","library/"],["مجله داینر","magazine/"],["دانشنامه","guides/"],["ابزارها","tools/"],["ژورنال","journal/"],["کاربرگ‌ها","kits/"],["خواندنی‌ها","reading/"],["نقدهای نیما","reviews/"],["جست‌وجو","search/"]];
   const navHTML=`<nav class="nav" aria-label="ناوبری اصلی">${nav.map(([l,p])=>`<a href="${link(p)}">${esc(l)}</a>`).join("")}</nav>`;
   const header=`<header class="topbar"><div class="wrap top-inner"><a class="brand" href="${BASE}" aria-label="خانه نیما داینر"><span>نیما داینر<span class="brand-dot">.</span></span><small dir="ltr">NIMA'S DINER</small></a>${navHTML}<a class="get-link" href="${link("get-book/")}">دریافت کتاب</a></div></header>`;
   const footer=`<footer class="footer"><div class="wrap footer-grid"><div><strong>نیما داینر</strong><p>دانش، ابزار و تصمیم بهتر برای کسب‌وکار غذا.</p></div><div><a href="${link("library/")}">کتابخانه</a><a href="${link("magazine/")}">مجله</a><a href="${link("guides/")}">دانشنامه</a><a href="${link("services/")}">خدمات مشاوره</a></div><div><a href="https://www.instagram.com/nimasdiner" rel="noopener">اینستاگرام</a><a href="https://t.me/nimasdiner" rel="noopener">تلگرام</a><a href="${link("about/")}">درباره داینر</a><a href="${link("privacy.html")}">حریم خصوصی</a><a href="mailto:nimania@gmail.com">تماس</a></div></div><div class="wrap footer-end">© نیما داینر · محتوای تخصصی برای صاحبان کسب‌وکار غذا</div></footer>`;
@@ -116,7 +116,7 @@ function renderSite(data, form, editorial = {articles: []}, keywordMap = {target
   ];
   const toolsIntro=`<section class="pagehead wrap">${crumbs([["ابزارها",null]])}<p class="eyebrow">آزمایشگاه داینر</p><h1>قبل از تصمیم، حساب کن</h1><p class="lead">ابزار موردنیاز را انتخاب کنید، عددهای خودتان را وارد کنید و نتیجه را همان‌جا ببینید. نیازی به ثبت‌نام ندارید.</p><p class="muted">عددها فقط در همین مرورگر محاسبه می‌شوند و به سرور فرستاده نمی‌شوند. نتیجه‌ها برآورد آموزشی‌اند.</p></section>`;
   const toolCards=toolCatalog.map(([slug,title,category,description])=>`<article class="card" data-tool-card data-tool-category="${esc(category)}"><span class="kicker">${esc(category)}</span><h3><a href="${link("tools/"+slug+"/")}">${esc(title)}</a></h3><p>${esc(description)}</p><a class="textlink" href="${link("tools/"+slug+"/")}">باز کردن محاسبه‌گر ←</a></article>`).join("");
-  const tools=toolsIntro+`<section class="block wrap"><h2>محاسبه‌گرها</h2><label for="tool-filter">جست‌وجوی ابزار</label><input id="tool-filter" type="search" autocomplete="off" placeholder="مثلاً قیمت غذا یا حقوق کارکنان" style="display:block;width:100%;max-width:520px;padding:14px;margin:10px 0 20px;border:1px solid #999;border-radius:8px"><p class="muted" id="tool-count" role="status" aria-live="polite">۱۰ ابزار برای استفاده</p><div class="cards two">${toolCards}</div></section>`+dinerActions();
+  const tools=toolsIntro+`<section class="block wrap"><h2>ابزار مناسب مسئله شما</h2><p class="muted">موضوع را انتخاب کنید یا نام ابزار را جست‌وجو کنید. هر ابزار در یک صفحه مستقل باز می‌شود.</p><div class="tool-categories" role="group" aria-label="دسته‌بندی ابزارها"><button type="button" class="tool-category active" data-tool-filter-category="همه" aria-pressed="true">همه ابزارها</button>${[...new Set(toolCatalog.map(x=>x[2]))].map(category=>`<button type="button" class="tool-category" data-tool-filter-category="${esc(category)}" aria-pressed="false">${esc(category)}</button>`).join("")}</div><label for="tool-filter">جست‌وجوی ابزار</label><input id="tool-filter" type="search" autocomplete="off" placeholder="مثلاً قیمت غذا یا حقوق کارکنان" style="display:block;width:100%;max-width:520px;padding:14px;margin:10px 0 20px;border:1px solid #999;border-radius:8px"><p class="muted" id="tool-count" role="status" aria-live="polite">۱۰ ابزار برای استفاده</p><div class="cards two">${toolCards}</div></section>`+dinerActions();
   add("tools/","ابزارهای رایگان مدیریت رستوران و کافه","۱۰ محاسبه‌گر تخصصی برای مدیریت رستوران: فودکاست، نقطه سربه‌سر، قیمت‌گذاری، کارکنان، رسپی، فروش و دلیوری.",tools,{script:"article-calculators.js"});
   for(const [slug,title,category,description,articleSlug] of toolCatalog){
     const config=articleTools[articleSlug],article=editorial.articles.find(x=>x.slug===articleSlug);
@@ -183,7 +183,7 @@ const root=process.cwd();
 const out=path.join(root,"site-dist");
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for(const file of ["download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","article-calculators.js","journal.mjs","journal-model.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
+for(const file of ["site-global.css","download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","article-calculators.js","journal.mjs","journal-model.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
 for(const dir of ["assets","consulting","advisor","app","investment"]){fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});}
 const data=JSON.parse(fs.readFileSync(path.join(root,"content/catalog.json"),"utf8"));
 const form=fs.readFileSync(path.join(root,"content/get-book-form.html"),"utf8");
@@ -203,4 +203,25 @@ const reviewSlugs=new Set();
 for(const r of reviews.reviews){if(reviewSlugs.has(r.slug))throw Error("Duplicate review slug: "+r.slug);reviewSlugs.add(r.slug);}
 const result=renderSite(data,form,editorial,seo,reviews);
 for(const item of result.generated){const target=path.join(out,item.path);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,item.content,"utf8");}
+
+// Keep typography and navigation consistent on every deployed HTML page.
+// Generated pages already contain the primary navigation; standalone tools
+// receive a compact cross-site directory without exposing private tool URLs.
+const sharedNav='<nav class="diner-global-nav" aria-label="دسترسی سریع سایت"><a href="/nimasdiner/">خانه</a><a href="/nimasdiner/tools/">ابزارها</a><a href="/nimasdiner/library/">کتابخانه</a><a href="/nimasdiner/guides/">دانشنامه</a><a href="/nimasdiner/reading/">خواندنی‌ها</a><a href="/nimasdiner/services/">مشاوره</a><a href="/nimasdiner/search/">جست‌وجو</a></nav>';
+function finishHTML(dir){
+ for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+  const full=path.join(dir,entry.name);
+  if(entry.isDirectory()){finishHTML(full);continue;}
+  if(!entry.name.endsWith(".html"))continue;
+  let html=fs.readFileSync(full,"utf8");
+  const stylesheet='<link rel="stylesheet" href="/nimasdiner/site-global.css">';
+  if(!html.includes('site-global.css'))html=html.replace(/<\/head>/i,stylesheet+'</head>');
+  // The generated page shell already has complete top-level navigation.
+  if(!html.includes('aria-label="ناوبری اصلی"')&&!html.includes('class="diner-global-nav"')){
+   html=html.replace(/<body([^>]*)>/i,(match,attrs)=>'<body'+attrs+'>'+sharedNav);
+  }
+  fs.writeFileSync(full,html,"utf8");
+ }
+}
+finishHTML(out);
 console.log("Built",result.generated.length,"files,",result.count,"indexable pages");
