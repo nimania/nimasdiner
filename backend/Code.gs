@@ -123,5 +123,11 @@ function submitInvestment_(p){
  if(p.form_id!=='investment/sweden/01'||raw.length>60000||!/^[^@ ]+@[^@ ]+\\.[^@ ]+$/.test(email))return {ok:false,code:'INVALID_INPUT'};
  let record;try{record=JSON.parse(raw)}catch(e){return {ok:false,code:'INVALID_JSON'}}
  if(record.consent!==true||!Array.isArray(record.answers)||record.answers.length!==32)return {ok:false,code:'INVALID_FORM'};
- return {ok:false,code:'NOT_CONFIGURED'};
+ const lock=LockService.getScriptLock();lock.waitLock(20000);
+ try{
+  const db=db_();let sheet=db.getSheetByName('InvestmentIntake');
+  if(!sheet){sheet=db.insertSheet('InvestmentIntake');sheet.appendRow(['received','email','payload']);}
+  sheet.appendRow([now_(),cell_(email),cell_(raw)]);
+  return {ok:true};
+ }finally{lock.releaseLock()}
 }
