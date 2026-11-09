@@ -117,4 +117,11 @@ function api_(p){
  }catch(e){console.error(String(e));return json_({ok:false,code:'REQUEST_FAILED'});}
 }
 
-function submitInvestment_(p){ return {ok:false,code:'NOT_CONFIGURED'}; }
+function submitInvestment_(p){
+ const email=String(p.email||'');
+ const raw=String(p.payload||'');
+ if(p.form_id!=='investment/sweden/01'||raw.length>60000||!/^[^@ ]+@[^@ ]+\\.[^@ ]+$/.test(email))return {ok:false,code:'INVALID_INPUT'};
+ let record;try{record=JSON.parse(raw)}catch(e){return {ok:false,code:'INVALID_JSON'}}
+ if(record.consent!==true||!Array.isArray(record.answers)||record.answers.length!==32)return {ok:false,code:'INVALID_FORM'};
+ return {ok:false,code:'NOT_CONFIGURED'};
+}
