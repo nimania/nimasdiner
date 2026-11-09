@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>اتاق ارزیابی سرمایه‌گذاری | نیما داینر</title><link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script></head>
+<body><header class="head"><div class="wrap head-inner"><div><small class="eyebrow" dir="ltr">NIMA'S DINER / ADVISORY STUDIO</small><div class="brand">اتاق ارزیابی سرمایه‌گذاری<span class="accent">.</span></div></div><span class="tag">مستقل از سایت اصلی · دسترسی با نشانی مستقیم</span></div></header>
+<main class="wrap">
+<section class="hero"><div><p class="eyebrow">پیش از خرید، با عدد تصمیم بگیرید</p><h1>خرید رستوران،<br>فقط خرید آشپزخانه نیست.</h1><p>محیط مستقل برای شناخت پروژه، کنترل ریسک معامله، ثبت پرسش‌های مشاوره و تحلیل سناریویی نقطه سربه‌سر.</p></div><aside class="disclaimer"><strong>توجه به محرمانگی</strong><p>این صفحه عمومی است؛ نشانی آن مخفی یا دارای رمز نیست. داده‌های فرم فقط در مرورگر شما ذخیره می‌شود و به سرور ارسال نمی‌شود. برای اطلاعات محرمانه یا داده‌های هویتی از این ابزار روی دستگاه مشترک استفاده نکنید.</p><strong>اعداد نمونه، داده واقعی نیستند.</strong></aside></section>
+<nav class="tabs" aria-label="بخش‌ها"><a href="#overview">نمای پروژه</a><a href="#questions">پرسش‌نامه</a><a href="#financial">مدل مالی</a><a href="#risks">ریسک‌ها</a><a href="#report">گزارش</a></nav>
+<section class="section" id="overview"><div class="section-head"><p class="eyebrow">۰۱ / شناخت پروژه</p><h2>پرونده اولیه سرمایه‌گذاری</h2><p>اطلاعات اعلامی را وارد کنید؛ موارد نامشخص را خالی بگذارید. نمونه پیش‌فرض عمداً بدون نام مشتری و جزئیات معامله است.</p></div>
+<div class="panel fields">
+<label>عنوان پروژه<input data-field="project" placeholder="مثلاً بررسی خرید رستوران در سوئد"></label>
+<label>شهر و کشور<input data-field="location" placeholder="Sundbyberg, Sweden"></label>
+<label>نوع فعالیت<select data-field="concept"><option value="">هنوز مشخص نیست</option><option>رستوران ایتالیایی</option><option>کافه</option><option>فست‌فود</option><option>سایر</option></select></label>
+<label>مرحله پروژه<select data-field="stage"><option value="">انتخاب نشده</option><option>بررسی فرصت</option><option>مذاکره خرید</option><option>بررسی قرارداد</option><option>پس از خرید</option></select></label>
+<label>مدل معامله<select data-field="deal"><option value="">نیازمند بررسی</option><option>خرید سهام شرکت</option><option>خرید دارایی و کسب‌وکار</option><option>انتقال قرارداد اجاره</option><option>تأسیس کسب‌وکار جدید</option></select></label>
+<label>مخاطب اصلی<input data-field="audience" placeholder="مثلاً خانواده‌ها و مشتریان محلی"></label>
+<label class="full">یادداشت حرفه‌ای<textarea data-field="notes" rows="3" placeholder="فرضیه‌ها، فرصت‌ها و نکاتی که نیاز به تأیید دارند"></textarea></label>
+</div></section>
+<section class="section" id="questions"><div class="section-head"><p class="eyebrow">۰۲ / مصاحبه پیش از خرید</p><h2>پرسش‌های ضروری</h2><p>به هر پرسش وضعیت بدهید و شواهد مورد نیاز را ثبت کنید. «پاسخ داریم» به معنای تأیید مستقل ادعا نیست.</p></div>
+<div class="row-actions"><strong id="progress">۰ از ۰ بررسی‌شده</strong><button class="btn ghost" id="export-json">خروجی JSON</button></div><div id="question-list" class="questions"></div></section>
+<section class="section" id="financial"><div class="section-head"><p class="eyebrow">۰۳ / آزمون اقتصادی</p><h2>ماشین‌حساب فروش و نقطه سربه‌سر</h2><p>مبالغ را در یک واحد پول و بر مبنای فروش بدون VAT وارد کنید. مقادیر اولیه فقط مثال آموزشی هستند.</p></div>
+<div class="finance-layout"><div class="panel fields">
+<label>واحد پول<select id="currency"><option value="SEK">کرون سوئد (SEK)</option><option value="EUR">یورو (EUR)</option><option value="USD">دلار (USD)</option><option value="IRR">ریال (IRR)</option></select></label>
+<label>مشتری روزانه<input id="guests" type="number" min="0" step="1" value="50"></label>
+<label>متوسط فاکتور بدون VAT<input id="ticket" type="number" min="0" step="1" value="200"></label>
+<label>روز فعالیت ماهانه<input id="days" type="number" min="1" max="31" value="26"></label>
+<label>هزینه متغیر نسبت به فروش (درصد)<input id="variable" type="number" min="0" max="99" value="35"></label>
+<label>هزینه ثابت ماهانه، شامل حقوق مالک در صورت کار<input id="fixed" type="number" min="0" value="180000"></label>
+<label>هزینه خرید کسب‌وکار<input id="purchase" type="number" min="0" placeholder="نامشخص"></label>
+<label>بودجه بازسازی و افتتاح<input id="setup" type="number" min="0" placeholder="نامشخص"></label>
+<label>سرمایه در گردش آماده<input id="cash" type="number" min="0" placeholder="نامشخص"></label>
+</div><div class="panel outcomes"><div><span>فروش ماهانه</span><strong id="revenue">—</strong></div><div><span>سهم پوشش هزینه ثابت</span><strong id="contribution">—</strong></div><div><span>سود/زیان عملیاتی مدل ساده</span><strong id="profit">—</strong></div><div><span>مشتری روزانه برای سربه‌سر</span><strong id="break-even">—</strong></div><div><span>سرمایه‌گذاری اولیه واردشده</span><strong id="investment">—</strong></div><div><span>ماه‌های پوشش کسری با نقدینگی واردشده</span><strong id="runway">—</strong></div></div></div>
+<div class="chart-panel"><h3>مقایسه سه سناریو با فرض‌های فعلی</h3><div class="legend"><span>فروش ماهانه</span><span>هزینه ماهانه</span></div><div id="scenario-chart" class="chart" role="img" aria-label="نمودار فروش و هزینه سه سناریو"></div><p class="fine">سناریوها بر پایه ۶۰٪، ۱۰۰٪ و ۱۴۰٪ تعداد مشتری واردشده محاسبه می‌شوند. این مدل مالیات سود، بهره و اقساط وام، استهلاک و هزینه‌های خارج از فرض را در بر نمی‌گیرد.</p></div>
+</section>
+<section class="section" id="risks"><div class="section-head"><p class="eyebrow">۰۴ / کنترل ریسک</p><h2>چک‌لیست بررسی پیش از تعهد</h2><p>این‌ها توصیه حقوقی یا حسابرسی نیستند؛ برای تأیید مستقل از متخصص محلی استفاده کنید.</p></div><div class="risk-grid" id="risk-list"></div></section>
+<section class="section" id="report"><div class="section-head"><p class="eyebrow">۰۵ / خروجی جلسه</p><h2>خلاصه قابل انتقال</h2><p>از متن زیر برای گزارش مشاوره یا ادامه تحلیل استفاده کنید. مقادیر مالی فرضی باید قبل از استفاده در تصمیم خرید با اسناد جایگزین شوند.</p></div><div class="panel"><textarea id="report-text" rows="16" readonly aria-label="گزارش اولیه"></textarea><div class="row-actions"><button class="btn primary" id="copy-report">کپی گزارش</button><button class="btn ghost" id="download-report">دریافت TXT</button><button class="btn ghost danger" id="reset-data">پاک‌کردن اطلاعات محلی</button></div><div id="feedback" aria-live="polite" class="fine"></div></div></section>
+</main><footer class="foot wrap"><span>نیما داینر / ابزار مقدماتی مشاوره و سرمایه‌گذاری</span><span>بدون لینک ورودی از منوی سایت اصلی · بدون سرویس ذخیره‌سازی ابری</span></footer></body></html>
