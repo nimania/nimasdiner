@@ -141,7 +141,7 @@ const out=path.join(root,"site-dist");
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
 for(const file of ["download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","journal.mjs","journal-model.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
-for(const dir of ["assets","consulting","app"]){fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});}
+for(const dir of ["assets","consulting","app","investment"]){fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});}
 const data=JSON.parse(fs.readFileSync(path.join(root,"content/catalog.json"),"utf8"));
 const form=fs.readFileSync(path.join(root,"content/get-book-form.html"),"utf8");
 const extended=JSON.parse(fs.readFileSync(path.join(root,"content/expanded-guides.json"),"utf8"));
