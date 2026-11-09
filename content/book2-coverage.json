@@ -1,0 +1,405 @@
+{
+  "book": 2,
+  "title": "کوچک شروع کن",
+  "sourceLibraryFileId": "libfile_3c7c90faeb288191946cfea5aba3d3f7",
+  "sourceFileName": "NimasDiner-2-Koochak-Shoroo-Kon_A5(2).pdf",
+  "pdfPages": 98,
+  "sourceReadCompletely": true,
+  "sourceTextLines": 3566,
+  "pageReference": "شمارهٔ صفحهٔ PDF",
+  "existingArticle": "opening-budget-versus-survival-cash",
+  "newArticleCount": 19,
+  "totalBookArticleCount": 20,
+  "chapters": [
+    {
+      "n": 1,
+      "title": "آیا الان وقت شروع است؟",
+      "pages": "۷ تا ۱۲",
+      "articles": [
+        "starting-restaurant-time-and-risk"
+      ]
+    },
+    {
+      "n": 2,
+      "title": "کدام مدل؟",
+      "pages": "۱۳ تا ۲۱",
+      "articles": [
+        "choose-small-food-business-model",
+        "recoverable-capital-and-exit-plan"
+      ]
+    },
+    {
+      "n": 3,
+      "title": "کانسپت کوچک، منوی کوتاه",
+      "pages": "۲۲ تا ۲۶",
+      "articles": [
+        "one-sentence-concept-signature-product",
+        "short-launch-menu-shared-ingredients"
+      ]
+    },
+    {
+      "n": 4,
+      "title": "بودجهٔ راه‌اندازی به درصد",
+      "pages": "۲۸ تا ۳۴",
+      "articles": [
+        "five-buckets-startup-budget"
+      ]
+    },
+    {
+      "n": 5,
+      "title": "اقتصاد یک فروش",
+      "pages": "۳۵ تا ۴۲",
+      "articles": [
+        "minimum-orders-before-opening"
+      ]
+    },
+    {
+      "n": 6,
+      "title": "تجهیزات: نو، دست‌دوم یا اجاره",
+      "pages": "۴۳ تا ۴۷",
+      "articles": [
+        "equipment-for-launch-menu",
+        "new-used-rented-equipment-comparison"
+      ]
+    },
+    {
+      "n": 7,
+      "title": "انتخاب محل",
+      "pages": "۴۹ تا ۵۳",
+      "articles": [
+        "one-week-test-food-location",
+        "infrastructure-before-restaurant-lease"
+      ]
+    },
+    {
+      "n": 8,
+      "title": "مجوزها و بهداشت",
+      "pages": "۵۴ تا ۵۷",
+      "articles": [
+        "permit-inquiry-before-small-restaurant"
+      ]
+    },
+    {
+      "n": 9,
+      "title": "آشپزخانهٔ کوچک، جریان درست",
+      "pages": "۵۹ تا ۶۲",
+      "articles": [
+        "small-kitchen-layout-before-buying"
+      ]
+    },
+    {
+      "n": 10,
+      "title": "تأمین‌کننده و انبار کوچک",
+      "pages": "۶۳ تا ۶۶",
+      "articles": [
+        "small-stock-par-before-opening"
+      ]
+    },
+    {
+      "n": 11,
+      "title": "تیم یک تا پنج نفره",
+      "pages": "۶۷ تا ۷۰",
+      "articles": [
+        "one-to-five-person-launch-team"
+      ]
+    },
+    {
+      "n": 12,
+      "title": "افتتاح نرم و ۹۰ روز اول",
+      "pages": "۷۱ تا ۷۵",
+      "articles": [
+        "soft-opening-before-big-launch",
+        "first-ninety-days-small-restaurant"
+      ]
+    },
+    {
+      "n": 13,
+      "title": "بازاریابی محلی کم‌هزینه",
+      "pages": "۷۷ تا ۸۰",
+      "articles": [
+        "local-marketing-first-customers"
+      ]
+    },
+    {
+      "n": 14,
+      "title": "دلیوری و پلتفرم‌ها",
+      "pages": "۸۱ تا ۸۴",
+      "articles": [
+        "launch-delivery-menu-and-pricing"
+      ]
+    },
+    {
+      "n": 15,
+      "title": "گسترش، تغییر یا بستن",
+      "pages": "۸۵ تا ۸۸",
+      "articles": [
+        "recoverable-capital-and-exit-plan",
+        "first-ninety-days-small-restaurant"
+      ]
+    }
+  ],
+  "appendix": {
+    "title": "چک‌لیست‌ها و فرم‌های آمادهٔ چاپ",
+    "pages": "۸۹ تا ۹۵",
+    "adaptedIn": [
+      "five-buckets-startup-budget",
+      "minimum-orders-before-opening",
+      "one-week-test-food-location",
+      "infrastructure-before-restaurant-lease",
+      "small-kitchen-layout-before-buying",
+      "small-stock-par-before-opening",
+      "soft-opening-before-big-launch"
+    ]
+  },
+  "articles": [
+    {
+      "slug": "starting-restaurant-time-and-risk",
+      "wordCount": 370,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل اول؛ آیا الان وقت شروع است؟",
+          "pages": "۷ تا ۱۲"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "choose-small-food-business-model",
+      "wordCount": 387,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل دوم؛ کدام مدل؟",
+          "pages": "۱۳ تا ۲۱"
+        }
+      ],
+      "toolKeys": [
+        "budget"
+      ]
+    },
+    {
+      "slug": "recoverable-capital-and-exit-plan",
+      "wordCount": 390,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل دوم؛ کدام مدل؟ و فصل پانزدهم؛ گسترش، تغییر یا بستن",
+          "pages": "۱۹ تا ۲۱ و ۸۵ تا ۸۸"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "one-sentence-concept-signature-product",
+      "wordCount": 405,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل سوم؛ کانسپت کوچک، منوی کوتاه",
+          "pages": "۲۲ تا ۲۶"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "short-launch-menu-shared-ingredients",
+      "wordCount": 404,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل سوم؛ کانسپت کوچک، منوی کوتاه",
+          "pages": "۲۳ تا ۲۶"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "five-buckets-startup-budget",
+      "wordCount": 391,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل چهارم؛ بودجهٔ راه‌اندازی به درصد",
+          "pages": "۲۸ تا ۳۴"
+        }
+      ],
+      "toolKeys": [
+        "budgetsplit"
+      ]
+    },
+    {
+      "slug": "minimum-orders-before-opening",
+      "wordCount": 397,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل پنجم؛ اقتصاد یک فروش",
+          "pages": "۳۵ تا ۴۲"
+        }
+      ],
+      "toolKeys": [
+        "breakeven"
+      ]
+    },
+    {
+      "slug": "equipment-for-launch-menu",
+      "wordCount": 396,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل ششم؛ تجهیزات: نو، دست‌دوم یا اجاره",
+          "pages": "۴۳ تا ۴۷"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "new-used-rented-equipment-comparison",
+      "wordCount": 411,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل ششم؛ تجهیزات: نو، دست‌دوم یا اجاره",
+          "pages": "۴۳ تا ۴۷"
+        }
+      ],
+      "toolKeys": [
+        "equipment"
+      ]
+    },
+    {
+      "slug": "one-week-test-food-location",
+      "wordCount": 407,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل هفتم؛ انتخاب محل",
+          "pages": "۴۹ تا ۵۳"
+        }
+      ],
+      "toolKeys": [
+        "rent"
+      ]
+    },
+    {
+      "slug": "infrastructure-before-restaurant-lease",
+      "wordCount": 384,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل هفتم؛ انتخاب محل",
+          "pages": "۴۹ تا ۵۳"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "permit-inquiry-before-small-restaurant",
+      "wordCount": 392,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل هشتم؛ مجوزها و بهداشت",
+          "pages": "۵۴ تا ۵۷"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "small-kitchen-layout-before-buying",
+      "wordCount": 384,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل نهم؛ آشپزخانهٔ کوچک، جریان درست",
+          "pages": "۵۹ تا ۶۲"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "small-stock-par-before-opening",
+      "wordCount": 386,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل دهم؛ تأمین‌کننده و انبار کوچک",
+          "pages": "۶۳ تا ۶۶"
+        }
+      ],
+      "toolKeys": [
+        "par"
+      ]
+    },
+    {
+      "slug": "one-to-five-person-launch-team",
+      "wordCount": 388,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل یازدهم؛ تیم یک تا پنج نفره",
+          "pages": "۶۷ تا ۷۰"
+        }
+      ],
+      "toolKeys": [
+        "labor"
+      ]
+    },
+    {
+      "slug": "soft-opening-before-big-launch",
+      "wordCount": 398,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل دوازدهم؛ افتتاح نرم و ۹۰ روز اول",
+          "pages": "۷۱ تا ۷۵"
+        }
+      ],
+      "toolKeys": []
+    },
+    {
+      "slug": "first-ninety-days-small-restaurant",
+      "wordCount": 391,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل دوازدهم؛ افتتاح نرم و ۹۰ روز اول / فصل پانزدهم؛ گسترش، تغییر یا بستن",
+          "pages": "۷۱ تا ۷۵ و ۸۵ تا ۸۸"
+        }
+      ],
+      "toolKeys": [
+        "weekly"
+      ]
+    },
+    {
+      "slug": "local-marketing-first-customers",
+      "wordCount": 399,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل سیزدهم؛ بازاریابی محلی کم‌هزینه",
+          "pages": "۷۷ تا ۸۰"
+        }
+      ],
+      "toolKeys": [
+        "discount"
+      ]
+    },
+    {
+      "slug": "launch-delivery-menu-and-pricing",
+      "wordCount": 403,
+      "bookSources": [
+        {
+          "n": 2,
+          "chapter": "فصل چهاردهم؛ دلیوری و پلتفرم‌ها",
+          "pages": "۸۱ تا ۸۴"
+        }
+      ],
+      "toolKeys": [
+        "delivery",
+        "onlineprice"
+      ]
+    }
+  ]
+}
