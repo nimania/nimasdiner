@@ -120,14 +120,17 @@ function api_(p){
 function submitInvestment_(p){
  const email=String(p.email||'');
  const raw=String(p.payload||'');
- if(p.form_id!=='investment/sweden/01'||raw.length>60000||!/^[^@ ]+@[^@ ]+\\.[^@ ]+$/.test(email))return {ok:false,code:'INVALID_INPUT'};
+ if(p.form_id!=='investment/sweden/01'||raw.length>45000||!/^[^@ ]+@[^@ ]+\\.[^@ ]+$/.test(email))return {ok:false,code:'INVALID_INPUT'};
  let record;try{record=JSON.parse(raw)}catch(e){return {ok:false,code:'INVALID_JSON'}}
  if(record.consent!==true||!Array.isArray(record.answers)||record.answers.length!==32)return {ok:false,code:'INVALID_FORM'};
  const lock=LockService.getScriptLock();lock.waitLock(20000);
  try{
   const db=db_();let sheet=db.getSheetByName('InvestmentIntake');
-  if(!sheet){sheet=db.insertSheet('InvestmentIntake');sheet.appendRow(['received','email','payload']);}
-  sheet.appendRow([now_(),cell_(email),cell_(raw)]);
-  return {ok:true};
+  if(!sheet){sheet=db.insertSheet('InvestmentIntake');sheet.appendRow(['submission_id','received','email','payload']);}
+  const id=String(p.submission_id||'');
+  if(!/^[a-f0-9-]{36}$/.test(id))return {ok:false,code:'INVALID_ID'};
+  if(sheet.getLastRow()>1&&sheet.getRange(2,1,sheet.getLastRow()-1,1).getValues().some(row=>row[0]===id))return {ok:true,submission_id:id,duplicate:true};
+  sheet.appendRow([id,now_(),cell_(email),cell_(raw)]);
+  return {ok:true,submission_id:id};
  }finally{lock.releaseLock()}
 }
