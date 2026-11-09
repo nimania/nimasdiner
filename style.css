@@ -20,3 +20,15 @@
   .header nav .consulting-link .consulting-label{display:none}
   .header nav .nav-cta{padding:7px 10px}
 }
+
+/* Restaurant problem finder entry point */
+.advisor-nav{font-weight:800!important;color:#251f16!important}
+.advisor-teaser{background:#ffcf22;padding:70px 0;color:#201d18}
+.advisor-teaser-inner{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
+.advisor-teaser h2{font-size:clamp(2rem,4vw,3.4rem);line-height:1.4;margin:12px 0 18px}
+.advisor-teaser p{max-width:610px;line-height:2}
+.advisor-teaser-prompt{border:2px solid #26221a;background:#fffef8;padding:22px;border-radius:18px;box-shadow:10px 10px 0 #26221a;transform:rotate(-1deg)}
+.advisor-teaser-prompt span{color:#786e5c;font-size:.85rem}
+.advisor-teaser-prompt p{font-size:1.35rem;font-weight:800;line-height:1.8}
+.advisor-teaser-prompt strong{display:block;border-top:1px solid #eee;padding-top:10px;color:#6a5632}
+@media(max-width:760px){.advisor-teaser{padding:42px 0}.advisor-teaser-inner{grid-template-columns:1fr}.advisor-teaser-prompt{transform:none}}
