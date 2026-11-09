@@ -38,5 +38,26 @@ document.querySelectorAll('[data-diner-calculator]').forEach(root=>{
  print.addEventListener('click',()=>{if(!update()){history.textContent='برای ذخیره PDF، عددها را تکمیل کنید.';return;}window.print();});
 });
 const filter=document.getElementById('tool-filter');
-if(filter){const cards=[...document.querySelectorAll('[data-tool-card]')],count=document.getElementById('tool-count');filter.addEventListener('input',()=>{const q=filter.value.trim().normalize('NFKC').replace(/[يى]/g,'ی').replace(/ك/g,'ک').toLowerCase();let n=0;cards.forEach(card=>{const content=card.textContent.normalize('NFKC').replace(/[يى]/g,'ی').replace(/ك/g,'ک').toLowerCase();card.hidden=!!q&&!content.includes(q);if(!card.hidden)n++});count.textContent=n+' ابزار پیدا شد';});}
+if(filter){
+ const cards=[...document.querySelectorAll('[data-tool-card]')];
+ const count=document.getElementById('tool-count');
+ const categories=[...document.querySelectorAll('[data-tool-filter-category]')];
+ let activeCategory='همه';
+ const normalize=s=>String(s||'').normalize('NFKC').replace(/[يى]/g,'ی').replace(/ك/g,'ک').toLowerCase().trim();
+ const apply=()=>{
+  const q=normalize(filter.value);let n=0;
+  for(const card of cards){
+   const category=card.dataset.toolCategory;
+   const show=(activeCategory==='همه'||category===activeCategory)&&(!q||normalize(card.textContent).includes(q));
+   card.hidden=!show;if(show)n++;
+  }
+  count.textContent=n+' ابزار مطابق انتخاب شما';
+ };
+ categories.forEach(button=>button.addEventListener('click',()=>{
+  activeCategory=button.dataset.toolFilterCategory;
+  categories.forEach(b=>{const selected=b===button;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));});
+  apply();
+ }));
+ filter.addEventListener('input',apply);apply();
+}
 })();
