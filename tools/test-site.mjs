@@ -64,3 +64,15 @@ if(!reviews.reviews.some(r=>r.status==="published")){
 }
 console.log("Review archive tests passed");
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
+
+const calculatorSlugs=["good-cook-or-restaurant-owner","opening-budget-versus-survival-cash","smaller-customer-bills-in-a-downturn","restaurant-technology-connected-2026","menu-trends-value-comfort-2026","restaurant-cost-pressure-2026","why-top-selling-menu-items-may-not-be-profitable","buffet-economics-fixed-price","consistent-food-brings-customers-back","recipe-card-standardization","restaurant-menu-pricing","restaurant-break-even","restaurant-delivery-discounts","restaurant-staffing-cost","restaurant-seat-capacity"];
+assert.ok(fs.existsSync(path.join(dist,"article-calculators.js")),"article calculator engine missing from deployment");
+for(const slug of calculatorSlugs){
+ const html=read("reading/"+slug+"/index.html");
+ assert.match(html,/data-diner-calculator="/,"missing calculator in "+slug);
+ assert.match(html,/data-calc-output/,"missing calculation result in "+slug);
+ assert.match(html,/https:\/\/t\.me\/nimaafsharnaderi/,"missing print book order in "+slug);
+ assert.match(html,/article-calculators\.js/,"missing calculator script in "+slug);
+ assert.match(sitemap,new RegExp("reading/"+slug+"/"),"missing sitemap entry "+slug);
+}
+console.log("Article calculators and book advertisements checked:",calculatorSlugs.length);
