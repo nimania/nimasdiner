@@ -1,0 +1,265 @@
+{
+  "book": {
+    "n": 3,
+    "title": "دوام بیاور",
+    "sourceFilename": "NimasDiner-3-Davam-Biavar_A5(3).pdf",
+    "pdfPages": 100
+  },
+  "sourceRead": {
+    "complete": true,
+    "extractedLines": 3566,
+    "pageReferenceBasis": "شمارهٔ صفحهٔ PDF، از ۱ تا ۱۰۰"
+  },
+  "generatedArticles": 19,
+  "existingArticles": [
+    "smaller-customer-bills-in-a-downturn"
+  ],
+  "totalBookArticles": 20,
+  "chapters": [
+    {
+      "n": 1,
+      "title": "مشتری در روزهای سخت چه می‌خواهد",
+      "pdfPages": [
+        8,
+        13
+      ],
+      "articles": [
+        "smaller-customer-bills-in-a-downturn"
+      ]
+    },
+    {
+      "n": 2,
+      "title": "منوی دولایه و تجمل در دسترس",
+      "pdfPages": [
+        14,
+        18
+      ],
+      "articles": [
+        "two-layer-menu-in-hard-times"
+      ]
+    },
+    {
+      "n": 3,
+      "title": "قیمت‌گذاری در تورم",
+      "pdfPages": [
+        19,
+        22
+      ],
+      "articles": [
+        "pricing-when-ingredient-costs-rise"
+      ]
+    },
+    {
+      "n": 4,
+      "title": "هزینه را کوچک کن، نه کیفیت را",
+      "pdfPages": [
+        23,
+        26
+      ],
+      "articles": [
+        "cut-operating-waste-not-core-quality"
+      ]
+    },
+    {
+      "n": 5,
+      "title": "دفتر صندوق: وقتی سیستم از کار افتاد",
+      "pdfPages": [
+        28,
+        34
+      ],
+      "articles": [
+        "manual-till-when-pos-stops",
+        "reconcile-cash-at-shift-end"
+      ]
+    },
+    {
+      "n": 6,
+      "title": "انبار و خرید روی کاغذ",
+      "pdfPages": [
+        35,
+        38
+      ],
+      "articles": [
+        "paper-inventory-during-outage"
+      ]
+    },
+    {
+      "n": 7,
+      "title": "پرداخت، نسیه و نقدینگی بدون کارتخوان",
+      "pdfPages": [
+        39,
+        42
+      ],
+      "articles": [
+        "set-credit-limits-before-offering-deferred-payment",
+        "accept-payments-when-card-terminal-fails"
+      ]
+    },
+    {
+      "n": 8,
+      "title": "فروش و ارتباط با مشتری بدون اینترنت",
+      "pdfPages": [
+        43,
+        46
+      ],
+      "articles": [
+        "phone-orders-and-local-delivery-without-apps",
+        "backup-customer-contact-channels"
+      ]
+    },
+    {
+      "n": 9,
+      "title": "آمادگی: کارهایی که امروز باید انجام شود",
+      "pdfPages": [
+        48,
+        52
+      ],
+      "articles": [
+        "prepare-and-rehearse-before-disruption"
+      ]
+    },
+    {
+      "n": 10,
+      "title": "۷۲ ساعت اول",
+      "pdfPages": [
+        53,
+        57
+      ],
+      "articles": [
+        "first-seventy-two-hours-of-disruption"
+      ]
+    },
+    {
+      "n": 11,
+      "title": "سه حالت کار و چهار ایستگاه تصمیم",
+      "pdfPages": [
+        58,
+        64
+      ],
+      "articles": [
+        "three-operating-modes-and-decision-stations",
+        "cash-runway-during-a-long-disruption"
+      ]
+    },
+    {
+      "n": 12,
+      "title": "روزهای طولانی: نقدینگی، تیم و توان",
+      "pdfPages": [
+        65,
+        71
+      ],
+      "articles": [
+        "cash-runway-during-a-long-disruption",
+        "protect-team-and-manager-capacity-in-crisis"
+      ]
+    },
+    {
+      "n": 13,
+      "title": "تأمین، انبار اضطراری و قطع برق",
+      "pdfPages": [
+        72,
+        78
+      ],
+      "articles": [
+        "emergency-stock-and-backup-suppliers",
+        "power-outage-operating-decisions"
+      ]
+    },
+    {
+      "n": 14,
+      "title": "بازگشت مرحله‌ای",
+      "pdfPages": [
+        80,
+        85
+      ],
+      "articles": [
+        "phased-reopening-after-disruption"
+      ]
+    },
+    {
+      "n": 15,
+      "title": "انصاف، اعتماد و مشتری محله",
+      "pdfPages": [
+        86,
+        89
+      ],
+      "articles": [
+        "fairness-and-neighbourhood-trust-in-hard-times"
+      ]
+    }
+  ],
+  "appendices": [
+    {
+      "pdfPage": 91,
+      "title": "دفتر صندوق روزانه",
+      "articles": [
+        "reconcile-cash-at-shift-end"
+      ]
+    },
+    {
+      "pdfPage": 92,
+      "title": "کارت انبار",
+      "articles": [
+        "paper-inventory-during-outage"
+      ]
+    },
+    {
+      "pdfPage": 93,
+      "title": "دفتر نسیه",
+      "articles": [
+        "set-credit-limits-before-offering-deferred-payment"
+      ]
+    },
+    {
+      "pdfPage": 94,
+      "title": "فهرست تماس اضطراری",
+      "articles": [
+        "prepare-and-rehearse-before-disruption"
+      ]
+    },
+    {
+      "pdfPage": 95,
+      "title": "چک‌لیست آمادگی",
+      "articles": [
+        "prepare-and-rehearse-before-disruption"
+      ]
+    },
+    {
+      "pdfPage": 96,
+      "title": "کارت ایستگاه تصمیم",
+      "articles": [
+        "three-operating-modes-and-decision-stations"
+      ]
+    },
+    {
+      "pdfPage": 97,
+      "title": "فرم سفارش تلفنی",
+      "articles": [
+        "phone-orders-and-local-delivery-without-apps"
+      ]
+    }
+  ],
+  "editorialNotes": [
+    "همهٔ فصل‌ها و پیوست‌های عملی کتاب پوشش داده شده‌اند؛ فصل نخست در مقالهٔ موجود پوشش دارد.",
+    "مقالات بازنویسی کاربردی‌اند؛ متن خام کتاب در مخزن ذخیره نشده است.",
+    "مثال‌های عددی آموزشی‌اند و آستانه‌های کتاب به‌عنوان نسخهٔ عمومی معرفی نشده‌اند.",
+    "موضوعات برق و ایمنی غذا به فرایند ثبت و تصمیم محدود شده‌اند؛ دما، زمان مجاز نگهداری یا دستور نصب تأییدنشده بازنشر نشده است.",
+    "دربارهٔ تعهدهای پرداخت و قرارداد، تغییر یک‌جانبه یا الزام حقوقی عمومی تجویز نشده است.",
+    "هر مقاله پنج بخش مستقل دارد؛ بخش‌ها مسئله، روش، مثال یا سناریو، خطای محتمل و اقدام عملی را با عنوان طبیعی پوشش می‌دهند."
+  ],
+  "tools": [
+    "cashflow",
+    "contribution",
+    "credit",
+    "delivery",
+    "foodcost",
+    "par",
+    "primecost",
+    "reorder",
+    "runwaydaily",
+    "stockcoverage",
+    "targetfoodcost",
+    "till",
+    "weekly"
+  ]
+}
