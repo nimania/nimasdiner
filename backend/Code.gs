@@ -116,3 +116,5 @@ function api_(p){
   return json_({ok:false,code:'INVALID_ACTION'});
  }catch(e){console.error(String(e));return json_({ok:false,code:'REQUEST_FAILED'});}
 }
+
+function submitInvestment_(p){ return {ok:false,code:'NOT_CONFIGURED'}; }
