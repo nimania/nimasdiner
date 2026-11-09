@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import {renderEditorial} from "./editorial-pages.mjs";
 import {renderReviews} from "./review-pages.mjs";
 import {renderManagerPages} from "./manager-pages.mjs";
 
@@ -40,7 +41,7 @@ function renderSite(data, form, editorial = {articles: []}, keywordMap = {target
 
   const mgURL=m=>`magazine/${num(m.n)}/`;
   const timeline=`<div class="timeline">${data.books.map(b=>`<div class="timeline-item ${b.status==="published"?"published":"future"}"><span class="timeline-index">${num(b.n)}</span><div><span class="tiny">${b.status==="published"?"منتشر شده":"در برنامه پیشنهادی · بدون تاریخ انتشار"}</span><h3>${b.status==="published"?`<a href="${link(bookURL(b))}">${esc(b.title)}</a>`:esc(b.title)}</h3><p>${esc(b.subtitle)}</p></div></div>`).join("")}</div>`;
-  const recentReading=(editorial.articles||[]).filter(x=>x.status==="published").slice(0,3);
+  const recentReading=(editorial.articles||[]).filter(x=>x.status==="published").sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt)).slice(0,3);
   const readingCards=recentReading.map(a=>card("reading/"+a.slug+"/",a.type==="news"?"رادار صنعت":"تحلیل مدیریتی",a.title,a.excerpt)).join("");
   const home=`<section class="hero"><div class="wrap hero-inner"><div><span class="eyebrow">مرجع مستقل کسب‌وکار غذا</span><h1>رستوران را با <em>عدد و سیستم</em> اداره کن، نه با حدس.</h1><p class="lead">کتاب‌های تخصصی، مجله تک‌موضوعی، دانشنامه، ابزارهای مدیریتی و کیت‌های اجرایی؛ یک مسیر رو‌به‌رشد از آموختن تا اجرای واقعی.</p><div class="actions"><a class="button button-dark" href="${link("library/")}">ورود به کتابخانه</a><a class="button button-outline" href="${link("get-book/")}">دریافت رایگان کتاب اول</a></div><p class="hero-note">۳ کتاب · ۱ شماره مجله · ۲۰ نوشته · ابزار و کاربرگ رایگان</p></div><div class="hero-art"><div class="art-tag">THE BUSINESS OF FOOD</div><img src="${link("assets/cover.webp")}" alt="جلد مرجع جامع مدیریت رستوران" width="420" height="620"><div class="art-caption">دانش کار، برای اهل کار.</div></div></div></section><div class="checker"></div>`
     + section("اکوسیستم داینر","چه چیزی در داینر پیدا می‌کنی؟",`<div class="cards three">${card("library/","کتابخانه در حال رشد","کتاب‌ها و جزوه‌های تخصصی","سه کتاب منتشرشده و برنامه‌ای برای گسترش موضوعات، از مهندسی منو تا ضوابط کسب‌وکار.")}${card("magazine/","شماره‌های پی‌درپی","مجله تک‌موضوعی داینر","هر شماره یک محصول یا مسئله، با پیوند تاریخ، فناوری، اقتصاد و مدیریت.")}${card("tools/","ابزار عملی","محاسبه و تصمیم‌گیری","محاسبه‌گرهای مالی، ژورنال روزانه با پشتیبان و کاربرگ‌های آمادهٔ چاپ.")}</div>`)
@@ -99,31 +100,7 @@ function renderSite(data, form, editorial = {articles: []}, keywordMap = {target
   const search=`<section class="pagehead wrap">${crumbs([["جست‌وجو",null]])}<p class="eyebrow">جست‌وجوی داینر</p><h1>در کتابخانه، مجله و دانشنامه بگرد</h1><p class="lead">جست‌وجوی داخلی روی محتوای منتشرشده انجام می‌شود؛ موضوعات پیشنهادی انتشارنیافته وارد نتیجه‌ها نمی‌شوند.</p><form action="${link("search/")}" method="get" class="search-form"><label for="local-search">عبارت موردنظر</label><div class="search-controls"><input id="local-search" name="q" type="search" autocomplete="off" placeholder="مثلاً فودکاست، مجوز، مهندسی منو"><button class="button button-dark" type="submit">جست‌وجو</button></div></form><p id="search-status" class="muted" role="status" aria-live="polite">عبارت را وارد کنید.</p><div id="search-results" class="cards two"></div></section>`;
   add("search/","جست‌وجوی داخلی نیما داینر","جست‌وجوی کتاب‌ها، مجله و دانشنامه نیما داینر؛ پیدا کردن راهنماهای تخصصی مدیریت رستوران و کافه.",search,{noindex:true,script:"site-v2.js"});
   
-  // خواندنی‌های داینر: خبر موثق، تحلیل کاربردی و پرونده تک‌موضوعی.
-  const artItems=(editorial.articles||[]).filter(a=>a.status==="published");
-  const artPath=a=>"reading/"+a.slug+"/";
-  const cardArticle=a=>`<article class="card editorial-card"><span class="kicker">${esc(a.type==="news"?"رادار صنعت غذا":"تحلیل و تجربه")} · ${esc(a.topic)}</span><h3><a href="${link(artPath(a))}">${esc(a.title)}</a></h3><p>${esc(a.excerpt)}</p><div class="card-meta"><time datetime="${esc(a.publishedAt)}">${esc(a.publishedAt)}</time><a class="textlink" href="${link(artPath(a))}">ادامه مطلب ←</a></div></article>`;
-  const introReading=(label,title,desc)=>`<section class="pagehead wrap">${crumbs([["خواندنی‌ها","reading/"],...(label?[ [label,null] ]:[])])}<p class="eyebrow">رسانه تخصصی نیما داینر</p><h1>${esc(title)}</h1><p class="lead">${esc(desc)}</p><div class="actions"><a class="button button-outline" href="${link("reading/")}">همه مطالب</a><a class="button button-outline" href="${link("reading/news/")}">رادار صنعت</a><a class="button button-outline" href="${link("reading/analysis/")}">تحلیل‌های کاربردی</a><a class="button button-outline" href="${link("guides/")}">دانشنامه</a></div></section>`;
-  const editorialCards=arr=>arr.length?`<div class="cards three">${arr.map(cardArticle).join("")}</div>`:`<p class="muted">مطلب تأییدشده‌ای در این بخش ثبت نشده است.</p>`;
-  const homeReading=introReading(null,"خواندنی‌های داینر","از خبرهای معتبر صنعت غذا تا تحلیل تصمیم‌های واقعی مدیران رستوران، کافه و نانوایی. هر خبر با تاریخ منبع و پیامد اجرایی همراه است.")
-    +section("آخرین مطالب","تازه‌های تحریریه",editorialCards(artItems))
-    +section("روش انتشار","چطور خبر و تحلیل منتشر می‌کنیم؟",`<p class="rich">خبرها فقط با منبع و تاریخ قابل بررسی منتشر می‌شوند؛ تحلیل‌ها با مثال و محاسبه مستند می‌شوند. گزارش‌های بازار آمریکا یا اروپا به‌صورت خودکار معادل وضعیت ایران نیستند و این مرز در متن مشخص می‌شود.</p><p class="rich">مطالب قدیمی در صورت تغییر داده یا مقررات بازبینی می‌شوند؛ تاریخ انتشار بی‌دلیل برای تازه‌نمایی تغییر نمی‌کند.</p>`);
-  add("reading/","خواندنی‌های داینر؛ خبر، تحلیل و مطالب صنعت غذا","خبرهای مستند صنعت غذا، تحلیل اقتصاد رستوران، مدیریت کافه، فناوری، مهندسی منو و پرونده‌های تخصصی نیما داینر.",homeReading);
-  add("reading/news/","رادار صنعت غذا؛ اخبار و روندهای رستوران و کافه","تازه‌ترین گزارش‌های مستند و تحلیل کاربردی خبرهای اقتصاد، فناوری و صنعت رستوران با تاریخ و منبع قابل بررسی.",introReading("رادار صنعت","رادار صنعت غذا","خبرهای بررسی‌شده، با منبع اصلی و توضیح اثر احتمالی بر تصمیم‌های کسب‌وکار غذا.")
-    +section("گزارش‌های دارای منبع","خبرهایی که برای مدیر معنا دارند",editorialCards(artItems.filter(a=>a.type==="news"))));
-  add("reading/analysis/","تحلیل صنعت رستوران و اقتصاد غذا","تحلیل مدل‌های درآمد، فودکاست، مدیریت منو، بوفه‌ها و بازگشت مشتری برای صاحبان کسب‌وکار غذا.",introReading("تحلیل‌ها","تحلیل و تجربه","مطالعات مسئله‌محور و مثال‌های اجرایی؛ اعداد فرضی به‌روشنی از داده‌های واقعی جدا می‌شوند.")
-    +section("مسائل کسب‌وکار","نگاهی عمیق‌تر به تصمیم‌های مدیر",editorialCards(artItems.filter(a=>a.type==="analysis"))));
-  for(const a of artItems){
-    const sourceLinks=(a.sources||[]).map(x=>`<li><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a></li>`).join("");
-    const links=(a.related||[]).map(u=>`<a href="${link(u)}">${esc(({"tools/":"محاسبه‌گرهای داینر","journal/":"ژورنال مدیر","magazine/01/":"مجلهٔ کرواسان"}[u]||data.guides.find(g=>"guides/"+g.slug+"/"===u)?.title||"مطالعهٔ مرتبط"))}</a>`).join("");
-    const body=`<section class="pagehead wrap">${crumbs([["خواندنی‌ها","reading/"],[a.type==="news"?"رادار صنعت":"تحلیل و تجربه",a.type==="news"?"reading/news/":"reading/analysis/"],[a.title,null]])}<p class="eyebrow">${esc(a.type==="news"?"خبر و تفسیر برای مدیران":"تحلیل کسب‌وکار غذا")} · ${esc(a.topic)}</p><h1>${esc(a.title)}</h1><p class="lead">${esc(a.excerpt)}</p><div class="chips"><span class="chip">تدوین: ${esc(a.byline)}</span><span class="chip">انتشار در داینر: <time datetime="${esc(a.publishedAt)}">${esc(a.publishedAt)}</time></span>${a.sourcePublishedAt?`<span class="chip">تاریخ خبر اصلی: <time datetime="${esc(a.sourcePublishedAt)}">${esc(a.sourcePublishedAt)}</time></span>`:""}</div></section>
-    <article class="article wrap"><div class="article-body">${a.sections.map(s=>`<section><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}
-    <aside class="source-note"><strong>منابع و شیوه تدوین</strong><p>${a.type==="news"?"گزارش خبری بر پایه منبع اصلی و تحلیل عملی داینر تهیه شده است. دامنه جغرافیایی داده‌ها در متن مشخص است.":"این یادداشت تحلیلی و آموزشی است. مثال‌های عددی فرضی هستند و نباید داده مشاهده‌شده از بازار تلقی شوند."}</p>${sourceLinks?`<ul class="source-links">${sourceLinks}</ul>`:"<p>روش: تحلیل مفهومی و مثال محاسباتی؛ بدون ادعای انجام پژوهش میدانی.</p>"}</aside>
-    <div class="related"><h2>مطالعه و ابزار مرتبط</h2>${links}</div>${sourceBooks(a.bookSources||[])}${comment(a.title)}</div></article>`;
-    const articleSchema={"@context":"https://schema.org","@type":a.type==="news"?"NewsArticle":"Article",headline:a.title,description:a.excerpt,datePublished:a.publishedAt,author:{"@type":a.byline==="نیما افشارنادری"?"Person":"Organization",name:a.byline},publisher:{"@type":"Organization",name:"نیما داینر"},inLanguage:"fa",mainEntityOfPage:ORIGIN+"/"+artPath(a)};
-    add(artPath(a),a.title,a.excerpt,body,{structured:articleSchema,keywords:a.keyword});
-  }
-
+  renderEditorial({editorial,data,add,section,crumbs,link,esc,sourceBooks,relatedBooks,comment});
 
   // No separate indexable pages for keywords without complete content.
   const indexed=pages.filter(x=>x.index);
@@ -140,12 +117,13 @@ const root=process.cwd();
 const out=path.join(root,"site-dist");
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for(const file of ["download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","journal.mjs","journal-model.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
+for(const file of ["download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","journal.mjs","journal-model.mjs","article-tools.mjs","calculator-model.mjs","reading-filter.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
 for(const dir of ["assets","consulting","app"]){fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});}
 const data=JSON.parse(fs.readFileSync(path.join(root,"content/catalog.json"),"utf8"));
 const form=fs.readFileSync(path.join(root,"content/get-book-form.html"),"utf8");
 const extended=JSON.parse(fs.readFileSync(path.join(root,"content/expanded-guides.json"),"utf8"));
 const editorial=JSON.parse(fs.readFileSync(path.join(root,"content/editorial.json"),"utf8"));
+for(const file of ["book1-articles.json","book2-articles.json","book3-articles.json"]){const p=path.join(root,"content",file);if(fs.existsSync(p))editorial.articles.push(...JSON.parse(fs.readFileSync(p,"utf8")));}
 const seo=JSON.parse(fs.readFileSync(path.join(root,"content/seo-keywords.json"),"utf8"));
 const known=new Set(data.guides.map(g=>g.slug));
 for(const g of extended.guides){if(known.has(g.slug))throw Error("Duplicate SEO guide slug: "+g.slug);known.add(g.slug);data.guides.push(g);}

@@ -1,0 +1,8 @@
+import {calculators,calculate} from './calculator-model.mjs';
+const fmt=new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2});
+for(const section of document.querySelectorAll('[data-calculator]')){
+ const key=section.dataset.calculator,t=calculators[key],form=section.querySelector('form'),status=section.querySelector('.tool-status'),results=section.querySelector('.tool-results');if(!t)continue;
+ const update=()=>{try{const values=Object.fromEntries(t.fields.map(f=>[f.key,form.elements.namedItem(f.key).value])),rows=calculate(key,values);results.replaceChildren();for(const r of rows){const d=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=r.label;dd.textContent=(typeof r.value==='number'?fmt.format(r.value):r.value)+(r.unit?' '+r.unit:'');d.append(dt,dd);results.append(d);}status.className='tool-status form-success';status.textContent='نتیجه با همین ورودی‌ها محاسبه شد.';}catch(e){results.replaceChildren();status.className='tool-status form-error';status.textContent=e.message;}};
+ form.addEventListener('submit',e=>{e.preventDefault();update();});form.querySelector('[data-example]').addEventListener('click',()=>{t.fields.forEach(f=>form.elements.namedItem(f.key).value=f.example);update();status.textContent='نتیجه با عددهای آموزشی نمونه؛ عددهای مجموعهٔ خودت را جایگزین کن.';});
+ form.addEventListener('input',()=>{results.replaceChildren();status.className='tool-status';status.textContent='ورودی تغییر کرد؛ برای نتیجهٔ تازه محاسبه را بزن.';});form.addEventListener('reset',()=>{results.replaceChildren();status.className='tool-status';status.textContent='عددها را وارد کن و محاسبه را بزن.';});
+}
