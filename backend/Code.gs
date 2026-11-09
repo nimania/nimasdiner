@@ -118,20 +118,23 @@ function api_(p){
 }
 
 function submitInvestment_(p){
- const email=String(p.email||'');
+ const email=String(p.email||'').trim().toLowerCase();
  const raw=String(p.payload||'');
  if(p.form_id!=='investment/sweden/01'||raw.length>45000||!/^[^@ ]+@[^@ ]+\\.[^@ ]+$/.test(email))return {ok:false,code:'INVALID_INPUT'};
  let record;try{record=JSON.parse(raw)}catch(e){return {ok:false,code:'INVALID_JSON'}}
  if(record.consent!==true||!Array.isArray(record.answers)||record.answers.length!==32)return {ok:false,code:'INVALID_FORM'};
+ const id=String(p.submission_id||'');
+ if(!/^[a-f0-9-]{36}$/.test(id))return {ok:false,code:'INVALID_ID'};
  const lock=LockService.getScriptLock();lock.waitLock(20000);
  try{
   const db=db_();let sheet=db.getSheetByName('InvestmentIntake');
-  if(!sheet){sheet=db.insertSheet('InvestmentIntake');sheet.appendRow(['submission_id','received','email','payload']);}
-  const id=String(p.submission_id||'');
-  if(!/^[a-f0-9-]{36}$/.test(id))return {ok:false,code:'INVALID_ID'};
-  if(sheet.getLastRow()>1&&sheet.getRange(2,1,sheet.getLastRow()-1,1).getValues().some(row=>row[0]===id))return {ok:true,submission_id:id,duplicate:true};
+  if(!sheet){sheet=db.insertSheet('InvestmentIntake');sheet.appendRow(['submission_id','received_at','contact_email','payload_json']);}
+  if(sheet.getLastRow()>1&&sheet.getRange(2,1,sheet.getLastRow()-1,1).getValues().some(row=>String(row[0])===id))return {ok:true,submission_id:id,duplicate:true};
   sheet.appendRow([id,now_(),cell_(email),cell_(raw)]);
-  enqueue_(ND.owner,'فرم مشاوره سوئد ثبت شد',mail_('فرم جدید','<p>یک فرم جدید ثبت شده است. برای مشاهده پاسخ‌ها فایل خصوصی مخاطبان را باز کنید.</p>'));
+  const answerHtml=record.answers.map((a,i)=>'<div style="padding:10px 0;border-bottom:1px solid #ddd"><b>'+(i+1)+'. '+esc_(a.question||'')+'</b><br><span style="white-space:pre-wrap">'+esc_(a.answer||'بی‌پاسخ')+'</span></div>').join('');
+  const ownerBody=mail_('فرم کامل مشاوره رستوران سوئد', '<p>یک فرم جدید ثبت شد.</p><p><b>ایمیل متقاضی:</b> '+esc_(email)+'</p><p><b>کد پیگیری:</b> '+esc_(id)+'</p><hr>'+answerHtml);
+  enqueue_('nimania@gmail.com','نیما داینر | پاسخ کامل فرم مشاوره سوئد',ownerBody);
+  enqueue_(email,'دریافت پاسخ‌های فرم مشاوره | نیما داینر',mail_('فرم شما ثبت شد','<p>پاسخ‌های شما با موفقیت دریافت شد. یک نسخه از اطلاعات را از صفحه فرم دانلود و نزد خود نگهداری کنید.</p><p>کد پیگیری: '+esc_(id)+'</p>'));
   return {ok:true,submission_id:id};
  }finally{lock.releaseLock()}
 }
