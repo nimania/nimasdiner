@@ -49,7 +49,7 @@ let state={answers:{},createdAt:new Date().toISOString(),consent:false};
 try{const raw=JSON.parse(localStorage.getItem(KEY)||'null');if(raw&&typeof raw==='object'&&raw.answers)state={...state,...raw}}catch{}
 const questions=groups.flatMap(g=>g.q.map(a=>({section:g.title,question:a[0],default:a[1]})));
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{$('#status').textContent='ذخیره موقت ممکن نشد؛ لطفاً در پایان نسخه‌ای بگیرید.'}}
-function progress(){const count=Object.values(state.answers).filter(x=>String(x).trim()).length;$('#progress-text').textContent=count.toLocaleString('fa-IR')+' پاسخ از '+questions.length.toLocaleString('fa-IR')+' سؤال';$('#progress-fill').style.width=(count/questions.length*100)+'%'}
+function progress(){const count=questions.filter((q,i)=>String(state.answers['q'+(i+1)]??q.default??'').trim()).length;$('#progress-text').textContent=count.toLocaleString('fa-IR')+' پاسخ از '+questions.length.toLocaleString('fa-IR')+' سؤال';$('#progress-fill').style.width=(count/questions.length*100)+'%'}
 let number=0;
 for(const group of groups){
  const section=document.createElement('section');section.className='section';
