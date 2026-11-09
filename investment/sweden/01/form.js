@@ -68,21 +68,30 @@ function getAnswers(){return questions.map((q,i)=>({number:i+1,section:q.section
 function textReport(){let lines=['فرم پیش از جلسه مشاوره رستوران — نیما داینر','پرونده سوئد / ۰۱','تاریخ تهیه: '+new Date().toLocaleDateString('fa-IR'),'','پاسخ‌ها از طرف متقاضی و نیازمند تأیید اسناد هستند.',''];for(const a of getAnswers())lines.push(a.number+'. '+a.question,'پاسخ: '+(a.answer.trim()||'هنوز مشخص نیست'),'');return lines.join('\n')}
 function download(){const url=URL.createObjectURL(new Blob([textReport()],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='NimasDiner-Sweden-01-Answers.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000)}
 $('#txt').addEventListener('click',()=>{download();$('#status').textContent='نسخه پاسخ‌ها روی دستگاه شما ذخیره شد.'});
-$('#submit').addEventListener('click',()=>{
- if(!$('#consent').checked){$('#status').textContent='لطفاً ابتدا تیک موافقت با ارسال پاسخ‌ها را بزنید.';$('#consent').focus();return}
- const filled=getAnswers().filter(a=>a.answer.trim()).length;
- if(filled<5){$('#status').textContent='لطفاً ابتدا حداقل چند سؤال را پاسخ دهید.';return}
- download();
- const full=textReport();
- // On short forms, place full answers in the email so no attachment is needed.
- // For long forms, avoid unreliable mailto URL limits and request the downloaded attachment.
- const subject='پرسش‌نامه رستوران سوئد ۰۱ — نیما داینر';
- const base='سلام نیما،\n\nپرسش‌نامه قبل از جلسه را تکمیل کرده‌ایم.\n';
- const body=encodeURIComponent(base+'\n'+full);
- const sendInline=body.length<6000;
- const mailBody=sendInline?base+'\n'+full:base+'فایل پاسخ‌ها را که هم‌اکنون دانلود شده است به این ایمیل پیوست می‌کنیم.\n\nبا تشکر';
- $('#status').textContent=sendInline?'نسخه شما ذخیره شد. ایمیل آماده باز می‌شود؛ فقط دکمه ارسال را بزنید.':'نسخه شما ذخیره شد. لطفاً فایل «NimasDiner-Sweden-01-Answers.txt» را به ایمیل آماده پیوست کنید و ارسال را بزنید.';
- window.location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(mailBody);
+const emailInput=$('#contact-email');
+emailInput.value=state.email||'';
+emailInput.addEventListener('input',()=>{state.email=emailInput.value.trim();save()});
+$('#submit').addEventListener('click',async()=>{
+ if(!$('#consent').checked){$('#status').textContent='لطفاً تیک موافقت با ارسال پاسخ‌ها را بزنید.';$('#consent').focus();return}
+ const email=emailInput.value.trim();
+ if(!emailInput.checkValidity()||!email){$('#status').textContent='لطفاً نشانی ایمیل معتبر بنویسید.';emailInput.focus();return}
+ if(getAnswers().filter(a=>a.answer.trim()).length<5){$('#status').textContent='لطفاً ابتدا چند سؤال را پاسخ دهید.';return}
+ const button=$('#submit');button.disabled=true;button.textContent='در حال ثبت پاسخ‌ها...';$('#status').textContent='در حال ارسال امن فرم...';
+ if(!state.submissionId)state.submissionId=crypto.randomUUID();
+ save();
+ const data={form_id:'investment/sweden/01',form_version:2,submission_id:state.submissionId,email,consent:true,answers:getAnswers()};
+ try{
+  const res=await fetch('https://nimasdiner-delivery.iran.chatgpt.site/api/investment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(55000)});
+  const result=await res.json();
+  if(!res.ok||result.ok!==true)throw Error('REMOTE_FAILURE');
+  download();
+  $('#status').textContent='پاسخ‌ها با موفقیت ثبت شدند. یک نسخه هم برای شما دانلود شد. کد پیگیری: '+state.submissionId;
+  state.lastSubmittedAt=new Date().toISOString();save();
+  button.textContent='ثبت شد ✓';
+ }catch(error){
+  $('#status').textContent='ارسال انجام نشد. پاسخ‌ها پاک نشده‌اند؛ لطفاً بعداً دوباره دکمه ثبت را بزنید یا از «یک نسخه برای خودم» استفاده کنید.';
+  button.disabled=false;button.textContent='تلاش دوباره برای ثبت';
+ }
 });
 progress();
 })();
