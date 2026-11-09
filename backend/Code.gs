@@ -37,7 +37,7 @@ function doGet(e){
  return page_('دریافت کتاب مدیریت رستوران','<p>برای ثبت درخواست کتاب از سایت نیما داینر شروع کنید.</p><a class="button dark" href="'+ND.site+'#get-book">رفتن به فرم دریافت کتاب</a>');
 }
 function doPost(e){
- try{const p=e&&e.parameter||{};if(e&&e.contentLength>15000)return page_('درخواست نامعتبر','<p>لطفاً دوباره از فرم سایت اقدام کنید.</p>');
+ try{const p=e&&e.parameter||{};if(e&&e.contentLength>(p.action==='api_investment'?65000:15000))return page_('درخواست نامعتبر','<p>لطفاً دوباره از فرم سایت اقدام کنید.</p>');
   if(/^api_/.test(p.action||''))return api_(p);
   if(p.action==='confirm')return confirm_(String(p.token||''));
   return register_(p);
