@@ -63,35 +63,23 @@ for(const group of groups){
  }
  $('#form-sections').append(section);
 }
-$('#consent').checked=!!state.consent;$('#consent').addEventListener('change',e=>{state.consent=e.target.checked;save()});
 function getAnswers(){return questions.map((q,i)=>({number:i+1,section:q.section,question:q.question,answer:state.answers['q'+(i+1)]??q.default??''}))}
-function textReport(){let lines=['فرم پیش از جلسه مشاوره رستوران — نیما داینر','پرونده سوئد / ۰۱','تاریخ تهیه: '+new Date().toLocaleDateString('fa-IR'),'','پاسخ‌ها از طرف متقاضی و نیازمند تأیید اسناد هستند.',''];for(const a of getAnswers())lines.push(a.number+'. '+a.question,'پاسخ: '+(a.answer.trim()||'هنوز مشخص نیست'),'');return lines.join('\n')}
-function download(){const url=URL.createObjectURL(new Blob([textReport()],{type:'text/plain;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='NimasDiner-Sweden-01-Answers.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),3000)}
-$('#txt').addEventListener('click',()=>{download();$('#status').textContent='نسخه پاسخ‌ها روی دستگاه شما ذخیره شد.'});
-const emailInput=$('#contact-email');
-emailInput.value=state.email||'';
-emailInput.addEventListener('input',()=>{state.email=emailInput.value.trim();state.submissionId=null;save()});
-$('#submit').addEventListener('click',async()=>{
- if(!$('#consent').checked){$('#status').textContent='لطفاً تیک موافقت با ارسال پاسخ‌ها را بزنید.';$('#consent').focus();return}
- const email=emailInput.value.trim();
- if(!emailInput.checkValidity()||!email){$('#status').textContent='لطفاً نشانی ایمیل معتبر بنویسید.';emailInput.focus();return}
- if(getAnswers().filter(a=>a.answer.trim()).length<5){$('#status').textContent='لطفاً ابتدا چند سؤال را پاسخ دهید.';return}
- const button=$('#submit');button.disabled=true;button.textContent='در حال ثبت پاسخ‌ها...';$('#status').textContent='در حال ارسال امن فرم...';
- if(!state.submissionId)state.submissionId=crypto.randomUUID();
- save();
- const data={form_id:'investment/sweden/01',form_version:2,submission_id:state.submissionId,email,consent:true,answers:getAnswers()};
- try{
-  const res=await fetch('https://nimasdiner-delivery.iran.chatgpt.site/api/investment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(55000)});
-  const result=await res.json();
-  if(!res.ok||result.ok!==true)throw Error('REMOTE_FAILURE');
-  download();
-  $('#status').textContent='پاسخ‌ها با موفقیت ثبت شدند. یک نسخه هم برای شما دانلود شد. کد پیگیری: '+state.submissionId;
-  state.lastSubmittedAt=new Date().toISOString();save();
-  button.textContent='ثبت شد ✓';
- }catch(error){
-  $('#status').textContent='ارسال انجام نشد. پاسخ‌ها پاک نشده‌اند؛ لطفاً بعداً دوباره دکمه ثبت را بزنید یا از «یک نسخه برای خودم» استفاده کنید.';
-  button.disabled=false;button.textContent='تلاش دوباره برای ثبت';
- }
+function textReport(){
+ const lines=['نیما داینر | پرسش‌نامه پیش از جلسه مشاوره','پرونده: سوئد / ۰۱','تاریخ تهیه: '+new Date().toLocaleDateString('fa-IR'),'','این پاسخ‌ها از سوی متقاضی وارد شده‌اند و هنوز مستقلاً راستی‌آزمایی نشده‌اند.',''];
+ let last='';
+ for(const a of getAnswers()){if(a.section!==last){lines.push('====================',a.section,'====================','');last=a.section;}lines.push(a.number+'. '+a.question,'پاسخ: '+(a.answer.trim()||'هنوز مشخص نیست'),'');}
+ return lines.join('\\n');
+}
+function download(){
+ const url=URL.createObjectURL(new Blob([textReport()],{type:'text/plain;charset=utf-8'}));
+ const link=document.createElement('a');link.href=url;link.download='NimasDiner-Sweden-01-Answers.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+$('#submit').addEventListener('click',()=>{
+ download();
+ $('#send-options').hidden=false;
+ $('#status').textContent='فایل پاسخ‌ها دانلود شد. حالا تلگرام یا ایمیل را باز کنید و فایل را بفرستید.';
+ $('#submit').textContent='دانلود دوباره فایل ↓';
 });
+
 progress();
 })();
