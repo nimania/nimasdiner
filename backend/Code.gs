@@ -112,6 +112,7 @@ function api_(p){
    return json_({ok:false,code:'INVALID_LINK'});
   }
   if(p.action==='api_register')return json_(registerDirect_(p));
+  if(p.action==='api_investment')return json_(submitInvestment_(p));
   return json_({ok:false,code:'INVALID_ACTION'});
  }catch(e){console.error(String(e));return json_({ok:false,code:'REQUEST_FAILED'});}
 }
