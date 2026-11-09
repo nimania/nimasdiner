@@ -68,7 +68,7 @@ function textReport(){
  const lines=['نیما داینر | پرسش‌نامه پیش از جلسه مشاوره','پرونده: سوئد / ۰۱','تاریخ تهیه: '+new Date().toLocaleDateString('fa-IR'),'','این پاسخ‌ها از سوی متقاضی وارد شده‌اند و هنوز مستقلاً راستی‌آزمایی نشده‌اند.',''];
  let last='';
  for(const a of getAnswers()){if(a.section!==last){lines.push('====================',a.section,'====================','');last=a.section;}lines.push(a.number+'. '+a.question,'پاسخ: '+(a.answer.trim()||'هنوز مشخص نیست'),'');}
- return lines.join('\\n');
+ return lines.join(String.fromCharCode(10));
 }
 function download(){
  const url=URL.createObjectURL(new Blob([textReport()],{type:'text/plain;charset=utf-8'}));
