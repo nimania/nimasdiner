@@ -131,6 +131,7 @@ function submitInvestment_(p){
   if(!/^[a-f0-9-]{36}$/.test(id))return {ok:false,code:'INVALID_ID'};
   if(sheet.getLastRow()>1&&sheet.getRange(2,1,sheet.getLastRow()-1,1).getValues().some(row=>row[0]===id))return {ok:true,submission_id:id,duplicate:true};
   sheet.appendRow([id,now_(),cell_(email),cell_(raw)]);
+  enqueue_(ND.owner,'فرم مشاوره سوئد ثبت شد',mail_('فرم جدید','<p>یک فرم جدید ثبت شده است. برای مشاهده پاسخ‌ها فایل خصوصی مخاطبان را باز کنید.</p>'));
   return {ok:true,submission_id:id};
  }finally{lock.releaseLock()}
 }
