@@ -76,3 +76,20 @@ for(const slug of calculatorSlugs){
  assert.match(sitemap,new RegExp("reading/"+slug+"/"),"missing sitemap entry "+slug);
 }
 console.log("Article calculators and book advertisements checked:",calculatorSlugs.length);
+
+const standaloneTools=["startup-runway","breakeven","foodcost","pricing","menu","buffet","labor","waste","discount","capacity"];
+const toolHub=read("tools/index.html");
+assert.match(toolHub,/id="tool-filter"/,"tool search missing");
+assert.equal((toolHub.match(/data-tool-card/g)||[]).length,standaloneTools.length,"tool catalog incomplete");
+for(const slug of standaloneTools){
+ const html=read("tools/"+slug+"/index.html");
+ assert.match(html,/data-diner-calculator=/,"calculator missing "+slug);
+ assert.match(html,/article-calculators\.js/,"shared engine missing "+slug);
+ assert.match(html,/درخواست جلسه مشاوره/,"consultation action missing "+slug);
+ assert.match(html,/سفارش کتاب چاپی/,"print book action missing "+slug);
+ assert.match(html,/https:\/\/t\.me\/nimaafsharnaderi/,"contact missing "+slug);
+ assert.match(html,/مقاله مرتبط/,"related article missing "+slug);
+ assert.match(sitemap,new RegExp("tools/"+slug+"/"),"not in sitemap "+slug);
+}
+for(const slug of calculatorSlugs)assert.match(read("reading/"+slug+"/index.html"),/درخواست جلسه مشاوره/,"article consultation missing "+slug);
+console.log("Standalone tools and consultations checked:",standaloneTools.length);
