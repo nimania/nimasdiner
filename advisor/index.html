@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffcf22">
+<meta name="description" content="مشکل رستوران، کافه یا آشپزخانه خود را بنویسید و منابع و راهکارهای مرتبط نیما داینر را پیدا کنید.">
+<title>مشاور هوشمند داینر | نیما داینر</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{font-family:Tahoma,"Vazirmatn",Arial,sans-serif;color:#202020;background:#f8f5ed;font-synthesis:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;line-height:1.85}button,textarea,a{font:inherit}
+a{color:inherit}button{cursor:pointer}.wrap{max-width:1040px;padding:0 24px;margin:auto}
+header{background:#fff;border-bottom:1px solid #e8e3d8}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:82px}
+.brand{font-size:1.35rem;font-weight:900;text-decoration:none}.brand span{color:#ed4d36}.back{font-size:.9rem;text-decoration:none;border-bottom:1px solid #999}
+main{padding:64px 0 90px}.eyebrow{font-size:.8rem;font-weight:900;letter-spacing:.05em;color:#675b44}
+h1{font-size:clamp(2.1rem,6vw,3.9rem);line-height:1.4;margin:10px 0 16px;letter-spacing:-.035em}h1 span{color:#db4330}
+.lead{font-size:1.12rem;max-width:720px;margin:0 0 32px;color:#46423c}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px;align-items:start}
+.panel{background:white;border:1px solid #e6dfd1;border-radius:18px;padding:25px;box-shadow:0 8px 30px #332b1608}
+label{font-weight:800;display:block;margin-bottom:12px}
+textarea{border:1.5px solid #cbc4b7;border-radius:12px;display:block;width:100%;padding:16px;resize:vertical;min-height:180px;line-height:2;color:#252525;background:#fff}
+textarea:focus{outline:3px solid #ffcf22;border-color:#292929}
+.hint{font-size:.85rem;color:#666;margin:8px 0 0}
+.examples{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.chip{background:#f8f6f0;border:1px solid #e4ddcf;border-radius:50px;color:#38332c;padding:7px 13px;font-size:.82rem}
+.chip:hover,.chip:focus-visible{background:#fff1b8}
+.primary{background:#ffcf22;border:2px solid #1f1f1f;border-radius:10px;padding:13px 20px;font-weight:900;color:#161616}
+.primary:hover{background:#ffe070}.primary:disabled{opacity:.5;cursor:not-allowed}
+.side h2,.results h2{font-size:1.2rem;margin:0 0 12px}.side p{color:#565047;font-size:.95rem;margin:6px 0 14px}
+.telegram{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#1677a9;color:#fff;text-decoration:none;padding:12px 17px;border-radius:10px;font-weight:800}
+.telegram svg{height:20px;width:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
+.note{font-size:.78rem;color:#736a5c;margin:12px 0 0}
+.results{margin-top:28px;padding:24px;background:#fff;border:1px solid #e6dfd1;border-radius:18px}
+.results[hidden]{display:none}.result-head{border-bottom:1px solid #eee5d5;padding-bottom:12px;margin-bottom:18px}
+.result-tag{display:inline-block;background:#fff0aa;color:#29220c;border-radius:40px;padding:2px 12px;font-size:.8rem;font-weight:700;margin:0 0 7px 7px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{padding:18px;border:1px solid #e5ded1;border-radius:12px;background:#fffcf6}
+.card strong{display:block;font-size:1.05rem}.card p{font-size:.91rem;color:#524e48;margin:9px 0}.small-btn{display:inline-block;font-weight:800;color:#282118;text-underline-offset:5px}
+.tip{padding:13px 16px;border-right:4px solid #ffcf22;background:#faf6e9;margin:16px 0}
+footer{border-top:1px solid #e4dccc;background:#fff;padding:24px 0;font-size:.88rem;color:#625b51}
+@media(max-width:750px){main{padding:35px 0 50px}.layout{grid-template-columns:1fr}.panel{padding:18px}.wrap{padding:0 16px}.side{order:2}}
+</style>
+<script defer src="advisor.js"></script>
+</head>
+<body>
+<header><div class="wrap top"><a class="brand" href="../">نیما داینر<span>.</span></a><a class="back" href="../">بازگشت به سایت</a></div></header>
+<main class="wrap">
+<p class="eyebrow">DINER / PROBLEM FINDER</p>
+<h1>رستورانت چه مشکلی داره؟<br><span>همین‌جا بنویس.</span></h1>
+<p class="lead">فروش کم شده؟ هزینه‌ها بالا رفته؟ با آشپز یا کارکنان اختلاف داری؟ هر مشکلی هست، با زبان خودت تعریف کن. بهت می‌گیم از کدام کتاب، راهنما یا اقدام عملی نیما داینر شروع کنی.</p>
+<div class="layout">
+<section class="panel" aria-labelledby="problem-label">
+<form id="problem-form">
+<label id="problem-label" for="problem-text">مسئله کسب‌وکارت را توضیح بده</label>
+<textarea id="problem-text" name="problem" rows="5" minlength="12" maxlength="2500" required placeholder="مثلاً: رستورانم فروش خوبی داره ولی آخر ماه سود نمی‌کنم. مواد اولیه گرون می‌شه و نمی‌دونم قیمت منو رو چطور اصلاح کنم."></textarea>
+<p class="hint">از توضیح بلند نترس؛ مسئله، نشانه‌ها و اتفاق‌هایی که افتاده را بنویس. نام مشتری، اطلاعات مالی محرمانه یا اطلاعات کارکنان را وارد نکن.</p>
+<div class="examples" aria-label="نمونه مسائل">
+<button type="button" class="chip" data-example="فروشم کم شده و نمی‌دانم چطور مشتری‌های قبلی را برگردانم.">فروش کم شده</button>
+<button type="button" class="chip" data-example="فروش رستوران بد نیست ولی آخر ماه سود نمی‌ماند و هزینه مواد و ضایعات بالاست.">فروش دارم، سود ندارم</button>
+<button type="button" class="chip" data-example="سرآشپز رفته و رسپی‌ها ثبت نشده. هر آشپز غذا را با طعم متفاوت درست می‌کند.">مشکل آشپز و رسپی</button>
+<button type="button" class="chip" data-example="می‌خواهم با سرمایه محدود یک کافه یا فست‌فود کوچک راه‌اندازی کنم.">راه‌اندازی با سرمایه کم</button>
+</div>
+<button class="primary" type="submit">بررسی مسئله و پیشنهاد منابع ←</button>
+<p class="note" role="status" id="form-status">رایگان و بدون ثبت‌نام؛ متن فقط در همین مرورگر بررسی می‌شود و به سرور ارسال یا ذخیره نمی‌شود.</p>
+</form>
+</section>
+<aside class="panel side">
+<h2>می‌خواهی مستقیم صحبت کنیم؟</h2>
+<p>اگر مسئله‌ات نیاز به بررسی دقیق‌تر دارد، از طریق تلگرام شخصی نیما پیام بده. برای خرید نسخه چاپی کتاب‌ها هم همین مسیر در دسترس است.</p>
+<a class="telegram" href="https://t.me/nimaafsharnaderi" target="_blank" rel="noopener noreferrer" aria-label="ارتباط با نیما در تلگرام">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="m22 2-11 11"/></svg> پیام به نیما در تلگرام
+</a>
+<p class="note">ارسال پیام اختیاری است؛ اطلاعات فرم به‌صورت خودکار منتقل نمی‌شود.</p>
+</aside>
+</div>
+<section id="results" class="results" hidden aria-live="polite" aria-labelledby="results-heading">
+<div class="result-head"><p class="eyebrow">نتیجه بررسی اولیه</p><h2 id="results-heading">از اینجا شروع کن</h2><div id="result-tags"></div><p id="result-intro"></p></div>
+<div id="result-cards" class="cards"></div>
+<p id="first-action" class="tip"></p>
+<p class="note">این سامانه فعلاً با تطبیق موضوع‌ها و کلیدواژه‌ها کار می‌کند، نه تشخیص قطعی یا گفت‌وگوی هوش مصنوعی. پیشنهادها جای بررسی داده‌های واقعی و مشاوره تخصصی را نمی‌گیرند.</p>
+<p><a class="telegram" href="https://t.me/nimaafsharnaderi" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="m22 2-11 11"/></svg> برای اطلاعات بیشتر با نیما صحبت کن</a></p>
+</section>
+</main>
+<footer><div class="wrap">نیما داینر — دانش کار، برای اهل کار. | <a href="../privacy.html">حریم خصوصی</a> | <a href="../">خانه</a></div></footer>
+</body>
+</html>
