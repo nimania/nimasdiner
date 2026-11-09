@@ -16,7 +16,27 @@ const calculations={
 document.querySelectorAll('[data-diner-calculator]').forEach(root=>{
  const key=root.dataset.dinerCalculator,fn=calculations[key];if(!fn)return;
  const inputs=[...root.querySelectorAll('input[data-calc-input]')],output=root.querySelector('[data-calc-output]');
- const update=()=>{const values=inputs.map(x=>parse(x.value));if(values.some(x=>x===null)){output.textContent='همه ورودی‌ها را تکمیل کنید؛ برای هزینه‌های صفر، عدد ۰ بگذارید.';return;}output.textContent=fn(values);};
+ const valid=()=>inputs.map(x=>parse(x.value));
+ const isValid=v=>v.every(x=>x!==null);
+ const update=()=>{const values=valid();if(!isValid(values)){output.textContent='همه ورودی‌ها را تکمیل کنید؛ برای هزینه‌های صفر، عدد ۰ بگذارید.';return false;}output.textContent=fn(values);return true;};
  inputs.forEach(x=>x.addEventListener('input',update));update();
+ // Additional actions are available only on the standalone tool pages.
+ if(root.closest('body')?.querySelector('[data-tool-card]')||!location.pathname.includes('/tools/'))return;
+ const bar=document.createElement('div');bar.className='actions';bar.style.cssText='display:flex;flex-wrap:wrap;gap:10px;margin-top:18px';
+ const make=(label)=>{const b=document.createElement('button');b.type='button';b.className='button button-outline';b.textContent=label;bar.appendChild(b);return b;};
+ const compare=make('ثبت این حالت برای مقایسه');
+ const csv=make('دریافت فایل اکسل CSV');
+ const print=make('چاپ / ذخیره PDF');
+ root.appendChild(bar);
+ const history=document.createElement('div');history.setAttribute('aria-live','polite');history.style.marginTop='15px';root.appendChild(history);
+ const snapshots=[];
+ const csvCell=s=>'"'+String(s).replace(/"/g,'""')+'"';
+ const rows=()=>snapshots.map((snap,index)=>({name:'حالت '+(index+1),...Object.fromEntries(inputs.map((input,i)=>[input.getAttribute('aria-label')||('ورودی '+(i+1)),snap.values[i]])),result:snap.result}));
+ const showHistory=()=>{history.replaceChildren();if(!snapshots.length)return;const h=document.createElement('strong');h.textContent='مقایسه حالت‌های ثبت‌شده';history.append(h);const ul=document.createElement('ul');snapshots.forEach((snap,i)=>{const li=document.createElement('li');li.textContent='حالت '+(i+1)+': '+snap.result;ul.appendChild(li)});history.appendChild(ul);};
+ compare.addEventListener('click',()=>{if(!update()){history.textContent='اول همه عددها را درست وارد کنید.';return;}if(snapshots.length===3)snapshots.shift();snapshots.push({values:valid(),result:output.textContent});showHistory();});
+ csv.addEventListener('click',()=>{if(!update()){history.textContent='برای دریافت خروجی، عددها را تکمیل کنید.';return;}const entries=snapshots.length?rows():[{name:'حالت فعلی',...Object.fromEntries(inputs.map((input,i)=>[input.getAttribute('aria-label')||('ورودی '+(i+1)),valid()[i]])),result:output.textContent}];const headers=Object.keys(entries[0]);const data='\uFEFF'+[headers.map(csvCell).join(','),...entries.map(item=>headers.map(h=>csvCell(item[h]??'')).join(','))].join('\r\n');const url=URL.createObjectURL(new Blob([data],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='nimasdiner-'+key+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+ print.addEventListener('click',()=>{if(!update()){history.textContent='برای ذخیره PDF، عددها را تکمیل کنید.';return;}window.print();});
 });
+const filter=document.getElementById('tool-filter');
+if(filter){const cards=[...document.querySelectorAll('[data-tool-card]')],count=document.getElementById('tool-count');filter.addEventListener('input',()=>{const q=filter.value.trim().normalize('NFKC').replace(/[يى]/g,'ی').replace(/ك/g,'ک').toLowerCase();let n=0;cards.forEach(card=>{const content=card.textContent.normalize('NFKC').replace(/[يى]/g,'ی').replace(/ك/g,'ک').toLowerCase();card.hidden=!!q&&!content.includes(q);if(!card.hidden)n++});count.textContent=n+' ابزار پیدا شد';});}
 })();
