@@ -58,7 +58,7 @@ for(const group of groups){
   number++;const id='q'+number;const box=document.createElement('article');box.className='card question';
   const heading=document.createElement('h3');const numberEl=document.createElement('span');numberEl.className='number';numberEl.textContent=number.toLocaleString('fa-IR');heading.append(numberEl,document.createTextNode(q));box.append(heading);
   const answer=document.createElement('textarea');answer.rows=old?3:2;answer.maxLength=1200;answer.setAttribute('aria-label',q);answer.value=state.answers[id]!==undefined?state.answers[id]:old;answer.placeholder='اگر نمی‌دانید، این قسمت را خالی بگذارید.';
-  answer.addEventListener('input',()=>{state.answers[id]=answer.value;save();progress()});
+  answer.addEventListener('input',()=>{state.answers[id]=answer.value;state.submissionId=null;save();progress()});
   box.append(answer);section.append(box);
  }
  $('#form-sections').append(section);
@@ -70,7 +70,7 @@ function download(){const url=URL.createObjectURL(new Blob([textReport()],{type:
 $('#txt').addEventListener('click',()=>{download();$('#status').textContent='نسخه پاسخ‌ها روی دستگاه شما ذخیره شد.'});
 const emailInput=$('#contact-email');
 emailInput.value=state.email||'';
-emailInput.addEventListener('input',()=>{state.email=emailInput.value.trim();save()});
+emailInput.addEventListener('input',()=>{state.email=emailInput.value.trim();state.submissionId=null;save()});
 $('#submit').addEventListener('click',async()=>{
  if(!$('#consent').checked){$('#status').textContent='لطفاً تیک موافقت با ارسال پاسخ‌ها را بزنید.';$('#consent').focus();return}
  const email=emailInput.value.trim();
