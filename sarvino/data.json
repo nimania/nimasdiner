@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "metadata": {
     "project": "Sarvino",
     "public": true,
@@ -980,6 +980,436 @@
       "id": "C06-11",
       "category": "راه‌اندازی و افتتاح",
       "title": "تصمیم‌گیری درباره امکان افتتاح در ۱ ژانویه ۲۰۲۷",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-01",
+      "category": "برندکیت و هویت بصری",
+      "title": "تعیین وضعیت نهایی و قابلیت استفاده از نام Sarvino در نام‌گذاری تجاری",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-02",
+      "category": "برندکیت و هویت بصری",
+      "title": "تعریف جایگاه برند و مشتری هدف بر اساس تصمیم تیم",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-03",
+      "category": "برندکیت و هویت بصری",
+      "title": "تدوین پیام اصلی، شخصیت و لحن نوشتاری برند",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-04",
+      "category": "برندکیت و هویت بصری",
+      "title": "طراحی و تأیید لوگوی اصلی و نسخه‌های کوچک/افقی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-05",
+      "category": "برندکیت و هویت بصری",
+      "title": "تعیین پالت رنگ با کدهای دقیق و کاربرد هر رنگ",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-06",
+      "category": "برندکیت و هویت بصری",
+      "title": "انتخاب تایپوگرافی و استاندارد کاربرد متن سوئدی/انگلیسی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-07",
+      "category": "برندکیت و هویت بصری",
+      "title": "تنظیم راهنمای استفاده درست و نادرست از لوگو",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-08",
+      "category": "برندکیت و هویت بصری",
+      "title": "تعریف سبک عکاسی غذا، فضا و کارکنان",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-09",
+      "category": "برندکیت و هویت بصری",
+      "title": "طراحی قالب منو چاپی و دیجیتال هماهنگ با برند",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-10",
+      "category": "برندکیت و هویت بصری",
+      "title": "طراحی تابلو، ویترین و اقلام راهنمای داخل رستوران",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-11",
+      "category": "برندکیت و هویت بصری",
+      "title": "بررسی طراحی بسته‌بندی بیرون‌بر و برچسب‌ها",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-12",
+      "category": "برندکیت و هویت بصری",
+      "title": "ایجاد بانک فایل نسخه‌دار برای لوگو و فایل‌های چاپی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-BRAND-13",
+      "category": "برندکیت و هویت بصری",
+      "title": "تأیید نهایی برندکیت و تحویل فایل‌های قابل استفاده",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-01",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "تعیین کانال‌های ارتباطی واقعاً موردنیاز با توجه به مشتریان محلی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-02",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "بررسی و ثبت مالکیت نام کاربری در شبکه‌های اجتماعی منتخب",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-03",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "آماده‌سازی بیو، معرفی، نشانی و ساعت کاری پس از تأیید اطلاعات",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-04",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "برنامه‌ریزی پروفایل کسب‌وکار در نقشه و سرویس‌های محلی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-05",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "تهیه تصاویر حرفه‌ای از غذا، سالن و نمای بیرونی پس از آماده‌سازی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-06",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "تعریف قالب‌های پست، استوری و ویدئو متناسب با برندکیت",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-07",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "ساخت تقویم محتوایی قبل و پس از افتتاح احتمالی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-08",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "طراحی سناریوی معرفی تیم و داستان رستوران با رضایت افراد",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-09",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "تدوین محتوای معرفی و معرفی تدریجی غذاهای منوی تأییدشده",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-10",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "برنامه‌ریزی اطلاع‌رسانی افتتاح فقط پس از قطعی شدن تاریخ",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-11",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "تعریف روال پاسخ‌گویی به پیام‌ها، نظرها و شکایات",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-12",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "بررسی فرایند ثبت عکس و رضایت مشتری برای انتشار",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-13",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "تعیین ابزار سنجش عملکرد (بازدید، تماس، رزرو و مراجعه)",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SOCIAL-14",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "title": "پایش برنامه انتشار و اصلاح آن بر اساس نتایج واقعی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-01",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "شناسایی الزامات ثبت/اعلان فعالیت غذایی و بازرسی‌های مربوطه نزد مراجع محلی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-02",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "تهیه و مستندسازی برنامه خودکنترلی بهداشت و ایمنی غذا با نظر مسئول فنی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-03",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "بررسی سیستم مدیریت خطرات غذا بر پایه اصول HACCP متناسب با عملیات",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-04",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "تعریف دمای نگهداری، پایش و ثبت کنترل یخچال و فریزر",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-05",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "تعریف کنترل دریافت کالا، حمل و نگهداری زنجیره سرد",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-06",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "شناسایی آلرژن‌های هر رسپی و روش اطلاع‌رسانی به مشتری",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-07",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "برنامه پیشگیری از تماس متقاطع بین مواد خام و غذای آماده",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-08",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "طراحی برنامه نظافت و ضدعفونی سطوح، تجهیزات و سرویس‌ها",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-09",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "بررسی تهویه، هود، فیلترها و نیاز به سرویس ایمن",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-10",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "بررسی ایمنی آتش، تجهیزات اطفا و مسیرهای خروج اضطراری با متخصص مربوط",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-11",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "بررسی ایمنی برق، گاز و تجهیزات پخت پیش از راه‌اندازی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-12",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "تعریف روش نگهداری مواد شوینده، برچسب‌گذاری و ایمنی کارکنان",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-13",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "بررسی کنترل آفات و مدیریت پسماند، روغن و چربی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-14",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "ثبت دستورالعمل رسیدگی به حادثه، آسیب و شرایط اضطراری",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-15",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "تعیین آموزش‌های لازم کارکنان درباره بهداشت و ایمنی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C-SAFETY-16",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "title": "اجرای بازدید و رفع مغایرت پیش از افتتاح احتمالی",
       "status": "unknown",
       "owner": null,
       "due": null,
@@ -2452,5 +2882,39 @@
       "preferredSupplier": null
     }
   ],
-  "ingredientsPolicy": "این فهرست تنها بانک کاندیدا برای انتخاب مواد اولیه پاستا و ریزوتو است؛ به معنی تصویب منو، سفارش، قیمت‌گذاری یا تأیید استفاده از تمامی اقلام نیست. مقادیر و قیمت‌ها تا دریافت داده واقعی خالی می‌مانند."
+  "ingredientsPolicy": "این فهرست تنها بانک کاندیدا برای انتخاب مواد اولیه پاستا و ریزوتو است؛ به معنی تصویب منو، سفارش، قیمت‌گذاری یا تأیید استفاده از تمامی اقلام نیست. مقادیر و قیمت‌ها تا دریافت داده واقعی خالی می‌مانند.",
+  "projectAreas": [
+    {
+      "id": "brand",
+      "title": "برندکیت و هویت بصری",
+      "subtitle": "هویت برند، طراحی، بسته‌بندی و استانداردهای تصویری",
+      "category": "برندکیت و هویت بصری",
+      "status": "planning",
+      "intro": "این بخش ابزار جمع‌آوری و تأیید تصمیم‌های هویت بصری Sarvino است؛ هیچ لوگو، رنگ یا شعار نهایی فرض نشده است."
+    },
+    {
+      "id": "social",
+      "title": "سوشیال‌مدیا و حضور دیجیتال",
+      "subtitle": "کانال‌های رسمی، برنامه انتشار، ارتباط با مشتری و افتتاح",
+      "category": "سوشیال‌مدیا و حضور دیجیتال",
+      "status": "planning",
+      "intro": "این فهرست صرفاً کارهای پیشنهادی پیش از حضور رسمی Sarvino است؛ هیچ حساب یا کمپینی ایجادشده فرض نمی‌شود."
+    },
+    {
+      "id": "safety",
+      "title": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "subtitle": "کنترل غذا، تجهیزات، کارکنان و خطرات محیط",
+      "category": "ایمنی، بهداشت و آمادگی بهره‌برداری",
+      "status": "planning",
+      "intro": "فهرست مقدماتی کنترل داخلی است، نه گواهی رعایت الزامات قانونی؛ باید با ضوابط سوئد، مقررات شهرداری و ارزیابی افراد دارای صلاحیت تطبیق داده شود."
+    },
+    {
+      "id": "local",
+      "title": "تحقیقات محلی و رقبا",
+      "subtitle": "پایش بازار سوندبی‌بری و بررسی گزینه‌های رقیب",
+      "category": null,
+      "status": "coming_soon",
+      "intro": "به‌زودی انجام خواهد شد."
+    }
+  ]
 }
