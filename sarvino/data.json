@@ -1,178 +1,1522 @@
 {
-  "version": 1,
-  "project": {
-    "name": "Sarvino",
-    "subtitle": "میز مشترک راه‌اندازی و مدیریت رستوران",
-    "country": "سوئد",
+  "version": 2,
+  "metadata": {
+    "project": "Sarvino",
+    "public": true,
+    "viewerAccess": "public",
+    "editPolicy": "مدیر پروژه (از طریق GitHub)",
+    "updated": "2026-11-11",
     "currency": "SEK",
     "timezone": "Europe/Stockholm",
-    "stage": "برنامه‌ریزی اولیه",
-    "lastUpdated": "2026-11-11",
-    "notice": "این صفحه عمومی است. صرفاً داده‌های قابل انتشار را اینجا ثبت کنید؛ اطلاعات محرمانه، مشخصات شخصی و اسناد مالی خصوصی نباید در این فایل قرار بگیرند."
+    "confidentiality": "فقط داده‌های تأییدشده برای انتشار عمومی؛ بدون اطلاعات شخصی و خصوصی مالی",
+    "dataStatus": "اطلاعات اولیه، متقاضی و کاربر؛ نیازمند راستی‌آزمایی"
   },
+  "milestones": [
+    {
+      "id": "M1",
+      "date": "2026-11-10",
+      "title": "آغاز بازه برنامه‌ریزی",
+      "kind": "start",
+      "confidence": "تعیین‌شده توسط مدیر پروژه",
+      "details": "آغاز فهرست زمانی پروژه"
+    },
+    {
+      "id": "M2",
+      "date": "2026-12-01",
+      "title": "روز تعیین تکلیف",
+      "kind": "decision",
+      "confidence": "تعیین‌شده توسط مدیر پروژه",
+      "details": "تعیین تکلیف وضعیت پروژه/معامله پس از بررسی مدارک"
+    },
+    {
+      "id": "M3",
+      "date": "2027-01-01",
+      "title": "افتتاح احتمالی",
+      "kind": "tentative",
+      "confidence": "هدف مشروط و غیرقطعی",
+      "details": "مشروط به نتیجه انتقال، مجوزها، آماده‌سازی فضا، تجهیزات و تست منو"
+    }
+  ],
   "team": [
     {
       "id": "nima",
       "name": "نیما",
-      "role": "مدیر پروژه و تنها ویرایشگر",
-      "location": "ایران",
-      "contact": "https://t.me/nimaafsharnaderi"
+      "role": "مشاور و هماهنگ‌کننده پروژه",
+      "location": "ایران"
     },
     {
       "id": "khaterah",
       "name": "خاطره",
-      "role": "عضو تیم پروژه",
+      "role": "مدیریت اجرایی و مالی (برنامه‌ریزی‌شده)",
       "location": "سوئد"
     },
     {
       "id": "mohammad",
       "name": "محمد",
-      "role": "عضو تیم پروژه",
+      "role": "مسئول آشپزخانه (برنامه‌ریزی‌شده)",
       "location": "سوئد"
     }
   ],
-  "phases": [
-    "تصمیم‌گیری و برنامه‌ریزی",
-    "قرارداد و مجوزها",
-    "تجهیز و تأمین",
-    "منو و عملیات",
-    "آماده‌سازی افتتاح",
-    "عملیات جاری"
-  ],
-  "tasks": [
+  "facts": [
     {
-      "id": "SV-001",
-      "title": "تعیین نقشه راه و نقاط تصمیم پروژه",
-      "phase": "تصمیم‌گیری و برنامه‌ریزی",
-      "owner": "nima",
-      "status": "proposed",
-      "priority": "high",
-      "start": "",
-      "due": "",
-      "description": "تدوین مراحل، وابستگی‌ها و معیارهای تصمیم؛ تاریخ‌ها پس از تأیید تیم ثبت شوند.",
-      "dependencies": [],
-      "tags": [
-        "مدیریت"
-      ]
+      "id": "F001",
+      "label": "نام پروژه",
+      "value": "Sarvino",
+      "source": "اعلام کاربر",
+      "note": "در انتظار تأیید نام رسمی"
     },
     {
-      "id": "SV-002",
-      "title": "تهیه چک‌لیست قرارداد، مجوزها و الزامات محلی",
-      "phase": "قرارداد و مجوزها",
-      "owner": "",
-      "status": "proposed",
-      "priority": "high",
-      "start": "",
-      "due": "",
-      "description": "جمع‌آوری موارد قابل بررسی؛ تعیین الزامات قطعی با مراجعه به منابع رسمی سوئد و متخصص محلی.",
-      "dependencies": [],
-      "tags": [
-        "حقوقی"
-      ]
+      "id": "F002",
+      "label": "نشانی",
+      "value": "Kyrkogatan 13, 172 32 Sundbyberg, Sweden",
+      "source": "پاسخ اولیه متقاضی",
+      "note": "نیازمند تطبیق مدارک"
     },
     {
-      "id": "SV-003",
-      "title": "تهیه فهرست تجهیزات و قیمت‌های پیشنهادی",
-      "phase": "تجهیز و تأمین",
-      "owner": "",
-      "status": "proposed",
-      "priority": "high",
-      "start": "",
-      "due": "",
-      "description": "ثبت مشخصات، تعداد، فروشنده، تاریخ استعلام و لینک هر پیشنهاد در بخش قیمت‌ها.",
-      "dependencies": [],
-      "tags": [
-        "خرید"
-      ]
+      "id": "F003",
+      "label": "محل فعلی",
+      "value": "Restaurang Rosina AB",
+      "source": "پاسخ اولیه متقاضی",
+      "note": "انتقال قطعی نشده"
     },
     {
-      "id": "SV-004",
-      "title": "جمع‌آوری قیمت مواد اولیه و بسته‌بندی",
-      "phase": "تجهیز و تأمین",
-      "owner": "",
-      "status": "proposed",
-      "priority": "medium",
-      "start": "",
-      "due": "",
-      "description": "ثبت قیمت واحد و واحد اندازه‌گیری برای مقایسه تأمین‌کنندگان.",
-      "dependencies": [],
-      "tags": [
-        "تأمین"
-      ]
+      "id": "F004",
+      "label": "نوع کسب‌وکار",
+      "value": "رستوران ایتالیایی",
+      "source": "تأیید کاربر",
+      "note": "تمرکز پاستا و ریزوتو"
     },
     {
-      "id": "SV-005",
-      "title": "تهیه فهرست هزینه‌های ثابت و متغیر",
-      "phase": "تصمیم‌گیری و برنامه‌ریزی",
-      "owner": "",
-      "status": "proposed",
-      "priority": "high",
-      "start": "",
-      "due": "",
-      "description": "تفکیک بودجه پیش‌بینی‌شده از هزینه پرداخت‌شده و مستندات قابل انتشار.",
-      "dependencies": [],
-      "tags": [
-        "بودجه"
-      ]
+      "id": "F005",
+      "label": "تعداد میز",
+      "value": 30,
+      "source": "اعلام جدید کاربر",
+      "note": "تعداد میز، نه تعداد صندلی"
     },
     {
-      "id": "SV-006",
-      "title": "تدوین منو، رسپی و قیمت فروش",
-      "phase": "منو و عملیات",
-      "owner": "",
-      "status": "proposed",
-      "priority": "medium",
-      "start": "",
-      "due": "",
-      "description": "پس از تأیید مدل کسب‌وکار، تهیه نسخه اولیه منو و محاسبات بهای تمام‌شده.",
-      "dependencies": [],
-      "tags": [
-        "منو"
-      ]
+      "id": "F006",
+      "label": "ظرفیت مهمان",
+      "value": "۴۰ تا ۵۰ نفر",
+      "source": "پاسخ اولیه متقاضی",
+      "note": "با تعداد ۳۰ میز تطبیق داده شود"
     },
     {
-      "id": "SV-007",
-      "title": "تعیین مسئولیت‌ها و روال گزارش هفتگی",
-      "phase": "تصمیم‌گیری و برنامه‌ریزی",
-      "owner": "nima",
-      "status": "proposed",
-      "priority": "medium",
-      "start": "",
-      "due": "",
-      "description": "توافق بر مسئول هر اقدام، موعد تحویل، نحوه اعلام مانع و ثبت تصمیم‌ها.",
-      "dependencies": [],
-      "tags": [
-        "هماهنگی"
-      ]
+      "id": "F007",
+      "label": "متراژ کل (مترمربع)",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
     },
     {
-      "id": "SV-008",
-      "title": "چک‌لیست آمادگی افتتاح و آزمون عملیاتی",
-      "phase": "آماده‌سازی افتتاح",
-      "owner": "",
-      "status": "proposed",
-      "priority": "medium",
-      "start": "",
-      "due": "",
-      "description": "بازبینی تجهیزات، فرآیندها، تأمین و آماده‌سازی تیم قبل از آغاز فعالیت.",
-      "dependencies": [],
-      "tags": [
-        "افتتاح"
-      ]
+      "id": "F008",
+      "label": "متراژ سالن (مترمربع)",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F009",
+      "label": "متراژ آشپزخانه (مترمربع)",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F010",
+      "label": "متراژ انبار خشک (مترمربع)",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F011",
+      "label": "متراژ سردخانه یا فضای یخچال",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F012",
+      "label": "متراژ سرویس‌ها و فضاهای جانبی",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F013",
+      "label": "تعداد صندلی دقیق",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F014",
+      "label": "ظرفیت فضای باز/تراس",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F015",
+      "label": "تعداد سرویس بهداشتی",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F016",
+      "label": "تعداد کارکنان هر شیفت",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F017",
+      "label": "ساعت کاری برنامه‌ریزی‌شده",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F018",
+      "label": "وضعیت تأیید انتقال مالکیت",
+      "value": "نهایی نشده",
+      "source": "پاسخ اولیه متقاضی",
+      "note": "وضعیت باید به‌روزرسانی شود"
+    },
+    {
+      "id": "F019",
+      "label": "وضعیت مالک ملک و اجاره",
+      "value": "نیازمند بررسی و تأیید",
+      "source": "پاسخ اولیه متقاضی",
+      "note": ""
+    },
+    {
+      "id": "F020",
+      "label": "تجهیز موردنیاز گزارش‌شده",
+      "value": "اجاق/تجهیز مناسب پخت پاستا",
+      "source": "پاسخ اولیه متقاضی",
+      "note": "مشخصات فنی و قیمت هنوز نامعلوم"
+    },
+    {
+      "id": "F021",
+      "label": "وضعیت فر پیتزا",
+      "value": null,
+      "source": "نامشخص",
+      "note": "موجودی/قابلیت استفاده بررسی شود"
+    },
+    {
+      "id": "F022",
+      "label": "وضعیت سیستم تهویه",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F023",
+      "label": "وضعیت برق و گاز",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F024",
+      "label": "وضعیت مجوزها",
+      "value": null,
+      "source": "نامشخص",
+      "note": ""
+    },
+    {
+      "id": "F025",
+      "label": "سبک دکور",
+      "value": "گرم و متمایز؛ فضای عکاسی مدنظر",
+      "source": "پاسخ اولیه متقاضی",
+      "note": "مشروط به بودجه و تأیید طراحی"
+    },
+    {
+      "id": "F026",
+      "label": "تعداد غذاهای اصلی هدف",
+      "value": "۱۰ تا ۱۲ (طرح اولیه)",
+      "source": "پاسخ اولیه متقاضی",
+      "note": "هنوز منو تصویب نشده"
+    },
+    {
+      "id": "F027",
+      "label": "افتتاح قطعی",
+      "value": null,
+      "source": "نامشخص",
+      "note": "۱ ژانویه صرفاً هدف احتمالی است"
     }
   ],
+  "checklist": [
+    {
+      "id": "C01-01",
+      "category": "تصمیم و قرارداد",
+      "title": "دریافت پاسخ نهایی بانک و پیگیری مراحل ثبت شرکت",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C01-02",
+      "category": "تصمیم و قرارداد",
+      "title": "دریافت وضعیت مالکیت/انتقال کسب‌وکار به‌صورت مکتوب",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C01-03",
+      "category": "تصمیم و قرارداد",
+      "title": "بررسی مدارک فروش و تعهدات طرفین",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C01-04",
+      "category": "تصمیم و قرارداد",
+      "title": "بررسی دقیق قرارداد اجاره، مدت و شروط انتقال",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C01-05",
+      "category": "تصمیم و قرارداد",
+      "title": "بررسی قراردادها، بدهی‌ها، تعهدات و مالیات احتمالی با متخصص محلی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C01-06",
+      "category": "تصمیم و قرارداد",
+      "title": "تأیید فهرست اقلام و تجهیزات تحویلی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C01-07",
+      "category": "تصمیم و قرارداد",
+      "title": "تنظیم صورت‌جلسه بازدید و مستندات",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C01-08",
+      "category": "تصمیم و قرارداد",
+      "title": "ثبت تصمیم نهایی ۱ دسامبر با شرایط و مدارک",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-01",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "اندازه‌گیری متراژ کل ملک",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-02",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "اندازه‌گیری متراژ سالن",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-03",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "اندازه‌گیری متراژ آشپزخانه",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-04",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "اندازه‌گیری انبار و فضاهای جانبی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-05",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "اندازه‌گیری و ثبت ابعاد میزها و جانمایی ۳۰ میز",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-06",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "شمارش واقعی صندلی‌ها و کنترل ظرفیت ۴۰–۵۰ نفر گزارش‌شده",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-07",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "بررسی مسیر حرکت مشتری، کارکنان و دسترسی‌ها",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-08",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "بررسی سرویس‌های بهداشتی و دسترسی‌پذیری",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-09",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "تهیه پلان موجود و پلان مطلوب",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-10",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "طراحی رنگ، نور و هویت بصری",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-11",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "ارزیابی امکان ایجاد فضای عکاسی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-12",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "طراحی ویترین، تابلو و ورودی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C02-13",
+      "category": "اندازه‌گیری و طراحی سالن",
+      "title": "برآورد زمان، هزینه و مجوز تغییرات سالن",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-01",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "برداشت وضع موجود تأسیسات و تجهیزات آشپزخانه",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-02",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی کیفیت، ظرفیت و نظافت تهویه و هود",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-03",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "کنترل برق، تابلو، ظرفیت مصرف و ایمنی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-04",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "کنترل گاز یا زیرساخت لازم برای تجهیزات پخت",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-05",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بازدید فنی لوله‌کشی آب، تخلیه و چربی‌گیر",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-06",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی کف، دیوارها و سطوح قابل شست‌وشو",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-07",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی یخچال، فریزر و ظرفیت زنجیره سرد",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-08",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی و قیمت‌گیری دستگاه مناسب پخت پاستا",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-09",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی وجود و وضعیت فر پیتزا",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-10",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی تجهیزات پخت ریزوتو، اجاق و ظروف مناسب",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-11",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی سینک‌ها، شست‌وشو و ماشین ظرف‌شویی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-12",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بررسی میز کار استیل، قفسه‌بندی و انبار",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-13",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "تهیه فهرست تعمیر، خرید و حذف تجهیزات",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-14",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "جمع‌آوری دست‌کم دو استعلام برای هر قلم مهم",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-15",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "تأیید نقشه گردش مواد خام، آماده‌سازی و سرو",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C03-16",
+      "category": "آشپزخانه و تبدیل فضا",
+      "title": "بازدید و کنترل ایمنی و بهداشت با مرجع ذی‌صلاح",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-01",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "بررسی ثبت/اعلان کسب‌وکار غذایی نزد مرجع محلی مربوط",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-02",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "تعیین نیاز به مجوزهای تغییر کاربری/ساختمانی یا تأسیساتی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-03",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "بررسی شرایط سرو نوشیدنی الکلی در صورت تصمیم قطعی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-04",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "تعیین چارت مسئولیت‌های عملیات، مالی و آشپزخانه",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-05",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "تعیین نیاز نیروی انسانی و شیفت‌ها",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-06",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "بررسی بیمه‌ها و تعهدات کارفرمایی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-07",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "بررسی مقررات استخدام، حقوق و مالیات با حسابدار سوئدی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-08",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "انتخاب یا بررسی صندوق، POS و گزارش فروش",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-09",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "تعریف شیوه کنترل موجودی، خرید و ثبت ضایعات",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-10",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "تعریف رویه ایمنی غذا، آلرژن‌ها و کنترل دما",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-11",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "تنظیم رویه نظافت، افتتاح و پایان شیفت",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C04-12",
+      "category": "مجوز، کارکنان و سیستم",
+      "title": "تعیین روال گزارش روزانه/هفتگی تیم",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-01",
+      "category": "منو و فودکاست",
+      "title": "مشخص‌کردن دسته‌های منوی اولیه و تعداد آیتم هر دسته",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-02",
+      "category": "منو و فودکاست",
+      "title": "انتخاب نام و دستور اولیه غذاهای پاستا",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-03",
+      "category": "منو و فودکاست",
+      "title": "انتخاب نام و دستور اولیه غذاهای ریزوتو",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-04",
+      "category": "منو و فودکاست",
+      "title": "تعیین تکلیف پیتزا، سالاد و دسر در ترکیب نهایی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-05",
+      "category": "منو و فودکاست",
+      "title": "تعریف گرماژ دقیق هر رسپی و تعداد پرس",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-06",
+      "category": "منو و فودکاست",
+      "title": "استعلام قیمت و واحد خرید تک‌تک مواد اولیه",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-07",
+      "category": "منو و فودکاست",
+      "title": "ثبت ضایعات، افت پخت و بازده مواد",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-08",
+      "category": "منو و فودکاست",
+      "title": "محاسبه هزینه مواد اولیه هر پرس",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-09",
+      "category": "منو و فودکاست",
+      "title": "ثبت کار مستقیم، انرژی، بسته‌بندی و سهم سربار",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-10",
+      "category": "منو و فودکاست",
+      "title": "محاسبه قیمت فروش پیشنهادی و حاشیه سود",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-11",
+      "category": "منو و فودکاست",
+      "title": "ثبت آلرژن‌ها و اطلاعات لازم منو",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-12",
+      "category": "منو و فودکاست",
+      "title": "تست عملی غذاها و زمان سرو",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C05-13",
+      "category": "منو و فودکاست",
+      "title": "نهایی‌سازی ترکیب، نام، قیمت و نسخه منو",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-01",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "تهیه بودجه آماده‌سازی و جدول پرداخت‌ها",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-02",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "بررسی قیمت و زمان تحویل تجهیزات ضروری",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-03",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "برنامه اجرای تغییرات و هماهنگی پیمانکاران",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-04",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "نظافت عمیق و بازآرایی پیش از افتتاح",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-05",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "نصب و آزمایش تجهیزات",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-06",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "تهیه موجودی اولیه مواد و بسته‌بندی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-07",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "آزمون نرم‌افزار صندوق و گزارش فروش",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-08",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "آموزش تیم سالن و آشپزخانه",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-09",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "اجرای تست سرویس و اندازه‌گیری زمان سفارش تا تحویل",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-10",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "رفع اشکالات تست، تکمیل مجوزها و بازبینی نهایی",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    },
+    {
+      "id": "C06-11",
+      "category": "راه‌اندازی و افتتاح",
+      "title": "تصمیم‌گیری درباره امکان افتتاح در ۱ ژانویه ۲۰۲۷",
+      "status": "unknown",
+      "owner": null,
+      "due": null,
+      "notes": "",
+      "evidenceUrl": null
+    }
+  ],
+  "costs": [
+    {
+      "id": "E001",
+      "period": "روزانه",
+      "title": "مواد مصرفی روزانه (تکمیل موجودی)",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E002",
+      "period": "روزانه",
+      "title": "هزینه مواد غذایی مصرف‌شده بر اساس فروش و رسپی",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E003",
+      "period": "روزانه",
+      "title": "ضایعات، مرجوعی و دورریز روزانه",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E004",
+      "period": "روزانه",
+      "title": "اقلام نظافت و بهداشت مصرفی",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E005",
+      "period": "روزانه",
+      "title": "هزینه تحویل و ارسال سفارش‌ها (در صورت فعالیت)",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E006",
+      "period": "هفتگی",
+      "title": "خرید تکمیلی مواد خشک و تازه",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E007",
+      "period": "هفتگی",
+      "title": "خرید بسته‌بندی بیرون‌بر",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E008",
+      "period": "هفتگی",
+      "title": "تسویه تأمین‌کننده بر مبنای قرارداد",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E009",
+      "period": "هفتگی",
+      "title": "سرویس و نظافت دوره‌ای یا عمیق",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E010",
+      "period": "هفتگی",
+      "title": "بودجه تبلیغات و فعالیت‌های محلی",
+      "nature": "اختیاری",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E011",
+      "period": "ماهانه",
+      "title": "اجاره ملک",
+      "nature": "ثابت",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E012",
+      "period": "ماهانه",
+      "title": "حقوق و دستمزد تیم",
+      "nature": "ترکیبی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E013",
+      "period": "ماهانه",
+      "title": "هزینه‌های قانونی کارفرما و مزایا",
+      "nature": "ترکیبی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E014",
+      "period": "ماهانه",
+      "title": "برق و گرمایش",
+      "nature": "ترکیبی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E015",
+      "period": "ماهانه",
+      "title": "آب و فاضلاب",
+      "nature": "ترکیبی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E016",
+      "period": "ماهانه",
+      "title": "اینترنت و تلفن",
+      "nature": "ثابت",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E017",
+      "period": "ماهانه",
+      "title": "نرم‌افزار صندوق، حسابداری و اشتراک‌ها",
+      "nature": "ثابت",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E018",
+      "period": "ماهانه",
+      "title": "بیمه کسب‌وکار",
+      "nature": "ثابت",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E019",
+      "period": "ماهانه",
+      "title": "خدمات حسابداری و اظهارنامه",
+      "nature": "ثابت",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E020",
+      "period": "ماهانه",
+      "title": "خدمات جمع‌آوری زباله و پسماند",
+      "nature": "ترکیبی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E021",
+      "period": "ماهانه",
+      "title": "کارمزدهای پرداخت و پلتفرم‌های فروش",
+      "nature": "متغیر",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E022",
+      "period": "ماهانه",
+      "title": "تعمیر و نگهداری جاری",
+      "nature": "ترکیبی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E023",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "خرید یا انتقال کسب‌وکار",
+      "nature": "یک‌باره",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E024",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "ودیعه و پیش‌پرداخت اجاره در صورت الزام قراردادی",
+      "nature": "یک‌باره",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E025",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "تعمیر و آماده‌سازی سالن",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E026",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "تعمیرات تأسیسات آشپزخانه",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E027",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "خرید تجهیزات پخت پاستا/ریزوتو",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E028",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "خرید یا تعمیر فر پیتزا (در صورت انتخاب منو)",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E029",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "تجهیزات سرمایش، انبار و شست‌وشو",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E030",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "تابلو، نورپردازی و هویت بصری",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E031",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "هزینه اخذ مجوز و بازرسی",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E032",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "موجودی اولیه و مواد مصرفی شروع کار",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E033",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "راه‌اندازی سیستم صندوق و ثبت موجودی",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E034",
+      "period": "میان‌مدت / راه‌اندازی",
+      "title": "آموزش و تست قبل از افتتاح",
+      "nature": "پروژه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E035",
+      "period": "بلندمدت",
+      "title": "ذخیره تعویض تجهیزات اصلی",
+      "nature": "سرمایه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E036",
+      "period": "بلندمدت",
+      "title": "نوسازی دکور و تعمیرات بزرگ",
+      "nature": "سرمایه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E037",
+      "period": "بلندمدت",
+      "title": "ذخیره تعمیر سیستم تهویه، سرمایش و گرمایش",
+      "nature": "سرمایه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E038",
+      "period": "بلندمدت",
+      "title": "تغییر شرایط اجاره و تعهدات تمدید",
+      "nature": "قراردادی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E039",
+      "period": "بلندمدت",
+      "title": "توسعه منو و تجهیزات آتی",
+      "nature": "توسعه‌ای",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    },
+    {
+      "id": "E040",
+      "period": "بلندمدت",
+      "title": "سرمایه در گردش و ذخیره نوسان فصلی",
+      "nature": "نقدینگی",
+      "amount": null,
+      "currency": "SEK",
+      "basis": "نامشخص",
+      "confidence": "بدون برآورد تأییدشده",
+      "status": "needs_data",
+      "note": ""
+    }
+  ],
+  "menuSections": [
+    {
+      "id": "pasta",
+      "label": "پاستا",
+      "focus": "اصلی",
+      "status": "در حال طراحی",
+      "items": []
+    },
+    {
+      "id": "risotto",
+      "label": "ریزوتو",
+      "focus": "اصلی",
+      "status": "در حال طراحی",
+      "items": []
+    },
+    {
+      "id": "pizza",
+      "label": "پیتزا",
+      "focus": "ذکرشده در طرح اولیه",
+      "status": "نیازمند تصمیم نهایی",
+      "items": []
+    },
+    {
+      "id": "salad",
+      "label": "سالاد",
+      "focus": "ذکرشده در طرح اولیه",
+      "status": "نیازمند تصمیم نهایی",
+      "items": []
+    },
+    {
+      "id": "dessert",
+      "label": "دسر",
+      "focus": "ذکرشده در طرح اولیه",
+      "status": "نیازمند تصمیم نهایی",
+      "items": []
+    },
+    {
+      "id": "drinks",
+      "label": "نوشیدنی",
+      "focus": "نیازمند تعیین نوع و مجوزهای مربوط",
+      "status": "نیازمند تصمیم نهایی",
+      "items": []
+    }
+  ],
+  "recipes": [],
   "quotes": [],
-  "expenses": [],
-  "milestones": [],
+  "actualExpenses": [],
   "updates": [
     {
-      "id": "UP-001",
-      "date": "2026-11-11",
-      "author": "نیما",
-      "type": "system",
-      "title": "ساخت فضای مشترک Sarvino",
-      "body": "نسخه اولیه پورتال برای نمایش نقشه راه، وظایف، زمان‌بندی، قیمت‌ها و هزینه‌ها ایجاد شد. وظایف فعلی صرفاً پیشنهاد اولیه‌اند و هنوز زمان‌بندی یا تأیید نشده‌اند."
+      "date": "2026-11-10",
+      "title": "آغاز بازه برنامه‌ریزی",
+      "note": "طبق برنامه زمانی اعلام‌شده. وضعیت اقدامات و جزئیات پس از تأیید تکمیل می‌شود."
     }
   ],
-  "links": []
+  "decisions": [],
+  "documents": [],
+  "publicDisclaimer": "هیچ‌یک از موارد چک‌لیست که «وضعیت نامشخص» دارند به‌معنای انجام‌نشده یا قطعی‌بودن نیاز نیست؛ همه باید در بازدید و بررسی مشترک تعیین تکلیف شوند. ارقام محرمانه در صفحه عمومی منتشر نمی‌شوند."
 }
