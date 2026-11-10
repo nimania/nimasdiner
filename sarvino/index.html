@@ -20,12 +20,49 @@ header{background:var(--dark);color:white}header .wrap{display:flex;justify-cont
 @media(max-width:900px){.columns{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.section-links{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.wrap{padding:0 13px}.identity strong{font-size:23px}.header-meta span{display:none}.hero h1{font-size:23px}.hero-grid{display:block}.main{padding-top:14px}.stats{gap:8px}.stat{padding:11px}.stat strong{font-size:20px}.checkgrid,.cost-grid,.facts,.milestones,.section-links{grid-template-columns:1fr}.box{padding:15px}.nav button{padding:10px 12px;font-size:12px}.heading h2{font-size:19px}}
 @media print{.nav,.printbtn,.header-meta,.footer{display:none!important}.hero{background:#fff;color:#000;padding:12px}.hero p,.hero .overline{color:#333}.hero-labels span{color:#333}.box,.stat,.milestone,.check,.fact{box-shadow:none;break-inside:avoid}.main{padding:10px 0}}
+
+/* Draft Sarvino brand kit — green / ivory horizontal wordmark */
+:root{--text:#23462d;--green:#245c30;--dark:#123b17;--light:#fbf4e4;--panel:#fffdf7;--border:#dedfd0;--muted:#778576;--cream:#fbf4e4;--shadow:0 8px 25px #1c36170d}
+body{background:#fbf4e4;color:#23462d}
+header{background:#fbf4e4;color:#123b17;border-bottom:1px solid #dadfca}
+header .wrap{min-height:105px}
+.identity{display:flex;align-items:center}.brand-logo{width:242px;max-width:55vw;height:80px;display:block;object-fit:contain}
+.header-meta span{border-color:#b9cbb0;color:#305d38;background:#f6f3e7}
+.header-meta a{color:#315936}
+.hero{background:linear-gradient(135deg,#174522,#0e3315);color:#fff9ed}
+.hero p{color:#e0e8dc}
+.overline{color:#e3c693}
+.hero-labels span{border-color:#c6cfbb55}
+.nav{background:#fffaf1;border-bottom:1px solid #e8dec8}
+.nav button.active{color:#205c2c;border-color:#326f3a;background:#f2f2e4}
+.nav .quick-link{display:flex;align-items:center;white-space:nowrap;padding:14px 16px;color:#35603b;text-decoration:none;font-weight:700;border-bottom:3px solid transparent}
+.nav .quick-link:hover{background:#f2f2e4}
+.stat,.box,.milestone,.fact,.section-card,.check,.table-scroll{background:#fffdf7;border-color:#e5e3d3}
+.stat.a{background:#e9f1e1}
+.milestone{border-top-color:#367144}
+.milestone.decision{border-top-color:#aa8b53}
+.milestone.tentative{border-top-color:#94a58a}
+.milestone .day{color:#23582c}
+.tag{background:#eaf1e5;color:#38633c}
+.tag.unknown,.tag.tentative{background:#fbefd9;color:#7b642f}
+.progress-track i{background:#42804c}
+.note{background:#eef4e9;border-right-color:#438448}
+.note.warn{background:#fcf4e6;border-right-color:#b18b4a}
+.printbtn{background:#fff8eb;color:#224e2b;border-color:#dfd3b8}
+.section-card{min-height:146px}
+.tile-link{display:block;text-decoration:none;cursor:pointer;transition:transform .15s,border-color .15s}
+.tile-link:hover{transform:translateY(-2px);border-color:#a9c5a5}
+.tile-link small{display:block;color:#788578;font-size:11px;margin-top:12px}
+.area-header{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.area-header h3{margin:0}.area-head-note{font-size:12px;color:#718376;margin:9px 0 15px}
+footer,.footer{background:#123b17;color:#d4e4d2}
+@media(max-width:650px){header .wrap{min-height:82px}.brand-logo{width:190px;height:65px}.nav .quick-link{padding:10px 12px;font-size:12px}}
 </style>
 </head><body>
-<header><div class="wrap"><a class="identity" href="./"><span class="emblem">S</span><span><strong>Sarvino</strong><small>NIMA'S DINER / SWEDEN</small></span></a><div class="header-meta"><span>فضای مشترک · فقط مشاهده</span><a href="../">نیما داینر</a></div></div></header>
+<header><div class="wrap"><a class="identity" href="./" aria-label="Sarvino — صفحه پروژه"><img class="brand-logo" src="./logo-green.svg" width="242" height="81" alt="Sarvino Ristorante Italiano"></a><div class="header-meta"><span>فضای مشترک · فقط مشاهده</span><a href="../">نیما داینر</a></div></div></header>
 <section class="hero"><div class="wrap hero-grid"><div><div class="overline">RESTAURANT PROJECT WORKSPACE</div><h1>سروینو؛ از تصمیم تا افتتاح</h1><p>مشخصات، مسیر زمانی، چک‌لیست تبدیل فضا، هزینه‌ها و فرایند توسعه منو — با ثبت وضعیت واقعی هر اقدام</p><div class="hero-labels"><span>سوندبی‌بری، سوئد</span><span>ایتالیایی · پاستا و ریزوتو</span><span>ارز پایه: SEK</span></div></div><button type="button" class="printbtn" onclick="print()">چاپ همین بخش</button></div></section>
 <nav class="nav" aria-label="بخش‌های سروینو"><div class="wrap" id="nav">
-<button data-tab="overview" class="active">نمای کلی</button><button data-tab="timeline">زمان‌بندی</button><button data-tab="facts">مشخصات رستوران</button><button data-tab="checklist">چک‌لیست اجرا</button><button data-tab="costs">هزینه‌ها</button><button data-tab="quotes">قیمت‌ها و خریدها</button><button data-tab="menu">منو و فودکاست</button><button data-tab="team">تیم و گزارش‌ها</button>
+<button data-tab="overview" class="active">نمای کلی</button><button data-tab="timeline">زمان‌بندی</button><button data-tab="facts">مشخصات رستوران</button><button data-tab="checklist">چک‌لیست اجرا</button><button data-tab="costs">هزینه‌ها</button><button data-tab="quotes">قیمت‌ها و خریدها</button><button data-tab="menu">منو و فودکاست</button><a class="quick-link" href="./ingredients.html">مواد اولیه پاستا و ریزوتو</a><button data-tab="areas">برند، رسانه و ایمنی</button><button data-tab="team">تیم و گزارش‌ها</button>
 </div></nav>
 <main class="wrap main" id="main" aria-live="polite"><div class="empty">در حال دریافت داده‌های پروژه...</div></main>
 <footer class="footer"><div class="wrap"><span>Sarvino · Nima's Diner | اطلاعات اولیه و تأییدنشده با برچسب مشخص نمایش داده می‌شوند</span><span>ویرایش و انتشار داده‌ها صرفاً توسط مدیر مجاز پروژه انجام می‌شود</span></div></footer>
@@ -50,6 +87,11 @@ const cs=A(d.checklist),done=cs.filter(x=>x.status==='done').length,known=A(d.fa
 let s=title('خلاصه وضعیت پروژه','بر اساس اطلاعات ثبت‌شده؛ بدون فرضِ پیشرفت یا هزینهٔ تأییدنشده');
 s+='<div class="stats">'+stat('میزهای اعلام‌شده','۳۰','تعداد صندلی هنوز قطعی نیست')+stat('کارهای تبدیل و راه‌اندازی',fa(cs.length),fa(done)+' مورد انجام‌شده ثبت شده')+stat('مشخصات نیازمند تکمیل',fa(missing),'از '+fa(d.facts.length)+' مشخصه')+stat('قلم هزینه برای پایش',fa(A(d.costs).length),'مبلغ‌ها به تأیید نیاز دارند')+'</div>';
 s+=milestones();
+
+s+='<div class="heading"><h2>مسیرهای تخصصی پروژه</h2><p>فهرست‌های پیشنهادی برای بررسی؛ هیچ موردی خودکار انجام‌شده فرض نمی‌شود</p></div><div class="section-links">'
++A(d.projectAreas).map(a=>'<a class="section-card tile-link" href="#areas" data-openarea="'+H(a.id)+'"><strong>'+H(a.title)+'</strong><p>'+H(a.subtitle)+'</p><span class="tag '+(a.status==='coming_soon'?'unknown':'')+'">'+(a.status==='coming_soon'?'به‌زودی انجام خواهد شد':fa(A(d.checklist).filter(t=>t.category===a.category).length)+' اقدام برای بررسی')+'</span></a>').join('')
++'<a class="section-card tile-link" href="./ingredients.html"><strong>بانک مواد اولیه پاستا و ریزوتو</strong><p>پایش استعلام‌ها و انتخاب مواد هر رسپی</p><span class="tag">'+fa(A(d.ingredientsCatalog).length)+' قلم پیشنهادی</span><small>مشاهده فهرست مواد اولیه</small></a></div>';
+
 s+='<div class="columns"><div><section class="box"><h3>نقشه کارهای اجرایی</h3>'+progress();let groups=[...new Set(cs.map(x=>x.category))];s+=groups.map(g=>{let a=cs.filter(x=>x.category===g);return '<div class="row"><strong>'+H(g)+'</strong><span>'+fa(a.filter(x=>x.status==='done').length)+' / '+fa(a.length)+'</span></div>'}).join('')+'</section>';
 s+='<section class="box"><h3>تصمیم‌های تعیین‌کننده</h3><p class="small">تا ۱ دسامبر باید وضعیت معامله و الزامات اجرایی بررسی شود؛ ۱ ژانویه صرفاً تاریخ احتمالی افتتاح است و تضمین‌شده نیست.</p><div class="note warn">مالکیت یا انتقال رستوران طبق اطلاعات اولیه نهایی نشده است. زمان افتتاح نباید به‌عنوان برنامه قطعی منتشر یا مبنای تعهد هزینه قرار گیرد.</div></section></div><div>';
 s+='<section class="box"><h3>مشخصات اصلی</h3>'+A(d.facts).filter(f=>['نام پروژه','نشانی','محل فعلی','نوع کسب‌وکار','تعداد میز','ظرفیت مهمان','متراژ کل (مترمربع)'].includes(f.label)).map(f=>'<div class="row"><strong>'+H(f.label)+'</strong><span>'+H(f.value===null?'نامشخص':f.value)+'</span></div>').join('')+'</section>';
@@ -71,15 +113,32 @@ s+='<div class="note">برای هر ماده و تجهیز: فروشنده، ب�
 function renderMenu(){let s=title('توسعه منو و فودکاست','هنوز نام غذا و قیمت فروش نهایی ثبت نشده؛ فرایند قیمت‌گذاری به هر رسپی متصل می‌شود');
 s+='<div class="stats">'+stat('تمرکز منو','پاستا','طبق تصمیم جدید')+stat('تمرکز منو','ریزوتو','طبق تصمیم جدید')+stat('غذای اصلی هدف','۱۰–۱۲','طرح اولیه، نیازمند تأیید')+stat('رسپی قیمت‌گذاری‌شده',fa(A(d.recipes).length),'فعلاً بدون اطلاعات قیمت')+'</div>';
 s+='<div class="section-links">'+A(d.menuSections).map(x=>'<article class="section-card"><strong>'+H(x.label)+'</strong><p>'+H(x.focus)+'</p><span class="tag unknown">'+H(x.status)+'</span><p>غذاهای ثبت‌شده: '+fa(A(d.recipes).filter(r=>r.category===x.id).length)+'</p></article>').join('')+'</div>';
-s+='<section class="box" style="margin-top:16px"><h3>محاسبه فودکاست هر غذا</h3><p>برای هر غذا یک کارت رسپی مستقل لازم است: وزن یا تعداد هر ماده در هر پرس، واحد و قیمت خرید، افت و ضایعات، تعداد پرس خروجی، و سربار اختصاص‌یافته.</p><div class="formula"><code>هزینه مواد هر پرس = مجموعِ (مقدار مصرفی هر ماده × قیمت واحد قابل‌مصرف پس از اصلاح افت/ضایعات)<br>بهای تمام‌شده عملیاتی هر پرس = هزینه مواد + بسته‌بندی + نیروی کار مستقیمِ قابل تخصیص + انرژی و سربار تخصیص‌یافته<br>سود مشارکت هر پرس = فروش خالص بدون VAT − هزینه‌های متغیر هر پرس<br>نسبت هزینه مواد = هزینه مواد ÷ فروش خالص بدون VAT × ۱۰۰</code></div><p class="small muted">برای جلوگیری از دوباره‌شماری، باید روش تخصیص سربار ثابت و کارمزد کانال فروش مشخص باشد. همه ارقام فعلاً خالی‌اند.</p></section>';
+s+='<div class="note"><a href="./ingredients.html"><strong>بانک مواد اولیه پاستا و ریزوتو</strong></a> برای انتخاب مواد و جمع‌آوری استعلام قیمت در دسترس است.</div><section class="box" style="margin-top:16px"><h3>محاسبه فودکاست هر غذا</h3><p>برای هر غذا یک کارت رسپی مستقل لازم است: وزن یا تعداد هر ماده در هر پرس، واحد و قیمت خرید، افت و ضایعات، تعداد پرس خروجی، و سربار اختصاص‌یافته.</p><div class="formula"><code>هزینه مواد هر پرس = مجموعِ (مقدار مصرفی هر ماده × قیمت واحد قابل‌مصرف پس از اصلاح افت/ضایعات)<br>بهای تمام‌شده عملیاتی هر پرس = هزینه مواد + بسته‌بندی + نیروی کار مستقیمِ قابل تخصیص + انرژی و سربار تخصیص‌یافته<br>سود مشارکت هر پرس = فروش خالص بدون VAT − هزینه‌های متغیر هر پرس<br>نسبت هزینه مواد = هزینه مواد ÷ فروش خالص بدون VAT × ۱۰۰</code></div><p class="small muted">برای جلوگیری از دوباره‌شماری، باید روش تخصیص سربار ثابت و کارمزد کانال فروش مشخص باشد. همه ارقام فعلاً خالی‌اند.</p></section>';
 s+='<section class="box"><h3>ترتیب تصمیم‌های منو</h3><div class="row"><strong>۱. انتخاب دسته‌ها و تعداد غذا</strong><span>نیازمند تصمیم</span></div><div class="row"><strong>۲. تدوین و تست رسپی استاندارد</strong><span>نیازمند داده</span></div><div class="row"><strong>۳. استعلام مواد و محاسبه Food Cost</strong><span>نیازمند قیمت</span></div><div class="row"><strong>۴. افزودن کار، انرژی، بسته‌بندی و سهم سربار</strong><span>نیازمند روش تخصیص</span></div><div class="row"><strong>۵. تعیین قیمت، تست سودآوری و نهایی‌سازی منو</strong><span>نیازمند تأیید</span></div></section>';
 s+='<section class="box"><h3>رسپی‌های قیمت‌گذاری‌شده</h3>'+(A(d.recipes).length?'<div class="table-scroll"><table><thead><tr><th>غذا</th><th>دسته</th><th>هزینه مواد</th><th>سربار/سایر</th><th>بهای تمام‌شده</th><th>فروش خالص</th></tr></thead><tbody>'+A(d.recipes).map(r=>{let materials=A(r.ingredients).reduce((sum,i)=>{let q=Number(i.quantity)||0,quote=A(d.quotes).find(x=>x.id===i.quoteId),p=quote&&Number(quote.packageQuantity)>0?Number(quote.amount)/Number(quote.packageQuantity):Number(i.pricePerUnit)||0,w=Math.max(0,Math.min(.99,Number(i.wasteRate)||0));return sum+q*p/(1-w)},0);let other=Number(r.labor)||0,over=Number(r.overhead)||0,pack=Number(r.packaging)||0;let has=A(r.ingredients).length;let n=has?materials+other+over+pack:null;return '<tr><td>'+H(r.name)+'</td><td>'+H(r.category)+'</td><td>'+H(has?materials.toFixed(2):'—')+'</td><td>'+H(has?(other+over+pack).toFixed(2):'—')+'</td><td>'+H(n===null?'—':n.toFixed(2))+'</td><td>'+H(r.netPrice||'—')+'</td></tr>'}).join('')+'</tbody></table></div>':none('غذای قیمت‌گذاری‌شده نداریم','با ثبت رسپی و قیمت مواد اولیه، جدول محاسبات از داده‌های واقعی پر می‌شود.'))+'</section>';return s}
+
+function renderAreas(){
+let s=title('حوزه‌های تخصصی راه‌اندازی','برندکیت، سوشیال‌مدیا، ایمنی و پژوهش محلی به‌عنوان مسیرهای قابل پیگیری');
+for(const a of A(d.projectAreas)){
+ const tasks=A(d.checklist).filter(x=>x.category===a.category),done=tasks.filter(x=>x.status==='done').length;
+ s+='<section class="box" id="area-'+H(a.id)+'"><div class="area-header"><h3>'+H(a.title)+'</h3><span class="tag '+(a.status==='coming_soon'?'unknown':'')+'">'+(a.status==='coming_soon'?'در برنامه آینده':fa(tasks.length)+' اقدام · '+fa(done)+' ثبت شده به‌عنوان انجام شده')+'</span></div><p class="area-head-note">'+H(a.subtitle)+'</p>';
+ if(a.status==='coming_soon'){
+  s+='<div class="empty"><strong>به‌زودی انجام خواهد شد</strong>پژوهش بازار محلی، قیمت‌ها و رقبا هنوز انجام نشده و نتیجه‌ای به آن نسبت داده نمی‌شود.</div>';
+ }else{
+  s+='<p class="small muted">'+H(a.intro)+'</p>'+checklistCards(tasks);
+ }
+ s+='</section>';
+}
+return s;
+}
+
 function renderTeam(){let s=title('همکاری، گزارش و تصمیم‌ها','مشاهده برای همه؛ ثبت و انتشار توسط مدیر مجاز');s+='<div class="section-links">'+A(d.team).map(x=>'<article class="section-card"><strong>'+H(x.name)+'</strong><p>'+H(x.role)+'</p><span class="tag">'+H(x.location)+'</span></article>').join('')+'</div>';
 s+='<div class="columns" style="margin-top:17px"><section class="box"><h3>گزارش‌ها</h3>'+activities()+'</section><section class="box"><h3>تصمیم‌های ثبت‌شده</h3>'+(A(d.decisions).length?d.decisions.map(x=>'<div class="row"><strong>'+H(x.title)+'</strong><span>'+H(fdate(x.date))+'</span></div>').join(''):none('صورت‌جلسه تصمیم قطعی ثبت نشده','تاریخ‌های برنامه با تصمیم‌های نهایی اشتباه گرفته نشوند.'))+'<div class="note warn">'+H(d.publicDisclaimer)+'</div></section></div>';return s}
-function render(){if(!d)return;let fn={overview:renderOverview,timeline:renderTimeline,facts:renderFacts,checklist:renderChecklist,costs:renderCosts,quotes:renderQuotes,menu:renderMenu,team:renderTeam};document.getElementById('main').innerHTML=fn[tab]();document.querySelectorAll('[data-tab]').forEach(x=>{x.classList.toggle('active',x.dataset.tab===tab);x.setAttribute('aria-current',x.dataset.tab===tab?'page':'false')});bind()}
+function render(){if(!d)return;let fn={overview:renderOverview,timeline:renderTimeline,facts:renderFacts,checklist:renderChecklist,costs:renderCosts,quotes:renderQuotes,menu:renderMenu,areas:renderAreas,team:renderTeam};document.getElementById('main').innerHTML=fn[tab]();document.querySelectorAll('[data-tab]').forEach(x=>{x.classList.toggle('active',x.dataset.tab===tab);x.setAttribute('aria-current',x.dataset.tab===tab?'page':'false')});bind()}
 function bind(){const f=document.getElementById('filter'),q=document.getElementById('q');if(f)f.addEventListener('change',e=>{filter=e.target.value;render()});if(q)q.addEventListener('input',e=>{search=e.target.value;let where=q.selectionStart;render();let next=document.getElementById('q');next.focus();next.setSelectionRange(where,where)})}
+document.getElementById('main').addEventListener('click',e=>{let a=e.target.closest('[data-openarea]');if(!a)return;e.preventDefault();tab='areas';history.replaceState(null,'','#areas');render();const t=document.getElementById('area-'+a.dataset.openarea);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
 document.getElementById('nav').addEventListener('click',e=>{let b=e.target.closest('button[data-tab]');if(!b)return;tab=b.dataset.tab;history.replaceState(null,'','#'+tab);render();window.scrollTo({top:150,behavior:'smooth'})});
-fetch('./data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('خطا در دریافت فایل اطلاعات: '+r.status);return r.json()}).then(v=>{d=v;let wanted=location.hash.substring(1);if(['overview','timeline','facts','checklist','costs','quotes','menu','team'].includes(wanted))tab=wanted;render()}).catch(e=>{document.getElementById('main').innerHTML='<div class="note warn">'+H(e.message)+'؛ صفحه را دوباره باز کنید.</div>'});
+fetch('./data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('خطا در دریافت فایل اطلاعات: '+r.status);return r.json()}).then(v=>{d=v;let wanted=location.hash.substring(1);if(['overview','timeline','facts','checklist','costs','quotes','menu','areas','team'].includes(wanted))tab=wanted;render()}).catch(e=>{document.getElementById('main').innerHTML='<div class="note warn">'+H(e.message)+'؛ صفحه را دوباره باز کنید.</div>'});
 })();
 </script>
 </body></html>
