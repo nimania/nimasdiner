@@ -209,7 +209,7 @@ const out=path.join(root,"site-dist");
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
 for(const file of ["site-global.css","download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","article-calculators.js","journal.mjs","journal-model.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
-for(const dir of ["assets","consulting","advisor","app","investment"]){fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});}
+for(const dir of ["assets","consulting","advisor","app","investment","sarvino"]){fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});}
 const data=JSON.parse(fs.readFileSync(path.join(root,"content/catalog.json"),"utf8"));
 const form=fs.readFileSync(path.join(root,"content/get-book-form.html"),"utf8");
 const extended=JSON.parse(fs.readFileSync(path.join(root,"content/expanded-guides.json"),"utf8"));
@@ -238,6 +238,8 @@ function finishHTML(dir){
   const full=path.join(dir,entry.name);
   if(entry.isDirectory()){finishHTML(full);continue;}
   if(!entry.name.endsWith(".html"))continue;
+  // Sarvino is intentionally a separate public-but-unlisted project workspace.
+  if(path.relative(out,full).startsWith("sarvino"+path.sep))continue;
   let html=fs.readFileSync(full,"utf8");
   const stylesheet='<link rel="stylesheet" href="/nimasdiner/site-global.css">';
   if(!html.includes('site-global.css'))html=html.replace(/<\/head>/i,stylesheet+'</head>');
