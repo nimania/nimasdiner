@@ -18,17 +18,17 @@ assert.ok(homeMeta.includes(verifyTag),"Google Search Console verification meta 
 assert.equal(homeMeta.split('name="google-site-verification"').length-1,1,"Google verification tag must be unique");
 const home=read("index.html");
 assert.match(home,/id="get-book"/,"old hash deep link broken");
-assert.match(home,/href="\/nimasdiner\/get-book\/"/);
+assert.match(home,/href="\/get-book\/"/);
 assert.match(home,/<h1>/);
 const sitemap=read("sitemap.xml");
-assert.match(sitemap,/\/nimasdiner\/get-book\//);
-assert.match(sitemap,/\/nimasdiner\/magazine\/01\//);
-assert.doesNotMatch(sitemap,/\/nimasdiner\/library\/04\//,"unpublished books must not be indexed");
-assert.doesNotMatch(sitemap,/\/nimasdiner\/search\//,"search should not be indexed");
+assert.match(sitemap,/\/get-book\//);
+assert.match(sitemap,/\/magazine\/01\//);
+assert.doesNotMatch(sitemap,/\/library\/04\//,"unpublished books must not be indexed");
+assert.doesNotMatch(sitemap,/\/search\//,"search should not be indexed");
 assert.match(read("search/index.html"),/noindex,follow/);
 const items=JSON.parse(read("search-index.json"));
 assert.ok(items.length>=10,"search pages too few");
-assert.ok(items.every(item=>item.url.startsWith("/nimasdiner/")),"search URLs incorrect");
+assert.ok(items.every(item=>item.url.startsWith("/")),"search URLs incorrect");
 assert.ok(!items.some(item=>item.url.includes("/library/04/")),"planned content in search index");
 assert.equal((read("library/index.html").match(/timeline-item/g)||[]).length,10,"missing roadmap volumes");
 for(const p of mustExist.filter(x=>x.endsWith("index.html")&&!x.startsWith("app/")&&!x.startsWith("consulting/"))){
@@ -39,11 +39,11 @@ for(const p of mustExist.filter(x=>x.endsWith("index.html")&&!x.startsWith("app/
 }
 const extraPages=["reading/index.html","reading/news/index.html","reading/analysis/index.html","reading/restaurant-technology-connected-2026/index.html","reading/menu-trends-value-comfort-2026/index.html","reading/why-top-selling-menu-items-may-not-be-profitable/index.html","about/index.html","feed.xml","guides/restaurant-management/index.html","guides/menu-pricing/index.html","guides/restaurant-profit/index.html"];
 for(const p of extraPages)assert.ok(fs.existsSync(path.join(dist,p)),"Editorial/SEO page missing: "+p);
-assert.match(read("index.html"),/href="\/nimasdiner\/reading\//,"reading link missing in homepage");
+assert.match(read("index.html"),/href="\/reading\//,"reading link missing in homepage");
 assert.match(read("reading/index.html"),/رادار صنعت/,"reading archive missing");
 assert.match(read("reading/restaurant-technology-connected-2026/index.html"),/۲۰۲۶-۱۱-۰۵|2026-11-05/,"news source date must be visible");
 assert.match(read("reading/restaurant-technology-connected-2026/index.html"),/restaurant\.org/,"official source link missing");
-assert.match(read("sitemap.xml"),/\/nimasdiner\/reading\//,"reading articles missing from sitemap");
+assert.match(read("sitemap.xml"),/\/reading\//,"reading articles missing from sitemap");
 assert.match(read("feed.xml"),/<rss version="2\.0">/,"valid RSS root missing");
 assert.ok(items.some(i=>i.url.includes("/reading/")),"editorial article not searchable");
 assert.ok(items.some(i=>i.url.includes("/guides/restaurant-management/")),"SEO guide not searchable");
@@ -52,15 +52,15 @@ assert.equal(mapping.meta.keywords,305);
 assert.equal(mapping.meta.targets,44);
 const editorial=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/editorial.json"),"utf8"));
 assert.ok(editorial.articles.filter(a=>a.status==="published").every(a=>a.type!=="news"||(a.sourcePublishedAt&&a.sources?.length)),"unsourced published news");
-assert.match(read("get-book/index.html"),/href="\/nimasdiner\/privacy\.html"/,"privacy link broken");
+assert.match(read("get-book/index.html"),/href="\/privacy\.html"/,"privacy link broken");
 console.log("Editorial tests passed:",extraPages.length,"additional pages,",mapping.meta.keywords,"keywords");
 const reviews=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/reviews.json"),"utf8"));
 assert.ok(fs.existsSync(path.join(dist,"reviews/index.html")),"Reviews archive must exist");
 assert.match(read("reviews/index.html"),/نقدهای نیما/,"Archive title missing");
-assert.match(read("index.html"),/href="\/nimasdiner\/reviews\//,"Review link missing on homepage");
+assert.match(read("index.html"),/href="\/reviews\//,"Review link missing on homepage");
 if(!reviews.reviews.some(r=>r.status==="published")){
   assert.match(read("reviews/index.html"),/noindex,follow/,"Unpopulated archive must not be indexed");
-  assert.doesNotMatch(read("sitemap.xml"),/\/nimasdiner\/reviews\//,"Empty archive should not enter sitemap");
+  assert.doesNotMatch(read("sitemap.xml"),/\/reviews\//,"Empty archive should not enter sitemap");
 }
 console.log("Review archive tests passed");
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
@@ -93,3 +93,6 @@ for(const slug of standaloneTools){
 }
 for(const slug of calculatorSlugs)assert.match(read("reading/"+slug+"/index.html"),/درخواست جلسه مشاوره/,"article consultation missing "+slug);
 console.log("Standalone tools and consultations checked:",standaloneTools.length);
+
+assert.match(read("index.html"), /https:\/\/nimania\.net/);
+assert.doesNotMatch(read("index.html"), /["\']\/nimasdiner\//);
