@@ -251,4 +251,19 @@ function finishHTML(dir){
  }
 }
 finishHTML(out);
+
+// Publish at the custom domain root, including copied standalone tools and data.
+function migrateDomain(dir){
+ for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+  const full=path.join(dir,entry.name);
+  if(entry.isDirectory()){migrateDomain(full);continue;}
+  if(!/\.(html|css|js|mjs|json|xml|txt|webmanifest)$/.test(entry.name))continue;
+  const original=fs.readFileSync(full,"utf8");
+  const migrated=original.replaceAll("https://nimania.github.io/nimasdiner","https://nimania.net")
+    .replaceAll("https://nimania.github.io","https://nimania.net")
+    .replaceAll("/nimasdiner/","/");
+  if(migrated!==original)fs.writeFileSync(full,migrated,"utf8");
+ }
+}
+migrateDomain(out);
 console.log("Built",result.generated.length,"files,",result.count,"indexable pages");
