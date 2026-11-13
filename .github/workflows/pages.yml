@@ -33,6 +33,20 @@ jobs:
           node tools/build-site.mjs
           node tools/test-site.mjs
           node tools/test-manager.mjs
+      - name: Protect existing public page URLs
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" =~ ^0+$ ]]; then
+            echo "A previous commit is required for URL stability verification."
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          BASE_DIR="$RUNNER_TEMP/nimasdiner-url-baseline"
+          git worktree add --detach "$BASE_DIR" "$BASE_SHA"
+          (cd "$BASE_DIR" && node tools/build-site.mjs)
+          node tools/check-url-stability.mjs "$BASE_DIR/site-dist" "$PWD/site-dist"
       - name: Upload preview artifact
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
