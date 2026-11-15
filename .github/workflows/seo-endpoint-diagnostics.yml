@@ -1,0 +1,31 @@
+name: SEO endpoint diagnostics (public)
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/seo-endpoint-diagnostics.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Inspect robots, sitemap and homepage from internet
+        shell: bash
+        run: |
+          set -u
+          for url in             https://nimania.net/robots.txt             https://nimania.net/sitemap.xml             https://nimania.net/             https://nimania.net/library/             https://nimania.net/consultation/             https://www.nimania.net/robots.txt             https://nimania.github.io/nimasdiner/robots.txt; do
+            echo "=== $url ==="
+            output="$(mktemp)"
+            headers="$(mktemp)"
+            curl --location --silent --show-error --connect-timeout 9 --max-time 22               --user-agent 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'               --dump-header "$headers" --output "$output"               --write-out 'Status: %{http_code}; Final URL: %{url_effective}; Type: %{content_type}\n'               "$url" || true
+            grep -Eim 4 '^(HTTP/|content-type:|location:|x-robots-tag:|server:)' "$headers" || true
+            case "$url" in
+              */robots.txt) head -n 18 "$output" | cut -c 1-150 ;;
+              */sitemap.xml) head -c 350 "$output"; echo ;;
+              *) grep -Eio '<meta[^>]+name="robots"[^>]+>|<link[^>]+rel="canonical"[^>]+>|<title>[^<]*' "$output" | head -n 5 || true ;;
+            esac
+            rm -f "$output" "$headers"
+          done
