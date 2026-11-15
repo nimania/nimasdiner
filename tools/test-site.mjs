@@ -126,7 +126,7 @@ for(const n of ["01","02","03"]){
 }
 
 const consultation=read("consultation/index.html");
-for(const word of ["۹۰ دقیقه","۳۰٬۰۰۰٬۰۰۰","۵۰٬۰۰۰٬۰۰۰","۱۰٬۰۰۰٬۰۰۰","تعرفهٔ حمایتی","قبل از رزرو","پرسش‌های متداول"]){
+for(const word of ["۹۰ دقیقه","۳۰٬۰۰۰٬۰۰۰","۵۰٬۰۰۰٬۰۰۰","۱۰٬۰۰۰٬۰۰۰","تعرفهٔ حمایتی","پیش از تأیید رزرو","پرسش‌های متداول"]){
  assert.ok(consultation.includes(word),"Consultation page missing "+word);
 }
 assert.match(consultation,/t\.me\/nimaafsharnaderi/);
