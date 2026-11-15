@@ -31,7 +31,7 @@ for(const r of archive){
  assert.ok(html.includes(r.sourceUrl));assert.ok(html.includes(r.publishedAt));assert.ok(!html.includes('آرشیوی'));assert.ok(!html.includes('شناسنامهٔ آرشیو'));
  for(const p of r.photos){assert.ok(fs.existsSync('site-dist/'+p.src.replace('/nimasdiner/','')));photos++;}
 }
-assert.equal(photos,52);
+assert.equal(photos,51);
 assert.ok(reviews.find(r=>r.slug==='peleh-qazvin').photos.every(p=>p.credit==='مهدی رشیدی فرد'));
 const offside=reviews.find(r=>r.slug==='offside-nowshahr');
 assert.ok(offside&&offside.status==='published'&&!offside.historical&&offside.body.length>=5);
@@ -61,7 +61,7 @@ assert.ok(barokHtml.includes('barok-exterior-night.mp4'),'Barok video must be em
 assert.ok(fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/reviews/barok-nowshahr/'),'Barok needs sitemap entry');
 assert.ok(!fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/membership/'));
 for(const p of ['journal/index.html','kits/index.html','kits/shift-handover/index.html','kits/waste-log/index.html','kits/weekly-review/index.html'])assert.ok(fs.existsSync('site-dist/'+p));
-console.log('Manager checks passed: Persian numbers, cashflow, backup validation, CSV safety; 20 complete texts, 52 review cover photos and Barok gallery + video.');
+console.log('Manager checks passed: Persian numbers, cashflow, backup validation, CSV safety; 20 complete texts, 51 historical archive photos plus user-supplied Barok gallery + video.');
 
 // Books are available for direct ordering only; free digital downloads must remain absent.
 for(const n of ['01','02','03']){
