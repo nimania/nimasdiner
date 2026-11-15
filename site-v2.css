@@ -344,3 +344,9 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .review-text-hero strong{font-size:clamp(29px,4vw,42px);letter-spacing:-.5px;line-height:1.5}
 .review-text-hero span{font-size:13px;color:#f2e4c8}
 @media(max-width:650px){.review-text-hero{min-height:155px;padding:24px 18px}}
+
+/* Restaurant dossier: categories and attractions */
+.review-menu-categories{list-style:none;padding:0;margin:0 0 14px;display:flex;flex-wrap:wrap;gap:6px}
+.review-menu-categories li{background:#f6f2ec;border:1px solid #e6dfd3;border-radius:7px;padding:2px 8px;color:#584d43;font-size:11px}
+.review-side-amenities{display:grid;gap:6px;margin:12px 0}
+.review-side-amenities div{font-size:12px;line-height:1.8;background:#f5f7f4;border-right:3px solid #58907a;padding:6px 9px;border-radius:6px}
