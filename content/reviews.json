@@ -1329,7 +1329,50 @@
       "publishedAt": "2026-11-15",
       "historical": false,
       "sourceUrl": null,
-      "photos": [],
+      "photos": [
+        {
+          "src": "/nimasdiner/assets/reviews/offside-exterior-night.webp",
+          "alt": "نمای شبانه کافه‌رستوران آفساید نوشهر در بلوار امام‌رضا",
+          "caption": "نمای ساختمان آفساید در شب",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-entrance.webp",
+          "alt": "ورودی روشن کافه‌رستوران آفساید نوشهر با تابلوی نام رستوران",
+          "caption": "ورودی آفساید",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-table-setting.webp",
+          "alt": "چیدمان میز، کارد و چنگال و بشقاب اختصاصی رستوران آفساید",
+          "caption": "چیدمان میز در آفساید",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-table-detail.webp",
+          "alt": "جزئیات سرو غذا و کارت برند رستوران آفساید روی میز",
+          "caption": "جزئیات سرو و هویت بصری رستوران",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-plate-branding.webp",
+          "alt": "بشقاب با نشان اختصاصی OFFSIDE در کافه‌رستوران آفساید نوشهر",
+          "caption": "بشقاب با نشان اختصاصی آفساید",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-qr-contact.webp",
+          "alt": "کارت منو و کد QR کافه‌رستوران آفساید نوشهر روی میز",
+          "caption": "کارت منوی دیجیتال آفساید",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-sign.webp",
+          "alt": "تابلوی روشن نام آفساید بالای ورودی کافه‌رستوران در شب",
+          "caption": "تابلوی آفساید در شب",
+          "credit": ""
+        }
+      ],
       "body": [
         {
           "h": "",
