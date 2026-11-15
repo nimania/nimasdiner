@@ -1436,7 +1436,59 @@
         "takht-jamshid-javaherdeh",
         "raz-pizza",
         "davood-pizza"
-      ]
+      ],
+      "sidebar": {
+        "address": "نوشهر، بلوار امام‌رضا، محدوده شهرک دریاسر، روبه‌روی پیتزا فلفل",
+        "hours": "۸ صبح تا حدود ۱ بامداد",
+        "hoursNote": "ساعت کار ممکن است در تعطیلات تغییر کند؛ پیش از مراجعه دیرهنگام بررسی کنید.",
+        "menuDate": "۲۴ آبان ۱۴۰۵",
+        "menuSections": 21,
+        "menuRows": 208,
+        "menuPrices": [
+          {
+            "name": "اسپرسو دبل پریمیوم",
+            "price": 260000
+          },
+          {
+            "name": "برگر کلاسیک",
+            "price": 750000
+          },
+          {
+            "name": "صبحانه ایرانی",
+            "price": 1150000
+          },
+          {
+            "name": "پیتزای چهارپنیر نیویورکی",
+            "price": 1240000
+          },
+          {
+            "name": "بشقاب بریسکت دودی",
+            "price": 2370000
+          }
+        ],
+        "links": [
+          {
+            "label": "منوی رسمی",
+            "url": "https://sepidz.menu/caferestaurant/offside"
+          },
+          {
+            "label": "اینستاگرام",
+            "url": "https://www.instagram.com/offsiderst/?hl=fa"
+          },
+          {
+            "label": "گوگل‌مپز",
+            "url": "https://share.google/S6ORi06l20eKJV5Ij"
+          },
+          {
+            "label": "نشان",
+            "url": "https://neshan.org/maps/places/f860631bd9efff863bcaca0242c3b2b1"
+          },
+          {
+            "label": "بلد",
+            "url": "https://balad.ir/p/%DA%A9%D8%A7%D9%81%D9%87-%D8%B1%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%86-%D8%A2%D9%81%D8%B3%D8%A7%DB%8C%D8%AF-nowshahr_restaurant-cafe-1iYXuX5MhuSHvg"
+          }
+        ]
+      }
     }
   ]
 }
