@@ -385,3 +385,10 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .review-video-item video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#191919;border-radius:8px}
 .review-video-item figcaption{padding:10px 5px 4px;font-size:12px;line-height:1.8;color:#54493e}
 @media(max-width:600px){.review-video-grid{grid-template-columns:1fr}}
+
+/* Consultation invitation on the library page */
+.consult-library-crosssell{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:25px 28px;background:#fff;border:1px solid var(--edge);border-right:5px solid #ffcf25;border-radius:12px}
+.consult-library-crosssell h3{font-size:21px;line-height:1.65;margin:0 0 8px}
+.consult-library-crosssell p{color:var(--muted);font-size:13px;line-height:2.1;max-width:740px;margin:0}
+.consult-library-crosssell .button{flex-shrink:0;white-space:nowrap}
+@media(max-width:750px){.consult-library-crosssell{flex-direction:column;align-items:stretch;padding:20px}.consult-library-crosssell .button{width:100%;white-space:normal}}
