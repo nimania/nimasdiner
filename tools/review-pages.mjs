@@ -41,13 +41,42 @@ export function renderReviews({reviews, add, section, crumbs, link, esc, comment
     return `<div class="review-inline-photos" aria-label="تصاویر مربوط به این بخش">${selected.map((p,j)=>`<a href="${esc(p.src)}" target="_blank" rel="noopener noreferrer" aria-label="دیدن اندازه بزرگ: ${esc(p.alt)}">${image(p,j+1)}</a>`).join('')}</div>`;
   };
 
+  const renderDossierGallery=(r)=>{
+    const images=r.photoGallery||[];
+    if(!images.length)return '';
+    const categories=[...new Set(images.map(p=>p.group||'تصاویر'))];
+    return `<section class="review-dossier-gallery" id="offside-gallery" aria-labelledby="review-gallery-heading">
+      <div class="review-gallery-heading"><span class="kicker">گزارش تصویری</span><h2 id="review-gallery-heading">گالری عکس‌های ${esc(r.venue.name)}</h2>
+      <p>تصاویر فضای داخلی، چیدمان سالن و غذاهای ثبت‌شده در بازدید. برای نمایش بزرگ‌تر و رفتن به عکس بعدی، هر تصویر را انتخاب کنید.</p></div>
+      ${categories.map(group=>`<div class="review-gallery-group"><h3>${esc(group)}</h3><div class="review-gallery-grid">
+      ${images.map((p,i)=>({p,i})).filter(x=>(x.p.group||'تصاویر')===group).map(({p,i})=>`<a class="review-gallery-item" data-photo-index="${i}" href="${esc(p.src)}" aria-label="نمایش تصویر بزرگ: ${esc(p.alt)}">
+      <figure><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy" decoding="async">
+      <figcaption>${esc(p.caption)}</figcaption></figure></a>`).join('')}</div></div>`).join('')}
+      <p class="review-gallery-note">تصاویر مربوط به فضای رستوران و غذاهای سرو‌شده هستند؛ عکس‌ها به‌تنهایی مبنای ارزیابی طعم، قیمت یا کیفیت خدمات نیستند.</p>
+      <dialog class="review-photo-modal" id="review-photo-modal" aria-label="نمایش بزرگ تصاویر">
+        <button type="button" class="review-modal-close" aria-label="بستن تصویر">×</button>
+        <button type="button" class="review-modal-prev" aria-label="تصویر قبلی">‹</button>
+        <div class="review-modal-content"><img alt=""><p aria-live="polite"></p></div>
+        <button type="button" class="review-modal-next" aria-label="تصویر بعدی">›</button>
+      </dialog>
+    </section>`;
+  };
   for(let i=0;i<items.length;i++){
     const r=items[i];
     if(!r.body?.length||!r.publishedAt||(r.historical&&!r.sourceUrl))throw Error('Incomplete review: '+r.slug);
     const image=(p,j)=>`<figure class="review-photo"><img src="${esc(p.src)}" alt="${esc(p.alt.replace(" در نوشتهٔ آرشیوی",""))}" ${j?'loading="lazy"':''}>${p.caption||p.credit?`<figcaption>${p.caption?esc(p.caption):''}${p.caption&&p.credit?' · ':''}${p.credit?'عکس: '+esc(p.credit):''}</figcaption>`:''}</figure>`;
     const photos=r.photos||[];
-    const body=`<section class="pagehead wrap">${crumbs([['نقدهای نیما','reviews/'],[r.venue.name,null]])}<p class="eyebrow">${esc(r.venue.city)} · ${esc(r.venue.type)}</p><h1>${esc(r.title)}</h1><p class="lead">${esc(r.summary)}</p><p class="muted"><time datetime="${r.publishedAt}">${faDate(r.publishedAt)}</time></p></section><article class="article wrap${r.sidebar?' review-article':''}">${renderSidebar(r)}<div class="article-body">${photos[0]?image(photos[0],0):(r.sidebar?`<div class="review-text-hero" aria-label="کافه‌برگر باروک؛ تصویر واقعی این رستوران هنوز به این پرونده افزوده نشده"><strong>${esc(r.venue.name)}</strong><span>${esc(r.venue.city)} · ${esc(r.venue.type)}</span></div>`:'')}${r.body.map((s,sectionIndex)=>`<section>${!r.historical&&s.h?`<h2>${esc(s.h)}</h2>`:''}${s.p.map(p=>`<p>${r.historical?esc(p):renderInline(p)}</p>`).join('')}${inlinePhotos(r,photos,sectionIndex,image)}</section>`).join('')}${photos.length>1&&!r.sidebar?`<section><h2>عکس‌های همراه نوشته</h2><div class="review-photo-grid">${photos.slice(1).map((p,j)=>image(p,j+1)).join('')}</div></section>`:''}${r.sourceUrl?`<p><a class="textlink" href="${esc(r.sourceUrl)}" target="_blank" rel="noopener noreferrer">نسخهٔ منتشرشده در ایکس ←</a></p>`:''}${r.relatedSlugs?.length?`<section class="review-related-section"><h2>مطالب مرتبط</h2><div class="cards three">${r.relatedSlugs.map(slug=>items.find(x=>x.slug===slug)).filter(Boolean).map(card).join('')}</div><p><a class="textlink" href="${link('guides/menu-engineering/')}">راهنمای مهندسی منوی رستوران ←</a></p></section>`:''}<nav class="related" aria-label="نوشته‌های دیگر"><h2>نوشته‌های دیگر</h2>${[items[i-1],items[i+1]].filter(Boolean).map(x=>`<a href="${link(url(x))}">${esc(x.title)} ←</a>`).join('')}<a href="${link('reviews/')}">همهٔ نقدها</a></nav>${comment(r.title)}</div></article>`;
-    add(url(r),r.title,r.summary,body,{image:r.photos?.[0]?.src||"",lastmod:r.publishedAt,structured:{'@context':'https://schema.org','@type':'Article',headline:r.title,description:r.summary,datePublished:r.publishedAt,inLanguage:'fa',image:r.photos?.[0]?.src?('https://nimania.github.io'+r.photos[0].src):undefined,author:{'@type':'Person',name:'نیما افشارنادری'},...(r.sourceUrl?{isBasedOn:r.sourceUrl}:{}),publisher:{'@type':'Organization',name:'نیما داینر',logo:{'@type':'ImageObject',url:'https://nimania.github.io/nimasdiner/assets/logo-512.png'}}}});
+    const body=`<section class="pagehead wrap">${crumbs([['نقدهای نیما','reviews/'],[r.venue.name,null]])}<p class="eyebrow">${esc(r.venue.city)} · ${esc(r.venue.type)}</p><h1>${esc(r.title)}</h1><p class="lead">${esc(r.summary)}</p><p class="muted"><time datetime="${r.publishedAt}">${faDate(r.publishedAt)}</time></p></section><article class="article wrap${r.sidebar?' review-article':''}">${renderSidebar(r)}<div class="article-body">${photos[0]?image(photos[0],0):(r.sidebar?`<div class="review-text-hero" aria-label="کافه‌برگر باروک؛ تصویر واقعی این رستوران هنوز به این پرونده افزوده نشده"><strong>${esc(r.venue.name)}</strong><span>${esc(r.venue.city)} · ${esc(r.venue.type)}</span></div>`:'')}${r.body.map((s,sectionIndex)=>`<section>${!r.historical&&s.h?`<h2>${esc(s.h)}</h2>`:''}${s.p.map(p=>`<p>${r.historical?esc(p):renderInline(p)}</p>`).join('')}${inlinePhotos(r,photos,sectionIndex,image)}${sectionIndex===3?renderDossierGallery(r):''}</section>`).join('')}${photos.length>1&&!r.sidebar?`<section><h2>عکس‌های همراه نوشته</h2><div class="review-photo-grid">${photos.slice(1).map((p,j)=>image(p,j+1)).join('')}</div></section>`:''}${r.sourceUrl?`<p><a class="textlink" href="${esc(r.sourceUrl)}" target="_blank" rel="noopener noreferrer">نسخهٔ منتشرشده در ایکس ←</a></p>`:''}${r.relatedSlugs?.length?`<section class="review-related-section"><h2>مطالب مرتبط</h2><div class="cards three">${r.relatedSlugs.map(slug=>items.find(x=>x.slug===slug)).filter(Boolean).map(card).join('')}</div><p><a class="textlink" href="${link('guides/menu-engineering/')}">راهنمای مهندسی منوی رستوران ←</a></p></section>`:''}<nav class="related" aria-label="نوشته‌های دیگر"><h2>نوشته‌های دیگر</h2>${[items[i-1],items[i+1]].filter(Boolean).map(x=>`<a href="${link(url(x))}">${esc(x.title)} ←</a>`).join('')}<a href="${link('reviews/')}">همهٔ نقدها</a></nav>${comment(r.title)}</div></article>`;
+    add(url(r),r.title,r.summary,body,{image:r.photos?.[0]?.src||"",lastmod:r.photoGallery?.length?'2026-11-15':r.publishedAt,script:r.photoGallery?.length?'assets/review-gallery.js':'',structured:[
+      {'@context':'https://schema.org','@type':'Article',headline:r.title,description:r.summary,datePublished:r.publishedAt,...(r.photoGallery?.length?{dateModified:'2026-11-15'}:{}),inLanguage:'fa',
+        image:[...(r.photos?.[0]?[r.photos[0]]:[]),...(r.photoGallery||[]).slice(0,5)].map(p=>'https://nimania.github.io'+p.src),
+        author:{'@type':'Person',name:'نیما افشارنادری'},...(r.sourceUrl?{isBasedOn:r.sourceUrl}:{}),
+        publisher:{'@type':'Organization',name:'نیما داینر',logo:{'@type':'ImageObject',url:'https://nimania.github.io/nimasdiner/assets/logo-512.png'}}},
+      ...(r.photoGallery?.length?[{'@context':'https://schema.org','@type':'ImageGallery',name:'گالری عکس‌های '+r.venue.name,
+        url:'https://nimania.github.io/nimasdiner/'+url(r)+'#offside-gallery',inLanguage:'fa',
+        associatedMedia:r.photoGallery.map(p=>({'@type':'ImageObject',contentUrl:'https://nimania.github.io'+p.src,
+           name:p.caption,description:p.alt,caption:p.caption}))}]:[])
+    ]});
   }
   return {cards:items.filter(r=>r.category!=='city').slice(0,3).map(card).join('')};
 }

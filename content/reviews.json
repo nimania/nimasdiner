@@ -1488,7 +1488,107 @@
             "url": "https://balad.ir/p/%DA%A9%D8%A7%D9%81%D9%87-%D8%B1%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%86-%D8%A2%D9%81%D8%B3%D8%A7%DB%8C%D8%AF-nowshahr_restaurant-cafe-1iYXuX5MhuSHvg"
           }
         ]
-      }
+      },
+      "photoGallery": [
+        {
+          "src": "/nimasdiner/assets/reviews/offside-entry-stairs-20260918.jpg",
+          "alt": "پله‌های ورودی و نمای سالن کافه‌رستوران آفساید نوشهر؛ کانتر در انتهای فضا دیده می‌شود.",
+          "caption": "ورودی و پله‌های سالن آفساید",
+          "group": "فضای داخلی",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-main-dining-hall-20260918.jpg",
+          "alt": "نمای سالن غذاخوری آفساید با میزهای چوبی، صندلی‌های تیره، گیاهان سبز و نورپردازی سقفی.",
+          "caption": "سالن اصلی و میزهای مهمانان",
+          "group": "فضای داخلی",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-interior-greenery-20260918.jpg",
+          "alt": "بخشی از دکور داخلی آفساید نوشهر با گلدان‌های بزرگ و درِ ورودی قرمزرنگ.",
+          "caption": "گیاهان و جزئیات دکوراسیون",
+          "group": "فضای داخلی",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-open-counter-20260918.jpg",
+          "alt": "دید رو به کانتر نوشیدنی و بخشی از فضای آماده‌سازی از داخل سالن کافه‌رستوران آفساید.",
+          "caption": "پیشخوان و فضای آماده‌سازی",
+          "group": "فضای داخلی",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-counter-drinks-20260918.jpg",
+          "alt": "قفسه نوشابه‌ها و تجهیزات پیشخوان نوشیدنی آفساید با تزئین قرمزرنگ کوکاکولا.",
+          "caption": "جزئیات پیشخوان نوشیدنی",
+          "group": "فضای داخلی",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-table-seating-view-20260918.jpg",
+          "alt": "نمای میزهای سالن، جداکننده‌های فلزی قرمز و مهمانان در کافه‌رستوران آفساید نوشهر.",
+          "caption": "چیدمان میزها در ساعات شب",
+          "group": "فضای داخلی",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-staff-service-20260918.jpg",
+          "alt": "یکی از کارکنان آفساید در حال حمل بشقاب غذا در میان میزهای سالن.",
+          "caption": "نمایی از سرویس‌دهی در سالن",
+          "group": "فضای داخلی",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-salad-corn-20260918.jpg",
+          "alt": "سالاد سرو‌شده در آفساید با تکه‌های ذرت، سبزیجات، نان ترد و سس به رنگ نارنجی.",
+          "caption": "سالاد همراه ذرت و سس",
+          "group": "غذا و سرو",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-salad-detail-20260918.jpg",
+          "alt": "نمای نزدیک یک سالاد در آفساید نوشهر با سبزیجات، ذرت، مواد ترد و سس.",
+          "caption": "نمای نزدیک سالاد",
+          "group": "غذا و سرو",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-salad-crispy-toppings-20260918.jpg",
+          "alt": "نمای نزدیک سالاد آفساید با نان‌های ترد مثلثی، ذرت و تزئینات سبز.",
+          "caption": "جزئیات مواد روی سالاد",
+          "group": "غذا و سرو",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-mini-burgers-fries-20260918.jpg",
+          "alt": "بشقاب سه ساندویچ برگری کوچک همراه سیب‌زمینی سرخ‌کرده و سس سفید در آفساید نوشهر.",
+          "caption": "مینی‌برگرها با سیب‌زمینی",
+          "group": "غذا و سرو",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-mini-burgers-closeup-20260918.jpg",
+          "alt": "کلوزآپ ساندویچ‌های برگری کوچک با نان برشته و سس سفید در کافه‌رستوران آفساید.",
+          "caption": "نمای نزدیک برگرها و سس",
+          "group": "غذا و سرو",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-seasoned-fries-20260918.jpg",
+          "alt": "نمای نزدیک سیب‌زمینی‌های سرخ‌کرده با ادویه و سبزی خشک در آفساید نوشهر.",
+          "caption": "سیب‌زمینی ادویه‌دار",
+          "group": "غذا و سرو",
+          "credit": ""
+        },
+        {
+          "src": "/nimasdiner/assets/reviews/offside-salad-after-serving-20260918.jpg",
+          "alt": "بشقاب سالاد با ذرت، برگ‌های سبز و سس پس از سرو در کافه‌رستوران آفساید.",
+          "caption": "نمای دیگری از سالاد سرو‌شده",
+          "group": "غذا و سرو",
+          "credit": ""
+        }
+      ]
     },
     {
       "status": "published",
