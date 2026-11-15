@@ -4,7 +4,7 @@ import path from "node:path";
 
 const dist=path.join(process.cwd(),"site-dist");
 const read=p=>fs.readFileSync(path.join(dist,p),"utf8");
-const mustExist=["index.html","get-book/index.html","library/index.html","library/01/index.html","library/02/index.html","library/03/index.html","magazine/index.html","magazine/01/index.html","guides/index.html","guides/food-cost/index.html","guides/menu-engineering/index.html","guides/restaurant-permits/index.html","tools/index.html","services/index.html","consulting/index.html","app/index.html","robots.txt","sitemap.xml","search-index.json"];
+const mustExist=["index.html","get-book/index.html","library/index.html","library/01/index.html","library/02/index.html","library/03/index.html","magazine/index.html","magazine/01/index.html","guides/index.html","guides/food-cost/index.html","guides/menu-engineering/index.html","guides/restaurant-permits/index.html","tools/index.html","services/index.html","consultation/index.html","consulting/index.html","app/index.html","robots.txt","sitemap.xml","search-index.json"];
 for(const p of mustExist){assert.ok(fs.existsSync(path.join(dist,p)),p+" missing");}
 const orderPage=read("get-book/index.html");
 assert.match(orderPage,/سفارش کتاب/);
@@ -123,4 +123,21 @@ for(const n of ["01","02","03"]){
  const detail=read("library/"+n+"/index.html");
  assert.match(detail,/این کتاب برای چه کسی مناسب است/);
  assert.match(detail,/چه چیزی به دست می‌آورید/);
+}
+
+const consultation=read("consultation/index.html");
+for(const word of ["۹۰ دقیقه","۳۰٬۰۰۰٬۰۰۰","۵۰٬۰۰۰٬۰۰۰","۱۰٬۰۰۰٬۰۰۰","تعرفهٔ حمایتی","قبل از رزرو","پرسش‌های متداول"]){
+ assert.ok(consultation.includes(word),"Consultation page missing "+word);
+}
+assert.match(consultation,/t\.me\/nimaafsharnaderi/);
+assert.match(consultation,/<link rel="stylesheet" href="\/assets\/consultation\.css">/);
+assert.match(consultation,/"@type":"Service"/);
+assert.match(consultation,/"@type":"FAQPage"/);
+assert.ok(consultation.includes("href=\"/library/\""));
+assert.match(read("services/index.html"),/href="\/consultation\/"/);
+assert.match(read("library/index.html"),/href="\/consultation\/"/);
+assert.match(read("sitemap.xml"),/https:\/\/nimania\.net\/consultation\//);
+assert.match(read("index.html"),/href="\/consultation\/"/);
+for(const deny of [/ChatGPT/i, /\bAI\b/i, /افزایش فروش تضمینی/]){
+ assert.doesNotMatch(consultation,deny,"Consultation page must avoid disallowed or guaranteed claims");
 }
