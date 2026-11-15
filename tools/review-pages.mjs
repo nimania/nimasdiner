@@ -80,7 +80,11 @@ export function renderReviews({reviews, add, section, crumbs, link, esc, comment
       ...(r.photoGallery?.length?[{'@context':'https://schema.org','@type':'ImageGallery',name:'گالری عکس‌های '+r.venue.name,
         url:'https://nimania.github.io/nimasdiner/'+url(r)+'#review-gallery-'+r.slug,inLanguage:'fa',
         associatedMedia:r.photoGallery.map(p=>({'@type':'ImageObject',contentUrl:'https://nimania.github.io'+p.src,
-           name:p.caption,description:p.alt,caption:p.caption}))}]:[])
+           name:p.caption,description:p.alt,caption:p.caption}))}]:[]),
+      ...(r.videoGallery||[]).map(v=>({'@context':'https://schema.org','@type':'VideoObject',
+        name:v.caption||'ویدئوی '+r.venue.name,description:v.alt||v.caption||r.summary,
+        contentUrl:'https://nimania.github.io'+v.src,thumbnailUrl:'https://nimania.github.io'+(v.poster||r.photos?.[0]?.src),
+        uploadDate:r.publishedAt,inLanguage:'fa',duration:'PT2S'}))
     ]});
   }
   return {cards:items.filter(r=>r.category!=='city').slice(0,3).map(card).join('')};

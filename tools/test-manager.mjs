@@ -31,7 +31,7 @@ for(const r of archive){
  assert.ok(html.includes(r.sourceUrl));assert.ok(html.includes(r.publishedAt));assert.ok(!html.includes('آرشیوی'));assert.ok(!html.includes('شناسنامهٔ آرشیو'));
  for(const p of r.photos){assert.ok(fs.existsSync('site-dist/'+p.src.replace('/nimasdiner/','')));photos++;}
 }
-assert.equal(photos,51);
+assert.equal(photos,52);
 assert.ok(reviews.find(r=>r.slug==='peleh-qazvin').photos.every(p=>p.credit==='مهدی رشیدی فرد'));
 const offside=reviews.find(r=>r.slug==='offside-nowshahr');
 assert.ok(offside&&offside.status==='published'&&!offside.historical&&offside.body.length>=5);
@@ -42,14 +42,26 @@ assert.ok(fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/reviews/off
 
 const barok=reviews.find(r=>r.slug==='barok-nowshahr');
 assert.ok(barok&&barok.status==='published'&&!barok.historical&&barok.body.length>=5);
-assert.equal(barok.photos.length,0,'Do not invent or misattribute Barok photographs');
+assert.equal(barok.photos.length,1,'Use the actual user-supplied Barok facade image, not fabricated photography');
+assert.equal(barok.photoGallery?.length,4,'Preserve all four user-supplied Barok photographs');
+for(const p of [...barok.photos,...barok.photoGallery]) {
+ assert.ok(p.src.startsWith('/nimasdiner/assets/reviews/barok-'),'Barok media must come from its own photo archive');
+ assert.ok(fs.existsSync('site-dist/'+p.src.replace('/nimasdiner/','')),'Missing published Barok image '+p.src);
+}
+assert.equal(barok.videoGallery?.length,1,'Preserve uploaded Barok video');
+for(const v of barok.videoGallery) {
+ assert.ok(v.src.endsWith('.mp4')&&fs.existsSync('site-dist/'+v.src.replace('/nimasdiner/','')),'Missing published Barok MP4');
+ assert.ok(fs.existsSync('site-dist/'+v.poster.replace('/nimasdiner/','')),'Missing Barok video poster');
+}
 const barokHtml=fs.readFileSync('site-dist/reviews/barok-nowshahr/index.html','utf8');
 for(const value of ['باروک','barokorder.ir','مهندسی منو','مسیریابی'])assert.ok(barokHtml.includes(value),'Barok guide missing '+value);
 assert.ok(barokHtml.includes('review-sidebar'),'Barok needs the dossier sidebar');
+assert.ok(barokHtml.includes('review-gallery-barok-nowshahr'),'Barok gallery must be integrated inside the article');
+assert.ok(barokHtml.includes('barok-exterior-night.mp4'),'Barok video must be embedded locally');
 assert.ok(fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/reviews/barok-nowshahr/'),'Barok needs sitemap entry');
 assert.ok(!fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/membership/'));
 for(const p of ['journal/index.html','kits/index.html','kits/shift-handover/index.html','kits/waste-log/index.html','kits/weekly-review/index.html'])assert.ok(fs.existsSync('site-dist/'+p));
-console.log('Manager checks passed: Persian numbers, cashflow, backup validation, CSV safety; 20 complete texts and 51 photos.');
+console.log('Manager checks passed: Persian numbers, cashflow, backup validation, CSV safety; 20 complete texts, 52 review cover photos and Barok gallery + video.');
 
 // Books are available for direct ordering only; free digital downloads must remain absent.
 for(const n of ['01','02','03']){

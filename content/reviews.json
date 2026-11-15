@@ -1783,6 +1783,15 @@
           "caption": "لیوان قهوهٔ سبزرنگ باروک با تصویر رنه دکارت و عبارت Cogito, Ergo Sum",
           "alt": "لیوان سبزرنگ قهوهٔ باروک با نشان BAROK، تصویر رنه دکارت و نوشتهٔ لاتین Cogito, Ergo Sum"
         }
+      ],
+      "videoGallery": [
+        {
+          "src": "/nimasdiner/assets/reviews/barok-exterior-night.mp4",
+          "poster": "/nimasdiner/assets/reviews/barok-exterior-arcade-night.jpg",
+          "type": "video/mp4",
+          "caption": "ویدئوی کوتاهِ نمای شبانهٔ ورودی باروک، تابلوی آرکید و غرفهٔ قهوه",
+          "alt": "ویدئوی کوتاه از نمای بیرونی کافه‌برگر باروک نوشهر در شب با تابلوی پیکسلی و نورپردازی سردر"
+        }
       ]
     }
   ]
