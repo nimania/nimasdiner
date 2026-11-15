@@ -54,7 +54,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const bookURL=b=>`library/${num(b.n)}/`;
   const orderURL="https://t.me/nimaafsharnaderi";
   const bookActions=b=>`<div class="actions"><a class="button button-dark" href="${orderURL}" target="_blank" rel="noopener noreferrer">سفارش کتاب در تلگرام ←</a></div><p class="muted">برای سفارش «${esc(b.title)}»، در تلگرام پیام بدهید.</p>`;
-  const bookCover=b=>b.n===1?"assets/cover.webp":`assets/book-${num(b.n)}.svg`;
+  const bookCover=b=>b.n===1?"assets/cover.webp":`assets/book-${num(b.n)}.webp`;
   const bookThumb=(b,extra="")=>`<a class="book-cover-link ${extra}" href="${link(bookURL(b))}" aria-label="معرفی کتاب ${esc(b.title)}"><img src="${link(bookCover(b))}" alt="تصویر جلد چاپی کتاب ${esc(b.title)}، نوشته نیما افشارنادری" width="330" height="468" loading="lazy" decoding="async"></a>`;
   const coverTrio=(extra="")=>`<div class="book-cover-trio ${extra}">${bs.map(b=>bookThumb(b,`trio-book trio-book-${b.n}`)).join("")}</div>`;
   const bookCard=b=>`<article class="book-showcase-card book-showcase-card-${b.n}">${bookThumb(b)}<div class="book-showcase-content"><span class="kicker">کتاب ${num(b.n)} · ${b.pages} صفحه</span><h3><a href="${link(bookURL(b))}">${esc(b.title)}</a></h3><p>${esc(b.summary)}</p><div class="book-card-actions"><a class="button button-outline" href="${link(bookURL(b))}">معرفی کتاب</a><a class="button button-dark" href="${orderURL}" target="_blank" rel="noopener noreferrer">سفارش چاپی ←</a></div></div></article>`;
