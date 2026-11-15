@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="650" viewBox="0 0 460 650" lang="fa">
+<rect width="460" height="650" fill="#67a6a0"/><rect width="460" height="29" fill="#171f24"/>
+<g font-family="Tahoma,'Arial',sans-serif" direction="rtl" text-anchor="middle" fill="#171f24">
+<text x="230" y="20" fill="#ffdb50" font-size="11">کتابخانهٔ نیما داینر · کتاب دوم</text>
+<text x="230" y="103" font-weight="900" font-size="49">کوچک شروع کن</text></g>
+<rect x="152" y="136" width="156" height="41" fill="#171f24"/>
+<text x="230" y="163" text-anchor="middle" direction="rtl" font-family="Tahoma,sans-serif" font-size="20" font-weight="bold" fill="#ffda2d">با سرمایهٔ محدود</text>
+<g direction="rtl" text-anchor="middle" font-family="Tahoma,sans-serif" font-size="15" font-weight="bold" fill="#171f24">
+<text x="230" y="208">راهنمای راه‌اندازی فست‌فود، کافه، کیوسک و آشپزخانه</text><text x="230" y="233">دلیوری (کترینگ)</text></g>
+<g transform="translate(104 342)">
+<path d="M24 0H228L244 67H8Z" fill="#171f24"/>
+<path d="M8 67H244V90H8Z" fill="#fff9e5"/>
+<path d="M8 67H34V90H8Z M60 67H86V90H60Z M112 67H138V90H112Z M164 67H190V90H164Z M216 67H244V90H216Z" fill="#d7342c"/>
+<path d="M8 88Q21 103 34 88Q47 103 60 88Q73 103 86 88Q99 103 112 88Q125 103 138 88Q151 103 164 88Q177 103 190 88Q203 103 216 88Q230 103 244 88V90H8Z" fill="#e24a38"/>
+<rect x="24" y="90" width="15" height="73" fill="#171f24"/><rect x="213" y="90" width="15" height="73" fill="#171f24"/>
+<rect x="0" y="151" width="252" height="22" rx="5" fill="#171f24"/>
+<rect x="11" y="169" width="230" height="35" rx="4" fill="#171f24"/>
+<rect x="104" y="177" width="73" height="19" rx="3" fill="#ffd11d"/>
+<rect x="70" y="112" width="26" height="37" fill="#171f24"/><path d="M76 118H91L89 147H78Z" fill="#fff"/>
+<rect x="167" y="122" width="44" height="28" rx="3" fill="#171f24"/><rect x="172" y="127" width="34" height="19" fill="#d93a2d"/>
+<circle cx="47" cy="204" r="16" fill="#171f24"/><circle cx="47" cy="204" r="5" fill="#ffcb24"/>
+<circle cx="209" cy="204" r="16" fill="#171f24"/><circle cx="209" cy="204" r="5" fill="#ffcb24"/></g>
+<text x="230" y="586" font-family="Tahoma,sans-serif" font-weight="bold" font-size="17" fill="#171f24" text-anchor="middle" direction="rtl">نیما افشارنادری</text>
+<g transform="translate(194 607)"><rect width="72" height="10" fill="#fff"/><path fill="#da2b26" d="M0 0h12v5H0zM24 0h12v5H24zM48 0h12v5H48zM12 5h12v5H12zM36 5h12v5H36zM60 5h12v5H60z"/></g>
+</svg>
