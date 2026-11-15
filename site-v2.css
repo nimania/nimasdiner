@@ -378,3 +378,10 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 @media(max-width:850px){.review-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.review-gallery-item img{height:175px}}
 @media(max-width:500px){.review-gallery-grid{gap:8px}.review-gallery-item img{height:125px}.review-gallery-item figcaption{font-size:10px;padding:7px 4px}.review-photo-modal{padding:47px 30px 15px}.review-modal-prev{right:1px}.review-modal-next{left:1px}}
 @media(prefers-reduced-motion:reduce){.review-gallery-item figure{transition:none}}
+
+/* Shared responsive video galleries for restaurant dossiers */
+.review-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.review-video-item{margin:0;padding:8px;border:1px solid #e8e0d5;background:white;border-radius:12px;min-width:0}
+.review-video-item video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#191919;border-radius:8px}
+.review-video-item figcaption{padding:10px 5px 4px;font-size:12px;line-height:1.8;color:#54493e}
+@media(max-width:600px){.review-video-grid{grid-template-columns:1fr}}
