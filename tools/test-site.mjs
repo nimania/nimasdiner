@@ -144,3 +144,11 @@ assert.match(read("index.html"),/href="\/consultation\/"/);
 for(const deny of [/ChatGPT/i, /\bAI\b/i, /افزایش فروش تضمینی/]){
  assert.doesNotMatch(consultation,deny,"Consultation page must avoid disallowed or guaranteed claims");
 }
+
+// Primary navigation: consultation is reached through the highlighted booking button,
+// and the magazine remains reachable from other sections, not the top menu.
+const topNav=(read("index.html").match(/<nav class="nav"[^>]*>[\\s\\S]*?<\\/nav>/)||[])[0];
+assert.ok(topNav,"Primary top navigation must exist");
+assert.doesNotMatch(topNav,/مشاورهٔ ۹۰ دقیقه‌ای|مجله داینر/);
+assert.match(read("index.html"),/class="get-link get-link-consultation" href="\\/consultation\\/"/);
+assert.match(read("magazine/index.html"),/مجله/);
