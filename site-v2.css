@@ -265,3 +265,9 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .sample-end p{max-width:600px;margin:5px auto 20px}
 @media(max-width:700px){.bundle-grid,.book-format-choices{grid-template-columns:1fr}.preview-teaser{grid-template-columns:95px minmax(0,1fr);gap:13px}.preview-teaser-cover{max-width:95px}.preview-teaser .button{padding:8px;font-size:11px}.sample-paper{padding:20px 17px;min-height:520px}.sample-paper header{font-size:10px}.sample-page-text{font-size:13px}}
 @media print{.sample-paper{box-shadow:none;break-after:page;page-break-after:always;max-width:100%;border:0}.sample-page-nav,.sample-intro .actions,.sample-end{display:none}}
+
+.book-audience{font-size:13px!important;color:#343d43!important;background:#fff9e9;border-right:3px solid #ffce25;padding:10px 12px;border-radius:4px;margin-bottom:14px!important}
+.book-audience strong{color:#171f24}
+.book-who{background:#fffaf0;border:1px solid var(--edge);border-radius:12px;padding:14px 17px;margin:16px 0}
+.book-who strong{font-size:14px}
+.book-who p{font-size:14px;line-height:1.9;margin:2px 0 12px}

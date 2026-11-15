@@ -118,3 +118,9 @@ for(const n of ["01","02","03"]){
 }
 assert.doesNotMatch(read("sitemap.xml"),/\/library\/(01|02|03)\/sample\//,"Samples should not crowd the public sitemap");
 console.log("Book prices, savings, five-page samples and paid ebook isolation checked.");
+
+for(const n of ["01","02","03"]){
+ const detail=read("library/"+n+"/index.html");
+ assert.match(detail,/این کتاب برای چه کسی مناسب است/);
+ assert.match(detail,/چه چیزی به دست می‌آورید/);
+}

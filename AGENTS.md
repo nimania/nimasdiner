@@ -26,3 +26,13 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - Keep artwork distinct and consistent across cards: first book yellow, second book teal/turquoise, third book brick red; retain readable cover titles, accessible alt text, responsive placement and optimized asset sizes. The site uses assets/cover.webp and assets/book-02.webp and assets/book-03.webp. The latter two are optimized WebP images rendered from the actual user-supplied one-page book cover PDFs. The earlier book-02.svg and book-03.svg are only illustrative legacy fallbacks, not the official cover art.
 - Keep printed-book orders directed to the established Telegram ordering contact, and **do not restore a free book download CTA**.
 - Preserve the existing public URLs and all SEO stability requirements above.
+
+## Print and digital pricing and sampling (owner approved, 15 Nov 2026)
+- Each printed volume: 1,000,000 **toman**. Each complete paid PDF: 500,000 toman.
+- Bundle containing the same three printed volumes: 2,500,000 toman, saving 500,000 toman (16.7% rounded).
+- Bundle of the three complete electronic volumes: 1,200,000 toman, saving 300,000 toman (20%).
+- The authoritative current source is `content/book-pricing.json`; do not hardcode contradictory prices in HTML. Distinguish single volumes from 3-volume bundles, and do not invent a mixed-format bundle.
+- Five-page text previews are generated at `/library/01/sample/`, `/library/02/sample/`, and `/library/03/sample/` from the publisher-owned source PDFs recorded in `content/book-samples.json`. These are expressly **text reconstructions**, not pixel-perfect replicas of printed pages.
+- It is fine to offer these limited samples free. Never publish the complete paid digital master PDFs or restore unrestricted free-book download APIs.
+- Purchase CTAs currently take customers to the established Telegram contact; that is an order inquiry, **not an automated payment checkout**. Do not suggest payment or digital file delivery is automated.
+- Update all promotional surfaces coherently, including individual detail pages, bundles, ordering page, library cards and article cross-sells. Keep stable URLs and active SEO protections.
