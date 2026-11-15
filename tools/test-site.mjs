@@ -96,3 +96,25 @@ console.log("Standalone tools and consultations checked:",standaloneTools.length
 
 assert.match(read("index.html"), /https:\/\/nimania\.net/);
 assert.doesNotMatch(read("index.html"), /["\']\/nimasdiner\//);
+
+const bookPrices=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/book-pricing.json"),"utf8"));
+assert.equal(bookPrices.single.print,1000000);
+assert.equal(bookPrices.single.digital,500000);
+assert.equal(bookPrices.bundleAllThree.print,2500000);
+assert.equal(bookPrices.bundleAllThree.digital,1200000);
+assert.equal(3*bookPrices.single.print-bookPrices.bundleAllThree.print,500000);
+assert.equal(3*bookPrices.single.digital-bookPrices.bundleAllThree.digital,300000);
+for(const amount of ["۱٬۰۰۰٬۰۰۰","۵۰۰٬۰۰۰","۲٬۵۰۰٬۰۰۰","۱٬۲۰۰٬۰۰۰","۳۰۰٬۰۰۰"]){
+ assert.ok(orderPage.includes(amount),"Missing price in order page: "+amount);
+}
+for(const n of ["01","02","03"]){
+ const preview="library/"+n+"/sample/index.html";
+ assert.ok(fs.existsSync(path.join(dist,preview)),"Five-page book sample missing: "+preview);
+ const html=read(preview);
+ assert.match(html,/noindex,follow/);
+ assert.equal((html.match(/class="sample-paper"/g)||[]).length,5,"Five preview pages required: "+n);
+ assert.ok(!html.includes("NimaDiner_Book"+Number(n)+"_Complete_"),"Paid ebook source file must never be linked");
+ assert.match(read("library/"+n+"/index.html"),new RegExp("href=\"/library/"+n+"/sample/\""));
+}
+assert.doesNotMatch(read("sitemap.xml"),/\/library\/(01|02|03)\/sample\//,"Samples should not crowd the public sitemap");
+console.log("Book prices, savings, five-page samples and paid ebook isolation checked.");
