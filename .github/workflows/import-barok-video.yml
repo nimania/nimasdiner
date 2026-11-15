@@ -1,0 +1,42 @@
+name: One-time import of Barok original video
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-barok-video.yml
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download the uploaded source clip
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 4 --retry-delay 2 --connect-timeout 15 --max-time 180 \
+            'https://at.adobe.com/nhu7rZ4SH0rlG5Lk' \
+            --output /tmp/barok-raw.mp4
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 /tmp/barok-raw.mp4
+      - name: Create widely supported H.264 playback file
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/reviews
+          ffmpeg -hide_banner -loglevel error -y -i /tmp/barok-raw.mp4 \
+            -map 0:v:0 -map 0:a:0? -c:v libx264 -pix_fmt yuv420p \
+            -vf 'scale=1280:-2' -r 25 -preset veryfast -crf 24 \
+            -c:a aac -b:a 96k -movflags +faststart \
+            assets/reviews/barok-exterior-night.mp4
+          test -s assets/reviews/barok-exterior-night.mp4
+      - name: Save optimized video to the repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/reviews/barok-exterior-night.mp4
+          git diff --cached --quiet || (git commit -m "media: archive Barok exterior night video" && git push origin HEAD:main)
