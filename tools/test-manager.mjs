@@ -18,11 +18,12 @@ assert.ok(csvRecords([{...a,note:'=SUM(A1:A3)'}]).includes("'=SUM(A1:A3)"),'CSV 
 
 const source=JSON.parse(fs.readFileSync('content/reviews-source.json','utf8'));
 const reviews=JSON.parse(fs.readFileSync('content/reviews.json','utf8')).reviews;
-assert.equal(source.length,20);assert.equal(reviews.length,20);assert.equal(reviews.filter(r=>r.category==='city').length,1);
-assert.equal(new Set(reviews.map(r=>r.sourceId)).size,20);
+const archive=reviews.filter(r=>r.historical===true);
+assert.equal(source.length,20);assert.equal(archive.length,20);assert.equal(reviews.length,21);assert.equal(reviews.filter(r=>r.category==='city').length,1);
+assert.equal(new Set(archive.map(r=>r.sourceId)).size,20);
 let photos=0;
 const squish=s=>s.replace(/\s+/g,' ').trim();
-for(const r of reviews){
+for(const r of archive){
  const original=source.find(x=>x.id===r.sourceId);assert.ok(original);
  assert.equal(squish(r.body.map(s=>s.p.join('\n')).join('\n')),squish(original.blocks.join('\n')),'Archive text changed: '+r.slug);
  assert.equal(r.photos.length,original.images.length);
@@ -32,6 +33,12 @@ for(const r of reviews){
 }
 assert.equal(photos,51);
 assert.ok(reviews.find(r=>r.slug==='peleh-qazvin').photos.every(p=>p.credit==='مهدی رشیدی فرد'));
+const offside=reviews.find(r=>r.slug==='offside-nowshahr');
+assert.ok(offside&&offside.status==='published'&&!offside.historical&&offside.body.length>=5);
+const offsideHtml=fs.readFileSync('site-dist/reviews/offside-nowshahr/index.html','utf8');
+for(const value of ['آفساید نوشهر','sepidz.menu/caferestaurant/offside','nimania.net/services/','مهندسی منو'])assert.ok(offsideHtml.includes(value),'Offside review missing '+value);
+assert.ok(fs.readFileSync('site-dist/reviews/index.html','utf8').includes('offside-nowshahr'));
+assert.ok(fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/reviews/offside-nowshahr/'));
 assert.ok(!fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/membership/'));
 for(const p of ['journal/index.html','kits/index.html','kits/shift-handover/index.html','kits/waste-log/index.html','kits/weekly-review/index.html'])assert.ok(fs.existsSync('site-dist/'+p));
 console.log('Manager checks passed: Persian numbers, cashflow, backup validation, CSV safety; 20 complete texts and 51 photos.');
