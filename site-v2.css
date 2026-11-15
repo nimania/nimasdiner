@@ -392,3 +392,11 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .consult-library-crosssell p{color:var(--muted);font-size:13px;line-height:2.1;max-width:740px;margin:0}
 .consult-library-crosssell .button{flex-shrink:0;white-space:nowrap}
 @media(max-width:750px){.consult-library-crosssell{flex-direction:column;align-items:stretch;padding:20px}.consult-library-crosssell .button{width:100%;white-space:normal}}
+
+/* Header actions: order books and book 90-minute consultation */
+.top-inner .header-actions{display:flex;gap:9px;align-items:center;justify-content:flex-end;flex-shrink:0}
+.top-inner .header-actions .get-link{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:9px 14px;background:var(--yellow);border:1px solid #f8c91a;border-radius:8px;font-size:13px;font-weight:700;line-height:1.5;white-space:nowrap;transition:background .15s ease}
+.top-inner .header-actions .get-link:hover,.top-inner .header-actions .get-link:focus-visible{background:#ffe06a;text-decoration:none}
+@media(max-width:1020px){.top-inner .header-actions{margin-right:auto}.top-inner .header-actions .get-link{margin-right:0}}
+@media(max-width:600px){.top-inner .brand{flex:1}.top-inner .header-actions{width:100%;margin:0;justify-content:stretch}.top-inner .header-actions .get-link{flex:1;min-width:0;white-space:normal;padding:10px 8px;font-size:13px}}
+@media(prefers-reduced-motion:reduce){.top-inner .header-actions .get-link{transition:none}}

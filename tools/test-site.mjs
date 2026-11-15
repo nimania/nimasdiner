@@ -125,6 +125,9 @@ for(const n of ["01","02","03"]){
  assert.match(detail,/چه چیزی به دست می‌آورید/);
 }
 
+const bookingActions=read("index.html");
+assert.match(bookingActions,/class="header-actions"[^>]*><a class="get-link" href="\/library\/">سفارش کتاب<\/a><a class="get-link get-link-consultation" href="\/consultation\/">درخواست مشاوره<\/a>/,"Both booking buttons must appear in the global header");
+assert.match(read("library/index.html"),/get-link-consultation" href="\/consultation\/"/,"Consultation button should appear on library page as well");
 const consultation=read("consultation/index.html");
 for(const word of ["۹۰ دقیقه","۳۰٬۰۰۰٬۰۰۰","۵۰٬۰۰۰٬۰۰۰","۱۰٬۰۰۰٬۰۰۰","تعرفهٔ حمایتی","پیش از تأیید رزرو","پرسش‌های متداول"]){
  assert.ok(consultation.includes(word),"Consultation page missing "+word);
