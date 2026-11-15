@@ -145,10 +145,9 @@ for(const deny of [/ChatGPT/i, /\bAI\b/i, /افزایش فروش تضمینی/])
  assert.doesNotMatch(consultation,deny,"Consultation page must avoid disallowed or guaranteed claims");
 }
 
-// Primary navigation: consultation is reached through the highlighted booking button,
-// and the magazine remains reachable from other sections, not the top menu.
-const topNav=(read("index.html").match(/<nav class="nav"[^>]*>[\\s\\S]*?<\\/nav>/)||[])[0];
+// Primary navigation: the CTAs remain while two menu entries are hidden.
+const topNav=read("index.html").split('<nav class="nav"')[1]?.split("</nav>")[0];
 assert.ok(topNav,"Primary top navigation must exist");
-assert.doesNotMatch(topNav,/مشاورهٔ ۹۰ دقیقه‌ای|مجله داینر/);
-assert.match(read("index.html"),/class="get-link get-link-consultation" href="\\/consultation\\/"/);
+assert.ok(!topNav.includes("مشاورهٔ ۹۰ دقیقه‌ای")&&!topNav.includes("مجله داینر"),"Keep consultation and magazine out of the primary menu");
+assert.ok(read("index.html").includes('class="get-link get-link-consultation" href="/consultation/"'),"Consultation CTA must remain in the header");
 assert.match(read("magazine/index.html"),/مجله/);
