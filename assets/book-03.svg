@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="650" viewBox="0 0 460 650" lang="fa">
+<rect width="460" height="650" fill="#bf5140"/><rect width="460" height="29" fill="#171f24"/>
+<g font-family="Tahoma,'Arial',sans-serif" direction="rtl" text-anchor="middle" fill="#171f24">
+<text x="230" y="20" fill="#ffdb50" font-size="11">کتابخانهٔ نیما داینر · کتاب سوم</text>
+<text x="230" y="103" font-weight="900" font-size="52">دوام بیاور</text></g>
+<rect x="155" y="136" width="150" height="42" fill="#171f24"/>
+<text x="230" y="163" text-anchor="middle" direction="rtl" font-family="Tahoma,sans-serif" font-size="20" font-weight="bold" fill="#ffda2d">در روزهای سخت</text>
+<g direction="rtl" text-anchor="middle" font-family="Tahoma,sans-serif" font-size="16" font-weight="bold" fill="#171f24">
+<text x="230" y="210">راهنمای تاب‌آوری رستوران و کافهٔ کوچک در رکود،</text><text x="230" y="236">قطعی‌ها و شرایط اضطراری</text></g>
+<g transform="translate(111 337)" stroke="#171f24" stroke-width="6" stroke-linejoin="round">
+<rect x="40" y="30" width="171" height="170" fill="#fff8d4"/>
+<path d="M65 12H190V35H65Z" fill="#171f24"/><path d="M79 25H173" stroke="#ffcf24" stroke-width="5"/>
+<path d="M32 44H220V74H32Z" fill="#171f24"/>
+<path d="M40 75H211" stroke="#171f24" stroke-width="7"/>
+<path d="M43 74q12 24 24 0q12 24 24 0q12 24 24 0q12 24 24 0q12 24 24 0q12 24 24 0q12 24 24 0" fill="#fff8d4" stroke-width="3"/>
+<rect x="63" y="97" width="70" height="66" fill="#ffd32c"/><rect x="71" y="104" width="50" height="48" fill="#ffda49"/>
+<rect x="152" y="97" width="46" height="103" fill="#fff"/><rect x="163" y="106" width="24" height="33" fill="#ffd42d"/><circle cx="189" cy="169" r="2" fill="#171f24"/>
+<path d="M44 160h100" stroke-width="6"/>
+<rect x="215" y="111" width="29" height="38" rx="4" fill="#ffce30"/><circle cx="228" cy="131" r="6" fill="#171f24" stroke="none"/>
+<rect x="220" y="169" width="37" height="30" fill="#fff8d4"/><path d="M220 178h36m-36 10h36" stroke-width="4"/>
+<path d="M12 201H270" stroke-width="4"/>
+</g>
+<text x="230" y="586" font-family="Tahoma,sans-serif" font-weight="bold" font-size="17" fill="#171f24" text-anchor="middle" direction="rtl">نیما افشارنادری</text>
+<g transform="translate(194 607)"><rect width="72" height="10" fill="#fff"/><path fill="#171f24" d="M0 0h12v5H0zM24 0h12v5H24zM48 0h12v5H48zM12 5h12v5H12zM36 5h12v5H36zM60 5h12v5H60z"/></g>
+</svg>
