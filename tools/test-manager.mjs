@@ -19,7 +19,7 @@ assert.ok(csvRecords([{...a,note:'=SUM(A1:A3)'}]).includes("'=SUM(A1:A3)"),'CSV 
 const source=JSON.parse(fs.readFileSync('content/reviews-source.json','utf8'));
 const reviews=JSON.parse(fs.readFileSync('content/reviews.json','utf8')).reviews;
 const archive=reviews.filter(r=>r.historical===true);
-assert.equal(source.length,20);assert.equal(archive.length,20);assert.equal(reviews.length,21);assert.equal(reviews.filter(r=>r.category==='city').length,1);
+assert.equal(source.length,20);assert.equal(archive.length,20);assert.ok(reviews.length>=22,'Historic and modern reviews must remain available');assert.equal(reviews.filter(r=>r.category==='city').length,1);
 assert.equal(new Set(archive.map(r=>r.sourceId)).size,20);
 let photos=0;
 const squish=s=>s.replace(/\s+/g,' ').trim();
@@ -39,6 +39,14 @@ const offsideHtml=fs.readFileSync('site-dist/reviews/offside-nowshahr/index.html
 for(const value of ['آفساید نوشهر','sepidz.menu/caferestaurant/offside','nimania.net/services/','مهندسی منو'])assert.ok(offsideHtml.includes(value),'Offside review missing '+value);
 assert.ok(fs.readFileSync('site-dist/reviews/index.html','utf8').includes('offside-nowshahr'));
 assert.ok(fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/reviews/offside-nowshahr/'));
+
+const barok=reviews.find(r=>r.slug==='barok-nowshahr');
+assert.ok(barok&&barok.status==='published'&&!barok.historical&&barok.body.length>=5);
+assert.equal(barok.photos.length,0,'Do not invent or misattribute Barok photographs');
+const barokHtml=fs.readFileSync('site-dist/reviews/barok-nowshahr/index.html','utf8');
+for(const value of ['باروک','barokorder.ir','مهندسی منو','مسیریابی'])assert.ok(barokHtml.includes(value),'Barok guide missing '+value);
+assert.ok(barokHtml.includes('review-sidebar'),'Barok needs the dossier sidebar');
+assert.ok(fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/reviews/barok-nowshahr/'),'Barok needs sitemap entry');
 assert.ok(!fs.readFileSync('site-dist/sitemap.xml','utf8').includes('/membership/'));
 for(const p of ['journal/index.html','kits/index.html','kits/shift-handover/index.html','kits/waste-log/index.html','kits/weekly-review/index.html'])assert.ok(fs.existsSync('site-dist/'+p));
 console.log('Manager checks passed: Persian numbers, cashflow, backup validation, CSV safety; 20 complete texts and 51 photos.');
