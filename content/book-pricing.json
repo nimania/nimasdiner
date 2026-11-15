@@ -1,0 +1,14 @@
+{
+  "currency": "IRT",
+  "currencyLabel": "تومان",
+  "single": {
+    "print": 1000000,
+    "digital": 500000
+  },
+  "bundleAllThree": {
+    "print": 2500000,
+    "digital": 1200000
+  },
+  "orderChannel": "https://t.me/nimaafsharnaderi",
+  "note": "Prices supplied by the publisher, 15 November 2026. Prices are stated in toman, not rial. Shipping and payment/delivery details are confirmed directly with the publisher."
+}
