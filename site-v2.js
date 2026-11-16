@@ -20,6 +20,39 @@ if(byId("fixed-costs")){
  ["fixed-costs","sale-price","variable-costs"].forEach(id=>byId(id).addEventListener("input",update));
  update();
 }
+// Restore archive cover photos from alternate WordPress hosts when one CDN refuses a request.
+// Keep the final fallback within this site so a card never exposes broken-image alt text.
+if(byId("review-grid")){
+  const mediaVariants=src=>{
+    let url;
+    try{url=new URL(src,location.href)}catch{return []}
+    let file="";
+    if(url.hostname==="nimania.files.wordpress.com" && url.pathname.startsWith("/2026/11/"))file=url.pathname.slice(9);
+    if(url.hostname==="nimania.wordpress.com" && url.pathname.startsWith("/wp-content/uploads/2026/11/"))file=url.pathname.slice("/wp-content/uploads/2026/11/".length);
+    if(!file)return [];
+    return [
+      "https://nimania.wordpress.com/wp-content/uploads/2026/11/"+file,
+      "https://nimania.files.wordpress.com/2026/11/"+file,
+      "https://i0.wp.com/nimania.files.wordpress.com/2026/11/"+file,
+      "https://i0.wp.com/nimania.wordpress.com/wp-content/uploads/2026/11/"+file
+    ];
+  };
+  document.querySelectorAll(".review-cover img").forEach(img=>{
+    const src=img.getAttribute("src")||"";
+    const urls=[...new Set([...mediaVariants(src),img.dataset.imageFallback||""])].filter(url=>url && url!==src);
+    let index=0;
+    const retry=()=>{
+      if(index<urls.length){img.src=urls[index++];return}
+      img.hidden=true;
+      const text=document.createElement("span");
+      text.className="review-cover-text";
+      text.textContent=img.closest(".review-card")?.querySelector("h3")?.textContent||"تصویر رستوران";
+      img.parentElement?.appendChild(text);
+    };
+    img.addEventListener("error",retry);
+    if(img.complete && img.naturalWidth===0)retry();
+  });
+}
 const search=byId("local-search");
 if(byId('delivery-price')){
  const ids=['delivery-price','delivery-food','delivery-pack','delivery-discount','delivery-fee'];
