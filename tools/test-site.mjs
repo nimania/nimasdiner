@@ -309,3 +309,31 @@ assert.ok(topNav,"Primary top navigation must exist");
 assert.ok(!topNav.includes("مشاورهٔ ۹۰ دقیقه‌ای")&&!topNav.includes("مجله داینر"),"Keep consultation and magazine out of the primary menu");
 assert.ok(read("index.html").includes('class="get-link get-link-consultation" href="/consultation/"'),"Consultation CTA must remain in the header");
 assert.match(read("magazine/index.html"),/مجله/);
+
+
+/* Layout/SEO regression: sidebar must improve discovery, preserve main content,
+   Article metadata, canonical and existing page URLs. */
+const exampleGuide=read("guides/menu-engineering/index.html");
+const exampleCase=read("reading/starbucks-closed-stores-barista-training-lesson/index.html");
+for(const [page,html] of [["guides/menu-engineering/",exampleGuide],["reading/starbucks-closed-stores-barista-training-lesson/",exampleCase]]){
+  assert.match(html,/<article class="article wrap knowledge-layout">/,"Missing contextual article layout: "+page);
+  assert.match(html,/<aside class="knowledge-sidebar" aria-label="دسترسی سریع/,"Missing server-rendered navigation: "+page);
+  assert.match(html,/<nav class="knowledge-side-nav"/,"Missing crawlable navigation: "+page);
+  const jumps=[...html.matchAll(/<a href="#(section-\d+)">/g)].map(m=>m[1]);
+  assert.ok(jumps.length>=2,"No heading jump anchors: "+page);
+  for(const id of jumps)assert.ok(html.includes('id="'+id+'"'),"Broken jump destination "+id+" in "+page);
+  assert.match(html,/<h1>/,"Main heading missing "+page);
+  assert.match(html,/rel="canonical"/,"Canonical removed "+page);
+  assert.match(html,/"@type":"Article"/,"Article schema removed "+page);
+  assert.ok(sitemap.includes("/"+page),"Indexed URL missing from sitemap "+page);
+}
+assert.match(exampleCase,/href="\/reading\/brands\/starbucks\/"/,"Missing crawlable brand link in sidebar");
+assert.match(exampleGuide,/href="\/tools\/"/,"Missing related tools link");
+assert.doesNotMatch(read("index.html"),/class="knowledge-sidebar"/,"Home must remain full width");
+assert.doesNotMatch(read("reading/brand-lessons/index.html"),/class="knowledge-sidebar"/,"Brand grid must remain full width");
+const densityStyles=read("site-v2.css");
+assert.match(densityStyles,/\.hero-inner\{min-height:410px/,"Compact desktop hero missing");
+assert.match(densityStyles,/\.pagehead\{padding-block:26px 8px/,"Compact page heading missing");
+assert.match(densityStyles,/@media\(max-width:950px\)/,"Responsive nav breakpoint missing");
+assert.match(densityStyles,/\.knowledge-side-nav\{display:flex;gap:8px;overflow-x:auto/,"Mobile nav should scroll horizontally");
+console.log("Compact layouts and crawlable sidebar/mobile navigation checks passed");
