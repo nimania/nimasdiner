@@ -480,3 +480,24 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
  .knowledge-layout{display:block}
  .knowledge-sidebar{display:none}
 }
+
+/* فرهنگ اصطلاحات رستوران‌داری (/glossary/) */
+.glossary-tools{position:sticky;top:0;z-index:5;background:var(--paper);border-block:1px solid var(--edge);padding:14px 0 10px}
+.glossary-tools label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.glossary-tools input{display:block;width:100%;max-width:560px;padding:12px 14px;border:1px solid #999;border-radius:8px;font:inherit;background:#fff}
+.glossary-tools .muted{margin:6px 0}
+.glossary-chips{display:flex;flex-wrap:wrap;gap:8px}
+.glossary-chips .chip:hover{border-color:var(--red);color:var(--red)}
+.glossary-body{padding-top:30px}
+.glossary-cat{margin-bottom:38px;scroll-margin-top:190px}
+.glossary-cat h2{font-size:22px;margin:0 0 14px;padding-bottom:8px;border-bottom:3px solid var(--yellow)}
+.glossary-count{font-size:13px;font-weight:400;color:var(--muted);margin-right:6px}
+.glossary-terms{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.glossary-term{background:var(--card);border:1px solid var(--edge);border-radius:8px}
+.glossary-term>span,.glossary-term>a,.glossary-term{display:block}
+.glossary-term>a,.glossary-term:not(:has(a)){padding:10px 14px}
+.glossary-fa{display:block;font-weight:700}
+.glossary-en{display:block;color:var(--muted);font-size:13px;text-align:right;font-family:system-ui,sans-serif}
+.glossary-term a:hover .glossary-fa{color:var(--red)}
+.glossary-term[hidden],.glossary-cat[hidden]{display:none}
+@media (max-width:700px){.glossary-tools{position:static}.glossary-terms{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.glossary-term>a,.glossary-term:not(:has(a)){padding:8px 10px}.glossary-cat{scroll-margin-top:20px}}

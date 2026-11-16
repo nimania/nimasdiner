@@ -221,6 +221,12 @@ console.log("Published brand lessons checked:",publishedBrandLessons.length,"art
 
 
 
+const glossaryPage=read("glossary/index.html");
+assert.equal((glossaryPage.match(/data-glossary-term=/g)||[]).length,JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/glossary.json"),"utf8")).terms.length,"glossary terms missing");
+assert.match(glossaryPage,/rel="canonical" href="https:\/\/nimania\.net\/glossary\/"/,"glossary canonical");
+assert.match(glossaryPage,/"@type":"DefinedTermSet"/,"glossary structured data");
+assert.match(read("sitemap.xml"),/\/glossary\//,"glossary missing from sitemap");
+assert.match(read("guides/index.html"),/href="\/glossary\/"/,"glossary link missing from guides hub");
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
 
 const calculatorSlugs=["good-cook-or-restaurant-owner","opening-budget-versus-survival-cash","smaller-customer-bills-in-a-downturn","restaurant-technology-connected-2026","menu-trends-value-comfort-2026","restaurant-cost-pressure-2026","why-top-selling-menu-items-may-not-be-profitable","buffet-economics-fixed-price","consistent-food-brings-customers-back","recipe-card-standardization","restaurant-menu-pricing","restaurant-break-even","restaurant-delivery-discounts","restaurant-staffing-cost","restaurant-seat-capacity"];

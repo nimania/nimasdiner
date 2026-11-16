@@ -1,0 +1,740 @@
+{
+ "schemaVersion": 1,
+ "note": "فرهنگ اصطلاحات رستوران‌داری نیما داینر. سطح‌ها: essential (۱۰۰)، practical (۲۵۰)، specialist (۸۰۰). مدخلی که entryPath دارد لینک می‌شود؛ بقیه فقط در فهرست می‌آیند.",
+ "categories": [
+  {
+   "slug": "finance",
+   "title": "مالی و هزینه"
+  },
+  {
+   "slug": "kitchen",
+   "title": "آشپزخانه و تولید"
+  },
+  {
+   "slug": "purchasing",
+   "title": "خرید و انبار"
+  },
+  {
+   "slug": "service",
+   "title": "سالن و سرویس"
+  },
+  {
+   "slug": "menu",
+   "title": "منو"
+  },
+  {
+   "slug": "safety",
+   "title": "بهداشت و ایمنی"
+  },
+  {
+   "slug": "people",
+   "title": "منابع انسانی"
+  },
+  {
+   "slug": "marketing",
+   "title": "بازاریابی و مشتری"
+  }
+ ],
+ "terms": [
+  {
+   "fa": "فودکاست",
+   "en": "Food Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "درصد فودکاست",
+   "en": "Food Cost Percentage",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "هزینه‌ی دستمزد",
+   "en": "Labor Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "پرایم کاست",
+   "en": "Prime Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "نقطه‌ی سربه‌سر",
+   "en": "Break-even Point",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "هزینه‌ی ثابت",
+   "en": "Fixed Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "هزینه‌ی متغیر",
+   "en": "Variable Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "حاشیه‌ی سود ناخالص",
+   "en": "Gross Margin",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سود خالص",
+   "en": "Net Profit",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "جریان نقدی",
+   "en": "Cash Flow",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "صورت سود و زیان",
+   "en": "Profit & Loss Statement (P&L)",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "بودجه‌بندی",
+   "en": "Budgeting",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سرمایه در گردش",
+   "en": "Working Capital",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "بازگشت سرمایه",
+   "en": "Return on Investment (ROI)",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "دوره‌ی بازگشت سرمایه",
+   "en": "Payback Period",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "میانگین فاکتور",
+   "en": "Average Check",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "فروش به‌ازای هر صندلی",
+   "en": "Sales per Seat",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "درآمد به‌ازای صندلی در ساعت",
+   "en": "RevPASH",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "حاشیه‌ی مشارکت",
+   "en": "Contribution Margin",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "قیمت‌گذاری منو",
+   "en": "Menu Pricing",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "فودکاست واقعی در برابر نظری",
+   "en": "Actual vs. Theoretical Food Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "هزینه‌ی اشغال (اجاره)",
+   "en": "Occupancy Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "هزینه‌ی راه‌اندازی",
+   "en": "Startup Cost",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "استهلاک",
+   "en": "Depreciation",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "تطبیق صندوق",
+   "en": "Cash Reconciliation",
+   "category": "finance",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "میزانپلاس",
+   "en": "Mise en place",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "دستور پخت استاندارد",
+   "en": "Standardized Recipe",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "بازده",
+   "en": "Yield",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "درصد بازده",
+   "en": "Yield Percentage",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ضایعات",
+   "en": "Waste",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "کنترل پرس",
+   "en": "Portion Control",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "آماده‌سازی (پرپ)",
+   "en": "Prep",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "لیست آماده‌سازی",
+   "en": "Prep List",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "پاس",
+   "en": "Pass",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "لاین (خط تولید)",
+   "en": "Line",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ایستگاه کاری",
+   "en": "Station",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "آشپز لاین",
+   "en": "Line Cook",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سرآشپز",
+   "en": "Head Chef",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سوشف",
+   "en": "Sous Chef",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "فیش سفارش آشپزخانه",
+   "en": "Kitchen Order Ticket (KOT)",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "زمان آماده‌شدن سفارش",
+   "en": "Ticket Time",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "تمام‌شده (۸۶)",
+   "en": "86'd",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ساعت اوج (راش)",
+   "en": "Rush / Peak Hours",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "پخت دسته‌ای",
+   "en": "Batch Cooking",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "نیم‌پز کردن",
+   "en": "Par-cooking",
+   "category": "kitchen",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "فیفو",
+   "en": "FIFO",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "انبارگردانی",
+   "en": "Inventory Count",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "گردش موجودی",
+   "en": "Inventory Turnover",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سطح پار (موجودی مبنا)",
+   "en": "Par Level",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "نقطه‌ی سفارش مجدد",
+   "en": "Reorder Point",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "مشخصات خرید",
+   "en": "Purchase Specification",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "تحویل‌گیری کالا",
+   "en": "Receiving",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "حواله‌ی انبار",
+   "en": "Requisition",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "تأمین‌کننده",
+   "en": "Supplier / Vendor",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "فاکتور خرید",
+   "en": "Purchase Invoice",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "تاریخ انقضا",
+   "en": "Expiry / Use-by Date",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "کسری انبار",
+   "en": "Shrinkage",
+   "category": "purchasing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "گردش میز",
+   "en": "Table Turnover",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "کاور (نفر سرویس‌شده)",
+   "en": "Cover",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ظرفیت نشستن",
+   "en": "Seating Capacity",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "پلان سالن",
+   "en": "Floor Plan",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سکشن (منطقه‌ی خدمت)",
+   "en": "Section",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "میزبان",
+   "en": "Host",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "رزرو",
+   "en": "Reservation",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "غیبت رزرو",
+   "en": "No-show",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "مدت حضور مشتری",
+   "en": "Dwell Time",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سالن (جلوی خانه)",
+   "en": "Front of House (FOH)",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "پشت خانه",
+   "en": "Back of House (BOH)",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "سیستم صندوق فروش",
+   "en": "Point of Sale (POS)",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "فروش افزایشی",
+   "en": "Upselling",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "حق سرویس",
+   "en": "Service Charge",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "انعام",
+   "en": "Tip",
+   "category": "service",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "مهندسی منو",
+   "en": "Menu Engineering",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ماتریس منو: ستاره، اسب کاری، معما، سگ",
+   "en": "Stars, Plowhorses, Puzzles, Dogs",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ترکیب فروش",
+   "en": "Sales Mix",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ست‌منو",
+   "en": "Prix fixe / Set Menu",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "آلاکارت",
+   "en": "À la carte",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "غذای شاخص",
+   "en": "Signature Dish",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "کالای جاذب (ضررده)",
+   "en": "Loss Leader",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "منوی فصلی",
+   "en": "Seasonal Menu",
+   "category": "menu",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "هسپ",
+   "en": "HACCP",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "نقطه‌ی کنترل بحرانی",
+   "en": "Critical Control Point (CCP)",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "محدوده‌ی خطر دما",
+   "en": "Temperature Danger Zone",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "آلودگی متقاطع",
+   "en": "Cross-contamination",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "زنجیره‌ی سرما",
+   "en": "Cold Chain",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "کارت بهداشت",
+   "en": "Health Card",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "پروانه‌ی کسب",
+   "en": "Business License",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "آلرژن",
+   "en": "Allergen",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "برچسب‌گذاری و تاریخ‌زنی",
+   "en": "Labeling & Dating",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "تمیزکاری در برابر ضدعفونی",
+   "en": "Cleaning vs. Sanitizing",
+   "category": "safety",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "شیفت‌بندی",
+   "en": "Staff Scheduling",
+   "category": "people",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ریزش نیرو",
+   "en": "Staff Turnover",
+   "category": "people",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "آموزش ضمن کار",
+   "en": "On-the-job Training",
+   "category": "people",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "شرح شغل",
+   "en": "Job Description",
+   "category": "people",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "جلسه‌ی پیش از سرویس",
+   "en": "Pre-shift Meeting",
+   "category": "people",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "باشگاه مشتریان",
+   "en": "Loyalty Program",
+   "category": "marketing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "هزینه‌ی جذب مشتری",
+   "en": "Customer Acquisition Cost (CAC)",
+   "category": "marketing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "ارزش طول عمر مشتری",
+   "en": "Customer Lifetime Value (CLV)",
+   "category": "marketing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "تجربه‌ی مشتری",
+   "en": "Guest Experience",
+   "category": "marketing",
+   "level": "essential",
+   "entryPath": null
+  },
+  {
+   "fa": "مفهوم رستوران (کانسپت)",
+   "en": "Restaurant Concept",
+   "category": "marketing",
+   "level": "essential",
+   "entryPath": null
+  }
+ ]
+}
