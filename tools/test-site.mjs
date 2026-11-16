@@ -63,6 +63,37 @@ if(!reviews.reviews.some(r=>r.status==="published")){
   assert.doesNotMatch(read("sitemap.xml"),/\/reviews\//,"Empty archive should not enter sitemap");
 }
 console.log("Review archive tests passed");
+
+const taxonomy=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/brand-topics.json"),"utf8"));
+assert.equal(taxonomy.brands.length,25,"Expected 25 case-study brands");
+assert.equal(taxonomy.topics.length,11,"Expected 11 consolidated management subjects");
+assert.equal(Object.keys(taxonomy.articleTags).length,30,"Expected tags for all 30 uploaded drafts");
+const brandKeys=new Set(taxonomy.brands.map(b=>b.slug));
+const topicKeys=new Set(taxonomy.topics.map(t=>t.slug));
+for(const [slug,tags] of Object.entries(taxonomy.articleTags)){
+  assert.ok(brandKeys.has(tags.brand),"Unknown brand for "+slug);
+  assert.ok(tags.topics?.length && tags.topics.every(t=>topicKeys.has(t)),"Invalid topic for "+slug);
+}
+const brandLessonHub="reading/brand-lessons/index.html";
+assert.ok(fs.existsSync(path.join(dist,brandLessonHub)),"Brand lesson archive missing");
+assert.match(read("reading/index.html"),/\/reading\/brand-lessons\//,"Editorial archive must link to brand lessons");
+const publishedMapped=editorial.articles.filter(a=>a.status==="published"&&taxonomy.articleTags[a.slug]);
+for(const a of publishedMapped){
+  const tags=taxonomy.articleTags[a.slug];
+  const page=read("reading/"+a.slug+"/index.html");
+  assert.ok(page.includes("/reading/brands/"+tags.brand+"/"),"Brand backlink missing: "+a.slug);
+  for(const t of tags.topics)assert.ok(page.includes("/reading/topics/"+t+"/"),"Topic backlink missing: "+a.slug+" / "+t);
+  assert.ok(fs.existsSync(path.join(dist,"reading/brands/"+tags.brand+"/index.html")),"Brand hub missing");
+}
+for(const slug of Object.keys(taxonomy.articleTags)){
+  if(!publishedMapped.some(a=>a.slug===slug))assert.doesNotMatch(sitemap,new RegExp("/reading/"+slug+"/"),"Draft leaked into sitemap: "+slug);
+}
+if(!publishedMapped.length){
+  assert.match(read(brandLessonHub),/noindex,follow/,"Empty brand collection should not be indexed");
+  assert.doesNotMatch(sitemap,/\/reading\/brand-lessons\//,"Empty hub should not be in sitemap");
+}
+console.log("Brand/topic taxonomy checks passed:",taxonomy.brands.length,"brands,",taxonomy.topics.length,"topics");
+
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
 
 const calculatorSlugs=["good-cook-or-restaurant-owner","opening-budget-versus-survival-cash","smaller-customer-bills-in-a-downturn","restaurant-technology-connected-2026","menu-trends-value-comfort-2026","restaurant-cost-pressure-2026","why-top-selling-menu-items-may-not-be-profitable","buffet-economics-fixed-price","consistent-food-brings-customers-back","recipe-card-standardization","restaurant-menu-pricing","restaurant-break-even","restaurant-delivery-discounts","restaurant-staffing-cost","restaurant-seat-capacity"];
