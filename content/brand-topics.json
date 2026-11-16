@@ -1,0 +1,502 @@
+{
+  "schemaVersion": 1,
+  "series": {
+    "slug": "brand-lessons",
+    "name": "درس‌هایی از برندهای بزرگ"
+  },
+  "policy": "این فهرست صرفاً دسته‌بندی است؛ هیچ محتوایی بدون status=published و راستی‌آزمایی منابع نباید ایندکس شود. هر مقاله یک URL اصلی دارد و در هر دو هاب برند/موضوع فقط به آن لینک می‌شود.",
+  "brands": [
+    {
+      "slug": "starbucks",
+      "fa": "استارباکس",
+      "en": "Starbucks",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Starbucks-wordmark-green.svg",
+        "alt": "نشان تجاری استارباکس (Starbucks)",
+        "width": 512,
+        "height": 50,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Starbucks-wordmark-green.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "kfc",
+      "fa": "کی‌اف‌سی",
+      "en": "KFC",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/5/5d/KFC_2026_(wordmark).svg",
+        "alt": "نشان تجاری کی‌اف‌سی (KFC)",
+        "width": 950,
+        "height": 296,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:KFC_2026_(wordmark).svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "dominos",
+      "fa": "دومینوز",
+      "en": "Domino's",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/6/64/Domino's_2025.svg",
+        "alt": "نشان تجاری دومینوز (Domino's)",
+        "width": 1000,
+        "height": 209,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Domino's_2025.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "subway",
+      "fa": "ساب‌وی",
+      "en": "Subway",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Subway_2016_logo.svg",
+        "alt": "نشان تجاری ساب‌وی (Subway)",
+        "width": 512,
+        "height": 102,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Subway_2016_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "red-lobster",
+      "fa": "رد لابستر",
+      "en": "Red Lobster"
+    },
+    {
+      "slug": "mcdonalds",
+      "fa": "مک‌دونالد",
+      "en": "McDonald's",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/3/36/McDonald's_Golden_Arches.svg",
+        "alt": "نشان تجاری مک‌دونالد (McDonald's)",
+        "width": 273,
+        "height": 239,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:McDonald's_Golden_Arches.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "coca-cola",
+      "fa": "کوکاکولا",
+      "en": "Coca-Cola",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg",
+        "alt": "نشان تجاری کوکاکولا (Coca-Cola)",
+        "width": 512,
+        "height": 161,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coca-Cola_logo.svg",
+        "license": "Public domain (historical US publication; PD-textlogo)؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "chipotle",
+      "fa": "چیپوتله",
+      "en": "Chipotle"
+    },
+    {
+      "slug": "jack-in-the-box",
+      "fa": "جک این د باکس",
+      "en": "Jack in the Box"
+    },
+    {
+      "slug": "sushiro",
+      "fa": "سوشیرو",
+      "en": "Sushiro"
+    },
+    {
+      "slug": "boston-market",
+      "fa": "بوستون مارکت",
+      "en": "Boston Market"
+    },
+    {
+      "slug": "krispy-kreme",
+      "fa": "کریسپی کریم",
+      "en": "Krispy Kreme",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Krispy_Kreme_logo.svg",
+        "alt": "نشان تجاری کریسپی کریم (Krispy Kreme)",
+        "width": 300,
+        "height": 110,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Krispy_Kreme_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "in-n-out",
+      "fa": "این‌اِن‌اوت",
+      "en": "In-N-Out Burger",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/8/8c/InNOut_2021_logo.svg",
+        "alt": "نشان تجاری این‌اِن‌اوت (In-N-Out Burger)",
+        "width": 140,
+        "height": 81,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:InNOut_2021_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "shake-shack",
+      "fa": "شیک‌شک",
+      "en": "Shake Shack",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/9/96/Shake_Shack_logo.svg",
+        "alt": "نشان تجاری شیک‌شک (Shake Shack)",
+        "width": 566,
+        "height": 124,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shake_Shack_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "costco",
+      "fa": "کاستکو",
+      "en": "Costco"
+    },
+    {
+      "slug": "chilis",
+      "fa": "چیلیز",
+      "en": "Chili's"
+    },
+    {
+      "slug": "five-guys",
+      "fa": "فایو گایز",
+      "en": "Five Guys",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/8/80/Five_Guys_logo.svg",
+        "alt": "نشان تجاری فایو گایز (Five Guys)",
+        "width": 417,
+        "height": 108,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Five_Guys_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "taco-bell",
+      "fa": "تاکو بل",
+      "en": "Taco Bell"
+    },
+    {
+      "slug": "ritz-carlton",
+      "fa": "ریتز کارلتون",
+      "en": "Ritz-Carlton"
+    },
+    {
+      "slug": "chick-fil-a",
+      "fa": "چیک‌فیله",
+      "en": "Chick-fil-A",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/0/02/Chick-fil-A_Logo.svg",
+        "alt": "نشان تجاری چیک‌فیله (Chick-fil-A)",
+        "width": 582,
+        "height": 263,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chick-fil-A_Logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "noma",
+      "fa": "نوما",
+      "en": "Noma"
+    },
+    {
+      "slug": "burger-king",
+      "fa": "برگرکینگ",
+      "en": "Burger King",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg",
+        "alt": "نشان تجاری برگرکینگ (Burger King)",
+        "width": 569,
+        "height": 620,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Burger_King_2020.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    },
+    {
+      "slug": "jollibee",
+      "fa": "جالیبی",
+      "en": "Jollibee"
+    },
+    {
+      "slug": "luckin-coffee",
+      "fa": "لاکین کافی",
+      "en": "Luckin Coffee"
+    },
+    {
+      "slug": "quiznos",
+      "fa": "کوئیزنوس",
+      "en": "Quiznos",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Quiznos_Logo.svg",
+        "alt": "نشان تجاری کوئیزنوس (Quiznos)",
+        "width": 164,
+        "height": 30,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quiznos_Logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
+    }
+  ],
+  "topics": [
+    {
+      "slug": "menu-engineering",
+      "title": "مهندسی منو",
+      "description": "طراحی منو، تعداد آیتم‌ها، سودآوری محصول و تغییر ترکیب فروش"
+    },
+    {
+      "slug": "pricing-profit",
+      "title": "قیمت‌گذاری و سودآوری",
+      "description": "قیمت، تخفیف، ارزش ادراک‌شده و اثر تصمیم‌ها بر حاشیه سود"
+    },
+    {
+      "slug": "staff-leadership",
+      "title": "آموزش و مدیریت کارکنان",
+      "description": "آموزش، اختیار تیم، استراحت و حفظ استاندارد خدمت"
+    },
+    {
+      "slug": "operations-quality",
+      "title": "عملیات و کنترل کیفیت",
+      "description": "ثبات محصول، کیفیت سرویس و گلوگاه‌های اجرا"
+    },
+    {
+      "slug": "food-safety",
+      "title": "بهداشت و ایمنی غذا",
+      "description": "پیشگیری، کنترل خطر و رسیدگی مسئولانه به رخدادهای ایمنی"
+    },
+    {
+      "slug": "customer-experience",
+      "title": "تجربه و رضایت مشتری",
+      "description": "شکایت، بازخورد، شفافیت و اعتماد مشتری"
+    },
+    {
+      "slug": "marketing-branding",
+      "title": "بازاریابی و مدیریت برند",
+      "description": "کمپین، نوآوری محصول و ساخت تقاضا"
+    },
+    {
+      "slug": "growth-strategy",
+      "title": "رشد، افتتاح و شناخت بازار",
+      "description": "راه‌اندازی، توسعه شعب، انتخاب بازار و کنترل سرعت رشد"
+    },
+    {
+      "slug": "supply-chain",
+      "title": "تأمین و قراردادها",
+      "description": "ریسک تأمین‌کننده، پایداری مواد اولیه و قراردادهای خرید"
+    },
+    {
+      "slug": "crisis-management",
+      "title": "مدیریت بحران",
+      "description": "پاسخ‌گویی به بحران رسانه‌ای، عملیاتی و آسیب به اعتبار"
+    },
+    {
+      "slug": "finance-controls",
+      "title": "مدل مالی و کنترل داخلی",
+      "description": "بدهی، جریان نقدی، اصالت داده‌های فروش و پایداری مدل اقتصادی"
+    }
+  ],
+  "articleTags": {
+    "starbucks-closed-stores-barista-training-lesson": {
+      "brand": "starbucks",
+      "topics": [
+        "staff-leadership",
+        "operations-quality"
+      ]
+    },
+    "kfc-chicken-shortage-supplier-lesson": {
+      "brand": "kfc",
+      "topics": [
+        "supply-chain",
+        "crisis-management"
+      ]
+    },
+    "dominos-pizza-turnaround-customer-feedback-lesson": {
+      "brand": "dominos",
+      "topics": [
+        "customer-experience",
+        "operations-quality"
+      ]
+    },
+    "subway-footlong-portion-honesty-lesson": {
+      "brand": "subway",
+      "topics": [
+        "customer-experience",
+        "operations-quality"
+      ]
+    },
+    "red-lobster-endless-shrimp-discount-lesson": {
+      "brand": "red-lobster",
+      "topics": [
+        "pricing-profit",
+        "finance-controls"
+      ]
+    },
+    "mcdonalds-1948-short-menu-lesson": {
+      "brand": "mcdonalds",
+      "topics": [
+        "menu-engineering",
+        "operations-quality"
+      ]
+    },
+    "new-coke-signature-item-lesson": {
+      "brand": "coca-cola",
+      "topics": [
+        "marketing-branding",
+        "menu-engineering"
+      ]
+    },
+    "chipotle-food-safety-crisis-lesson": {
+      "brand": "chipotle",
+      "topics": [
+        "food-safety",
+        "crisis-management"
+      ]
+    },
+    "jack-in-the-box-cooking-temperature-lesson": {
+      "brand": "jack-in-the-box",
+      "topics": [
+        "food-safety"
+      ]
+    },
+    "dominos-youtube-video-crisis-response-lesson": {
+      "brand": "dominos",
+      "topics": [
+        "crisis-management",
+        "marketing-branding"
+      ]
+    },
+    "sushiro-soy-sauce-video-self-service-hygiene-lesson": {
+      "brand": "sushiro",
+      "topics": [
+        "food-safety",
+        "crisis-management"
+      ]
+    },
+    "mcdonalds-hot-coffee-complaints-lesson": {
+      "brand": "mcdonalds",
+      "topics": [
+        "customer-experience",
+        "food-safety"
+      ]
+    },
+    "boston-market-fast-expansion-debt-lesson": {
+      "brand": "boston-market",
+      "topics": [
+        "growth-strategy",
+        "finance-controls"
+      ]
+    },
+    "krispy-kreme-overexpansion-scarcity-lesson": {
+      "brand": "krispy-kreme",
+      "topics": [
+        "growth-strategy",
+        "marketing-branding"
+      ]
+    },
+    "in-n-out-controlled-growth-quality-lesson": {
+      "brand": "in-n-out",
+      "topics": [
+        "growth-strategy",
+        "operations-quality"
+      ]
+    },
+    "shake-shack-hot-dog-cart-test-small-lesson": {
+      "brand": "shake-shack",
+      "topics": [
+        "growth-strategy"
+      ]
+    },
+    "costco-hot-dog-anchor-price-lesson": {
+      "brand": "costco",
+      "topics": [
+        "pricing-profit"
+      ]
+    },
+    "chilis-value-menu-comeback-lesson": {
+      "brand": "chilis",
+      "topics": [
+        "pricing-profit",
+        "menu-engineering"
+      ]
+    },
+    "five-guys-extra-fries-perceived-value-lesson": {
+      "brand": "five-guys",
+      "topics": [
+        "pricing-profit",
+        "customer-experience"
+      ]
+    },
+    "taco-bell-doritos-locos-tacos-menu-innovation-lesson": {
+      "brand": "taco-bell",
+      "topics": [
+        "menu-engineering",
+        "marketing-branding"
+      ]
+    },
+    "pumpkin-spice-latte-seasonal-menu-lesson": {
+      "brand": "starbucks",
+      "topics": [
+        "menu-engineering",
+        "marketing-branding"
+      ]
+    },
+    "ritz-carlton-employee-empowerment-hospitality-lesson": {
+      "brand": "ritz-carlton",
+      "topics": [
+        "staff-leadership",
+        "customer-experience"
+      ]
+    },
+    "chick-fil-a-closed-sundays-staff-rest-lesson": {
+      "brand": "chick-fil-a",
+      "topics": [
+        "staff-leadership"
+      ]
+    },
+    "noma-unsustainable-restaurant-model-lesson": {
+      "brand": "noma",
+      "topics": [
+        "finance-controls",
+        "staff-leadership"
+      ]
+    },
+    "burger-king-whopper-detour-marketing-lesson": {
+      "brand": "burger-king",
+      "topics": [
+        "marketing-branding"
+      ]
+    },
+    "starbucks-mobile-order-congestion-lesson": {
+      "brand": "starbucks",
+      "topics": [
+        "operations-quality",
+        "customer-experience"
+      ]
+    },
+    "starbucks-australia-local-market-lesson": {
+      "brand": "starbucks",
+      "topics": [
+        "growth-strategy",
+        "marketing-branding"
+      ]
+    },
+    "jollibee-local-taste-beat-mcdonalds-lesson": {
+      "brand": "jollibee",
+      "topics": [
+        "growth-strategy",
+        "menu-engineering"
+      ]
+    },
+    "luckin-coffee-fake-sales-honest-numbers-lesson": {
+      "brand": "luckin-coffee",
+      "topics": [
+        "finance-controls"
+      ]
+    },
+    "quiznos-supplier-contract-lesson": {
+      "brand": "quiznos",
+      "topics": [
+        "supply-chain",
+        "finance-controls"
+      ]
+    }
+  }
+}

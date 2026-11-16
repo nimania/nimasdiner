@@ -3,6 +3,7 @@ import path from "node:path";
 import {renderReviews} from "./review-pages.mjs";
 import {renderManagerPages} from "./manager-pages.mjs";
 import {renderConsultation} from "./consultation-page.mjs";
+import {renderBrandTopicPages} from "./brand-topic-pages.mjs";
 
 // Generated pages are the source of deployed HTML. Do not edit site-dist by hand.
 function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}, reviews = {reviews: []}) {
@@ -192,8 +193,10 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const cardArticle=a=>`<article class="card editorial-card"><span class="kicker">${esc(a.type==="news"?"رادار صنعت غذا":"تحلیل و تجربه")} · ${esc(a.topic)}</span><h3><a href="${link(artPath(a))}">${esc(a.title)}</a></h3><p>${esc(a.excerpt)}</p><div class="card-meta"><time datetime="${esc(a.publishedAt)}">${esc(a.publishedAt)}</time><a class="textlink" href="${link(artPath(a))}">ادامه مطلب ←</a></div></article>`;
   const introReading=(label,title,desc)=>`<section class="pagehead wrap">${crumbs([["خواندنی‌ها","reading/"],...(label?[ [label,null] ]:[])])}<p class="eyebrow">رسانه تخصصی نیما داینر</p><h1>${esc(title)}</h1><p class="lead">${esc(desc)}</p><div class="actions"><a class="button button-outline" href="${link("reading/")}">همه مطالب</a><a class="button button-outline" href="${link("reading/news/")}">رادار صنعت</a><a class="button button-outline" href="${link("reading/analysis/")}">تحلیل‌های کاربردی</a><a class="button button-outline" href="${link("guides/")}">دانشنامه</a></div></section>`;
   const editorialCards=arr=>arr.length?`<div class="cards three">${arr.map(cardArticle).join("")}</div>`:`<p class="muted">مطلب تأییدشده‌ای در این بخش ثبت نشده است.</p>`;
+  const brandTopic=renderBrandTopicPages({editorial,add,section,crumbs,editorialCards,link,esc});
   const homeReading=introReading(null,"خواندنی‌های داینر","از خبرهای معتبر صنعت غذا تا تحلیل تصمیم‌های واقعی مدیران رستوران، کافه و نانوایی. هر خبر با تاریخ منبع و پیامد اجرایی همراه است.")
     +section("آخرین مطالب","تازه‌های تحریریه",editorialCards(artItems))
+    +section("درس‌هایی از برندهای بزرگ","تجربهٔ برندها، درس برای رستوران‌ها",`<p class="rich">پرونده‌های مدیریتی برندهای شناخته‌شده را هم بر اساس نام برند و هم بر اساس مسئله‌ای مثل مهندسی منو، آموزش کارکنان یا قیمت‌گذاری دنبال کنید.</p><a class="button button-outline" href="${link("reading/brand-lessons/")}">مشاهده درس‌های برندها ←</a>`)
     +section("روش انتشار","چطور خبر و تحلیل منتشر می‌کنیم؟",`<p class="rich">خبرها فقط با منبع و تاریخ قابل بررسی منتشر می‌شوند؛ تحلیل‌ها با مثال و محاسبه مستند می‌شوند. گزارش‌های بازار آمریکا یا اروپا به‌صورت خودکار معادل وضعیت ایران نیستند و این مرز در متن مشخص می‌شود.</p><p class="rich">مطالب قدیمی در صورت تغییر داده یا مقررات بازبینی می‌شوند؛ تاریخ انتشار بی‌دلیل برای تازه‌نمایی تغییر نمی‌کند.</p>`);
   add("reading/","خواندنی‌های داینر؛ خبر، تحلیل و مطالب صنعت غذا","خبرهای مستند صنعت غذا، تحلیل اقتصاد رستوران، مدیریت کافه، فناوری، مهندسی منو و پرونده‌های تخصصی نیما داینر.",homeReading);
   add("reading/news/","رادار صنعت غذا؛ اخبار و روندهای رستوران و کافه","تازه‌ترین گزارش‌های مستند و تحلیل کاربردی خبرهای اقتصاد، فناوری و صنعت رستوران با تاریخ و منبع قابل بررسی.",introReading("رادار صنعت","رادار صنعت غذا","خبرهای بررسی‌شده، با منبع اصلی و توضیح اثر احتمالی بر تصمیم‌های کسب‌وکار غذا.")
@@ -206,8 +209,10 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
     const body=`<section class="pagehead wrap">${crumbs([["خواندنی‌ها","reading/"],[a.type==="news"?"رادار صنعت":"تحلیل و تجربه",a.type==="news"?"reading/news/":"reading/analysis/"],[a.title,null]])}<p class="eyebrow">${esc(a.type==="news"?"خبر و تفسیر برای مدیران":"تحلیل کسب‌وکار غذا")} · ${esc(a.topic)}</p><h1>${esc(a.title)}</h1><p class="lead">${esc(a.excerpt)}</p><div class="chips"><span class="chip">تدوین: ${esc(a.byline)}</span><span class="chip">انتشار در داینر: <time datetime="${esc(a.publishedAt)}">${esc(a.publishedAt)}</time></span>${a.sourcePublishedAt?`<span class="chip">تاریخ خبر اصلی: <time datetime="${esc(a.sourcePublishedAt)}">${esc(a.sourcePublishedAt)}</time></span>`:""}</div></section>
     <article class="article wrap"><div class="article-body">${a.sections.map(s=>`<section><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}
     <aside class="source-note"><strong>منابع و شیوه تدوین</strong><p>${a.type==="news"?"گزارش خبری بر پایه منبع اصلی و تحلیل عملی داینر تهیه شده است. دامنه جغرافیایی داده‌ها در متن مشخص است.":"این یادداشت تحلیلی و آموزشی است. مثال‌های عددی فرضی هستند و نباید داده مشاهده‌شده از بازار تلقی شوند."}</p>${sourceLinks?`<ul class="source-links">${sourceLinks}</ul>`:"<p>روش: تحلیل مفهومی و مثال محاسباتی؛ بدون ادعای انجام پژوهش میدانی.</p>"}</aside>
-    <div class="related"><h2>مطالعه و ابزار مرتبط</h2>${links}</div>${calcArticle(a.slug)}${articleTools[a.slug]?`<p><a class="button button-outline" href="${link("tools/"+articleTools[a.slug][0]+"/")}">صفحه مستقل این محاسبه‌گر ←</a></p>`:""}${sourceBooks(a.bookSources||[])}${articleBookAd()}${comment(a.title)}</div></article>`;
+    <div class="related"><h2>مطالعه و ابزار مرتبط</h2>${links}${brandTopic.articleLinks(a)}</div>${calcArticle(a.slug)}${articleTools[a.slug]?`<p><a class="button button-outline" href="${link("tools/"+articleTools[a.slug][0]+"/")}">صفحه مستقل این محاسبه‌گر ←</a></p>`:""}${sourceBooks(a.bookSources||[])}${articleBookAd()}${comment(a.title)}</div></article>`;
     const articleSchema={"@context":"https://schema.org","@type":a.type==="news"?"NewsArticle":"Article",headline:a.title,description:a.excerpt,datePublished:a.publishedAt,author:{"@type":a.byline==="نیما افشارنادری"?"Person":"Organization",name:a.byline},publisher:{"@type":"Organization",name:"نیما داینر",logo:{"@type":"ImageObject",url:ORIGIN+"/assets/logo-512.png"}},inLanguage:"fa",mainEntityOfPage:ORIGIN+"/"+artPath(a)};
+    const about=brandTopic.about(a);
+    if(about.length)articleSchema.about=about;
     add(artPath(a),a.title,a.excerpt,body,{structured:articleSchema,keywords:a.keyword,script:"article-calculators.js",lastmod:a.publishedAt});
   }
 
@@ -235,6 +240,7 @@ data.bookSamples=JSON.parse(fs.readFileSync(path.join(root,"content/book-samples
 
 const extended=JSON.parse(fs.readFileSync(path.join(root,"content/expanded-guides.json"),"utf8"));
 const editorial=JSON.parse(fs.readFileSync(path.join(root,"content/editorial.json"),"utf8"));
+editorial.brandTaxonomy=JSON.parse(fs.readFileSync(path.join(root,"content/brand-topics.json"),"utf8"));
 const seo=JSON.parse(fs.readFileSync(path.join(root,"content/seo-keywords.json"),"utf8"));
 const known=new Set(data.guides.map(g=>g.slug));
 for(const g of extended.guides){if(known.has(g.slug))throw Error("Duplicate SEO guide slug: "+g.slug);known.add(g.slug);data.guides.push(g);}
