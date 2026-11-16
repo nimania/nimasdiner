@@ -78,7 +78,7 @@ for(const [slug,tags] of Object.entries(taxonomy.articleTags)){
 const brandLessonHub="reading/brand-lessons/index.html";
 assert.ok(fs.existsSync(path.join(dist,brandLessonHub)),"Brand lesson archive missing");
 assert.match(read("reading/index.html"),/\/reading\/brand-lessons\//,"Editorial archive must link to brand lessons");
-const publishedMapped=editorial.articles.filter(a=>a.status==="published"&&taxonomy.articleTags[a.slug]);
+const publishedMapped=[...editorial.articles,...["brand-lessons-part1.json","brand-lessons-part2.json"].flatMap(name=>JSON.parse(fs.readFileSync(path.join(process.cwd(),"content",name),"utf8")).articles)].filter(a=>a.status==="published"&&taxonomy.articleTags[a.slug]);
 for(const a of publishedMapped){
   const tags=taxonomy.articleTags[a.slug];
   const page=read("reading/"+a.slug+"/index.html");
