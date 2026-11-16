@@ -241,6 +241,21 @@ data.bookSamples=JSON.parse(fs.readFileSync(path.join(root,"content/book-samples
 const extended=JSON.parse(fs.readFileSync(path.join(root,"content/expanded-guides.json"),"utf8"));
 const editorial=JSON.parse(fs.readFileSync(path.join(root,"content/editorial.json"),"utf8"));
 editorial.brandTaxonomy=JSON.parse(fs.readFileSync(path.join(root,"content/brand-topics.json"),"utf8"));
+const brandLessonFiles=["brand-lessons-part1.json","brand-lessons-part2.json"];
+for(const file of brandLessonFiles){
+  const data=JSON.parse(fs.readFileSync(path.join(root,"content",file),"utf8"));
+  if(data.schemaVersion!==1||!Array.isArray(data.articles))throw Error("Invalid brand lesson file: "+file);
+  for(const a of data.articles){
+    if(a.status!=="published")throw Error("Unreviewed brand lesson must not appear in the published feed: "+a.slug);
+    if(!a.brand||!editorial.brandTaxonomy.brands.some(b=>b.slug===a.brand))throw Error("Unknown case-study brand: "+a.slug);
+    if(!a.topics?.length||a.topics.some(t=>!editorial.brandTaxonomy.topics.some(z=>z.slug===t)))throw Error("Invalid subject taxonomy for "+a.slug);
+    if(!a.sources||a.sources.length<2||a.sources.some(s=>!s.url?.startsWith("https://")))throw Error("At least two cited HTTPS sources required for "+a.slug);
+    if(!a.sections?.length||a.sections.some(s=>!s.h||!s.p?.length))throw Error("Invalid sections for "+a.slug);
+    if(editorial.articles.some(x=>x.slug===a.slug))throw Error("Duplicate source/editorial article: "+a.slug);
+    editorial.articles.push(a);
+  }
+}
+
 const seo=JSON.parse(fs.readFileSync(path.join(root,"content/seo-keywords.json"),"utf8"));
 const known=new Set(data.guides.map(g=>g.slug));
 for(const g of extended.guides){if(known.has(g.slug))throw Error("Duplicate SEO guide slug: "+g.slug);known.add(g.slug);data.guides.push(g);}
