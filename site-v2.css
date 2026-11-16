@@ -420,3 +420,63 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 @media(max-width:700px){.brand-logo-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.brand-logo-link{padding:14px 8px 12px}.brand-logo-frame{height:76px}.brand-logo-frame img{max-height:70px}.brand-logo-fa{font-size:14px}}
 @media(max-width:440px){.brand-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brand-logo-link{min-height:180px}.brand-logo-frame{height:74px}}
 @media(prefers-reduced-motion:reduce){.brand-logo-link{transition:none}.brand-logo-link:hover,.brand-logo-link:focus-visible{transform:none}}
+
+/* 2026-11-16: Compact editorial rhythm; preserve responsive layout and all existing URLs. */
+.hero-inner{min-height:410px;padding-block:32px;gap:42px}
+.hero h1{font-size:clamp(30px,3.6vw,50px);line-height:1.4;margin:10px 0 12px}
+.hero .lead{font-size:clamp(15px,1.35vw,18px);line-height:1.8;margin:10px 0 15px}
+.hero .actions{margin-top:16px}
+.hero-note{margin-top:12px}
+.hero-art-books{padding:14px 12px 10px}
+.hero-art-books .book-cover-trio{min-height:235px;padding:14px 4px}
+.block{padding-block:28px}
+.block h2,.cta-panel h2{line-height:1.45;margin:4px 0 16px}
+.pagehead{padding-block:26px 8px}
+.pagehead h1{font-size:clamp(28px,3.2vw,43px);line-height:1.42;margin:5px 0 9px}
+.pagehead .lead{font-size:clamp(15px,1.3vw,18px);line-height:1.8;margin:9px 0 13px}
+.pagehead .chips{margin:10px 0}
+.breadcrumbs{margin-bottom:11px}
+.pagehead+.block{padding-top:15px}
+.pagehead .actions{margin-top:13px}
+
+/* Dedicated contextual navigation for guides and editorial articles.
+   Server-rendered anchors are identical across mobile and desktop. */
+.knowledge-layout{display:grid;grid-template-columns:minmax(215px,250px) minmax(0,1fr);gap:clamp(18px,2.6vw,36px);align-items:start}
+.knowledge-layout>.article-body{max-width:none;width:100%;min-width:0;margin:0}
+.knowledge-layout .article-body>section[id]{scroll-margin-top:105px}
+.knowledge-sidebar{min-width:0;position:sticky;top:98px;max-height:calc(100dvh - 112px);overflow-y:auto;scrollbar-width:thin;background:#fff;border:1px solid var(--edge);border-radius:13px;padding:15px 13px;box-shadow:0 4px 18px #2631360a}
+.knowledge-side-heading{font-size:15px!important;line-height:1.6!important;font-weight:800;margin:0 0 10px!important}
+.knowledge-side-nav{display:grid;gap:14px}
+.knowledge-side-group{display:grid;gap:5px}
+.knowledge-side-label{display:block;color:var(--muted);font-size:11px;font-weight:700;margin:0 3px 3px}
+.knowledge-side-group a{display:block;border-radius:7px;padding:7px 9px;font-size:13px;line-height:1.65;color:var(--ink);text-decoration:none}
+.knowledge-side-group a:hover,.knowledge-side-group a:focus-visible{background:#fff3ce;text-decoration:none;outline-offset:2px}
+.knowledge-side-resources{border-top:1px solid var(--edge);padding-top:11px}
+
+@media(max-width:950px){
+ .knowledge-layout{grid-template-columns:1fr;gap:13px}
+ .knowledge-sidebar{position:static;top:auto;max-height:none;overflow:visible;padding:11px 12px}
+ .knowledge-side-heading{font-size:13px!important;margin:0 0 7px!important}
+ .knowledge-side-nav{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding:0 0 5px;max-width:100%}
+ .knowledge-side-group{display:contents}
+ .knowledge-side-label{display:none}
+ .knowledge-side-resources{border:0;padding:0}
+ .knowledge-side-group a{white-space:nowrap;flex:0 0 auto;font-size:12px;min-height:37px;padding:8px 11px;border:1px solid var(--edge);background:#fffbf0;border-radius:8px}
+}
+@media(max-width:700px){
+ .hero-inner{min-height:0;grid-template-columns:1fr;gap:19px;padding-block:24px}
+ .hero h1{font-size:clamp(26px,7vw,37px);line-height:1.42}
+ .hero .lead{font-size:15px;line-height:1.75}
+ .hero-art-books .book-cover-trio{min-height:185px;padding:8px 4px}
+ .block{padding-block:20px}
+ .block h2{font-size:clamp(22px,6vw,29px);margin-bottom:12px}
+ .pagehead{padding-block:17px 5px}
+ .pagehead h1{font-size:clamp(26px,6vw,34px)}
+ .pagehead .lead{font-size:15px;margin:7px 0 10px}
+ .breadcrumbs{margin-bottom:8px}
+ .pagehead+.block{padding-top:12px}
+}
+@media print{
+ .knowledge-layout{display:block}
+ .knowledge-sidebar{display:none}
+}
