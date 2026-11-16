@@ -30,7 +30,17 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const badge=(s,type="")=>`<span class="chip ${type}">${esc(s)}</span>`;
   const card=(href,kicker,title,description)=>`<article class="card"><span class="kicker">${esc(kicker)}</span><h3>${href?`<a href="${link(href)}">${esc(title)}</a>`:esc(title)}</h3><p>${esc(description)}</p>${href?`<a class="textlink" href="${link(href)}">مشاهده و مطالعه ←</a>`:""}</article>`;
   const section=(eyebrow,title,body)=>`<section class="block wrap"><p class="eyebrow">${esc(eyebrow)}</p><h2>${esc(title)}</h2>${body}</section>`;
-  const comment=subject=>`<section class="comment-zone" id="comments"><h2>دیدگاه‌ها و تجربه‌های حرفه‌ای</h2><p>تجربهٔ مرتبط، پرسش یا اصلاحی برای این مطلب داری؟ آن را برای تحریریه بفرست. نام مطلب را در موضوع ایمیل نگه دار تا پیگیری ساده‌تر شود.</p><a class="button button-outline" href="mailto:nimania@gmail.com?subject=${encodeURIComponent("نظر درباره: "+subject)}">ارسال نظر به تحریریه</a></section>`;
+  const comment=(subject,{kind="general",venue=""}={})=>{
+    const isReview=kind==="review";
+    const title=isReview?"تو از این رستوران چه خاطره‌ای داری؟":"چیزی برای اضافه کردن داری؟";
+    const intro=isReview?"طعم غذا، رفتار کارکنان یا حتی یک جزئیات کوچک که در خاطرت مانده؛ تجربه‌ات کمک می‌کند این نقد کامل‌تر شود.":"تجربه، پرسش یا نکته‌ای برای اصلاح این نوشته داری؟ برایمان بفرست تا در بازبینی‌های بعدی دقیق‌تر بنویسیم.";
+    const mailSubject=isReview?"تجربه دربارهٔ "+(venue||subject):"بازخورد دربارهٔ "+subject;
+    const button=isReview?"تجربه‌ام را می‌فرستم":"ارسال بازخورد";
+    return `<section class="comment-zone ${isReview?'comment-zone--review':'comment-zone--general'}" id="comments" aria-labelledby="feedback-heading">
+      <div class="comment-zone-copy"><span class="comment-zone-kicker">${isReview?"حرف شما هم شنیدنی‌ست":"گفت‌وگو ادامه دارد"}</span><h2 id="feedback-heading">${esc(title)}</h2><p>${esc(intro)}</p></div>
+      <div class="comment-zone-action"><a class="comment-zone-button" href="mailto:nimania@gmail.com?subject=${encodeURIComponent(mailSubject)}" aria-label="${esc(button+'؛ ارسال ایمیل درباره '+(venue||subject))}"><span>${esc(button)}</span><span class="comment-zone-arrow" aria-hidden="true">←</span></a><span class="comment-zone-hint">با انتخاب دکمه، برنامهٔ ایمیل باز می‌شود.</span></div>
+    </section>`;
+  };
   const pages=[];
   function add(path,title,description,content,{noindex=false,structured=null,script="",keywords="",image="",head="",lastmod=""}={}){
     const canonical=ORIGIN+(path?"/"+path:"/");
