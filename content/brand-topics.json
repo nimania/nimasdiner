@@ -9,22 +9,54 @@
     {
       "slug": "starbucks",
       "fa": "استارباکس",
-      "en": "Starbucks"
+      "en": "Starbucks",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Starbucks-wordmark-green.svg",
+        "alt": "نشان تجاری استارباکس (Starbucks)",
+        "width": 512,
+        "height": 50,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Starbucks-wordmark-green.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "kfc",
       "fa": "کی‌اف‌سی",
-      "en": "KFC"
+      "en": "KFC",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/5/5d/KFC_2026_(wordmark).svg",
+        "alt": "نشان تجاری کی‌اف‌سی (KFC)",
+        "width": 950,
+        "height": 296,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:KFC_2026_(wordmark).svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "dominos",
       "fa": "دومینوز",
-      "en": "Domino's"
+      "en": "Domino's",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/6/64/Domino's_2025.svg",
+        "alt": "نشان تجاری دومینوز (Domino's)",
+        "width": 1000,
+        "height": 209,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Domino's_2025.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "subway",
       "fa": "ساب‌وی",
-      "en": "Subway"
+      "en": "Subway",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Subway_2016_logo.svg",
+        "alt": "نشان تجاری ساب‌وی (Subway)",
+        "width": 512,
+        "height": 102,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Subway_2016_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "red-lobster",
@@ -34,12 +66,28 @@
     {
       "slug": "mcdonalds",
       "fa": "مک‌دونالد",
-      "en": "McDonald's"
+      "en": "McDonald's",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/3/36/McDonald's_Golden_Arches.svg",
+        "alt": "نشان تجاری مک‌دونالد (McDonald's)",
+        "width": 273,
+        "height": 239,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:McDonald's_Golden_Arches.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "coca-cola",
       "fa": "کوکاکولا",
-      "en": "Coca-Cola"
+      "en": "Coca-Cola",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg",
+        "alt": "نشان تجاری کوکاکولا (Coca-Cola)",
+        "width": 512,
+        "height": 161,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coca-Cola_logo.svg",
+        "license": "Public domain (historical US publication; PD-textlogo)؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "chipotle",
@@ -64,17 +112,41 @@
     {
       "slug": "krispy-kreme",
       "fa": "کریسپی کریم",
-      "en": "Krispy Kreme"
+      "en": "Krispy Kreme",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Krispy_Kreme_logo.svg",
+        "alt": "نشان تجاری کریسپی کریم (Krispy Kreme)",
+        "width": 300,
+        "height": 110,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Krispy_Kreme_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "in-n-out",
       "fa": "این‌اِن‌اوت",
-      "en": "In-N-Out Burger"
+      "en": "In-N-Out Burger",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/8/8c/InNOut_2021_logo.svg",
+        "alt": "نشان تجاری این‌اِن‌اوت (In-N-Out Burger)",
+        "width": 140,
+        "height": 81,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:InNOut_2021_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "shake-shack",
       "fa": "شیک‌شک",
-      "en": "Shake Shack"
+      "en": "Shake Shack",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/9/96/Shake_Shack_logo.svg",
+        "alt": "نشان تجاری شیک‌شک (Shake Shack)",
+        "width": 566,
+        "height": 124,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shake_Shack_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "costco",
@@ -89,7 +161,15 @@
     {
       "slug": "five-guys",
       "fa": "فایو گایز",
-      "en": "Five Guys"
+      "en": "Five Guys",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/8/80/Five_Guys_logo.svg",
+        "alt": "نشان تجاری فایو گایز (Five Guys)",
+        "width": 417,
+        "height": 108,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Five_Guys_logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "taco-bell",
@@ -104,7 +184,15 @@
     {
       "slug": "chick-fil-a",
       "fa": "چیک‌فیله",
-      "en": "Chick-fil-A"
+      "en": "Chick-fil-A",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/0/02/Chick-fil-A_Logo.svg",
+        "alt": "نشان تجاری چیک‌فیله (Chick-fil-A)",
+        "width": 582,
+        "height": 263,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chick-fil-A_Logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "noma",
@@ -114,7 +202,15 @@
     {
       "slug": "burger-king",
       "fa": "برگرکینگ",
-      "en": "Burger King"
+      "en": "Burger King",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg",
+        "alt": "نشان تجاری برگرکینگ (Burger King)",
+        "width": 569,
+        "height": 620,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Burger_King_2020.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     },
     {
       "slug": "jollibee",
@@ -129,7 +225,15 @@
     {
       "slug": "quiznos",
       "fa": "کوئیزنوس",
-      "en": "Quiznos"
+      "en": "Quiznos",
+      "logo": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Quiznos_Logo.svg",
+        "alt": "نشان تجاری کوئیزنوس (Quiznos)",
+        "width": 164,
+        "height": 30,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quiznos_Logo.svg",
+        "license": "PD-textlogo؛ علامت تجاری متعلق به صاحب برند است"
+      }
     }
   ],
   "topics": [
