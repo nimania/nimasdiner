@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {renderBrandTopicPages} from "./brand-topic-pages.mjs";
+import {persianDigits, persianizeHTML} from "./persian-digits-html.mjs";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -137,6 +138,32 @@ const noLogoProfile=mockPages.find(p=>p.path==="reading/brands/costco/");
 assert.ok(noLogoProfile,"Brand without approved logo must still have its own page");
 assert.doesNotMatch(noLogoProfile.html,/brand-profile-logo/,"Unapproved brand mark must not appear");
 console.log("Brand logo card tests passed:",approvedLogos.length,"source-checked marks and text fallbacks");
+
+const localeSample = '<div title="2026 edition"><p>Price: 150,000 | 2026-11-16</p><time datetime="2026-11-16">2026-11-16</time></div>' +
+  '<script type="application/ld+json">{"price":"150000","date":"2026-11-16"}</script>' +
+  '<style>.x{width:2026px}</style><pre>2026 / 01</pre><code>2026</code><!-- release 2026 -->';
+const localizedSample=persianizeHTML(localeSample);
+assert.match(localizedSample, /Price: ۱۵۰,۰۰۰ \| ۲۰۲۶-۱۱-۱۶/);
+assert.match(localizedSample, /<time datetime="2026-11-16">۲۰۲۶-۱۱-۱۶<\/time>/);
+assert.match(localizedSample, /title="2026 edition"/,"Never mutate machine-readable HTML attributes");
+assert.match(localizedSample, /"price":"150000"/,"Keep structured data as provided");
+assert.match(localizedSample, /width:2026px/,"Keep CSS source unchanged");
+assert.match(localizedSample, /<pre>2026 \/ 01<\/pre>/,"Keep preformatted examples unchanged");
+assert.match(localizedSample, /<!-- release 2026 -->/,"Keep HTML comments unchanged");
+assert.equal(persianDigits("2026, 150000"),"۲۰۲۶, ۱۵۰۰۰۰");
+const brandView=read("reading/brand-lessons/index.html");
+assert.match(brandView,/۴ مطلب منتشرشده/,"Brand article counts must have Persian digits in built HTML");
+assert.match(brandView,/href="\/reading\/brands\/starbucks\/"/,"Internal URLs must remain ASCII and stable");
+const liveArticle=read("reading/starbucks-closed-stores-barista-training-lesson/index.html");
+assert.match(liveArticle,/<time datetime="2026-11-16">۲۰۲۶-۱۱-۱۶<\/time>/,"Visible article dates should be Persian while ISO datetime remains machine-readable");
+for(const page of ["index.html","reading/index.html","reading/brand-lessons/index.html","reading/brands/starbucks/index.html","tools/index.html","consultation/index.html","app/index.html"]){
+  const html=read(page);
+  assert.match(html,/<script defer src="\/persian-digits\.js"><\/script>/,"Missing live number localization on "+page);
+}
+assert.ok(fs.existsSync(path.join(dist,"persian-digits.js")),"Missing dynamic numeral localization script");
+assert.match(read("persian-digits.js"),/MutationObserver/,"Dynamic UI values must also be localized");
+console.log("Persian numeral localization passed on static HTML and dynamic UI bootstrap");
+
 
 const publishedBrandLessons=["brand-lessons-part1.json","brand-lessons-part2.json"].flatMap(name=>JSON.parse(fs.readFileSync(path.join(process.cwd(),"content",name),"utf8")).articles);
 assert.equal(publishedBrandLessons.length,13,"Initial verified editorial release should include 13 case studies");

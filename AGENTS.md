@@ -36,3 +36,10 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - It is fine to offer these limited samples free. Never publish the complete paid digital master PDFs or restore unrestricted free-book download APIs.
 - Purchase CTAs currently take customers to the established Telegram contact; that is an order inquiry, **not an automated payment checkout**. Do not suggest payment or digital file delivery is automated.
 - Update all promotional surfaces coherently, including individual detail pages, bundles, ordering page, library cards and article cross-sells. Keep stable URLs and active SEO protections.
+
+
+## Visible numerals across nimania.net (owner instruction, 16 Nov 2026)
+- Every **user-facing numeric character** in Persian site text must be rendered with Persian glyphs (۰۱۲۳۴۵۶۷۸۹): dates, prices, counts, times, article headings, menus, cards, and dynamic calculator output.
+- `tools/persian-digits-html.mjs` converts only **visible HTML text nodes** during build. `persian-digits.js` localizes dynamically inserted UI text, accessible descriptions, and visible placeholders after page load.
+- Preserve ASCII digits in HTML attributes used for computation/routing (`href`, `src`, `id`, `datetime`, `value`, `data-*`), structured data, JSON, JS, URLs, and numeric form values. Do not modify SVG paths or logos. Numeric inputs remain numeric for reliable calculations.
+- Never edit `site-dist/` directly or change an existing page URL. Every new HTML page must receive the shared localization script from `tools/build-site.mjs`. Keep the regression tests in `tools/test-site.mjs`.

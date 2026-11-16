@@ -4,6 +4,7 @@ import {renderReviews} from "./review-pages.mjs";
 import {renderManagerPages} from "./manager-pages.mjs";
 import {renderConsultation} from "./consultation-page.mjs";
 import {renderBrandTopicPages} from "./brand-topic-pages.mjs";
+import {persianizeHTML} from "./persian-digits-html.mjs";
 
 // Generated pages are the source of deployed HTML. Do not edit site-dist by hand.
 function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}, reviews = {reviews: []}) {
@@ -232,7 +233,7 @@ const root=process.cwd();
 const out=path.join(root,"site-dist");
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for(const file of ["site-global.css","download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","article-calculators.js","journal.mjs","journal-model.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
+for(const file of ["site-global.css","download.html","privacy.html","style.css","app.js","site-v2.css","site-v2.js","article-calculators.js","persian-digits.js","journal.mjs","journal-model.mjs",".nojekyll"]){fs.copyFileSync(path.join(root,file),path.join(out,file));}
 for(const dir of ["assets","consulting","advisor","app","investment","sarvino"]){fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});}
 const data=JSON.parse(fs.readFileSync(path.join(root,"content/catalog.json"),"utf8"));
 data.bookPricing=JSON.parse(fs.readFileSync(path.join(root,"content/book-pricing.json"),"utf8"));
@@ -289,6 +290,12 @@ function finishHTML(dir){
   if(!html.includes('aria-label="ناوبری اصلی"')&&!html.includes('class="diner-global-nav"')){
    html=html.replace(/<body([^>]*)>/i,(match,attrs)=>'<body'+attrs+'>'+sharedNav);
   }
+  // Browser-side localization catches results generated after page load.
+  if(!html.includes('src="/nimasdiner/persian-digits.js"')){
+    html=html.replace(new RegExp("</body>","i"),'<script defer src="/nimasdiner/persian-digits.js"></script></body>');
+  }
+  // Render crawled/static HTML text in Persian; leave markup, IDs, links, data and JS intact.
+  html=persianizeHTML(html);
   fs.writeFileSync(full,html,"utf8");
  }
 }
