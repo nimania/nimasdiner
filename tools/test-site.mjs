@@ -121,6 +121,10 @@ renderBrandTopicPages({
 const sampleBrandHub=mockPages.find(p=>p.path==="reading/brand-lessons/");
 assert.ok(sampleBrandHub,"Hub not generated when case studies exist");
 assert.match(sampleBrandHub.html,/brand-logo-grid/,"Missing responsive logo grid");
+assert.equal((sampleBrandHub.html.match(/class="brand-logo-link"/g)||[]).length,25,"All 25 brands must be visible before articles are published");
+assert.equal(mockPages.filter(p=>p.path.startsWith("reading/brands/")).length,25,"Every brand card must have a real destination");
+assert.equal(mockPages.filter(p=>p.path.startsWith("reading/topics/")).length,11,"All 11 subject hubs must be present");
+assert.match(sampleBrandHub.html,/در دست آماده‌سازی/,"Unpublished brand label should be explicit");
 assert.match(sampleBrandHub.html,/<a class="brand-logo-link" href="\/reading\/brands\/starbucks\/"/,"Logo must link to the brand hub via HTML");
 assert.match(sampleBrandHub.html,/alt="لوگوی استارباکس \(Starbucks\)"/,"Logo image needs accessible alt text");
 assert.match(sampleBrandHub.html,/loading="lazy"/,"Logo images should lazy-load");
