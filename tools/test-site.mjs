@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {renderBrandTopicPages} from "./brand-topic-pages.mjs";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -93,6 +94,46 @@ if(!publishedMapped.length){
   assert.doesNotMatch(sitemap,/\/reading\/brand-lessons\//,"Empty hub should not be in sitemap");
 }
 console.log("Brand/topic taxonomy checks passed:",taxonomy.brands.length,"brands,",taxonomy.topics.length,"topics");
+
+const approvedLogos=taxonomy.brands.filter(b=>b.logo);
+assert.ok(approvedLogos.length>=10,"Expected verified logos for the initial brand catalog");
+for(const b of approvedLogos){
+  assert.ok(b.logo.alt.includes(b.fa) && b.logo.alt.includes(b.en),"Descriptive bilingual alt missing "+b.slug);
+  assert.ok(b.logo.src.startsWith("https://upload.wikimedia.org/wikipedia/commons/"),"Unexpected image host "+b.slug);
+  assert.ok(b.logo.sourceUrl.startsWith("https://commons.wikimedia.org/wiki/File:"),"Missing licensing source "+b.slug);
+  assert.ok(b.logo.license && b.logo.width>0 && b.logo.height>0,"Incomplete attribution or layout dimensions for "+b.slug);
+}
+const mockPages=[];
+const fakeCases=[
+  {status:"published",slug:"starbucks-closed-stores-barista-training-lesson",title:"نمونه استارباکس"},
+  {status:"published",slug:"mcdonalds-1948-short-menu-lesson",title:"نمونه مک‌دونالد"},
+  {status:"published",slug:"costco-hot-dog-anchor-price-lesson",title:"نمونه کاستکو"}
+];
+renderBrandTopicPages({
+  editorial:{articles:fakeCases,brandTaxonomy:taxonomy},
+  add:(path,title,description,html,opts)=>mockPages.push({path,html,opts}),
+  section:(label,title,body)=>'<section><h2>'+title+'</h2>'+body+'</section>',
+  crumbs:()=>'<nav aria-label="مسیر صفحه"></nav>',
+  editorialCards:arr=>'<p>'+arr.map(a=>a.title).join("، ")+'</p>',
+  link:path=>"/"+path,
+  esc:s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))
+});
+const sampleBrandHub=mockPages.find(p=>p.path==="reading/brand-lessons/");
+assert.ok(sampleBrandHub,"Hub not generated when case studies exist");
+assert.match(sampleBrandHub.html,/brand-logo-grid/,"Missing responsive logo grid");
+assert.match(sampleBrandHub.html,/<a class="brand-logo-link" href="\/reading\/brands\/starbucks\/"/,"Logo must link to the brand hub via HTML");
+assert.match(sampleBrandHub.html,/alt="لوگوی استارباکس \(Starbucks\)"/,"Logo image needs accessible alt text");
+assert.match(sampleBrandHub.html,/loading="lazy"/,"Logo images should lazy-load");
+assert.match(sampleBrandHub.html,/brand-fallback-mark/,"Unverified logo must use named textual fallback");
+assert.doesNotMatch(sampleBrandHub.html,/href="https:\/\/www\.starbucks\.com\/"/,"Logo must not redirect to an external brand");
+const sampleBrandProfile=mockPages.find(p=>p.path==="reading/brands/starbucks/");
+assert.ok(sampleBrandProfile&&sampleBrandProfile.html.includes("brand-profile-logo"),"Brand profile logo missing");
+assert.match(sampleBrandProfile.html,/commons.wikimedia.org/,"Brand logo source attribution missing");
+const noLogoProfile=mockPages.find(p=>p.path==="reading/brands/costco/");
+assert.ok(noLogoProfile,"Brand without approved logo must still have its own page");
+assert.doesNotMatch(noLogoProfile.html,/brand-profile-logo/,"Unapproved brand mark must not appear");
+console.log("Brand logo card tests passed:",approvedLogos.length,"source-checked marks and text fallbacks");
+
 
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
 
