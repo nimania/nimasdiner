@@ -68,8 +68,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Build
-        run: node tools/build-site.mjs
+      - name: Restore cached restaurant cover photos
+        uses: actions/cache@v4
+        with:
+          path: .cache/review-covers
+          key: diner-review-covers-20261117-v1
+      - name: Build and publish stable review cover photos
+        run: |
+          node --check tools/mirror-review-covers.mjs
+          node tools/build-site.mjs
+          node tools/mirror-review-covers.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
