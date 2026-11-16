@@ -21,8 +21,8 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
   const intro=(heading,kicker,description,trail)=>
     '<section class="pagehead wrap">'+crumbs([["خواندنی‌ها","reading/"],["درس‌هایی از برندهای بزرگ","reading/brand-lessons/"],[trail,null]])+
     '<p class="eyebrow">'+esc(kicker)+'</p><h1>'+esc(heading)+'</h1><p class="lead">'+esc(description)+'</p></section>';
-  const brandGroups=[...brands.values()].map(b=>({...b,articles:published.filter(a=>brandOf(a)?.slug===b.slug)})).filter(b=>b.articles.length);
-  const topicGroups=[...topics.values()].map(t=>({...t,articles:published.filter(a=>topicsOf(a).some(x=>x.slug===t.slug))})).filter(t=>t.articles.length);
+  const brandGroups=[...brands.values()].map(b=>({...b,articles:published.filter(a=>brandOf(a)?.slug===b.slug)}));
+  const topicGroups=[...topics.values()].map(t=>({...t,articles:published.filter(a=>topicsOf(a).some(x=>x.slug===t.slug))}));
   const listLinks=(xs,makePath,makeLabel)=>
     xs.length?'<div class="cards three">'+xs.map(x=>
       '<article class="card"><h3><a href="'+link(makePath(x))+'">'+esc(makeLabel(x))+'</a></h3>'+
@@ -38,7 +38,7 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
       '<span class="brand-logo-frame">'+brandLogo(b)+'</span>'+
       '<strong class="brand-logo-fa">'+esc(b.fa)+'</strong>'+
       '<span class="brand-logo-en" dir="ltr">'+esc(b.en)+'</span>'+
-      '<span class="brand-logo-count">'+esc(String(b.articles.length))+' مطلب منتشرشده</span>'+
+      '<span class="brand-logo-count">'+(b.articles.length?esc(String(b.articles.length))+' مطلب منتشرشده':'در دست آماده‌سازی')+'</span>'+
     '</a>').join("")+'</div>':
     '<p class="muted">با انتشار نخستین پروندهٔ تأییدشده، لوگو و صفحهٔ اختصاصی برند در این بخش فعال می‌شود.</p>';
   const hub=intro("درس‌هایی از برندهای بزرگ","تجربه برندها؛ راهکار رستوران‌داری",
@@ -47,18 +47,19 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
     section("بر اساس موضوع","مسئله‌ای که می‌خواهید حل کنید",listLinks(topicGroups,topicPath,t=>t.title))+
     section("تحلیل و آموزش","یک پرونده، دو مسیر",'<p class="rich">هر تحلیل نشانی اصلی خودش را دارد و در صفحهٔ برند و صفحهٔ موضوع فقط معرفی و پیوند آن می‌آید. ادعاها با منابع مشخص بررسی می‌شوند؛ مثال‌های مدیریتی از واقعیت تاریخی جدا هستند.</p>');
   add("reading/brand-lessons/","درس‌هایی از برندهای بزرگ برای رستوران‌داران | نیما داینر",
-    "درس‌های مدیریتی برندهای مشهور غذایی برای رستوران‌داران؛ مرور پرونده‌ها بر اساس برند و موضوع، با تحلیل و راهکار اجرایی.",hub,{noindex:brandGroups.length===0});
+    "درس‌های مدیریتی برندهای مشهور غذایی برای رستوران‌داران؛ مرور پرونده‌ها بر اساس برند و موضوع، با تحلیل و راهکار اجرایی.",hub,{noindex:published.filter(a=>brandOf(a)).length===0});
   for(const b of brandGroups){
     const title=b.fa+" ("+b.en+")؛ تجربه‌ها، اخبار و درس‌های مدیریتی";
     const desc="مرکز مستقل پرونده‌های "+b.fa+" ("+b.en+") در نیما داینر: تصمیم‌های قابل بررسی، خبرها و تحلیل‌های مرتبط با مدیریت رستوران و کافه.";
-    const themes=[...new Set(b.articles.flatMap(a=>topicsOf(a).map(t=>t.slug)))].map(s=>topics.get(s));
+    const plannedTopics=Object.values(data.articleTags||{}).filter(x=>x.brand===b.slug).flatMap(x=>x.topics||[]);
+    const themes=[...new Set([...b.articles.flatMap(a=>topicsOf(a).map(t=>t.slug)),...plannedTopics])].map(s=>topics.get(s)).filter(Boolean);
     const links=themes.map(t=>'<a class="chip" href="'+link(topicPath(t))+'">'+esc(t.title)+'</a>').join(" ");
     const brandLogoBlock=b.logo?.src?
       '<div class="brand-profile-logo">'+brandLogo(b)+
       '<p class="brand-logo-credit">نشان تجاری '+esc(b.fa)+' صرفاً برای شناسایی موضوع این تحلیل مستقل نمایش داده شده است. '+
       '<a href="'+esc(b.logo.sourceUrl)+'" target="_blank" rel="noopener noreferrer">منبع نشان</a></p></div>':"";
     const html=intro(title,"پرونده برند",desc,b.fa)+brandLogoBlock+
-      section("پرونده‌های "+b.fa,"مقالات و خبرهای مرتبط",editorialCards(b.articles))+
+      section("پرونده‌های "+b.fa,"مقالات و خبرهای مرتبط",b.articles.length?editorialCards(b.articles):'<p class="muted">پرونده‌های این برند در حال بررسی منابع و آماده‌سازی‌اند؛ پس از تأیید در همین صفحه نمایش داده می‌شوند.</p>')+
       (links?section("موضوعات مدیریتی","این برند چه درس‌هایی دارد؟",'<div class="chips">'+links+'</div>'):"")+
       section("درباره این صفحه","تحلیل مستقل",'<p class="rich">این صفحه متعلق به '+esc(b.fa)+' نیست و وابستگی یا تأیید رسمی این برند را نشان نمی‌دهد. خبرها و تحلیل‌های منتشرشده در داینر از منظر آموزش مدیریت کسب‌وکار غذا گردآوری می‌شوند.</p>');
     // Pages with a single listed story are available to users, but not pushed into the index
@@ -82,11 +83,12 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
   for(const t of topicGroups){
     const title=t.title+"؛ تجربه برندها و راهکار رستوران‌داری";
     const desc=t.description+". پرونده‌های مستند از برندهای غذا همراه با روش‌های قابل اجرا برای مدیران.";
-    const relatedBrands=[...new Set(t.articles.map(a=>brandOf(a)?.slug).filter(Boolean))].map(s=>brands.get(s));
+    const plannedBrands=Object.values(data.articleTags||{}).filter(x=>(x.topics||[]).includes(t.slug)).map(x=>x.brand);
+    const relatedBrands=[...new Set([...t.articles.map(a=>brandOf(a)?.slug).filter(Boolean),...plannedBrands])].map(s=>brands.get(s)).filter(Boolean);
     const brandLinks=relatedBrands.map(b=>'<a class="chip" href="'+link(brandPath(b))+'">'+esc(b.fa)+'</a>').join(" ");
     const resources=(topicResources[t.slug]||[]).map(([name,path])=>'<a href="'+link(path)+'">'+esc(name)+'</a>').join(" ");
     const html=intro(title,"راهنمای موضوعی",desc,t.title)+
-      section("تجربه‌های واقعی","مطالعات موردی مرتبط با "+t.title,editorialCards(t.articles))+
+      section("تجربه‌های واقعی","مطالعات موردی مرتبط با "+t.title,t.articles.length?editorialCards(t.articles):'<p class="muted">مطالعات موردی این موضوع در مرحلهٔ راستی‌آزمایی هستند. تا انتشار آن‌ها از راهنماها و ابزارهای مرتبط استفاده کنید.</p>')+
       (brandLinks?section("برندهای مرتبط","این مسئله در چه برندهایی دیده شده است؟",'<div class="chips">'+brandLinks+'</div>'):"")+
       (resources?section("از تحلیل به اجرا","راهنما، ابزار و کتاب مرتبط",'<div class="related">'+resources+'</div>'):"");
     add(topicPath(t),title,desc,html,{noindex:t.articles.length<2});
