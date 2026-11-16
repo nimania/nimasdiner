@@ -1,5 +1,16 @@
 export function renderReviews({reviews, add, section, crumbs, link, esc, comment}) {
   const items=reviews.reviews.filter(r=>r.status==='published').sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt));
+  // A video publication timestamp must be precise and timezone-aware.
+  // Do not reuse article date-only metadata: Google VideoObject expects DateTime.
+  const videoDatePattern=/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/;
+  for(const review of items){
+    for(const video of review.videoGallery||[]){
+      if(!videoDatePattern.test(video.uploadDate||"")||Number.isNaN(Date.parse(video.uploadDate))){
+        throw new Error("Invalid timezone-aware video uploadDate for review: "+review.slug);
+      }
+    }
+  }
+
   const faDate=s=>new Intl.DateTimeFormat('fa-IR',{dateStyle:'long',timeZone:'UTC'}).format(new Date(s+'T12:00:00Z'));
   const url=r=>'reviews/'+r.slug+'/';
   const card=r=>`<article class="card review-card" data-review-category="${esc(r.category)}" data-review-city="${esc(r.venue.city)}" data-review-type="${esc(r.venue.type)}"><a class="review-cover" href="${link(url(r))}">${r.photos?.length?`<img src="${esc(r.photos[0].src)}" alt="${esc(r.photos[0].alt.replace(" در نوشتهٔ آرشیوی",""))}" loading="lazy" width="640" height="420">`:`<span class="review-cover-text">${esc(r.venue.name)}</span>`}</a><div class="review-card-body"><span class="kicker">${esc(r.venue.city)} · ${esc(r.venue.type)}</span><h3><a href="${link(url(r))}">${esc(r.title)}</a></h3><p>${esc(r.summary)}</p><div class="card-meta"><time datetime="${r.publishedAt}">${faDate(r.publishedAt)}</time><a class="textlink" href="${link(url(r))}">خواندن نقد ←</a></div></div></article>`;
@@ -84,7 +95,7 @@ export function renderReviews({reviews, add, section, crumbs, link, esc, comment
       ...(r.videoGallery||[]).map(v=>({'@context':'https://schema.org','@type':'VideoObject',
         name:v.caption||'ویدئوی '+r.venue.name,description:v.alt||v.caption||r.summary,
         contentUrl:'https://nimania.github.io'+v.src,thumbnailUrl:'https://nimania.github.io'+(v.poster||r.photos?.[0]?.src),
-        uploadDate:r.publishedAt,inLanguage:'fa',duration:'PT2S'}))
+        uploadDate:v.uploadDate,inLanguage:'fa',duration:'PT2S'}))
     ]});
   }
   return {cards:items.filter(r=>r.category!=='city').slice(0,3).map(card).join('')};
