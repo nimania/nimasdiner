@@ -522,3 +522,12 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
  .review-emblem--mobile .review-emblem-details{max-width:none;flex:1}
  .review-emblem--mobile .review-emblem-details p{margin-top:3px}
 }
+
+
+/* Graceful no-image state if a third-party media host is unavailable. */
+.review-gallery-item.review-image-unavailable-card img,
+.review-photo.review-image-unavailable-card img,
+.review-emblem-art.review-image-unavailable-card img{display:none}
+.review-image-error-text{display:block;padding:38px 10px;text-align:center;line-height:1.7;font-size:12px;font-weight:600;color:#555;background:#f3f0e9;border-radius:9px}
+.review-emblem-art .review-image-error-text{padding:10px;font-size:11px}
+.review-gallery-item[aria-disabled="true"]{cursor:default;pointer-events:none}
