@@ -48,14 +48,30 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
     // until they have substantial original editorial context.
     add(brandPath(b),title,desc,html,{noindex:b.articles.length<2});
   }
+  // Link subject clusters to the site's established guides, calculators and books.
+  const topicResources={
+    "menu-engineering":[["راهنمای مهندسی منو","guides/menu-engineering/"],["ابزار تحلیل منو","tools/menu/"],["کتاب مدیریت جامع ۱۰۱","library/01/"]],
+    "pricing-profit":[["راهنمای قیمت‌گذاری منو","guides/menu-pricing/"],["محاسبه‌گر قیمت‌گذاری","tools/pricing/"],["کتاب مدیریت جامع ۱۰۱","library/01/"]],
+    "staff-leadership":[["مدیریت کارکنان رستوران","guides/restaurant-staff/"],["محاسبه‌گر هزینهٔ نیروی کار","tools/labor/"],["کتاب مدیریت جامع ۱۰۱","library/01/"]],
+    "operations-quality":[["استانداردسازی عملیات آشپزخانه","guides/kitchen-sop/"],["استانداردهای سرویس","guides/restaurant-service-standards/"]],
+    "food-safety":[["استانداردسازی آشپزخانه","guides/kitchen-sop/"],["کتاب مدیریت جامع ۱۰۱","library/01/"]],
+    "customer-experience":[["راهنمای استانداردهای سرویس","guides/restaurant-service-standards/"],["کتاب مدیریت جامع ۱۰۱","library/01/"]],
+    "marketing-branding":[["راهنمای مدیریت رستوران","guides/restaurant-management/"],["کتاب مدیریت جامع ۱۰۱","library/01/"]],
+    "growth-strategy":[["راهنمای راه‌اندازی","guides/restaurant-permits/"],["محاسبه‌گر سرمایه و دوام","tools/startup-runway/"],["کتاب کوچک شروع کن","library/02/"]],
+    "supply-chain":[["راهنمای فودکاست","guides/food-cost/"],["محاسبه‌گر بهای مواد اولیه","tools/foodcost/"]],
+    "crisis-management":[["راهنمای مدیریت رستوران","guides/restaurant-management/"],["کتاب دوام بیاور","library/03/"]],
+    "finance-controls":[["راهنمای سود رستوران","guides/restaurant-profit/"],["محاسبه‌گر نقطه سربه‌سر","tools/breakeven/"],["کتاب دوام بیاور","library/03/"]]
+  };
   for(const t of topicGroups){
     const title=t.title+"؛ تجربه برندها و راهکار رستوران‌داری";
     const desc=t.description+". پرونده‌های مستند از برندهای غذا همراه با روش‌های قابل اجرا برای مدیران.";
     const relatedBrands=[...new Set(t.articles.map(a=>brandOf(a)?.slug).filter(Boolean))].map(s=>brands.get(s));
     const brandLinks=relatedBrands.map(b=>'<a class="chip" href="'+link(brandPath(b))+'">'+esc(b.fa)+'</a>').join(" ");
+    const resources=(topicResources[t.slug]||[]).map(([name,path])=>'<a href="'+link(path)+'">'+esc(name)+'</a>').join(" ");
     const html=intro(title,"راهنمای موضوعی",desc,t.title)+
       section("تجربه‌های واقعی","مطالعات موردی مرتبط با "+t.title,editorialCards(t.articles))+
-      (brandLinks?section("برندهای مرتبط","این مسئله در چه برندهایی دیده شده است؟",'<div class="chips">'+brandLinks+'</div>'):"");
+      (brandLinks?section("برندهای مرتبط","این مسئله در چه برندهایی دیده شده است؟",'<div class="chips">'+brandLinks+'</div>'):"")+
+      (resources?section("از تحلیل به اجرا","راهنما، ابزار و کتاب مرتبط",'<div class="related">'+resources+'</div>'):"");
     add(topicPath(t),title,desc,html,{noindex:t.articles.length<2});
   }
   return {
