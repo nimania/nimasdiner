@@ -4,6 +4,7 @@ import {renderReviews} from "./review-pages.mjs";
 import {renderManagerPages} from "./manager-pages.mjs";
 import {renderConsultation} from "./consultation-page.mjs";
 import {renderBrandTopicPages} from "./brand-topic-pages.mjs";
+import {renderKnowledgeSidebar} from "./knowledge-sidebar.mjs";
 import {persianizeHTML} from "./persian-digits-html.mjs";
 
 // Generated pages are the source of deployed HTML. Do not edit site-dist by hand.
@@ -137,11 +138,20 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
     `<section class="pagehead wrap">${crumbs([["دانشنامه",null]])}<p class="eyebrow">دانشنامه داینر</p><h1>یادگیری درباره مسائل واقعی رستوران‌داری</h1><p class="lead">هر موضوع صفحه پایدار، توضیح قابل خواندن، پیوند به منبع و مسیر عملی خواهد داشت. راهنماها با بررسی و راستی‌آزمایی تکمیل می‌شوند.</p></section>`
       +section("مطالب موجود","از اینجا شروع کن",`<div class="cards three">${data.guides.map(g=>card(`guides/${g.slug}/`,g.tags.join(" · "),g.title,g.summary)).join("")}</div>`));
   for(const g of data.guides){
+    const guideSidebar=renderKnowledgeSidebar({
+      headings:g.sections.map(item=>item.h),
+      related:[
+        {label:"همه راهنماهای دانشنامه",path:"guides/"},
+        {label:"ابزارها و محاسبه‌گرها",path:"tools/"},
+        {label:"درس‌های برندهای بزرگ",path:"reading/brand-lessons/"},
+        {label:"کتاب مرجع مدیریت رستوران",path:"library/01/"}
+      ],link,esc
+    });
     const sourceNote=g.regulatory
       ?`<aside class="source-note" style="border-right:4px solid var(--red,#c94232);background:#fff6f4"><strong>هشدار مهم: این راهنما مرجع رسمی نیست</strong><p>این صفحه فقط ترتیب کلی کارها و مدارک رایج را برای جهت‌دهی توضیح می‌دهد. مقررات، مدارک، مبالغ، نرخ‌ها و مراحل بسته به شهر، صنف و زمان تغییر می‌کند. پیش از هر اقدام، شرایط روز را مستقیماً از مرجع رسمی مربوط (اتحادیهٔ صنفی، ادارهٔ نظارت بر اماکن عمومی، مرکز بهداشت یا سازمان امور مالیاتی) استعلام کنید. این مطلب مشاورهٔ حقوقی یا مالیاتی نیست.</p></aside>`
       :`<aside class="source-note"><strong>درباره منابع و حدود اعتبار</strong><p>این صفحه بر پایه مباحث کتابخانه و پرونده‌های نیما داینر تدوین شده است. نمونه‌های عددی آموزشی‌اند. الزامات بهداشتی و حقوقی باید جداگانه با منابع رسمیِ معتبر در تاریخ و شهر مربوط بررسی شوند.</p></aside>`;
     const body=`<section class="pagehead wrap">${crumbs([["دانشنامه","guides/"],[g.title,null]])}<p class="eyebrow">${esc(g.tags.join(" · "))}</p><h1>${esc(g.title)}</h1><p class="lead">${esc(g.summary)}</p><div class="chips">${badge("راهنمای مرجع")}${g.regulatory?badge("نیازمند استعلام رسمی","active"):badge("آخرین تدوین: آبان ۱۴۰۵")}</div></section>`
-      +`<article class="article wrap"><div class="article-body">${g.regulatory?sourceNote:""}${g.sections.map(s=>`<section><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}${g.regulatory?"":sourceNote}<div class="related"><h2>در ادامه</h2><a href="${link("library/01/")}">کتاب مرجع مدیریت رستوران</a><a href="${link("tools/")}">محاسبه‌گرهای داینر</a><a href="${link("magazine/")}">آرشیو مجله داینر</a></div>${relatedBooks([(["start-restaurant","start-cafe","start-fastfood","restaurant-startup-cost"].includes(g.slug)?2:1)])}${comment(g.title)}</div></article>`;
+      +`<article class="article wrap knowledge-layout">${guideSidebar}<div class="article-body">${g.regulatory?sourceNote:""}${g.sections.map((s,i)=>`<section id="section-${i+1}"><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}${g.regulatory?"":sourceNote}<div class="related"><h2>در ادامه</h2><a href="${link("library/01/")}">کتاب مرجع مدیریت رستوران</a><a href="${link("tools/")}">محاسبه‌گرهای داینر</a><a href="${link("magazine/")}">آرشیو مجله داینر</a></div>${relatedBooks([(["start-restaurant","start-cafe","start-fastfood","restaurant-startup-cost"].includes(g.slug)?2:1)])}${comment(g.title)}</div></article>`;
     add(`guides/${g.slug}/`,g.title,g.summary,body,{structured:{"@context":"https://schema.org","@type":"Article",headline:g.title,description:g.summary,inLanguage:"fa",author:{"@type":"Organization",name:"تحریریه نیما داینر"},publisher:{"@type":"Organization",name:"نیما داینر",logo:{"@type":"ImageObject",url:ORIGIN+"/assets/logo-512.png"}}},keywords:g.tags.join(" ")});
   }
   const toolCatalog=[
@@ -205,10 +215,26 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   add("reading/analysis/","تحلیل صنعت رستوران و اقتصاد غذا","تحلیل مدل‌های درآمد، فودکاست، مدیریت منو، بوفه‌ها و بازگشت مشتری برای صاحبان کسب‌وکار غذا.",introReading("تحلیل‌ها","تحلیل و تجربه","مطالعات مسئله‌محور و مثال‌های اجرایی؛ اعداد فرضی به‌روشنی از داده‌های واقعی جدا می‌شوند.")
     +section("مسائل کسب‌وکار","نگاهی عمیق‌تر به تصمیم‌های مدیر",editorialCards(artItems.filter(a=>a.type==="analysis"))));
   for(const a of artItems){
+    const tagged=editorial.brandTaxonomy.articleTags[a.slug]||{};
+    const brandSlug=a.brand||tagged.brand;
+    const brand=editorial.brandTaxonomy.brands.find(item=>item.slug===brandSlug);
+    const topicSlugs=a.topics||tagged.topics||[];
+    const topicLinks=topicSlugs.slice(0,2).map(slug=>editorial.brandTaxonomy.topics.find(t=>t.slug===slug)).filter(Boolean)
+      .map(t=>({label:t.title,path:"reading/topics/"+t.slug+"/"}));
+    const articleSidebar=renderKnowledgeSidebar({
+      headings:a.sections.map(item=>item.h),
+      related:[
+        ...(brand?[{label:"تمام مطالب "+brand.fa,path:"reading/brands/"+brand.slug+"/"}]:[]),
+        ...topicLinks,
+        {label:"همه خواندنی‌های داینر",path:"reading/"},
+        {label:"دانشنامه رستوران‌داری",path:"guides/"},
+        {label:"ابزارهای مدیریتی",path:"tools/"}
+      ],link,esc
+    });
     const sourceLinks=(a.sources||[]).map(x=>`<li><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a></li>`).join("");
     const links=(a.related||[]).map(u=>`<a href="${link(u)}">${esc(({"tools/":"محاسبه‌گرهای داینر","journal/":"ژورنال مدیر","magazine/01/":"مجلهٔ کرواسان"}[u]||data.guides.find(g=>"guides/"+g.slug+"/"===u)?.title||"مطالعهٔ مرتبط"))}</a>`).join("");
     const body=`<section class="pagehead wrap">${crumbs([["خواندنی‌ها","reading/"],[a.type==="news"?"رادار صنعت":"تحلیل و تجربه",a.type==="news"?"reading/news/":"reading/analysis/"],[a.title,null]])}<p class="eyebrow">${esc(a.type==="news"?"خبر و تفسیر برای مدیران":"تحلیل کسب‌وکار غذا")} · ${esc(a.topic)}</p><h1>${esc(a.title)}</h1><p class="lead">${esc(a.excerpt)}</p><div class="chips"><span class="chip">تدوین: ${esc(a.byline)}</span><span class="chip">انتشار در داینر: <time datetime="${esc(a.publishedAt)}">${esc(a.publishedAt)}</time></span>${a.sourcePublishedAt?`<span class="chip">تاریخ خبر اصلی: <time datetime="${esc(a.sourcePublishedAt)}">${esc(a.sourcePublishedAt)}</time></span>`:""}</div></section>
-    <article class="article wrap"><div class="article-body">${a.sections.map(s=>`<section><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}
+    <article class="article wrap knowledge-layout">${articleSidebar}<div class="article-body">${a.sections.map((s,i)=>`<section id="section-${i+1}"><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}
     <aside class="source-note"><strong>منابع و شیوه تدوین</strong><p>${a.type==="news"?"گزارش خبری بر پایه منبع اصلی و تحلیل عملی داینر تهیه شده است. دامنه جغرافیایی داده‌ها در متن مشخص است.":"این یادداشت تحلیلی و آموزشی است. مثال‌های عددی فرضی هستند و نباید داده مشاهده‌شده از بازار تلقی شوند."}</p>${sourceLinks?`<ul class="source-links">${sourceLinks}</ul>`:"<p>روش: تحلیل مفهومی و مثال محاسباتی؛ بدون ادعای انجام پژوهش میدانی.</p>"}</aside>
     <div class="related"><h2>مطالعه و ابزار مرتبط</h2>${links}${brandTopic.articleLinks(a)}</div>${calcArticle(a.slug)}${articleTools[a.slug]?`<p><a class="button button-outline" href="${link("tools/"+articleTools[a.slug][0]+"/")}">صفحه مستقل این محاسبه‌گر ←</a></p>`:""}${sourceBooks(a.bookSources||[])}${articleBookAd()}${comment(a.title)}</div></article>`;
     const articleSchema={"@context":"https://schema.org","@type":a.type==="news"?"NewsArticle":"Article",headline:a.title,description:a.excerpt,datePublished:a.publishedAt,author:{"@type":a.byline==="نیما افشارنادری"?"Person":"Organization",name:a.byline},publisher:{"@type":"Organization",name:"نیما داینر",logo:{"@type":"ImageObject",url:ORIGIN+"/assets/logo-512.png"}},inLanguage:"fa",mainEntityOfPage:ORIGIN+"/"+artPath(a)};
