@@ -501,3 +501,6 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .glossary-term a:hover .glossary-fa{color:var(--red)}
 .glossary-term[hidden],.glossary-cat[hidden]{display:none}
 @media (max-width:700px){.glossary-tools{position:static}.glossary-terms{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.glossary-term>a,.glossary-term:not(:has(a)){padding:8px 10px}.glossary-cat{scroll-margin-top:20px}}
+.glossary-h1-en{display:block;font-size:.45em;color:var(--muted);font-weight:500;font-family:system-ui,sans-serif;text-align:right}
+.glossary-formula{border-right:4px solid var(--yellow)}
+.glossary-formula p{font-weight:700;margin:4px 0 0}

@@ -5,6 +5,9 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  # Daily rebuild at 06:00 Tehran so scheduled glossary entries (publishOn) go live.
+  schedule:
+    - cron: '30 2 * * *'
 permissions:
   contents: read
   pages: write

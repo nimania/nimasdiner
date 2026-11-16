@@ -227,6 +227,15 @@ assert.match(glossaryPage,/rel="canonical" href="https:\/\/nimania\.net\/glossar
 assert.match(glossaryPage,/"@type":"DefinedTermSet"/,"glossary structured data");
 assert.match(read("sitemap.xml"),/\/glossary\//,"glossary missing from sitemap");
 assert.match(read("guides/index.html"),/href="\/glossary\/"/,"glossary link missing from guides hub");
+{
+ const {renderGlossary}=await import("./glossary-page.mjs");
+ const g=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/glossary.json"),"utf8"));
+ const e=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/glossary-entries.json"),"utf8"));
+ const future=[];renderGlossary({glossary:structuredClone(g),entries:e,today:"2999-01-01",add:p=>future.push(p),crumbs:()=>"",link:p=>"/"+p,esc:s=>String(s)});
+ assert.equal(future.filter(p=>p.startsWith("glossary/")&&p!=="glossary/").length,e.entries.length,"every scheduled glossary entry must render");
+ const past=[];renderGlossary({glossary:structuredClone(g),entries:e,today:"2000-01-01",add:p=>past.push(p),crumbs:()=>"",link:p=>"/"+p,esc:s=>String(s)});
+ assert.deepEqual(past,["glossary/"],"unscheduled entries must not be published early");
+}
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
 
 const calculatorSlugs=["good-cook-or-restaurant-owner","opening-budget-versus-survival-cash","smaller-customer-bills-in-a-downturn","restaurant-technology-connected-2026","menu-trends-value-comfort-2026","restaurant-cost-pressure-2026","why-top-selling-menu-items-may-not-be-profitable","buffet-economics-fixed-price","consistent-food-brings-customers-back","recipe-card-standardization","restaurant-menu-pricing","restaurant-break-even","restaurant-delivery-discounts","restaurant-staffing-cost","restaurant-seat-capacity"];
