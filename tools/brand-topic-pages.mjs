@@ -44,7 +44,7 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
   const hub=intro("درس‌هایی از برندهای بزرگ","تجربه برندها؛ راهکار رستوران‌داری",
     "از تصمیم‌های واقعی برندهای شناخته‌شدهٔ صنعت غذا تا راه‌حل‌های قابل اجرا برای کافه و رستوران. از دو مسیر برند یا مسئله مدیریتی وارد شوید.","درس‌هایی از برندهای بزرگ")+
     section("مطالعه بر اساس برند","برندهایی که مطلب منتشرشده دارند",brandCards(brandGroups.filter(b=>b.articles.length)))+
-    section("جدیدترین پرونده‌ها","از ماجرا تا راه‌حل اجرایی",editorialCards(published.filter(a=>brandOf(a)).slice().sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt)).slice(0,6)))+
+    section("جدیدترین پرونده‌ها","از ماجرا تا راه‌حل اجرایی",editorialCards(published.filter(a=>brandOf(a)).slice().sort((a,b)=>String(b.publishedAt||"").localeCompare(String(a.publishedAt||""))).slice(0,6)))+
     section("برندهای بعدی","پرونده‌های در حال راستی‌آزمایی",brandCards(brandGroups.filter(b=>!b.articles.length)))+
     section("بر اساس موضوع","مسئله‌ای که می‌خواهید حل کنید",listLinks(topicGroups,topicPath,t=>t.title))+
     section("تحلیل و آموزش","یک پرونده، دو مسیر",'<p class="rich">هر تحلیل نشانی اصلی خودش را دارد و در صفحهٔ برند و صفحهٔ موضوع فقط معرفی و پیوند آن می‌آید. ادعاها با منابع مشخص بررسی می‌شوند؛ مثال‌های مدیریتی از واقعیت تاریخی جدا هستند.</p>');
