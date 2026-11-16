@@ -292,7 +292,7 @@ function finishHTML(dir){
   }
   // Browser-side localization catches results generated after page load.
   if(!html.includes('src="/nimasdiner/persian-digits.js"')){
-    html=html.replace(/<\\/body>/i,'<script defer src="/nimasdiner/persian-digits.js"></script></body>');
+    html=html.replace(new RegExp("</body>","i"),'<script defer src="/nimasdiner/persian-digits.js"></script></body>');
   }
   // Render crawled/static HTML text in Persian; leave markup, IDs, links, data and JS intact.
   html=persianizeHTML(html);
