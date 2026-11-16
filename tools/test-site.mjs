@@ -66,6 +66,25 @@ if(!reviews.reviews.some(r=>r.status==="published")){
 }
 console.log("Review archive tests passed");
 
+// Video structured data must use a true timezone-aware publication DateTime.
+// The article's display date remains separate and can be localized in Persian.
+const barokReview=reviews.reviews.find(r=>r.slug==="barok-nowshahr");
+assert.ok(barokReview,"Barok review missing");
+assert.equal(barokReview.videoGallery?.[0]?.uploadDate,"2026-11-15T19:29:51Z");
+const barokHtml=read("reviews/barok-nowshahr/index.html");
+const schemas=[...barokHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+  .map(x=>JSON.parse(x[1])).flat();
+const videos=schemas.flatMap(x=>Array.isArray(x)?x:[x]).filter(x=>x?.["@type"]==="VideoObject");
+assert.equal(videos.length,1,"Expected one Barok VideoObject in JSON-LD");
+for(const video of videos){
+ assert.match(video.uploadDate,/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/,"VideoObject uploadDate requires an ISO datetime with timezone");
+ assert.ok(Number.isFinite(Date.parse(video.uploadDate)),"Unparseable video uploadDate");
+ assert.equal(video.uploadDate,barokReview.videoGallery[0].uploadDate);
+ assert.match(video.contentUrl,/\/assets\/reviews\/barok-exterior-night\.mp4$/);
+}
+console.log("VideoObject published timestamp and timezone checks passed");
+
+
 const taxonomy=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/brand-topics.json"),"utf8"));
 assert.equal(taxonomy.brands.length,25,"Expected 25 case-study brands");
 assert.equal(taxonomy.topics.length,11,"Expected 11 consolidated management subjects");
