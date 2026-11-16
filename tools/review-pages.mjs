@@ -63,8 +63,8 @@ export function renderReviews({reviews, add, section, crumbs, link, esc, comment
     const categories=[...new Set(images.map(p=>p.group||'تصاویر'))];
     const galleryId='review-gallery-'+r.slug;
     return `<section class="review-dossier-gallery" id="${esc(galleryId)}" aria-labelledby="review-gallery-heading">
-      <div class="review-gallery-heading"><span class="kicker">گزارش تصویری</span><h2 id="review-gallery-heading">گالری عکس و ویدئوی ${esc(r.venue.name)}</h2>
-      <p>تصاویر و ویدئوهای ثبت‌شده از محیط مجموعه و غذاهای سرو‌شده. عکس‌ها را برای نمایش بزرگ‌تر انتخاب کنید و ویدئوها را با کنترل پخش خودتان ببینید.</p></div>
+      <div class="review-gallery-heading"><span class="kicker">${esc(r.galleryTitle?"اسناد تصویری":"گزارش تصویری")}</span><h2 id="review-gallery-heading">${esc(r.galleryTitle||`گالری عکس و ویدئوی ${r.venue.name}`)}</h2>
+      <p>${esc(r.galleryIntro||"تصاویر و ویدئوهای ثبت‌شده از محیط مجموعه و غذاهای سرو‌شده. عکس‌ها را برای نمایش بزرگ‌تر انتخاب کنید و ویدئوها را با کنترل پخش خودتان ببینید.")}</p></div>
       ${categories.map(group=>`<div class="review-gallery-group"><h3>${esc(group)}</h3><div class="review-gallery-grid">
       ${images.map((p,i)=>({p,i})).filter(x=>(x.p.group||'تصاویر')===group).map(({p,i})=>`<a class="review-gallery-item" data-photo-index="${i}" href="${esc(p.src)}" aria-label="نمایش تصویر بزرگ: ${esc(p.alt)}">
       <figure><img src="${esc(p.src)}" alt="${esc(p.alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
@@ -72,7 +72,7 @@ export function renderReviews({reviews, add, section, crumbs, link, esc, comment
       ${videos.length?`<div class="review-gallery-group"><h3>ویدئوهای مجموعه</h3><div class="review-video-grid">
       ${videos.map(v=>`<figure class="review-video-item"><video controls playsinline preload="metadata" ${v.poster?`poster="${esc(v.poster)}"`:''} aria-label="${esc(v.alt||v.caption||'ویدئوی رستوران')}"><source src="${esc(v.src)}" type="${esc(v.type||'video/mp4')}">مرورگر شما امکان پخش این ویدئو را ندارد.</video>
       <figcaption>${esc(v.caption||'نمایی از مجموعه')}</figcaption></figure>`).join('')}</div></div>`:''}
-      <p class="review-gallery-note">عکس‌ها و ویدئوها ثبت تصویری محیط و غذاها هستند؛ برای نتیجه‌گیری قطعی دربارهٔ کیفیت خدمات، قیمت یا طعم کافی نیستند.</p>
+      <p class="review-gallery-note">${esc(r.galleryTitle?"این تصویر یک سند آرشیوی با تاریخ و پدیدآورنده نامشخص است و به‌تنهایی مالکیت حقوقی یا کیفیت امروز رستوران را اثبات نمی‌کند.":"عکس‌ها و ویدئوها ثبت تصویری محیط و غذاها هستند؛ برای نتیجه‌گیری قطعی دربارهٔ کیفیت خدمات، قیمت یا طعم کافی نیستند.")}</p>
       ${images.length?`<dialog class="review-photo-modal" id="review-photo-modal" aria-label="نمایش بزرگ تصاویر">
         <button type="button" class="review-modal-close" aria-label="بستن تصویر">×</button>
         <button type="button" class="review-modal-prev" aria-label="تصویر قبلی">‹</button>
