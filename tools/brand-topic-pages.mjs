@@ -31,7 +31,7 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
   // Use ordinary <a href> image links so crawlers can see destinations without JavaScript.
   // Images identify the covered brand editorially, never as a visual endorsement.
   const brandLogo=b=>b.logo?.src?
-    '<img src="'+esc(b.logo.src)+'" alt="'+esc("لوگوی "+b.fa+" ("+b.en+")")+"\\""+' loading="lazy" decoding="async" width="'+Number(b.logo.width)+'" height="'+Number(b.logo.height)+'">':
+    '<img src="'+esc(b.logo.src)+'" alt="'+esc("لوگوی "+b.fa+" ("+b.en+")")+'" loading="lazy" decoding="async" width="'+Number(b.logo.width)+'" height="'+Number(b.logo.height)+'">':
     '<span class="brand-fallback-mark" dir="ltr">'+esc(b.en)+'</span>';
   const brandCards=arr=>arr.length?'<div class="brand-logo-grid">'+arr.map(b=>
     '<a class="brand-logo-link" href="'+link(brandPath(b))+'" aria-label="'+esc("مطالعه خبرها، تجربه‌ها و درس‌های مدیریتی "+b.fa)+'">'+
