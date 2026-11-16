@@ -13,6 +13,7 @@ export function renderReviews({reviews, add, section, crumbs, link, esc, comment
 
   const faDate=s=>new Intl.DateTimeFormat('fa-IR',{dateStyle:'long',timeZone:'UTC'}).format(new Date(s+'T12:00:00Z'));
   const url=r=>'reviews/'+r.slug+'/';
+  const absImageUrl=src=>/^https?:\/\//i.test(src)?src:'https://nimania.github.io'+src;
   const card=r=>`<article class="card review-card" data-review-category="${esc(r.category)}" data-review-city="${esc(r.venue.city)}" data-review-type="${esc(r.venue.type)}"><a class="review-cover" href="${link(url(r))}">${r.photos?.length?`<img src="${esc(r.photos[0].src)}" alt="${esc(r.photos[0].alt.replace(" در نوشتهٔ آرشیوی",""))}" loading="lazy" width="640" height="420">`:`<span class="review-cover-text">${esc(r.venue.name)}</span>`}</a><div class="review-card-body"><span class="kicker">${esc(r.venue.city)} · ${esc(r.venue.type)}</span><h3><a href="${link(url(r))}">${esc(r.title)}</a></h3><p>${esc(r.summary)}</p><div class="card-meta"><time datetime="${r.publishedAt}">${faDate(r.publishedAt)}</time><a class="textlink" href="${link(url(r))}">خواندن نقد ←</a></div></div></article>`;
   const cities=[...new Set(items.map(r=>r.venue.city))],types=[...new Set(items.map(r=>r.venue.type))];
   const options=arr=>arr.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');
@@ -83,18 +84,18 @@ export function renderReviews({reviews, add, section, crumbs, link, esc, comment
     const image=(p,j)=>`<figure class="review-photo"><img src="${esc(p.src)}" alt="${esc(p.alt.replace(" در نوشتهٔ آرشیوی",""))}" ${j?'loading="lazy"':''}>${p.caption||p.credit?`<figcaption>${p.caption?esc(p.caption):''}${p.caption&&p.credit?' · ':''}${p.credit?'عکس: '+esc(p.credit):''}</figcaption>`:''}</figure>`;
     const photos=r.photos||[];
     const body=`<section class="pagehead wrap">${crumbs([['نقدهای نیما','reviews/'],[r.venue.name,null]])}<p class="eyebrow">${esc(r.venue.city)} · ${esc(r.venue.type)}</p><h1>${esc(r.title)}</h1><p class="lead">${esc(r.summary)}</p><p class="muted"><time datetime="${r.publishedAt}">${faDate(r.publishedAt)}</time></p></section><article class="article wrap${r.sidebar?' review-article':''}">${renderSidebar(r)}<div class="article-body">${photos[0]?image(photos[0],0):(r.sidebar?`<div class="review-text-hero" aria-label="${esc(r.venue.name)}؛ تصویر واقعی این رستوران هنوز به این پرونده افزوده نشده"><strong>${esc(r.venue.name)}</strong><span>${esc(r.venue.city)} · ${esc(r.venue.type)}</span></div>`:'')}${r.body.map((s,sectionIndex)=>`<section>${!r.historical&&s.h?`<h2>${esc(s.h)}</h2>`:''}${s.p.map(p=>`<p>${r.historical?esc(p):renderInline(p)}</p>`).join('')}${inlinePhotos(r,photos,sectionIndex,image)}${sectionIndex===3?renderDossierGallery(r):''}</section>`).join('')}${photos.length>1&&!r.sidebar?`<section><h2>عکس‌های همراه نوشته</h2><div class="review-photo-grid">${photos.slice(1).map((p,j)=>image(p,j+1)).join('')}</div></section>`:''}${r.sourceUrl?`<p><a class="textlink" href="${esc(r.sourceUrl)}" target="_blank" rel="noopener noreferrer">نسخهٔ منتشرشده در ایکس ←</a></p>`:''}${r.relatedSlugs?.length?`<section class="review-related-section"><h2>مطالب مرتبط</h2><div class="cards three">${r.relatedSlugs.map(slug=>items.find(x=>x.slug===slug)).filter(Boolean).map(card).join('')}</div><p><a class="textlink" href="${link('guides/menu-engineering/')}">راهنمای مهندسی منوی رستوران ←</a></p></section>`:''}<nav class="related" aria-label="نوشته‌های دیگر"><h2>نوشته‌های دیگر</h2>${[items[i-1],items[i+1]].filter(Boolean).map(x=>`<a href="${link(url(x))}">${esc(x.title)} ←</a>`).join('')}<a href="${link('reviews/')}">همهٔ نقدها</a></nav>${comment(r.title)}</div></article>`;
-    add(url(r),r.title,r.summary,body,{image:r.photos?.[0]?.src||"",lastmod:r.photoGallery?.length?'2026-11-15':r.publishedAt,script:(r.photoGallery?.length||r.videoGallery?.length)?'assets/review-gallery.js':'',structured:[
-      {'@context':'https://schema.org','@type':'Article',headline:r.title,description:r.summary,datePublished:r.publishedAt,...(r.photoGallery?.length?{dateModified:'2026-11-15'}:{}),inLanguage:'fa',
-        image:[...(r.photos?.[0]?[r.photos[0]]:[]),...(r.photoGallery||[]).slice(0,5)].map(p=>'https://nimania.github.io'+p.src),
+    add(url(r),r.title,r.summary,body,{image:r.photos?.[0]?.src||"",lastmod:r.updatedAt||r.publishedAt,script:(r.photoGallery?.length||r.videoGallery?.length)?'assets/review-gallery.js':'',structured:[
+      {'@context':'https://schema.org','@type':'Article',headline:r.title,description:r.summary,datePublished:r.publishedAt,...(r.updatedAt?{dateModified:r.updatedAt}:{}),inLanguage:'fa',
+        image:[...(r.photos?.[0]?[r.photos[0]]:[]),...(r.photoGallery||[]).slice(0,5)].map(p=>absImageUrl(p.src)),
         author:{'@type':'Person',name:'نیما افشارنادری'},...(r.sourceUrl?{isBasedOn:r.sourceUrl}:{}),
         publisher:{'@type':'Organization',name:'نیما داینر',logo:{'@type':'ImageObject',url:'https://nimania.github.io/nimasdiner/assets/logo-512.png'}}},
       ...(r.photoGallery?.length?[{'@context':'https://schema.org','@type':'ImageGallery',name:'گالری عکس‌های '+r.venue.name,
         url:'https://nimania.github.io/nimasdiner/'+url(r)+'#review-gallery-'+r.slug,inLanguage:'fa',
-        associatedMedia:r.photoGallery.map(p=>({'@type':'ImageObject',contentUrl:'https://nimania.github.io'+p.src,
+        associatedMedia:r.photoGallery.map(p=>({'@type':'ImageObject',contentUrl:absImageUrl(p.src),
            name:p.caption,description:p.alt,caption:p.caption}))}]:[]),
       ...(r.videoGallery||[]).map(v=>({'@context':'https://schema.org','@type':'VideoObject',
         name:v.caption||'ویدئوی '+r.venue.name,description:v.alt||v.caption||r.summary,
-        contentUrl:'https://nimania.github.io'+v.src,thumbnailUrl:'https://nimania.github.io'+(v.poster||r.photos?.[0]?.src),
+        contentUrl:absImageUrl(v.src),thumbnailUrl:absImageUrl(v.poster||r.photos?.[0]?.src),
         uploadDate:v.uploadDate,inLanguage:'fa',duration:'PT2S'}))
     ]});
   }
