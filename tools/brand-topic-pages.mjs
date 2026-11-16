@@ -21,7 +21,7 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
   const intro=(heading,kicker,description,trail)=>
     '<section class="pagehead wrap">'+crumbs([["خواندنی‌ها","reading/"],["درس‌هایی از برندهای بزرگ","reading/brand-lessons/"],[trail,null]])+
     '<p class="eyebrow">'+esc(kicker)+'</p><h1>'+esc(heading)+'</h1><p class="lead">'+esc(description)+'</p></section>';
-  const brandGroups=[...brands.values()].map(b=>({...b,articles:published.filter(a=>brandOf(a)?.slug===b.slug)}));
+  const brandGroups=[...brands.values()].map(b=>({...b,articles:published.filter(a=>brandOf(a)?.slug===b.slug)})).sort((a,b)=>b.articles.length-a.articles.length);
   const topicGroups=[...topics.values()].map(t=>({...t,articles:published.filter(a=>topicsOf(a).some(x=>x.slug===t.slug))}));
   const listLinks=(xs,makePath,makeLabel)=>
     xs.length?'<div class="cards three">'+xs.map(x=>
@@ -43,7 +43,9 @@ export function renderBrandTopicPages({editorial,add,section,crumbs,editorialCar
     '<p class="muted">با انتشار نخستین پروندهٔ تأییدشده، لوگو و صفحهٔ اختصاصی برند در این بخش فعال می‌شود.</p>';
   const hub=intro("درس‌هایی از برندهای بزرگ","تجربه برندها؛ راهکار رستوران‌داری",
     "از تصمیم‌های واقعی برندهای شناخته‌شدهٔ صنعت غذا تا راه‌حل‌های قابل اجرا برای کافه و رستوران. از دو مسیر برند یا مسئله مدیریتی وارد شوید.","درس‌هایی از برندهای بزرگ")+
-    section("بر اساس برند","برندها و تجربه‌هایشان",brandCards(brandGroups))+
+    section("مطالعه بر اساس برند","برندهایی که مطلب منتشرشده دارند",brandCards(brandGroups.filter(b=>b.articles.length)))+
+    section("جدیدترین پرونده‌ها","از ماجرا تا راه‌حل اجرایی",editorialCards(published.filter(a=>brandOf(a)).slice().sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt)).slice(0,6)))+
+    section("برندهای بعدی","پرونده‌های در حال راستی‌آزمایی",brandCards(brandGroups.filter(b=>!b.articles.length)))+
     section("بر اساس موضوع","مسئله‌ای که می‌خواهید حل کنید",listLinks(topicGroups,topicPath,t=>t.title))+
     section("تحلیل و آموزش","یک پرونده، دو مسیر",'<p class="rich">هر تحلیل نشانی اصلی خودش را دارد و در صفحهٔ برند و صفحهٔ موضوع فقط معرفی و پیوند آن می‌آید. ادعاها با منابع مشخص بررسی می‌شوند؛ مثال‌های مدیریتی از واقعیت تاریخی جدا هستند.</p>');
   add("reading/brand-lessons/","درس‌هایی از برندهای بزرگ برای رستوران‌داران | نیما داینر",
