@@ -138,6 +138,42 @@ assert.ok(noLogoProfile,"Brand without approved logo must still have its own pag
 assert.doesNotMatch(noLogoProfile.html,/brand-profile-logo/,"Unapproved brand mark must not appear");
 console.log("Brand logo card tests passed:",approvedLogos.length,"source-checked marks and text fallbacks");
 
+const publishedBrandLessons=["brand-lessons-part1.json","brand-lessons-part2.json"].flatMap(name=>JSON.parse(fs.readFileSync(path.join(process.cwd(),"content",name),"utf8")).articles);
+assert.equal(publishedBrandLessons.length,13,"Initial verified editorial release should include 13 case studies");
+assert.equal(new Set(publishedBrandLessons.map(a=>a.slug)).size,13,"Duplicate published brand article slugs");
+for(const a of publishedBrandLessons){
+  assert.equal(a.status,"published");
+  assert.ok(a.sources?.length>=2 && a.sources.every(s=>s.url.startsWith("https://")),"Missing sources: "+a.slug);
+  const page=read("reading/"+a.slug+"/index.html");
+  assert.ok(page.includes(a.title),"Published article title missing: "+a.slug);
+  assert.ok(page.includes("/reading/brands/"+a.brand+"/"),"Brand backlink missing: "+a.slug);
+  assert.ok(page.includes("منابع و شیوه تدوین"),"Editorial source list missing: "+a.slug);
+  assert.ok(page.includes("2026-11-16"),"Original Diner publication date missing: "+a.slug);
+  for(const t of a.topics)assert.ok(page.includes("/reading/topics/"+t+"/"),"Topic backlink missing: "+a.slug+" "+t);
+  assert.ok(sitemap.includes("reading/"+a.slug+"/"),"Published story missing from sitemap: "+a.slug);
+  assert.ok(items.some(x=>x.url==="/reading/"+a.slug+"/"),"Story missing from site search: "+a.slug);
+}
+const brandLanding=read("reading/brand-lessons/index.html");
+assert.match(brandLanding,/برندهایی که مطلب منتشرشده دارند/);
+assert.match(brandLanding,/جدیدترین پرونده‌ها/);
+assert.match(brandLanding,/پرونده‌های در حال راستی‌آزمایی/);
+assert.match(brandLanding,/استارباکس چرا ۷ هزار شعبه را بست/);
+assert.match(brandLanding,/منوی ۹ آیتمی مک‌دونالد/);
+const starbucksHub=read("reading/brands/starbucks/index.html");
+const dominosHub=read("reading/brands/dominos/index.html");
+for(const q of publishedBrandLessons.filter(a=>a.brand==="starbucks")){
+  assert.ok(starbucksHub.includes("/reading/"+q.slug+"/"),"Starbucks article missing in brand hub "+q.slug);
+}
+assert.equal(publishedBrandLessons.filter(a=>a.brand==="starbucks").length,4);
+assert.equal(publishedBrandLessons.filter(a=>a.brand==="dominos").length,2);
+for(const q of publishedBrandLessons.filter(a=>a.brand==="dominos")){
+  assert.ok(dominosHub.includes("/reading/"+q.slug+"/"),"Dominos article missing in brand hub "+q.slug);
+}
+assert.doesNotMatch(starbucksHub,/name="robots" content="noindex/,"Multi-article Starbucks brand hub should be indexed");
+assert.match(read("reading/brands/starbucks/index.html"),/مهندسی منو/);
+console.log("Published brand lessons checked:",publishedBrandLessons.length,"articles and bidirectional links");
+
+
 
 console.log("Site tests passed:",mustExist.length,"required files,",items.length,"searchable pages");
 
