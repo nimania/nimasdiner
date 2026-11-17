@@ -53,4 +53,4 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 ## Book 05 «منوی سودده» companion tools (owner instruction, 18 Nov 2026)
 - `/b5/` and its sub-pages (`3`, `4`, `7`, `8`, `10`, `13`) are printed as QR codes in the book «منوی سودده». Never rename or remove them.
 - Interactive logic is in `assets/b5-tools.js` (recipe card, menu matrix, online price). Inputs accept Persian and Latin digits; state is kept only in the visitor's browser.
-- The book is not yet in `content/catalog.json`; add it there (as book 05, shifting planned titles) only when the owner decides to sell it.
+- «منوی سودده» is published as book 05 at `/library/05/` with `formats: ["digital"]` (e-book only; print shown as coming soon). Bundles remain books 01–03 only. The planned roadmap now starts at 06 and has no public URLs. Book pages `/b4/` and `/b5/` link to their `/library/NN/` pages.
