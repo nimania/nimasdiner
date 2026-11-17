@@ -193,6 +193,7 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .book-showcase-card-1>.book-cover-link{background:#f6d55c}
 .book-showcase-card-2>.book-cover-link{background:#c7e5df}
 .book-showcase-card-3>.book-cover-link{background:#f2c0af}
+.book-showcase-card-4>.book-cover-link{background:#f9d2e0}
 .book-showcase-content{padding:19px 20px 24px;display:flex;flex-direction:column;flex:1}
 .book-showcase-content h3{font-size:22px;margin:7px 0 6px}
 .book-showcase-content p{font-size:14px;color:var(--muted);margin:0 0 18px;flex:1}
