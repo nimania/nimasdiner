@@ -656,3 +656,15 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .other-book .other-book-cover img{width:100%;height:auto;border-radius:3px;box-shadow:0 8px 14px #0002}
 .other-book h3{margin:.2rem 0 .3rem;font-size:1.05rem}.other-book p{margin:0 0 .4rem;font-size:.88rem;line-height:1.8}
 .other-book-1{border-right:5px solid #ffce25}.other-book-2{border-right:5px solid #60a199}.other-book-3{border-right:5px solid #c34f3d}.other-book-4{border-right:5px solid #f5a3c0}
+
+.book-showcase-card-5>.book-cover-link{background:#fbd9b3}
+.book-cover-trio.cover-quint .trio-book{width:21%;max-width:120px}
+.book-cover-trio.cover-quint .trio-book-1{z-index:1;transform:rotate(-12deg) translateX(34px)}
+.book-cover-trio.cover-quint .trio-book-2{z-index:2;transform:rotate(-6deg) translateX(18px) translateY(-4px)}
+.book-cover-trio.cover-quint .trio-book-3{z-index:3;transform:translateY(-8px)}
+.book-cover-trio.cover-quint .trio-book-4{z-index:4;transform:rotate(6deg) translateX(-18px) translateY(-4px)}
+.book-cover-trio.cover-quint .trio-book-5{z-index:5;transform:rotate(12deg) translateX(-34px)}
+.book-cover-trio.cover-quint .trio-book:hover{transform:translateY(-13px) scale(1.07);z-index:6}
+.hero-art-books .book-cover-trio.cover-quint .trio-book{width:22%;max-width:140px}
+.book-promo-art .cover-quint .trio-book{max-width:62px}
+.other-book-5{border-right:5px solid #f28c28}

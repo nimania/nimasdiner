@@ -284,7 +284,7 @@ assert.equal(3*bookPrices.single.digital-bookPrices.bundleAllThree.digital,30000
 for(const amount of ["۱٬۰۰۰٬۰۰۰","۵۰۰٬۰۰۰","۲٬۵۰۰٬۰۰۰","۱٬۲۰۰٬۰۰۰","۳۰۰٬۰۰۰"]){
  assert.ok(orderPage.includes(amount),"Missing price in order page: "+amount);
 }
-for(const n of ["01","02","03","04"]){
+for(const n of ["01","02","03","04","05"]){
  const preview="library/"+n+"/sample/index.html";
  assert.ok(fs.existsSync(path.join(dist,preview)),"Five-page book sample missing: "+preview);
  const html=read(preview);
@@ -293,7 +293,7 @@ for(const n of ["01","02","03","04"]){
  assert.ok(!html.includes("NimaDiner_Book"+Number(n)+"_Complete_"),"Paid ebook source file must never be linked");
  assert.match(read("library/"+n+"/index.html"),new RegExp("href=\"/library/"+n+"/sample/\""));
 }
-assert.doesNotMatch(read("sitemap.xml"),/\/library\/(01|02|03|04)\/sample\//,"Samples should not crowd the public sitemap");
+assert.doesNotMatch(read("sitemap.xml"),/\/library\/(01|02|03|04|05)\/sample\//,"Samples should not crowd the public sitemap");
 console.log("Book prices, savings, five-page samples and paid ebook isolation checked.");
 
 {
@@ -302,7 +302,7 @@ console.log("Book prices, savings, five-page samples and paid ebook isolation ch
  assert.match(ebook,/۵۰۰٬۰۰۰/,"digital-only book must show the e-book price");
  assert.doesNotMatch(ebook,/سفارش چاپی ←/,"digital-only book must not offer a print order");
 }
-for(const n of ["01","02","03","04"]){
+for(const n of ["01","02","03","04","05"]){
  const detail=read("library/"+n+"/index.html");
  assert.match(detail,/این کتاب برای چه کسی مناسب است/);
  assert.match(detail,/چه چیزی به دست می‌آورید/);
@@ -368,5 +368,15 @@ for(const p of ["b5/","b5/3/","b5/4/","b5/7/","b5/8/","b5/10/","b5/13/"]){
  const html=read(p+"index.html");
  assert.match(html,/persian-digits\.js/,"localization script missing on "+p);
  if(["b5/3/","b5/4/","b5/10/"].includes(p))assert.match(html,/assets\/b5-tools\.js/,"tool script missing on "+p);
+}
+{
+ const e5=read("library/05/index.html");
+ assert.match(e5,/چاپی به‌زودی/,"book 05 must say print is coming");
+ assert.match(e5,/۵۰۰٬۰۰۰/,"book 05 must show the e-book price");
+ assert.doesNotMatch(e5,/سفارش چاپی ←/,"book 05 must not offer a print order");
+ assert.match(read("sitemap.xml"),/\/library\/05\//,"book 05 must be indexed");
+ assert.match(read("b5/index.html"),/href="\/library\/05\/"/,"/b5/ must link to /library/05/");
+ for(const n of ["01","02","03","04","05"])assert.match(read("library/"+n+"/index.html"),/other-book-5|other-book-1/,"other-books section missing on "+n);
+ assert.match(read("library/01/index.html"),/\/library\/05\//,"book pages must link to book 05");
 }
 console.log("Book 05 companion pages and tools checked.");
