@@ -43,3 +43,9 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - `tools/persian-digits-html.mjs` converts only **visible HTML text nodes** during build. `persian-digits.js` localizes dynamically inserted UI text, accessible descriptions, and visible placeholders after page load.
 - Preserve ASCII digits in HTML attributes used for computation/routing (`href`, `src`, `id`, `datetime`, `value`, `data-*`), structured data, JSON, JS, URLs, and numeric form values. Do not modify SVG paths or logos. Numeric inputs remain numeric for reliable calculations.
 - Never edit `site-dist/` directly or change an existing page URL. Every new HTML page must receive the shared localization script from `tools/build-site.mjs`. Keep the regression tests in `tools/test-site.mjs`.
+
+## Book 04 «دیده شو» — e-book first (owner instruction, 18 Nov 2026)
+- «دیده شو» (Instagram without an ad budget) is published as book 04 at `/library/04/` with `formats: ["digital"]` in `content/catalog.json`: only the electronic edition is sold, at the single digital price from `content/book-pricing.json`; the print edition is shown as «به‌زودی». When the print edition arrives, remove the `formats` field (or add `"print"`) instead of hardcoding prices.
+- The three-volume bundles remain books 01–03 only (`printBooks` in `tools/build-site.mjs`); do not add book 04 to a bundle without owner-approved pricing.
+- The planned roadmap titles were renumbered 05–11; they have no public URLs.
+- `/b4/` and its sub-pages are printed as QR codes in the book. Never rename or remove them.

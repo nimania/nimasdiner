@@ -24,14 +24,18 @@ assert.match(home,/<h1>/);
 const sitemap=read("sitemap.xml");
 assert.match(sitemap,/\/get-book\//);
 assert.match(sitemap,/\/magazine\/01\//);
-assert.doesNotMatch(sitemap,/\/library\/04\//,"unpublished books must not be indexed");
+const catalogBooks=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/catalog.json"),"utf8")).books;
+const plannedBookPaths=catalogBooks.filter(b=>b.status!=="published").map(b=>"/library/"+String(b.n).padStart(2,"0")+"/");
+assert.ok(plannedBookPaths.length>0,"roadmap should list planned books");
+for(const u of plannedBookPaths)assert.ok(!sitemap.includes(u),"unpublished books must not be indexed: "+u);
+assert.match(sitemap,/\/library\/04\//,"published e-book «دیده شو» must be indexed");
 assert.doesNotMatch(sitemap,/\/search\//,"search should not be indexed");
 assert.match(read("search/index.html"),/noindex,follow/);
 const items=JSON.parse(read("search-index.json"));
 assert.ok(items.length>=10,"search pages too few");
 assert.ok(items.every(item=>item.url.startsWith("/")),"search URLs incorrect");
-assert.ok(!items.some(item=>item.url.includes("/library/04/")),"planned content in search index");
-assert.equal((read("library/index.html").match(/timeline-item/g)||[]).length,10,"missing roadmap volumes");
+assert.ok(!items.some(item=>plannedBookPaths.some(u=>item.url.includes(u))),"planned content in search index");
+assert.equal((read("library/index.html").match(/timeline-item/g)||[]).length,catalogBooks.length,"missing roadmap volumes");
 for(const p of mustExist.filter(x=>x.endsWith("index.html")&&!x.startsWith("app/")&&!x.startsWith("consulting/"))){
  const txt=read(p);
  assert.match(txt,/<html lang="fa" dir="rtl">/,"RTL missing "+p);
@@ -280,7 +284,7 @@ assert.equal(3*bookPrices.single.digital-bookPrices.bundleAllThree.digital,30000
 for(const amount of ["۱٬۰۰۰٬۰۰۰","۵۰۰٬۰۰۰","۲٬۵۰۰٬۰۰۰","۱٬۲۰۰٬۰۰۰","۳۰۰٬۰۰۰"]){
  assert.ok(orderPage.includes(amount),"Missing price in order page: "+amount);
 }
-for(const n of ["01","02","03"]){
+for(const n of ["01","02","03","04"]){
  const preview="library/"+n+"/sample/index.html";
  assert.ok(fs.existsSync(path.join(dist,preview)),"Five-page book sample missing: "+preview);
  const html=read(preview);
@@ -289,10 +293,16 @@ for(const n of ["01","02","03"]){
  assert.ok(!html.includes("NimaDiner_Book"+Number(n)+"_Complete_"),"Paid ebook source file must never be linked");
  assert.match(read("library/"+n+"/index.html"),new RegExp("href=\"/library/"+n+"/sample/\""));
 }
-assert.doesNotMatch(read("sitemap.xml"),/\/library\/(01|02|03)\/sample\//,"Samples should not crowd the public sitemap");
+assert.doesNotMatch(read("sitemap.xml"),/\/library\/(01|02|03|04)\/sample\//,"Samples should not crowd the public sitemap");
 console.log("Book prices, savings, five-page samples and paid ebook isolation checked.");
 
-for(const n of ["01","02","03"]){
+{
+ const ebook=read("library/04/index.html");
+ assert.match(ebook,/چاپی به‌زودی/,"digital-only book must say print is coming");
+ assert.match(ebook,/۵۰۰٬۰۰۰/,"digital-only book must show the e-book price");
+ assert.doesNotMatch(ebook,/سفارش چاپی ←/,"digital-only book must not offer a print order");
+}
+for(const n of ["01","02","03","04"]){
  const detail=read("library/"+n+"/index.html");
  assert.match(detail,/این کتاب برای چه کسی مناسب است/);
  assert.match(detail,/چه چیزی به دست می‌آورید/);
