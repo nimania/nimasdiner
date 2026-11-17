@@ -362,3 +362,11 @@ assert.match(densityStyles,/\.pagehead\{padding-block:26px 8px/,"Compact page he
 assert.match(densityStyles,/@media\(max-width:950px\)/,"Responsive nav breakpoint missing");
 assert.match(densityStyles,/\.knowledge-side-nav\{display:flex;gap:8px;overflow-x:auto/,"Mobile nav should scroll horizontally");
 console.log("Compact layouts and crawlable sidebar/mobile navigation checks passed");
+
+// Book 05 «منوی سودده»: QR-printed companion routes and tools must exist.
+for(const p of ["b5/","b5/3/","b5/4/","b5/7/","b5/8/","b5/10/","b5/13/"]){
+ const html=read(p+"index.html");
+ assert.match(html,/persian-digits\.js/,"localization script missing on "+p);
+ if(["b5/3/","b5/4/","b5/10/"].includes(p))assert.match(html,/assets\/b5-tools\.js/,"tool script missing on "+p);
+}
+console.log("Book 05 companion pages and tools checked.");

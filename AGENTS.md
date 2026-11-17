@@ -49,3 +49,8 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - The three-volume bundles remain books 01–03 only (`printBooks` in `tools/build-site.mjs`); do not add book 04 to a bundle without owner-approved pricing.
 - The planned roadmap titles were renumbered 05–11; they have no public URLs.
 - `/b4/` and its sub-pages are printed as QR codes in the book. Never rename or remove them.
+
+## Book 05 «منوی سودده» companion tools (owner instruction, 18 Nov 2026)
+- `/b5/` and its sub-pages (`3`, `4`, `7`, `8`, `10`, `13`) are printed as QR codes in the book «منوی سودده». Never rename or remove them.
+- Interactive logic is in `assets/b5-tools.js` (recipe card, menu matrix, online price). Inputs accept Persian and Latin digits; state is kept only in the visitor's browser.
+- The book is not yet in `content/catalog.json`; add it there (as book 05, shifting planned titles) only when the owner decides to sell it.
