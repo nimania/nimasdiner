@@ -678,3 +678,28 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .book-showcase-card-8>.book-cover-link{background:#f6d0d4}
 .book-showcase-card-9>.book-cover-link{background:#d3dceb}
 .book-showcase-card-10>.book-cover-link{background:#dde3ef}
+/* Homepage hero shelf: main book, two companions, kitchen pair, country guides in the margin (19 Nov 2026) */
+.hero-inner:has(.hero-art-shelf){grid-template-columns:1fr 1fr;gap:48px}
+.hero-art-shelf{transform:none;padding:16px 14px 10px}
+.hero-shelf{display:grid;grid-template-columns:1fr 64px;gap:12px;align-items:stretch}
+.shelf-books{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.shelf-tier{display:flex;direction:ltr;justify-content:center;align-items:flex-end;width:100%}
+.shelf-book{display:block;position:relative;transition:transform .2s ease}
+.shelf-book img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 12px 26px #0008}
+.shelf-main{width:44%;max-width:190px;z-index:3}
+.shelf-side{width:31%;max-width:132px;z-index:2;opacity:.97}
+.shelf-side-a{transform:rotate(-7deg) translateX(18px)}
+.shelf-side-b{transform:rotate(7deg) translateX(-18px)}
+.shelf-tier-kitchen{gap:14px;margin-top:4px}
+.shelf-small{width:24%;max-width:100px}
+.shelf-book:hover{transform:translateY(-8px) scale(1.04);z-index:4}
+.shelf-label{font-family:Vazirmatn,Tahoma,sans-serif;font-size:12px;line-height:1.7;color:#ffe57e;text-align:center;max-width:340px}
+.shelf-countries{display:flex;flex-direction:column;align-items:center;gap:7px;border-inline-start:1px dashed #ffffff40;padding-inline-start:10px}
+.shelf-countries strong{font-size:11px;line-height:1.5;color:#ffcf22;text-align:center;font-weight:700}
+.shelf-country{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;text-decoration:none;font-size:11px;transition:transform .2s ease}
+.shelf-country img{width:52px;height:auto;border-radius:2px;box-shadow:0 6px 14px #0008}
+.shelf-country:hover{transform:translateY(-4px)}
+@media(max-width:1020px){.hero-inner:has(.hero-art-shelf){grid-template-columns:1.1fr .9fr;gap:30px}}
+@media(max-width:700px){.hero-inner:has(.hero-art-shelf){grid-template-columns:1fr}.hero-art-shelf{max-width:420px;margin-inline:auto}.hero-shelf{grid-template-columns:1fr}.shelf-countries{flex-direction:row;flex-wrap:wrap;justify-content:center;border-inline-start:0;border-top:1px dashed #ffffff40;padding:10px 0 0}.shelf-countries strong{width:100%}.shelf-country img{width:46px}}
+@media(prefers-reduced-motion:reduce){.shelf-book,.shelf-country{transition:none}}
+.shelf-label b{color:#ffcf22;font-weight:900}

@@ -60,3 +60,7 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - 06 «شف» (chefs' book, purple cover); 07–10 «مرجع جامع راه‌اندازی و مدیریت رستوران در …» country editions: 07 Sweden, 08 Turkey, 09 USA (California focus), 10 UK (London focus), each with a cover in its flag colours.
 - Covers are `assets/book-06.webp` … `assets/book-10.webp`, rendered from the final e-book PDFs; five-page samples are page images in `assets/samples/` recorded in `content/book-samples.json`. The complete paid PDFs are not in this repository.
 - The planned roadmap was renumbered 11–16; it has no public URLs.
+
+## Homepage hero shelf (owner instruction, 19 Nov 2026)
+- The homepage hero shows the library as a hierarchy: the yellow main book «مرجع جامع مدیریت رستوران» largest in the centre, flanked by «کوچک شروع کن» and «دوام بیاور»; below them «شف» and «منوی سودده»; and in the margin the four country guides in this order: ترکیه، آمریکا، انگلستان، سوئد. Built by `heroShelf()` in `tools/build-site.mjs`, styled under `.hero-shelf` in `site-v2.css`.
+- Other cover groups (`coverTrio`) show books 01–05 only, so they don't fill up as the library grows.
