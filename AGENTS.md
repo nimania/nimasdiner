@@ -54,3 +54,9 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - `/b5/` and its sub-pages (`3`, `4`, `7`, `8`, `10`, `13`) are printed as QR codes in the book «منوی سودده». Never rename or remove them.
 - Interactive logic is in `assets/b5-tools.js` (recipe card, menu matrix, online price). Inputs accept Persian and Latin digits; state is kept only in the visitor's browser.
 - «منوی سودده» is published as book 05 at `/library/05/` with `formats: ["digital"]` (e-book only; print shown as coming soon). Bundles remain books 01–03 only. The planned roadmap now starts at 06 and has no public URLs. Book pages `/b4/` and `/b5/` link to their `/library/NN/` pages.
+
+## Books 06–10 — e-books only (owner instruction, 19 Nov 2026)
+- Published at `/library/06/` to `/library/10/` with `formats: ["digital"]` in `content/catalog.json`, at the single digital price from `content/book-pricing.json`; print shown as «به‌زودی». Bundles remain books 01–03 only.
+- 06 «شف» (chefs' book, purple cover); 07–10 «مرجع جامع راه‌اندازی و مدیریت رستوران در …» country editions: 07 Sweden, 08 Turkey, 09 USA (California focus), 10 UK (London focus), each with a cover in its flag colours.
+- Covers are `assets/book-06.webp` … `assets/book-10.webp`, rendered from the final e-book PDFs; five-page samples are page images in `assets/samples/` recorded in `content/book-samples.json`. The complete paid PDFs are not in this repository.
+- The planned roadmap was renumbered 11–16; it has no public URLs.

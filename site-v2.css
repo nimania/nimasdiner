@@ -673,3 +673,8 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .sample-paper[data-img]{padding:0;min-height:0;overflow:hidden}
 .sample-paper[data-img] header,.sample-paper[data-img] footer{display:none}
 .sample-page-img{display:block;width:100%;height:auto}
+.book-showcase-card-6>.book-cover-link{background:#e3d3ef}
+.book-showcase-card-7>.book-cover-link{background:#cfe3f2}
+.book-showcase-card-8>.book-cover-link{background:#f6d0d4}
+.book-showcase-card-9>.book-cover-link{background:#d3dceb}
+.book-showcase-card-10>.book-cover-link{background:#dde3ef}
