@@ -409,3 +409,43 @@ console.log("Book 05 companion pages and tools checked.");
   assert.equal([...read("prompts/index.html").matchAll(/class="prompt-card" data-category/g)].length,promptData.prompts.length,"Original card count must be preserved");
   console.log("Prompt gallery, 12 samples, and indexed routes checked.");
 }
+
+
+// Prompt Studio v2: no removed routes, browser-only customization, honest sample provenance.
+{
+ const studio=read("prompts/studio/index.html");
+ const gallery=read("prompts/showcase/index.html");
+ const archive=read("prompts/index.html");
+ const quality=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/prompt-quality.json"),"utf8"));
+ const examples=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/prompt-comparisons.json"),"utf8"));
+ assert.match(studio,/id="studio-template"/);
+ assert.match(studio,/id="studio-templates"/);
+ assert.match(studio,/id="studio-copy"/);
+ assert.match(studio,/id="studio-result"/);
+ assert.match(gallery,/class="compare-range"/);
+ assert.match(gallery,/تصاویر فرضی/);
+ assert.match(gallery,/ساختگی/);
+ assert.match(archive,/\/prompts\/studio\//);
+ assert.match(archive,/\/prompts\/showcase\//);
+ assert.match(sitemap,/\/prompts\/studio\//);
+ assert.match(sitemap,/\/prompts\/showcase\//);
+ assert.equal(examples.comparisons.length,2);
+ for(const item of examples.comparisons) {
+   assert.ok(fs.existsSync(path.join(dist,item.before)),item.before+" missing");
+   assert.ok(fs.existsSync(path.join(dist,item.after)),item.after+" missing");
+   assert.match(read("prompts/"+item.slug+"/index.html"),/class="compare-range"/);
+ }
+ for(const slug of Object.keys(quality.profiles)) {
+   const html=read("prompts/"+slug+"/index.html");
+   assert.match(html,/شناسنامه پرامپت/);
+   assert.match(html,/آزمون مستقل مستند نشده/);
+   assert.match(html,/پرامپت‌ساز اختصاصی/);
+   assert.doesNotMatch(html,/آزمون مستقل موفق|تضمین نتیجه/);
+ }
+ const js=read("assets/prompts-studio.js");
+ assert.match(js,/navigator\.clipboard/);
+ assert.match(js,/data-compare-card/);
+ assert.doesNotMatch(js,/\bfetch\(/);
+ assert.doesNotMatch(js,/localStorage|sessionStorage/);
+ console.log("Prompt Studio v2, before-after samples and transparent quality profiles checked.");
+}
