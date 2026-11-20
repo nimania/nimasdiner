@@ -104,3 +104,44 @@
 @media(max-width:980px){.prompt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.prompt-hero-inner{gap:20px}.prompt-detail-layout{grid-template-columns:1fr}.prompt-guidance{display:block}}
 @media(max-width:700px){.prompt-hero-inner{grid-template-columns:1fr;padding-block:49px 52px}.prompt-hero-aside{display:none}.prompt-hero h1{letter-spacing:0}.prompt-collection{padding-top:42px}.prompt-section-head{flex-direction:column;align-items:stretch;gap:4px}.prompt-grid{grid-template-columns:1fr}.prompt-search-panel{padding:17px}.prompt-filter-row{flex-wrap:nowrap;overflow-x:auto;padding-bottom:7px}.prompt-filter-row button{white-space:nowrap}.prompt-info-panel,.prompt-detail-hero{grid-template-columns:1fr}.prompt-detail-art{height:155px;box-shadow:5px 5px 0 #1a2023}.prompt-detail-art strong{font-size:60px}.prompt-end{flex-direction:column;align-items:stretch;padding:25px}.prompt-copy-box,.prompt-guidance{padding:16px}.prompt-copy-head{align-items:start;gap:8px}.prompt-copy-btn{padding:9px}.prompt-source{padding:15px;font-size:12px}.prompt-related{padding-top:38px}}
 @media(prefers-reduced-motion:reduce){.prompt-card,.prompt-primary-link,.prompt-secondary-link{transition:none}.prompt-card:hover,.prompt-primary-link:hover,.prompt-secondary-link:hover{transform:none}}
+
+
+/* Prompt sample gallery — shared contact sheet, no third-party hotlinks */
+.prompt-example-flag{position:absolute;z-index:3;top:12px;right:14px;border-radius:20px;background:#171d1de8;color:#ffdf6a;padding:3px 10px;font-size:11px;font-weight:700}
+.prompt-example-flag--text{background:#fff;color:#1c292d}
+.prompt-card-photo{position:absolute;z-index:0;left:0;top:50%;width:100%;aspect-ratio:9 / 8;transform:translateY(-50%);background-image:url("/nimasdiner/assets/prompts/showcase.jpg");background-repeat:no-repeat;background-size:200% 300%;filter:saturate(.96)}
+.prompt-card-art:has(.prompt-card-photo){background:#1d2020}
+.prompt-card-art:has(.prompt-card-photo):after{display:none}
+.prompt-card-art:has(.prompt-card-photo) .prompt-card-number,.prompt-card-art:has(.prompt-card-photo) .prompt-card-art-label{background:#161a1ad9;color:#fff;padding:5px 8px;border-radius:6px}
+.prompt-sample-image{display:block;width:100%;aspect-ratio:9 / 8;background-image:url("/nimasdiner/assets/prompts/showcase.jpg");background-repeat:no-repeat;background-size:200% 300%;border-radius:9px}
+.prompt-card-photo[data-slot="0"],.prompt-sample-image[data-slot="0"]{background-position:0 0}
+.prompt-card-photo[data-slot="1"],.prompt-sample-image[data-slot="1"]{background-position:100% 0}
+.prompt-card-photo[data-slot="2"],.prompt-sample-image[data-slot="2"]{background-position:0 50%}
+.prompt-card-photo[data-slot="3"],.prompt-sample-image[data-slot="3"]{background-position:100% 50%}
+.prompt-card-photo[data-slot="4"],.prompt-sample-image[data-slot="4"]{background-position:0 100%}
+.prompt-card-photo[data-slot="5"],.prompt-sample-image[data-slot="5"]{background-position:100% 100%}
+.prompt-only-examples{display:flex;gap:7px;align-items:center;cursor:pointer;font-weight:700}
+.prompt-only-examples input{accent-color:#1a2023;width:17px;height:17px}
+.prompt-example-section{padding-top:4px;padding-bottom:30px}
+.prompt-example-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+.prompt-example-head h2{margin:0;font-size:clamp(23px,3vw,31px)}
+.prompt-example-head p:not(.prompt-overline){color:#596269;font-size:14px;margin:4px 0}
+.prompt-example-kind{display:inline-flex;border-radius:30px;padding:7px 13px;font-size:12px;background:#fff;border:1px solid #e5ddd0;white-space:nowrap}
+.prompt-example-figure{margin:0;padding:19px;background:#fff;border-radius:16px;border:1px solid #e5ddd0}
+.prompt-example-picture{max-width:660px;margin-inline:auto;border-radius:11px;overflow:hidden}
+.prompt-example-picture .prompt-sample-image{max-width:100%;border-radius:11px;box-shadow:0 1px 12px #0001}
+.prompt-example-figure figcaption{color:#586167;font-size:13px;margin:12px 0 0;text-align:center}
+.prompt-example-picture--design{width:min(100%,350px);min-height:0;aspect-ratio:9/16;background:linear-gradient(170deg,#171d1e 0%,#363330 45%,#ffc72e 45%,#ffce25 100%);display:flex;flex-direction:column;justify-content:flex-end;position:relative;box-shadow:0 8px 24px #2425222a}
+.prompt-example-picture--design .prompt-sample-image{margin-top:auto;width:100%;aspect-ratio:9/8;border-radius:0;box-shadow:none}
+.prompt-design-overlay{position:absolute;z-index:1;top:13%;left:8%;right:8%;display:flex;align-items:flex-start;flex-direction:column;gap:10px;color:#fff;text-shadow:0 2px 4px #0006}
+.prompt-design-overlay strong{font-size:clamp(26px,4vw,39px);line-height:1.45}
+.prompt-design-overlay small{font-size:14px;color:#ffce25}
+.prompt-example-text-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:17px}
+.prompt-example-input,.prompt-example-output{background:#fff;border:1px solid #e5ddd0;border-radius:13px;padding:22px;min-width:0}
+.prompt-example-input strong,.prompt-example-output strong{font-size:14px}
+.prompt-example-input p{font-size:14px;color:#596269;line-height:2.1}
+.prompt-example-output pre{white-space:pre-wrap;word-wrap:break-word;color:#26302d;background:#f8f8f4;border-radius:9px;padding:19px;font:15px/2.15 Vazirmatn,Tahoma,sans-serif;margin:12px 0}
+.prompt-copy-example-btn{margin-top:6px}
+.prompt-example-disclosure{max-width:900px;color:#646a6b;font-size:12px;line-height:2.1;margin:16px 0 5px}
+.prompt-example-disclosure strong{color:#303a3e}
+@media(max-width:700px){.prompt-example-head{align-items:start;flex-direction:column;gap:9px}.prompt-example-figure{padding:10px}.prompt-example-text-grid{grid-template-columns:1fr}.prompt-example-input,.prompt-example-output{padding:14px}.prompt-filter-meta{flex-wrap:wrap}.prompt-example-picture--design{width:min(100%,330px)}}
