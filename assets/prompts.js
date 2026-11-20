@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded",function(){
   if(query&&cards.length){
     let category="all";
     const type=document.getElementById("prompt-type");
+    const onlyExamples=document.getElementById("prompt-only-examples");
     const count=document.getElementById("prompt-count");
     const empty=document.getElementById("prompt-empty");
     const faNumber=n=>new Intl.NumberFormat("fa-IR").format(n);
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded",function(){
       let shown=0;
       for(const card of cards){
         const ok=(category==="all"||card.dataset.category===category)
+          &&(!onlyExamples||!onlyExamples.checked||card.dataset.hasExample==="true")
           &&(!type||type.value==="all"||card.dataset.type===type.value)
           &&(!needle||normalize(card.dataset.search).includes(needle));
         card.hidden=!ok;
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded",function(){
     }
     query.addEventListener("input",update);
     if(type)type.addEventListener("change",update);
+    if(onlyExamples)onlyExamples.addEventListener("change",update);
     document.querySelectorAll("[data-prompt-category]").forEach(btn=>btn.addEventListener("click",function(){
       category=btn.dataset.promptCategory;
       document.querySelectorAll("[data-prompt-category]").forEach(b=>{

@@ -1,10 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import {loadPromptExamples,promptExampleThumbnail,renderPromptExample} from "./prompt-samples.mjs";
 
 /** Public prompt library. Data lives in content/prompts.json; pages share the main site shell. */
 export function renderPromptPages({add,esc,link,crumbs}) {
   const source = JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/prompts.json"),"utf8"));
   const prompts = source.prompts;
+  const {examples,updated:examplesUpdated}=loadPromptExamples(prompts);
+  const exampleFor=p=>examples.get(p.slug);
   const categories = [
     ["عکاسی غذا","🍔"],["فضای کافه","☕"],["شبکه‌های اجتماعی","📱"],
     ["ویدئو","🎬"],["منو و تبلیغات","📋"],["مدیریت و عملیات","📊"],
@@ -12,7 +15,7 @@ export function renderPromptPages({add,esc,link,crumbs}) {
   ];
   const icons = Object.fromEntries(categories);
   const style = '<link rel="stylesheet" href="'+link("assets/prompts.css")+'">';
-  const config = {head:style,script:"assets/prompts.js",lastmod:source.updated};
+  const config = {head:style,script:"assets/prompts.js",lastmod:examplesUpdated||source.updated};
   const validTypes = new Set(["عکس","ویدئو","متن","طراحی"]);
   const seen = new Set();
   for (const p of prompts) {
@@ -22,9 +25,9 @@ export function renderPromptPages({add,esc,link,crumbs}) {
   }
   const pURL = p => "prompts/"+p.slug+"/";
   const pCard = (p,related=false) =>
-    '<article class="prompt-card" data-category="'+esc(p.category)+'" data-type="'+esc(p.type)+'" data-search="'+esc([p.title,p.summary,p.category,p.type,p.slug].join(" "))+'">'+
+    '<article class="prompt-card" data-category="'+esc(p.category)+'" data-type="'+esc(p.type)+'" data-has-example="'+(exampleFor(p)?"true":"false")+'" data-search="'+esc([p.title,p.summary,p.category,p.type,p.slug].join(" "))+'">'+
       '<a class="prompt-card-link" href="'+link(pURL(p))+'">'+
-        '<div class="prompt-card-art" aria-hidden="true"><span class="prompt-card-number">DINER / '+String(p.id).padStart(3,"0")+'</span><span class="prompt-card-emoji">'+(icons[p.category]||"✦")+'</span><span class="prompt-card-art-label">'+esc(p.type)+'</span></div>'+
+        '<div class="prompt-card-art" aria-hidden="true">'+promptExampleThumbnail(exampleFor(p),esc)+'<span class="prompt-card-number">DINER / '+String(p.id).padStart(3,"0")+'</span><span class="prompt-card-emoji">'+(exampleFor(p)&&exampleFor(p).kind!=="text"?"":icons[p.category]||"✦")+'</span><span class="prompt-card-art-label">'+esc(p.type)+'</span></div>'+
         '<div class="prompt-card-content"><span class="prompt-card-category">'+esc(p.category)+'</span><h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p>'+
         '<div class="prompt-card-bottom"><span>'+esc(p.level)+' · '+esc(p.ratio)+'</span><strong>مشاهده پرامپت ←</strong></div></div>'+
       '</a></article>';
@@ -35,7 +38,7 @@ export function renderPromptPages({add,esc,link,crumbs}) {
       '<div><p class="prompt-overline">NIMA’S DINER / PROMPT LIBRARY</p><h1>پرامپت‌خانه<span class="prompt-heading-dot">.</span><br><span>دفترچه صنعت غذا</span></h1>'+
       '<p>از یک ایده ساده تا محتوای حرفه‌ای و تصمیم اجرایی. دستورهای آماده برای رستوران، کافه، فست‌فود، نانوایی و قنادی؛ انتخاب کن، کپی کن و برای کسب‌وکار خودت شخصی‌سازی کن.</p>'+
       '<div class="prompt-hero-actions"><a class="prompt-primary-link" href="#prompt-catalog">دیدن پرامپت‌ها ↓</a><a class="prompt-secondary-link" href="https://t.me/nimasdiner" target="_blank" rel="noopener noreferrer">کانال تلگرام داینر ↗</a></div>'+
-      '<div class="prompt-mini-stats"><span><b>'+new Intl.NumberFormat("fa-IR").format(prompts.length)+'</b> پرامپت آماده</span><span><b>'+new Intl.NumberFormat("fa-IR").format(categories.length)+'</b> دسته تخصصی</span><span>بدون ثبت‌نام</span></div></div>'+
+      '<div class="prompt-mini-stats"><span><b>'+new Intl.NumberFormat("fa-IR").format(prompts.length)+'</b> پرامپت آماده</span><span><b>'+new Intl.NumberFormat("fa-IR").format(categories.length)+'</b> دسته تخصصی</span><span><b>'+new Intl.NumberFormat("fa-IR").format(examples.size)+'</b> نمونه خروجی</span><span>بدون ثبت‌نام</span></div></div>'+
       '<div class="prompt-hero-aside" aria-hidden="true"><span class="ph-a">PHOTO <b>🍔</b></span><span class="ph-b">VIDEO <b>🎬</b></span><span class="ph-c">OPERATIONS <b>📊</b></span></div>'+
     '</div></section>'+
     '<section class="wrap prompt-collection" id="prompt-catalog" aria-labelledby="prompt-catalog-title">'+
@@ -43,7 +46,7 @@ export function renderPromptPages({add,esc,link,crumbs}) {
       '<div class="prompt-search-panel"><label for="prompt-query">جست‌وجو در دفترچه</label><input type="search" id="prompt-query" placeholder="مثلاً برگر، شیفت، قهوه، ریلز..." autocomplete="off">'+
       '<div class="prompt-filter-row" role="group" aria-label="فیلتر دسته‌بندی"><button type="button" data-prompt-category="all" class="selected" aria-pressed="true">همه</button>'+
       categories.map(c=>'<button type="button" data-prompt-category="'+esc(c[0])+'" aria-pressed="false">'+c[1]+' '+esc(c[0])+'</button>').join("")+'</div>'+
-      '<div class="prompt-filter-meta"><span id="prompt-count" role="status" aria-live="polite">'+new Intl.NumberFormat("fa-IR").format(prompts.length)+' نتیجه</span><label for="prompt-type">نوع خروجی <select id="prompt-type"><option value="all">همه خروجی‌ها</option><option value="عکس">عکس</option><option value="ویدئو">ویدئو</option><option value="طراحی">طراحی</option><option value="متن">متن</option></select></label></div></div>'+
+      '<div class="prompt-filter-meta"><span id="prompt-count" role="status" aria-live="polite">'+new Intl.NumberFormat("fa-IR").format(prompts.length)+' نتیجه</span><label class="prompt-only-examples" for="prompt-only-examples"><input id="prompt-only-examples" type="checkbox"> فقط نمونه‌دار</label><label for="prompt-type">نوع خروجی <select id="prompt-type"><option value="all">همه خروجی‌ها</option><option value="عکس">عکس</option><option value="ویدئو">ویدئو</option><option value="طراحی">طراحی</option><option value="متن">متن</option></select></label></div></div>'+
       '<div class="prompt-grid" id="prompt-results">'+prompts.map(p=>pCard(p)).join("")+'</div>'+
       '<p class="prompt-empty" id="prompt-empty" hidden>با این فیلترها پرامپتی پیدا نشد. عبارت جست‌وجو یا دسته را تغییر بده.</p>'+
     '</section>'+
@@ -69,6 +72,7 @@ export function renderPromptPages({add,esc,link,crumbs}) {
       '<div class="prompt-taglist"><span>'+esc(p.category)+'</span><span>'+esc(p.type)+'</span><span>'+esc(p.level)+'</span><span>خروجی: '+esc(p.ratio)+'</span><span>'+(p.reference?"نیازمند عکس مرجع":"بدون نیاز به عکس مرجع")+'</span></div></div>'+
       '<div class="prompt-detail-art" aria-hidden="true"><span>'+esc(p.category)+'</span><strong>'+(icons[p.category]||"✦")+'</strong><small>DINER PROMPTS</small></div></div>'+
       '</section>'+
+      renderPromptExample(exampleFor(p),{esc,link})+
       '<section class="wrap prompt-detail-layout"><article class="prompt-copy-box">'+
       '<div class="prompt-copy-head"><div><p class="prompt-overline">COPY & CUSTOMIZE</p><h2>پرامپت کامل</h2></div><button type="button" class="prompt-copy-btn" data-copy-prompt="#prompt-source">کپی پرامپت <span aria-hidden="true">⧉</span></button></div>'+
       '<pre id="prompt-source" class="prompt-source" lang="'+(p.type==="متن"?"en":"en")+'" dir="ltr">'+esc(p.prompt)+'</pre>'+

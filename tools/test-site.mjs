@@ -380,3 +380,32 @@ for(const p of ["b5/","b5/3/","b5/4/","b5/7/","b5/8/","b5/10/","b5/13/"]){
  assert.match(read("library/01/index.html"),/\/library\/05\//,"book pages must link to book 05");
 }
 console.log("Book 05 companion pages and tools checked.");
+
+
+// Prompt library: accessible illustrated examples, honest labeling, and stable routes.
+{
+  const promptData=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/prompts.json"),"utf8"));
+  const samples=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/prompt-examples.json"),"utf8"));
+  assert.equal(samples.entries.length,12,"Launch showcase should have 12 examples");
+  assert.equal(new Set(samples.entries.map(x=>x.slug)).size,12,"Sample slugs must be unique");
+  assert.ok(fs.statSync(path.join(dist,"assets/prompts/showcase.jpg")).size>10000,"Bundled photo asset missing");
+  const archive=read("prompts/index.html");
+  assert.match(archive,/id="prompt-only-examples"/,"Sample-only filter missing");
+  assert.match(archive,/نمونه تصویری/,"Sample badges absent");
+  assert.match(archive,/نمونه پاسخ/,"Text example badge absent");
+  assert.match(read("assets/prompts.css"),/\/assets\/prompts\/showcase\.jpg/,"Sprite URL must be rewritten to the domain root");
+  for(const sample of samples.entries){
+    assert.ok(promptData.prompts.some(p=>p.slug===sample.slug),"Sample references unknown prompt "+sample.slug);
+    const html=read("prompts/"+sample.slug+"/index.html");
+    assert.match(html,/id="prompt-example-heading"/,"Output example section missing: "+sample.slug);
+    assert.match(html,/نمونه خروجی/,"Example label missing: "+sample.slug);
+    assert.match(html,/تصویر مفهومی|ماکت تبلیغاتی|متن نمونه/,"Example type missing: "+sample.slug);
+    assert.match(html,/نمونه|فرضی|نمایشی/,"Demo nature not disclosed: "+sample.slug);
+    assert.match(html,/کپی پرامپت/,"Prompt itself must remain copyable: "+sample.slug);
+    assert.ok(sitemap.includes("/prompts/"+sample.slug+"/"),"Missing prompt in sitemap: "+sample.slug);
+    if(sample.kind==="text")assert.match(html,/prompt-example-output/,"Text example missing: "+sample.slug);
+    else assert.match(html,/prompt-sample-image/,"Visual example missing: "+sample.slug);
+  }
+  assert.equal([...read("prompts/index.html").matchAll(/class="prompt-card" data-category/g)].length,promptData.prompts.length,"Original card count must be preserved");
+  console.log("Prompt gallery, 12 samples, and indexed routes checked.");
+}
