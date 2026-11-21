@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "books": [
+    {
+      "group": "foreign",
+      "slug": "restaurant-success-by-the-numbers",
+      "cover": {
+        "img": "https://static.fnac-static.com/multimedia/Images/FR/MC/e1/7b/5b/39549921/1507-1/tsp20190506230411/Restaurant-Succe-by-the-Numbers-Revised-A-Money-Guy-s-Guide-to-Opening-the-Next-New-Hot-Spot-Version-Originale.jpg",
+        "credit": "تصویر جلد؛ FNAC",
+        "url": "https://www.fnac.pt/Restaurant-success-by-the-numbers-FIELDS-ROGER/a8121522"
+      },
+      "title": "موفقیت رستوران به روایت اعداد",
+      "original": "Restaurant Success by the Numbers",
+      "author": "راجر فیلدز",
+      "publisher": "Ten Speed Press",
+      "topic": "مدیریت مالی و راه‌اندازی",
+      "description": "راهنمایی برای ارزیابی اقتصادی رستوران، از انتخاب مفهوم و مکان تا هزینه‌های شروع، کارکنان و سودآوری.",
+      "ideas": [
+        "طرح کسب‌وکار و برآورد هزینه پیش از افتتاح لازم‌اند.",
+        "کیفیت تصمیم درباره مکان، منو و کارکنان بر اقتصاد رستوران اثر می‌گذارد.",
+        "فروش به‌تنهایی برای سنجش موفقیت کسب‌وکار کافی نیست."
+      ],
+      "application": "برای رستوران خود یک برگه هزینه‌های ثابت، متغیر و نقطه سربه‌سر تهیه کنید و سناریوی فروش محتاطانه را هم بسنجید.",
+      "source": "https://www.penguinrandomhouse.com/books/226866/restaurant-success-by-the-numbers-second-edition-by-roger-fields-cpa/",
+      "sourceLabel": "مشاهده و خرید از صفحه ناشر",
+      "isbn": "9781607745587"
+    },
+    {
+      "group": "foreign",
+      "slug": "setting-the-table",
+      "cover": {
+        "img": "https://boldforkbooks.com/cdn/shop/products/settingthetable.jpg?v=1693102861",
+        "credit": "تصویر جلد؛ Bold Fork Books",
+        "url": "https://boldforkbooks.com/products/setting-the-table-danny-meyer"
+      },
+      "title": "چیدن میز",
+      "original": "Setting the Table",
+      "author": "دنی مایر",
+      "publisher": "HarperCollins",
+      "topic": "رهبری و مهمان‌نوازی",
+      "description": "روایتی از ساخت کسب‌وکارهای رستورانی با محور روابط انسانی، فرهنگ سازمانی و مهمان‌نوازی آگاهانه.",
+      "ideas": [
+        "رفتار با کارکنان بخشی از کیفیت خدمات به مهمان است.",
+        "مهمان‌نوازی فراتر از انجام صحیح وظایف خدماتی است.",
+        "فرهنگ تیم باید در استخدام و آموزش قابل مشاهده باشد."
+      ],
+      "application": "در جلسه پیش از شیفت، از هر نفر بخواهید یک رفتار مشخص برای بهتر شدن تجربه مهمان پیشنهاد کند.",
+      "source": "https://books.google.com/books/about/Setting_the_Table.html?id=X3HZmAEACAAJ",
+      "sourceLabel": "مشاهده مشخصات نسخه اصلی",
+      "isbn": "9780060742768"
+    },
+    {
+      "group": "foreign",
+      "slug": "unreasonable-hospitality",
+      "cover": {
+        "img": "https://www.bookmarked.id/cdn/shop/files/UnreasonableHospitalityNEW_600x600_crop_center.jpg?v=1724293681",
+        "credit": "تصویر جلد؛ Bookmarked",
+        "url": "https://www.bookmarked.id/products/unreasonable-hospitality"
+      },
+      "title": "مهمان‌نوازی فراتر از انتظار",
+      "original": "Unreasonable Hospitality",
+      "author": "ویل گیدارا",
+      "publisher": "Penguin Random House",
+      "topic": "تجربه مشتری",
+      "description": "شرح تجربه‌های رستورانی درباره تبدیل یک خدمت عادی به خاطره‌ای شخصی و به‌یادماندنی.",
+      "ideas": [
+        "جزئیات شخصی می‌توانند تجربه مهمان را متمایز کنند.",
+        "حس دیده‌شدن مهمان گاهی از تشریفات پرهزینه اثرگذارتر است.",
+        "تیم باید برای ایده‌های مهمان‌نوازی اختیار و چارچوب داشته باشد."
+      ],
+      "application": "یک دفتر ثبت نیازها و مناسبت‌های مشتریان وفادار ایجاد کنید؛ بدون جمع‌آوری اطلاعات غیرضروری یا نقض حریم خصوصی.",
+      "source": "https://www.unreasonablehospitality.com/books",
+      "sourceLabel": "مشاهده و تهیه از وب‌سایت رسمی کتاب"
+    },
+    {
+      "group": "foreign",
+      "slug": "the-e-myth-revisited",
+      "cover": {
+        "img": "https://is1-ssl.mzstatic.com/image/thumb/Publication4/v4/40/d3/46/40d34668-55b9-4447-e542-de76a68de450/9780061741654.jpg/1200x1200wz.jpg",
+        "credit": "تصویر جلد؛ Apple Books",
+        "url": "https://books.apple.com/us/book/the-e-myth-revisited/id363686639"
+      },
+      "title": "افسانه کارآفرینی",
+      "original": "The E-Myth Revisited",
+      "author": "مایکل ای. گربر",
+      "publisher": "HarperCollins",
+      "topic": "سیستم‌سازی",
+      "description": "اثری عمومی درباره تفاوت مهارت فنی با اداره کسب‌وکار و تبدیل کارهای تکرارشونده به فرآیندهای قابل انتقال.",
+      "ideas": [
+        "آشپز ماهر بودن معادل مدیر موفق بودن نیست.",
+        "فرآیندها باید برای افراد تازه‌وارد هم قابل آموزش باشند.",
+        "مالک باید زمانی برای کار روی کسب‌وکار، نه فقط درون آن، کنار بگذارد."
+      ],
+      "application": "سه کار پرتکرار رستوران را با گام‌ها، مسئول مشخص و معیار کنترل کیفیت روی یک صفحه مستند کنید.",
+      "source": "https://books.google.com/books/about/The_E_Myth_Revisited_Rev_Ed.html?id=dqI_PgAACAAJ",
+      "sourceLabel": "مشاهده مشخصات نسخه اصلی",
+      "isbn": "9780060766610"
+    },
+    {
+      "group": "foreign",
+      "slug": "work-clean",
+      "cover": {
+        "img": "https://ak-asset.jarir.com/akeneo-prod/asset/m1images/4/6/463991.jpg",
+        "credit": "تصویر جلد؛ Jarir",
+        "url": "https://www.jarir.com/sa-en/holtzbrinck-publishing-group-english-books-463991.html"
+      },
+      "title": "منظم کار کن",
+      "original": "Work Clean",
+      "author": "دن چارناس",
+      "publisher": "Rodale Books",
+      "topic": "نظم عملیاتی و مدیریت شیفت",
+      "description": "کاربرد مفهوم حرفه‌ای میزان‌پلاس در سازمان‌دهی کار، آماده‌سازی و تمرکز؛ برگرفته از شیوه کار آشپزهای حرفه‌ای.",
+      "ideas": [
+        "آماده‌سازی باید پیش از آغاز سرویس انجام شود.",
+        "ابزار، اطلاعات و مواد باید در جای تعریف‌شده قرار گیرند.",
+        "مرور پایان شیفت به بهبود آماده‌سازی شیفت بعد کمک می‌کند."
+      ],
+      "application": "برای ده دقیقه نخست شیفت یک چک‌لیست میزان‌پلاس بسازید و کارهای انجام‌نشده را در تحویل شیفت ثبت کنید.",
+      "source": "https://www.penguinrandomhouse.com/books/546003/work-clean-by-dan-charnas/",
+      "sourceLabel": "مشاهده و خرید از صفحه ناشر",
+      "isbn": "9781623365929"
+    },
+    {
+      "group": "iranian",
+      "slug": "ketab-mostatab-ashpazi",
+      "cover": {
+        "img": "https://www.karnamehpub.com/media/products/sources/Ketab-e-Mostatab-e-Ashpazi_ba_ghab-new_2.jpg",
+        "credit": "تصویر نسخه دو جلدی؛ نشر کارنامه",
+        "url": "https://www.karnamehpub.com/books/details/%DA%A9%D8%AA%D8%A7%D8%A8-%D9%85%D8%B3%D8%AA%D8%B7%D8%A7%D8%A8-%D8%A2%D8%B4%D9%BE%D8%B2%DB%8C-%D8%A7%D8%B2-%D8%B3%DB%8C%D8%B1-%D8%AA%D8%A7-%D9%BE%DB%8C%D8%A7%D8%B2/%D8%AF%D9%88-%D8%AC%D9%84%D8%AF%DB%8C-%D9%88%D8%B2%DB%8C%D8%B1%DB%8C-%D8%AC%D9%84%D8%AF-%D8%B3%D8%AE%D8%AA-%D8%A8%D8%A7-%D9%82%D8%A7%D8%A8/"
+      },
+      "title": "کتاب مستطاب آشپزی؛ از سیر تا پیاز",
+      "original": "کتاب مستطاب آشپزی از سیر تا پیاز",
+      "author": "نجف دریابندری و فهیمه راستکار",
+      "publisher": "نشر کارنامه",
+      "topic": "آشپزی ایرانی و فرهنگ خوراک",
+      "description": "اثری مرجع درباره خوراک‌ها و تکنیک‌های آشپزی ایرانی و فرنگی، با رویکردی فراتر از ارائه فهرست دستور پخت.",
+      "ideas": [
+        "شناخت واژگان و پیشینه خوراک برای تنظیم منوی دقیق مفید است.",
+        "روش‌های پخت باید پیش از تبدیل شدن به رسپی استاندارد آزمایش شوند.",
+        "منابع کلاسیک نقطه شروع پژوهش‌اند، نه جایگزین آزمون آشپزخانه."
+      ],
+      "application": "یک غذای اصیل از منوی خود انتخاب و تفاوت نسخه رایج رستوران با روایت‌های سنتی آن را ثبت کنید.",
+      "source": "https://www.karnamehpub.com/books/details/%DA%A9%D8%AA%D8%A7%D8%A8-%D9%85%D8%B3%D8%AA%D8%B7%D8%A7%D8%A8-%D8%A2%D8%B4%D9%BE%D8%B2%DB%8C-%D8%A7%D8%B2-%D8%B3%DB%8C%D8%B1-%D8%AA%D8%A7-%D9%BE%DB%8C%D8%A7%D8%B2/%D8%AF%D9%88-%D8%AC%D9%84%D8%AF%DB%8C-%D9%88%D8%B2%DB%8C%D8%B1%DB%8C-%D8%AC%D9%84%D8%AF-%D8%B3%D8%AE%D8%AA-%D8%A8%D8%A7-%D9%82%D8%A7%D8%A8/",
+      "sourceLabel": "مشاهده و خرید از ناشر",
+      "isbn": "9789644310126"
+    },
+    {
+      "group": "iranian",
+      "slug": "honar-e-ashpazi",
+      "cover": {
+        "img": "https://static.wixstatic.com/media/82af30_1726e7bc9a6345079fe39df8523ff3d2~mv2.jpg/v1/fill/w_480%2Ch_534%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/82af30_1726e7bc9a6345079fe39df8523ff3d2~mv2.jpg",
+        "credit": "تصویر جلد اول؛ کتابفروشی ناکجا",
+        "url": "https://www.naakojaaketab.com/product-page/%D9%87%D9%86%D8%B1-%D8%A2%D8%B4%D9%BE%D8%B2%DB%8C-%D8%B1%D8%B2%D8%A7-%D9%85%D9%86%D8%AA%D8%B8%D9%85%DB%8C-%D8%AF%D9%88-%D8%AC%D9%84%D8%AF"
+      },
+      "title": "هنر آشپزی",
+      "original": "هنر آشپزی",
+      "author": "رزا منتظمی",
+      "publisher": "انتشارات رزا منتظمی",
+      "topic": "دستورهای آشپزی ایرانی و ملل",
+      "description": "از شناخته‌شده‌ترین مجموعه‌های دستور پخت آشپزی در ایران با پوششی گسترده از غذاهای خانگی و مجلسی.",
+      "ideas": [
+        "تنوع رسپی‌ها امکان مقایسه چند شیوه طبخ را می‌دهد.",
+        "دستور خانگی برای عرضه تجاری به آزمون بازده و ثبات نیاز دارد.",
+        "میزان مواد در مقیاس رستوران باید با وزن و بازده واقعی ثبت شود."
+      ],
+      "application": "یک دستور منتخب را سه بار با وزن‌کشی و آزمون طعم تکرار کنید تا قابلیت استانداردسازی‌اش روشن شود.",
+      "source": "https://www.sababook.ir/view.php?id=2533&page=viewbook",
+      "sourceLabel": "مشاهده شناسنامه کتاب"
+    },
+    {
+      "group": "iranian",
+      "slug": "honar-e-ashpazi-dar-gilan",
+      "cover": {
+        "img": "https://www.iranibook.com/shopping/images/cover/60717.jpg",
+        "credit": "تصویر چاپ نشر عطایی؛ IraniBook",
+        "url": "https://www.iranibook.com/shopping/shopexd.asp?id=5794"
+      },
+      "title": "هنر آشپزی در گیلان",
+      "original": "هنر آشپزی در گیلان",
+      "author": "زری مرعشی خاور",
+      "publisher": "آشیانه کتاب",
+      "topic": "آشپزی محلی و میراث گیلان",
+      "description": "مجموعه‌ای با تمرکز بر ثبت و حفظ نسخه‌ها و دستورهای آشپزی بومی و سنتی گیلان.",
+      "ideas": [
+        "غذاهای محلی هویت فرهنگی مشخصی دارند.",
+        "ثبت نسخه‌های بومی به جلوگیری از یکسان‌سازی منو کمک می‌کند.",
+        "مواد اولیه فصلی و در دسترس بر اجرای حرفه‌ای رسپی اثر می‌گذارند."
+      ],
+      "application": "برای یک غذای محلی نام، مواد شاخص، فصل مواد اولیه و روش طبخ اصلی را در کارت رسپی ثبت کنید.",
+      "source": "https://mahdroo.ir/shop/product/book-684138-m3ceok",
+      "sourceLabel": "مشاهده مشخصات و گزینه‌های تهیه",
+      "isbn": "9789646350434"
+    },
+    {
+      "group": "iranian",
+      "slug": "khuraki-haye-sarzamin-baran",
+      "cover": null,
+      "title": "خوراکی‌های سرزمین باران",
+      "original": "خوراکی‌های سرزمین باران",
+      "author": "رضا شرافت‌پیما",
+      "publisher": "تیرگان (چاپ معرفی‌شده)",
+      "topic": "خوراک‌های بومی گیلان",
+      "description": "کتابی درباره خوراک‌های گیلانی همراه با دستور تهیه شمار زیادی از خوراکی‌های منطقه.",
+      "ideas": [
+        "گردآوری خوراک‌های محلی به توسعه منوی منطقه‌ای کمک می‌کند.",
+        "رسپی‌های سنتی ممکن است تنوع خانوادگی و محلی داشته باشند.",
+        "ثبت منبع دستور و شیوه آزمایش آن برای تولید حرفه‌ای ضروری است."
+      ],
+      "application": "از میان غذاهای محلی سه گزینه متناسب با بازار هدف را برای تست آشپزخانه و محاسبه قیمت تمام‌شده انتخاب کنید.",
+      "source": "https://mahdroo.ir/shop/product/book-7120-hz2hmi",
+      "sourceLabel": "مشاهده شناسنامه چاپ تیرگان (فروش غیرفعال)",
+      "isbn": "9786003241541"
+    },
+    {
+      "group": "iranian",
+      "slug": "kuchak-khanom",
+      "cover": {
+        "img": "https://img.taaghche.com/frontCover/246487.jpg",
+        "credit": "تصویر جلد؛ طاقچه",
+        "url": "https://taaghche.com/book/246487/%DA%A9%D9%88%DA%86%DA%A9-%D8%AE%D8%A7%D9%86%D9%85"
+      },
+      "title": "کوچک خانم",
+      "original": "کوچک خانم؛ نگاهی به میراث گیلان، فرهنگ، غذا و مهمان‌نوازی",
+      "author": "مریم ربیعی کوشاهی",
+      "publisher": "نمای علم",
+      "topic": "فرهنگ غذا و مهمان‌نوازی گیلان",
+      "description": "اثری درباره پیوند خوراک، مهمان‌نوازی و میراث فرهنگی گیلان، با نگاهی به تاریخ و زندگی روزمره منطقه.",
+      "ideas": [
+        "غذا بخشی از روایت هویت و جغرافیای یک منطقه است.",
+        "معرفی مسئولانه خوراک محلی باید با احترام به فرهنگ مبدأ همراه باشد.",
+        "قصه یک غذا می‌تواند به توضیح بهتر منو برای مهمان کمک کند."
+      ],
+      "application": "برای یک غذای محلی در منو یک توضیح کوتاه و مستند درباره پیشینه و مواد شاخص آن بنویسید.",
+      "source": "https://taaghche.com/book/246487/%DA%A9%D9%88%DA%86%DA%A9-%D8%AE%D8%A7%D9%86%D9%85",
+      "sourceLabel": "مشاهده و خرید نسخه الکترونیکی",
+      "isbn": "9786224351043"
+    }
+  ]
+}
