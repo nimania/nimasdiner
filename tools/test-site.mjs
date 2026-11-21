@@ -82,6 +82,27 @@ assert.ok(offsideSeoHtml.includes("آفساید نوشهر | نقد، منو، �
 assert.ok(offsideSeoHtml.includes("Offside Nowshahr"),"English discovery alias");
 const ciabbataSeoHtml=read("reviews/ciabatta-cucina-gandhi/index.html");
 assert.ok(ciabbataSeoHtml.includes("Ciabbata Cucina Tehran"),"Ciabbata English naming");
+// Review improvements must answer real search intents without inventing prices or experiences.
+const offsideImproved=read("reviews/offside-nowshahr/index.html");
+assert.ok(offsideImproved.includes("پاسخ کوتاه به پرسش‌های رایج درباره آفساید نوشهر"));
+assert.ok(offsideImproved.includes("گالری چه اطلاعاتی می‌دهد؟"));
+assert.ok(offsideImproved.includes("https://sepidz.menu/caferestaurant/offside"));
+assert.ok(offsideImproved.includes("review-gallery-offside-nowshahr"));
+assert.ok(offsideImproved.includes("۲۴ آبان ۱۴۰۵"));
+const ciabbataImproved=read("reviews/ciabatta-cucina-gandhi/index.html");
+assert.ok(ciabbataImproved.includes("منوی چاباتا کوچینا تهران؛ چه می‌دانیم و چه نمی‌دانیم؟"));
+assert.ok(ciabbataImproved.includes("پرسش‌های رایج درباره چاباتا کوچینا"));
+assert.ok(ciabbataImproved.includes("قیمت روز هر ساندویچ"));
+assert.ok(ciabbataImproved.includes("غذا نخورده‌ام"));
+assert.ok(ciabbataImproved.includes("شماره واحد نیازمند تأیید"));
+assert.ok(!ciabbataImproved.includes("منوی رسمی و به‌روز چاباتا کوچینا را ببینید"));
+const offsideRecord=reviews.reviews.find(r=>r.slug==="offside-nowshahr");
+const ciabbataRecord=reviews.reviews.find(r=>r.slug==="ciabatta-cucina-gandhi");
+assert.equal(offsideRecord.updatedAt,"2026-11-21");
+assert.equal(ciabbataRecord.updatedAt,"2026-11-21");
+assert.equal(offsideRecord.photoGallery.length>=16,true,"Offside gallery must remain intact");
+assert.equal(ciabbataRecord.photos.length,0,"Do not invent Ciabbata photos");
+assert.ok(!ciabbataImproved.includes('FAQPage'),"No FAQ rich-result markup on editorial reviews");
 const barokReview=reviews.reviews.find(r=>r.slug==="barok-nowshahr");
 assert.ok(barokReview,"Barok review missing");
 assert.equal(barokReview.videoGallery?.[0]?.uploadDate,"2026-11-15T19:29:51Z");
