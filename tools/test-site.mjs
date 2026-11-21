@@ -73,15 +73,15 @@ console.log("Review archive tests passed");
 // Video structured data must use a true timezone-aware publication DateTime.
 // The article's display date remains separate and can be localized in Persian.
 const tfcHtml=read("reviews/tehran-fried-chicken-tfc/index.html");
-assert.match(tfcHtml,/رضا هراتی تهرانی/,"TFC successor mentioned with factual context");
-assert.match(tfcHtml,/محسن هراتی تهرانی/,"TFC founder retained");
-assert.match(tfcHtml,/tehranfriedchicken\\.com\\/about-us\\//,"Founder facts linked to official history");
-assert.match(tfcHtml,/Tehran Fried Chicken/,"English brand alias indexable");
+assert.ok(tfcHtml.includes("رضا هراتی تهرانی"),"TFC successor mentioned with factual context");
+assert.ok(tfcHtml.includes("محسن هراتی تهرانی"),"TFC founder retained");
+assert.ok(tfcHtml.includes("tehranfriedchicken.com/about-us/"),"Founder facts linked to official history");
+assert.ok(tfcHtml.includes("Tehran Fried Chicken"),"English brand alias indexable");
 const offsideSeoHtml=read("reviews/offside-nowshahr/index.html");
-assert.match(offsideSeoHtml,/آفساید نوشهر \\| نقد، منو، قیمت و عکس/,"Offside search-intent title");
-assert.match(offsideSeoHtml,/Offside Nowshahr/,"English discovery alias");
+assert.ok(offsideSeoHtml.includes("آفساید نوشهر | نقد، منو، قیمت و عکس"),"Offside search-intent title");
+assert.ok(offsideSeoHtml.includes("Offside Nowshahr"),"English discovery alias");
 const ciabbataSeoHtml=read("reviews/ciabatta-cucina-gandhi/index.html");
-assert.match(ciabbataSeoHtml,/Ciabbata Cucina Tehran/,"Ciabbata English naming");
+assert.ok(ciabbataSeoHtml.includes("Ciabbata Cucina Tehran"),"Ciabbata English naming");
 const barokReview=reviews.reviews.find(r=>r.slug==="barok-nowshahr");
 assert.ok(barokReview,"Barok review missing");
 assert.equal(barokReview.videoGallery?.[0]?.uploadDate,"2026-11-15T19:29:51Z");
