@@ -15,6 +15,13 @@ assert.ok(read("library/index.html").includes("/books/foreign/"),"Existing autho
 assert.ok(read("library/index.html").includes("/books/iranian/"),"Existing author library must link to Iranian titles");
 assert.ok(read("books/index.html").includes("/library/"),"World catalog must link to existing author library");
 assert.ok(!read("books/foreign/setting-the-table/index.html").includes("دانلود رایگان کتاب"),"Must not market unauthorized free full texts");
+for(const slug of ["restaurant-success-by-the-numbers","setting-the-table","unreasonable-hospitality","the-e-myth-revisited","work-clean"]){ const html=read("books/foreign/"+slug+"/index.html");assert.match(html,/<img src="https:\/\//, "Real foreign book jacket missing: "+slug);assert.match(html,/alt="جلد کتاب/, "Accessible alt missing");assert.match(html,/figcaption/, "Cover source credit missing"); }
+for(const slug of ["ketab-mostatab-ashpazi","honar-e-ashpazi","honar-e-ashpazi-dar-gilan","kuchak-khanom"]){ const html=read("books/iranian/"+slug+"/index.html");assert.match(html,/<img src="https:\/\//,"Real Iranian book jacket missing: "+slug);assert.match(html,/figcaption/,"Cover source credit missing"); }
+assert.match(read("books/iranian/khuraki-haye-sarzamin-baran/index.html"),/تصویر جلد این چاپ هنوز تأیید نشده است/,"Do not invent image for unverified title");
+assert.match(read("books/foreign/index.html"),/world-book-card/);
+assert.match(read("books/iranian/index.html"),/world-book-card/);
+assert.match(read("site-v2.css"),/world-book-cover/);
+console.log("Cover provenance, accessible image markup and missing-cover disclosure passed");
 console.log("World food books index and individual pages passed");
 const orderPage=read("get-book/index.html");
 assert.match(orderPage,/سفارش کتاب/);
