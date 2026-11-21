@@ -36,7 +36,7 @@ for(const b of worldCatalog.books){
   assert.match(html,/world-book-analysis-item/,"Deep analysis not rendered: "+b.slug);
   assert.match(html,/سه تمرین برای رستوران‌های ایران/,"Exercises missing: "+b.slug);
   assert.match(html,/مرور فارسی قابل دریافت/,"PDF content section missing: "+b.slug);
-  assert.match(html,/summary\\.pdf/,"PDF link missing: "+b.slug);
+  assert.match(html,/summary\.pdf/,"PDF link missing: "+b.slug);
   const pdfPath=path.join(dist,dir,"summary.pdf");
   assert.ok(fs.existsSync(pdfPath),"Persian PDF missing: "+pdfPath);
   const pdf=fs.readFileSync(pdfPath);
