@@ -8,6 +8,14 @@ const dist=path.join(process.cwd(),"site-dist");
 const read=p=>fs.readFileSync(path.join(dist,p),"utf8");
 const mustExist=["index.html","get-book/index.html","library/index.html","library/01/index.html","library/02/index.html","library/03/index.html","magazine/index.html","magazine/01/index.html","guides/index.html","guides/food-cost/index.html","guides/menu-engineering/index.html","guides/restaurant-permits/index.html","tools/index.html","services/index.html","consultation/index.html","consulting/index.html","app/index.html","robots.txt","sitemap.xml","search-index.json"];
 for(const p of mustExist){assert.ok(fs.existsSync(path.join(dist,p)),p+" missing");}
+const worldBookPages=["books/index.html","books/foreign/index.html","books/iranian/index.html","books/foreign/restaurant-success-by-the-numbers/index.html","books/foreign/setting-the-table/index.html","books/foreign/unreasonable-hospitality/index.html","books/foreign/the-e-myth-revisited/index.html","books/foreign/work-clean/index.html","books/iranian/ketab-mostatab-ashpazi/index.html","books/iranian/honar-e-ashpazi/index.html","books/iranian/honar-e-ashpazi-dar-gilan/index.html","books/iranian/khuraki-haye-sarzamin-baran/index.html","books/iranian/kuchak-khanom/index.html"];
+for(const p of worldBookPages){ assert.ok(fs.existsSync(path.join(dist,p)),p+" missing"); const html=read(p);assert.match(html,/rel="canonical"/);assert.match(html,/lang="fa" dir="rtl"/);}
+for(const url of ["/books/","/books/foreign/","/books/iranian/"]){assert.ok(read("sitemap.xml").includes(url),"World book index missing in sitemap: "+url);}
+assert.ok(read("library/index.html").includes("/books/foreign/"),"Existing author library must link to foreign titles");
+assert.ok(read("library/index.html").includes("/books/iranian/"),"Existing author library must link to Iranian titles");
+assert.ok(read("books/index.html").includes("/library/"),"World catalog must link to existing author library");
+assert.ok(!read("books/foreign/setting-the-table/index.html").includes("دانلود رایگان کتاب"),"Must not market unauthorized free full texts");
+console.log("World food books index and individual pages passed");
 const orderPage=read("get-book/index.html");
 assert.match(orderPage,/سفارش کتاب/);
 assert.match(orderPage,/https:\/\/t\.me\/nimaafsharnaderi/);
