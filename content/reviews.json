@@ -1627,7 +1627,13 @@
       "galleryIntro": "تصاویر ثبت‌شده از فضای داخلی، کانتر، چیدمان میزها، غذاها و سرو آفساید نوشهر؛ دو عکس تازه سالن و کانتر نیز به مجموعه افزوده شده‌اند.",
       "galleryAfterSection": 4,
       "galleryNote": "این تصاویر نمایی از محیط، غذا و نحوه ارائه را در زمان ثبت عکس‌ها نشان می‌دهند. عکس‌های تازه ارسالی هستند؛ این مجموعه به‌تنهایی معیار قطعی کیفیت غذا، استاندارد بهداشت، سرعت خدمات یا عملکرد رستوران در ساعت شلوغی نیست.",
-      "updatedAt": "2026-11-21"
+      "updatedAt": "2026-11-21",
+      "seoTitle": "آفساید نوشهر | نقد، منو، قیمت و عکس کافه‌رستوران",
+      "seoDescription": "نقد کافه‌رستوران آفساید نوشهر؛ آدرس، عکس‌های واقعی، منوی آنلاین و نمونه قیمت‌های آبان ۱۴۰۵، صبحانه و ساعت فعالیت، همراه با تحلیل مستقل نیما داینر.",
+      "searchAliases": [
+        "Offside Nowshahr",
+        "Offside Cafe Restaurant Nowshahr"
+      ]
     },
     {
       "status": "published",
@@ -1839,7 +1845,13 @@
         "caption": "نشان معرفی باروک",
         "kind": "brand",
         "fallback": "/nimasdiner/assets/reviews/barok-coffee-cup.jpg"
-      }
+      },
+      "seoTitle": "باروک نوشهر | نقد، منو، قیمت و فضای بازی",
+      "seoDescription": "راهنمای کافه‌برگر باروک نوشهر؛ آدرس، منوی آنلاین، نمونه قیمت‌های آبان ۱۴۰۵، عکس و ویدئو، فضای بازی و ارزیابی مستقل از منظر مشتری و مدیر رستوران.",
+      "searchAliases": [
+        "Barok Nowshahr",
+        "Cafe Burger Barok Nowshahr"
+      ]
     },
     {
       "status": "published",
@@ -2116,7 +2128,14 @@
       },
       "archiveImage": "https://nimania.wordpress.com/wp-content/uploads/2026/11/tfc-exterior-nov2026.jpg",
       "archiveFallback": "/nimasdiner/assets/reviews/tfc-editorial-cover.svg",
-      "archiveImageAlt": "نمای بیرونی تهران مرغ سوخاری؛ عکس اختصاصی از بازدید آبان ۱۴۰۵"
+      "archiveImageAlt": "نمای بیرونی تهران مرغ سوخاری؛ عکس اختصاصی از بازدید آبان ۱۴۰۵",
+      "seoTitle": "تهران مرغ سوخاری TFC | نقد، منو و تاریخچه برند",
+      "seoDescription": "نقد تهران مرغ سوخاری (TFC)، منو و قیمت شعب، تاریخچه بنیان‌گذار محسن هراتی تهرانی و مدیریت رضا هراتی تهرانی، با ارجاع به وب‌سایت رسمی مجموعه.",
+      "searchAliases": [
+        "Tehran Fried Chicken",
+        "TFC Tehran",
+        "کنتاکی سابق تهران"
+      ]
     },
     {
       "status": "published",
@@ -2779,7 +2798,13 @@
         "hideHoursChart": true,
         "timelineNote": "ساعت تأییدشدهٔ این واحد را نداریم؛ ساعت مرکز خرید راهنمای تقریبی است.",
         "menuNote": "منوی منتشرشدهٔ برند قیمت ندارد؛ قیمت‌ها پس از ثبت از منوی حضوری اضافه می‌شوند."
-      }
+      },
+      "seoTitle": "گاو برگر تهران (Gav Burger) | نقد منو و هویت برند",
+      "seoDescription": "بررسی مستقل منوی گاو برگر در مرکز خرید گاندی تهران؛ برگرهای دودی، برچسب‌های منو و نکات مدیریتی. این نقد مبتنی بر منو است و قیمت‌های روز را پوشش نمی‌دهد.",
+      "searchAliases": [
+        "Gav Burger Tehran",
+        "Gav Burger Gandhi"
+      ]
     },
     {
       "status": "published",
@@ -3081,7 +3106,13 @@
         "hideHoursChart": true,
         "timelineNote": "ساعت تأییدشدهٔ این واحد را نداریم؛ ساعت مرکز خرید راهنمای تقریبی است.",
         "menuNote": "منوی این مجموعه هنوز ثبت نشده است."
-      }
+      },
+      "seoTitle": "چاباتا کوچینا تهران (Ciabbata Cucina) | نقد و آدرس",
+      "seoDescription": "نقد کوتاه چاباتا کوچینا در مرکز خرید گاندی تهران؛ آدرس، صف انتظار و روایت مشتریان. منوی قیمت‌دار و تست حضوری هنوز ثبت نشده است.",
+      "searchAliases": [
+        "Ciabbata Cucina Tehran",
+        "Ciabbata Cucina Gandhi"
+      ]
     },
     {
       "status": "published",
