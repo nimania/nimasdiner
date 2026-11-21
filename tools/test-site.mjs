@@ -22,6 +22,29 @@ assert.match(read("books/foreign/index.html"),/world-book-card/);
 assert.match(read("books/iranian/index.html"),/world-book-card/);
 assert.match(read("site-v2.css"),/world-book-cover/);
 console.log("Cover provenance, accessible image markup and missing-cover disclosure passed");
+
+// Editorial review depth and downloadable PDFs for the full 10-book collection.
+const worldCatalog=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/world-books.json"),"utf8"));
+const worldAnalyses=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/world-book-reviews.json"),"utf8"));
+assert.equal(worldCatalog.books.length,10);
+assert.equal(worldAnalyses.reviews.length,10);
+const reviewKeys=new Set(worldAnalyses.reviews.map(x=>x.slug));
+for(const b of worldCatalog.books){
+  assert.ok(reviewKeys.has(b.slug),"Editorial analysis missing: "+b.slug);
+  const dir="books/"+b.group+"/"+b.slug+"/";
+  const html=read(dir+"index.html");
+  assert.match(html,/world-book-analysis-item/,"Deep analysis not rendered: "+b.slug);
+  assert.match(html,/سه تمرین برای رستوران‌های ایران/,"Exercises missing: "+b.slug);
+  assert.match(html,/مرور فارسی قابل دریافت/,"PDF content section missing: "+b.slug);
+  assert.match(html,/summary\.pdf/,"PDF link missing: "+b.slug);
+  const pdfPath=path.join(dist,dir,"summary.pdf");
+  assert.ok(fs.existsSync(pdfPath),"Persian PDF missing: "+pdfPath);
+  const pdf=fs.readFileSync(pdfPath);
+  assert.ok(pdf.length>5000,"Empty PDF: "+pdfPath);
+  assert.equal(pdf.toString("ascii",0,5),"%PDF-","Invalid PDF header: "+pdfPath);
+}
+console.log("Ten sourced, full editorial reviews and Persian PDFs passed");
+
 console.log("World food books index and individual pages passed");
 const orderPage=read("get-book/index.html");
 assert.match(orderPage,/سفارش کتاب/);

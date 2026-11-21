@@ -721,3 +721,13 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .world-book-detail-art figcaption{font-size:.77rem;line-height:1.6;color:#615b52}
 .world-book-detail-art figcaption a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:680px){.world-book-detail-grid{grid-template-columns:1fr;gap:1.2rem}.world-book-detail-art .world-book-cover{max-width:230px;min-height:280px;margin:auto}.world-book-detail-art .world-book-cover>a{min-height:240px}.world-book-detail-art .world-book-cover img{max-height:290px}.world-book-cover{min-height:250px}.world-book-card .world-book-cover{max-width:190px;min-height:240px}}
+
+
+/* Editorial pages of the World Food Library */
+.world-book-analysis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}
+.world-book-analysis-item{background:#fff;border:1px solid #e9e2d6;border-radius:13px;padding:18px 20px;min-width:0}
+.world-book-analysis-item h3{font-size:18px;line-height:1.7;margin:0 0 10px}
+.world-book-analysis-item p{font-size:15px;line-height:2.05;margin:0}
+.world-book-detail .actions{align-items:stretch}
+.world-book-detail .actions a[type="application/pdf"]{background:#ffcf22;border-color:#ffcf22;color:#222}
+@media(max-width:780px){.world-book-analysis{grid-template-columns:1fr}}
