@@ -36,7 +36,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const section=(eyebrow,title,body)=>`<section class="block wrap"><p class="eyebrow">${esc(eyebrow)}</p><h2>${esc(title)}</h2>${body}</section>`;
   const instagramEmbed=(item,fallbackTitle="ویدئوی همراه پرونده")=>{
     const raw=typeof item==="string"?item:item?.url;
-    const match=/^https:\/\/www\\.instagram\\.com\/(reel|p)\/([A-Za-z0-9_-]+)\/?/i.exec(String(raw||""));
+    const match=/^https:\/\/www\.instagram\.com\/(reel|p)\/([A-Za-z0-9_-]+)\/?/i.exec(String(raw||""));
     if(!match)return "";
     const permalink="https://www.instagram.com/"+match[1]+"/"+match[2]+"/";
     const title=typeof item==="object"&&item?.title?item.title:fallbackTitle;
