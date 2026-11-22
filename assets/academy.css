@@ -1,0 +1,53 @@
+
+/* Academy · educational courses, consistent with Nima Diner */
+.academy-heading h1,.academy-course-head h1{font-size:clamp(30px,4vw,49px);line-height:1.55;max-width:850px}
+.academy-feature{display:grid;grid-template-columns:210px minmax(0,1fr);gap:40px;align-items:center;background:#fff;border:1px solid var(--edge);padding:26px;border-radius:14px}
+.academy-feature h2{font-size:clamp(23px,3vw,34px);line-height:1.65;margin:5px 0}
+.academy-feature p{color:var(--muted)}
+.academy-cover,.academy-hero-cover{background:#fff2c6;border-radius:12px;display:grid;place-items:center;padding:16px}
+.academy-cover img{width:180px;box-shadow:9px 14px 20px #0002;transform:rotate(-3deg)}
+.academy-note{font-size:13px}
+.academy-course-hero{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:35px;align-items:center}
+.academy-hero-cover img{max-width:185px;box-shadow:12px 16px 22px #0003}
+.academy-chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.academy-chips span{background:#fff1c3;border:1px solid #edd99c;border-radius:100px;padding:4px 14px;font-size:12px}
+.academy-progress{max-width:550px;margin-top:28px}
+.academy-progress-label{display:flex;justify-content:space-between;gap:16px;font-size:13px;margin-bottom:10px}
+.academy-progress-track{width:100%;height:10px;background:#e8e1d4;border-radius:30px;overflow:hidden}
+.academy-progress-track i{display:block;height:100%;background:var(--red);border-radius:30px}
+.academy-lesson-list{display:grid;gap:12px}
+.academy-lesson{display:flex;gap:16px;align-items:center;border:1px solid var(--edge);border-radius:12px;background:#fff;padding:18px 22px;min-width:0}
+a.academy-lesson:hover{border-color:#c43a2c;text-decoration:none}
+.academy-lesson.current{border:2px solid var(--red);background:#fff9e8}
+.academy-lesson.upcoming{background:#f4f1e9;color:#707579}
+.academy-lesson-num{font-size:25px;font-weight:700;color:var(--red);width:42px;flex-shrink:0}
+.academy-lesson.upcoming .academy-lesson-num{color:#8e9398}
+.academy-lesson-body{display:grid;gap:3px;min-width:0;flex:1}
+.academy-lesson-body strong{font-size:18px}
+.academy-lesson-body small{font-size:12px;color:var(--muted)}
+.academy-lesson-state{font-weight:700;font-size:12px;color:#8b3428;white-space:nowrap}
+.academy-lesson.upcoming .academy-lesson-state{color:#657078}
+.academy-video{aspect-ratio:16 / 9;width:100%;max-width:940px;border-radius:14px;overflow:hidden;background:#151a1b;box-shadow:0 6px 25px #0002}
+.academy-video iframe{border:0;width:100%;height:100%;display:block}
+.academy-lesson-video{padding-top:16px;padding-bottom:28px}
+.academy-video-sources{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.academy-book-box{background:var(--yellow);border-radius:15px;padding:32px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:30px;align-items:center}
+.academy-book-box h2{font-size:clamp(23px,2.4vw,32px);margin:4px 0}
+.academy-book-box p{max-width:770px}
+.academy-book-cover img{width:145px;box-shadow:7px 11px 23px #0004}
+.academy-practice{border-right:5px solid var(--yellow);background:#fff;padding:20px 25px;margin-block:28px}
+.academy-practice h3{margin:0 0 10px}
+.academy-practice li{margin:8px 0}
+.academy-cta{margin-top:24px;margin-bottom:32px}
+@media(max-width:800px){
+ .academy-feature{grid-template-columns:1fr;gap:15px}
+ .academy-cover img{width:135px}
+ .academy-course-hero{grid-template-columns:1fr}
+ .academy-hero-cover{display:none}
+ .academy-book-box{grid-template-columns:1fr}
+ .academy-book-cover img{width:115px}
+ .academy-lesson{gap:10px;padding:14px}
+ .academy-lesson-num{width:30px;font-size:20px}
+ .academy-lesson-body strong{font-size:15px}
+ .academy-lesson-state{font-size:10px}
+}
