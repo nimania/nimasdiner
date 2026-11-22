@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "courses": [
+    {
+      "slug": "restaurant-management-101",
+      "title": "دوره ویدئویی ۱۰۱ قانون طلایی مدیریت رستوران",
+      "bookNumber": 1,
+      "teacher": "نیما افشارنادری",
+      "description": "آموزش رایگان ویدئویی بر پایهٔ کتاب مرجع جامع مدیریت رستوران؛ ۱۰۱ قانون در هفت قسمت، از پیش از راه‌اندازی تا مدیریت کسب‌وکار غذا.",
+      "lessons": [
+        {
+          "number": 1,
+          "slug": "lesson-01",
+          "title": "پیش از راه‌اندازی",
+          "startRule": 1,
+          "endRule": 15,
+          "topic": "امکان‌سنجی، مدل کسب‌وکار و انتخاب ملک",
+          "status": "published",
+          "youtubeId": "P9y2UdNuztc",
+          "youtubeUrl": "https://www.youtube.com/watch?v=P9y2UdNuztc",
+          "aparatUrl": "https://www.aparat.com/v/rstd525",
+          "description": "قسمت اول دوره ویدئویی کتاب زرد؛ مرور قوانین ۱ تا ۱۵ درباره مرحلهٔ پیش از راه‌اندازی کسب‌وکار غذا."
+        },
+        {
+          "number": 2,
+          "slug": "lesson-02",
+          "title": "حساب‌وکتاب رستوران",
+          "startRule": 16,
+          "endRule": 30,
+          "topic": "اقتصاد رستوران و مدیریت مالی",
+          "status": "planned"
+        },
+        {
+          "number": 3,
+          "slug": "lesson-03",
+          "title": "منویی که حساب دارد",
+          "startRule": 31,
+          "endRule": 45,
+          "topic": "مهندسی منو، رسپی و قیمت‌گذاری",
+          "status": "planned"
+        },
+        {
+          "number": 4,
+          "slug": "lesson-04",
+          "title": "پشت صحنهٔ یک سرویس خوب",
+          "startRule": 46,
+          "endRule": 60,
+          "topic": "عملیات آشپزخانه، تدارکات و بهداشت",
+          "status": "planned"
+        },
+        {
+          "number": 5,
+          "slug": "lesson-05",
+          "title": "تیمی که کار را جلو می‌برد",
+          "startRule": 61,
+          "endRule": 75,
+          "topic": "منابع انسانی و عملیات سالن",
+          "status": "planned"
+        },
+        {
+          "number": 6,
+          "slug": "lesson-06",
+          "title": "از سفارش تا دوباره برگشتن",
+          "startRule": 76,
+          "endRule": 90,
+          "topic": "تجربه مشتری، بازاریابی و دلیوری",
+          "status": "planned"
+        },
+        {
+          "number": 7,
+          "slug": "lesson-07",
+          "title": "آماده برای روزهای سخت",
+          "startRule": 91,
+          "endRule": 101,
+          "topic": "ایمنی، مجوزها و مدیریت بحران",
+          "status": "planned"
+        }
+      ]
+    }
+  ]
+}
