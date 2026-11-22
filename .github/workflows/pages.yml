@@ -41,6 +41,7 @@ jobs:
           node --check site-v2.js
           node tools/build-site.mjs
           python tools/build-world-book-pdfs.py
+          python tools/build-world-book-epubs.py
           node tools/test-site.mjs
           node tools/test-manager.mjs
       - name: Protect existing public page URLs
@@ -90,6 +91,7 @@ jobs:
           node --check tools/mirror-review-covers.mjs
           node tools/build-site.mjs
           python tools/build-world-book-pdfs.py
+          python tools/build-world-book-epubs.py
           node tools/mirror-review-covers.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
