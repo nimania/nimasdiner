@@ -488,6 +488,22 @@ for(const p of ["b7/","b7/2/","b7/4/","b7/5/","b7/6/","b7/9/","b7/10/","b7/11/",
 }
 console.log("Book 12 «دخل» and /b7/ companion pages checked.");
 
+// Book 06 «شف»: QR-printed companion routes and the seven chapter readings must exist.
+for(const p of ["b6/","b6/1/","b6/2/","b6/3/","b6/4/","b6/5/","b6/6/","b6/9/","b6/10/","b6/12/"]){
+ const html=read(p+"index.html");
+ assert.match(html,/persian-digits\.js/,"localization script missing on "+p);
+ assert.match(html,/href="\/library\/06\/"/,p+" must link to /library/06/");
+ if(["b6/2/","b6/4/","b6/6/"].includes(p))assert.match(html,/assets\/b6-tools\.js/,"tool script missing on "+p);
+}
+for(const s of ["escoffier-brigade-lesson","cronut-hybrid-lesson","elbulli-workshop-lesson","pepsi-challenge-tasting-lesson","cheesecake-factory-standards-lesson","wasted-dan-barber-lesson","plate-color-taste-lesson"]){
+ const html=read("reading/"+s+"/index.html");
+ assert.match(html,/href="\/library\/06\/"/,"reading "+s+" must credit book 06");
+ assert.match(read("sitemap.xml"),new RegExp("/reading/"+s+"/"),"reading "+s+" must be indexed");
+}
+assert.ok(fs.existsSync(path.join(dist,"assets/b6/shef-forms.pdf")),"missing chef forms PDF");
+assert.match(read("library/06/index.html"),/href="\/b6\/"/,"book 06 must link to its companion pages");
+console.log("Book 06 «شف» /b6/ companion pages and chapter readings checked.");
+
 
 // Prompt library: accessible illustrated examples, honest labeling, and stable routes.
 {

@@ -76,3 +76,9 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - `/b7/` and its sub-pages (`2`, `4`, `5`, `6`, `9`, `10`, `11`, `12`) are printed as QR codes in the book. Never rename or remove them. They are built by `tools/book7-pages.mjs`; interactive logic is in `assets/b7-tools.js` (state stays in the visitor's browser). Downloads in `assets/b7/`: three Excel templates and `dakhl-forms.pdf` (only the seven appendix form pages, which the book says are free to use).
 - The homepage hero shelf shows «دخل» in the second tier next to «شف» and «منوی سودده». Site copy counts: twelve published books, five country guides, nine e-book-only titles.
 - Finance, cost, stock, staff and delivery guides, and most calculators under `/tools/`, recommend book 12 via `guideBooks()` / `toolBooks` in `tools/build-site.mjs`.
+
+## Book 06 «شف» companion pages and chapter readings (owner instruction, 23 Nov 2026)
+- `/b6/` and its sub-pages (`1`, `2`, `3`, `4`, `5`, `6`, `9`, `10`, `12`) and seven `/reading/` articles (`escoffier-brigade-lesson`, `cronut-hybrid-lesson`, `elbulli-workshop-lesson`, `pepsi-challenge-tasting-lesson`, `cheesecake-factory-standards-lesson`, `wasted-dan-barber-lesson`, `plate-color-taste-lesson`) are printed as QR codes in the book «شف». Never rename or remove them.
+- Built by `tools/book6-pages.mjs`; interactive logic (idea filter, tasting averages, yield) in `assets/b6-tools.js`; `assets/b6/shef-forms.pdf` holds only the book's appendix form pages (79–86). The readings are `analysis` articles in `content/editorial.json` with `bookSources` pointing to book 06; their facts are sourced.
+- The planned roadmap title «خرید، انبار و کنترل ضایعات» was removed on the owner's instruction because «دخل» covers it; the roadmap is now 13–17.
+
