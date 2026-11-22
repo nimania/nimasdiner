@@ -576,3 +576,19 @@ console.log("Shooka case study SEO, source attribution and archival links passed
  assert.match(magazineArchivePage,/\/magazine\/02\//,"New magazine 02 must be discoverable");
  assert.match(read("sitemap.xml"),/\/magazine\/02\//,"New magazine must appear in sitemap");
  console.log("Diner magazine 02 verified: original binary assets, canonical URLs, archive, SEO, and no temporary host");
+
+
+// Diner OS phase one must preserve search URL, source-grounded answers and static SEO.
+const dinerSearch=read("search/index.html");
+assert.match(dinerSearch,/DINER OS/,"Diner OS search identity missing");
+assert.match(dinerSearch,/id="local-search"/,"Hybrid search input missing");
+assert.match(dinerSearch,/id="diner-os-answer"/,"Source-grounded answer panel missing");
+assert.match(dinerSearch,/data-diner-example="چطور فودکاست/,"Example controls missing");
+assert.match(dinerSearch,/noindex,follow/,"Search results route must stay noindex");
+assert.doesNotMatch(read("sitemap.xml"),/<loc>[^<]*\/search\//,"Search route must not appear in sitemap");
+assert.match(read("index.html"),/از داینر بپرس/,"Global navigation must expose new search");
+assert.match(read("site-v2.js"),/const ranked=\(pages,q\)/,"Ranking script missing");
+assert.match(read("site-v2.js"),/answerSummary\.textContent=best\.description/,"Answer must come from published descriptions");
+assert.match(read("site-v2.js"),/search-index\.json/,"Existing local search index must remain");
+assert.doesNotMatch(dinerSearch,/sk-proj-|OPENAI_API_KEY/i,"No credentials on public page");
+console.log("Diner OS hybrid search and SEO-preserving checks passed");

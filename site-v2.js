@@ -76,21 +76,71 @@ if(reviewFilters){
  [category,city,type].forEach(el=>el.addEventListener('change',filter));query.addEventListener('input',filter);filter();
 }
 if(search){
- const status=byId("search-status"),results=byId("search-results"),term=new URLSearchParams(location.search).get("q")||"";
- search.value=term;
- const tokens=normalize(term).split(" ").filter(Boolean);
- if(!tokens.length)return;
- status.textContent="در حال بررسی مطالب منتشرشده…";
- fetch("/nimasdiner/search-index.json",{cache:"no-store"})
- .then(r=>{if(!r.ok)throw Error("Unavailable");return r.json();})
- .then(pages=>{
- const matches=pages.filter(p=>tokens.every(t=>normalize(p.title+" "+p.description+" "+p.body).includes(t)));
- results.replaceChildren();
- status.textContent=matches.length?fmt.format(matches.length)+" نتیجه مرتبط یافت شد.":"مطلب مرتبطی در آرشیو منتشرشده پیدا نشد.";
- for(const p of matches){const card=document.createElement("article");card.className="card";
- const h=document.createElement("h3"),a=document.createElement("a"),desc=document.createElement("p");
- a.href=p.url;a.textContent=p.title;h.appendChild(a);desc.textContent=p.description;card.append(h,desc);results.appendChild(card);}
- })
- .catch(()=>{status.textContent="بارگذاری فهرست جست‌وجو انجام نشد. لطفاً دوباره تلاش کنید.";});
+ const status=byId("search-status"),results=byId("search-results"),resultsWrap=byId("diner-os-results-wrap"),answer=byId("diner-os-answer"),answerTitle=byId("diner-os-answer-title"),answerSummary=byId("diner-os-answer-summary"),answerSource=byId("diner-os-answer-source"),empty=byId("diner-os-empty"),filters=byId("diner-os-filters");
+ const stop=new Set("چطور چگونه چرا چی چیست کی کجا از در با به برای من ما منو رستورانم کافه ام یک یه رو را این آن که هست است می کنم کنیم کنند ولی اما و یا هم چه دارم ندارم میخوام میخواهم می تونم".split(" "));
+ const rules=[
+  {test:/فود\s*کاست|food\s*cost|مواد اولیه|هزینه غذا|foodcost/,terms:["فودکاست","هزینه مواد","food cost"],route:"/guides/food-cost/"},
+  {test:/سود|ضرر|شلوغ|درآمد|حاشیه|قیمت\s*گذار|قیمت\s*فروش/,terms:["سود رستوران","حاشیه مشارکت","فودکاست","مهندسی منو"],route:"/guides/restaurant-profit/"},
+  {test:/مشتری|وفادار|بازگشت|برنمیگرد|بر نمیگرد|شوکا|یارعلی/,terms:["وفاداری مشتری","کافه شوکا","تجربه مشتری"],route:"/reading/yarali-pourmoghadam-shooka-cafe-management/"},
+  {test:/افتتاح|راه\s*انداز|تأسیس|تاسیس|رستوران بزن|کافه بزن|سرمایه/,terms:["راه اندازی","سرمایه محدود","مجوز رستوران"],route:"/guides/restaurant-management/"},
+  {test:/مجله|ماهنامه|کرواسان/,terms:["مجله داینر","کرواسان","یارعلی و شوکا"],route:"/magazine/"},
+  {test:/رسپی|دستور پخت|دستور غذا|مواد مصرف|پخت/,terms:["رسپی","کارت رسپی","استانداردسازی"],route:"/tools/"},
+  {test:/ضایعات|دورریز|موجودی|انبار/,terms:["ضایعات","انبار","هزینه مواد"],route:"/tools/"}
+ ];
+ const category=url=>url.startsWith("/tools/")?"tools":url.startsWith("/guides/")?"guide":url.startsWith("/reading/")?"reading":url.startsWith("/reviews/")?"review":url.startsWith("/magazine/")?"magazine":url.startsWith("/library/")||url.startsWith("/books/")?"book":"other";
+ const labels={all:"همه",guide:"دانشنامه",tools:"ابزار",reading:"خواندنی‌ها",review:"نقد رستوران",magazine:"ماهنامه",book:"کتابخانه",other:"سایر"};
+ const tokenize=q=>[...new Set(normalize(q).split(/[^\p{L}\p{N}]+/u).filter(t=>t.length>2&&!stop.has(t)))].slice(0,12);
+ const safePath=url=>typeof url==="string"&&url.startsWith("/")&&!url.startsWith("//")&&!url.includes("\\")?url:"";
+ let current=[],chosen="all",catalogPromise;
+ const index=()=>catalogPromise||(catalogPromise=fetch("/nimasdiner/search-index.json",{cache:"no-store"})
+  .then(r=>{if(!r.ok)throw Error("index");return r.json()})
+  .then(pages=>{if(!Array.isArray(pages))throw Error("invalid index");return pages.filter(p=>safePath(p.url)&&p.title&&p.description)})
+  .catch(error=>{catalogPromise=null;throw error}));
+ const ranked=(pages,q)=>{
+  const n=normalize(q),tokens=tokenize(q),intent=rules.find(r=>r.test.test(n));
+  const extra=intent?intent.terms.flatMap(tokenize):[];
+  const related=[...new Set(extra)].filter(t=>!tokens.includes(t)).slice(0,9);
+  const items=[];
+  for(const p of pages){
+   const title=normalize(p.title),description=normalize(p.description),body=normalize((p.body||"").slice(0,24000));
+   let score=0,primary=0;
+   if(n.length>2&&title.includes(n))score+=35;
+   if(n.length>2&&description.includes(n))score+=16;
+   for(const t of tokens){if(title.includes(t)){score+=11;primary++}else if(description.includes(t)){score+=5;primary++}else if(body.includes(t)){score+=1;primary++}}
+   for(const t of related){if(title.includes(t))score+=5;else if(description.includes(t))score+=2;else if(body.includes(t))score+=.5}
+   if(intent&&p.url===intent.route)score+=24;
+   if(score>0&&(primary>0||(intent&&score>=8)))items.push({page:p,score,kind:category(p.url)});
+  }
+  return items.sort((a,b)=>b.score-a.score||a.page.title.localeCompare(b.page.title,"fa")).slice(0,24);
+ };
+ const render=()=>{
+  results.replaceChildren();
+  filters.replaceChildren();
+  for(const type of ["all",...new Set(current.map(x=>x.kind))]){
+   const button=document.createElement("button");button.type="button";button.textContent=labels[type];button.className="diner-os-filter"+(chosen===type?" is-active":"");button.setAttribute("aria-pressed",String(chosen===type));
+   button.addEventListener("click",()=>{chosen=type;render()});filters.append(button);
+  }
+  for(const entry of current.filter(x=>chosen==="all"||x.kind===chosen).slice(0,12)){
+   const p=entry.page,card=document.createElement("article"),k=document.createElement("span"),h=document.createElement("h3"),a=document.createElement("a"),desc=document.createElement("p");
+   card.className="card diner-os-result";k.className="kicker";k.textContent=labels[entry.kind];a.href=p.url;a.textContent=p.title;h.append(a);desc.textContent=p.description;card.append(k,h,desc);results.append(card);
+  }
+ };
+ const run=async(q,changeUrl)=>{
+  const term=q.trim().slice(0,240);search.value=term;
+  if(changeUrl){const url=new URL(location.href);term?url.searchParams.set("q",term):url.searchParams.delete("q");history.replaceState(null,"",url.pathname+url.search)}
+  answer.hidden=true;empty.hidden=true;resultsWrap.hidden=true;current=[];chosen="all";
+  if(!term){status.textContent="برای شروع سؤال بپرس یا یکی از موضوع‌ها را انتخاب کن.";return}
+  status.textContent="در حال بررسی محتوای منتشرشده…";
+  try{
+   const pages=await index();if(search.value!==term)return;
+   current=ranked(pages,term);status.textContent=current.length?fmt.format(current.length)+" نتیجه مرتبط از آرشیو نیمانیا":"پاسخ دقیقی در آرشیو پیدا نشد.";
+   if(!current.length){empty.hidden=false;return}
+   const best=current[0].page;answerTitle.textContent=best.title;answerSummary.textContent=best.description;
+   answerSource.href=best.url;answerSource.textContent="مطالعه منبع: "+best.title+" ←";answer.hidden=false;resultsWrap.hidden=false;render();
+  }catch(error){status.textContent="بارگذاری آرشیو ممکن نشد. اتصال اینترنت را بررسی و دوباره تلاش کن.";empty.hidden=false;console.warn("Diner search index",error)}
+ };
+ byId("diner-os-form")?.addEventListener("submit",event=>{event.preventDefault();run(search.value,true)});
+ document.querySelectorAll("[data-diner-example]").forEach(button=>button.addEventListener("click",()=>run(button.dataset.dinerExample||"",true)));
+ const initial=new URLSearchParams(location.search).get("q")||"";if(initial)run(initial,false);
 }
 })();

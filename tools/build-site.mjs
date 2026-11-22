@@ -26,7 +26,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const BUILD_DATE=new Date().toISOString().slice(0,10);
   const absURL=u=>u?(u.startsWith("http")?u:HOST+u):OG_DEFAULT;
   const crumbLabels={"":"خانه",b4:"دیده شو",b5:"منوی سودده",library:"کتابخانه",magazine:"مجله داینر",guides:"دانشنامه",tools:"ابزارها",journal:"ژورنال",kits:"کاربرگ‌ها",reading:"خواندنی‌ها",news:"رادار صنعت غذا",analysis:"تحلیل و تجربه",reviews:"نقدهای نیما",services:"خدمات",consultation:"مشاورهٔ ۹۰ دقیقه‌ای",glossary:"فرهنگ اصطلاحات",prompts:"پرامپت‌خانه",about:"درباره داینر","get-book":"سفارش کتاب",membership:"عضویت داینر",search:"جست‌وجو"};
-  const nav=[["خانه",""],["کتابخانه","library/"],["دانشنامه","guides/"],["ابزارها","tools/"],["پرامپت‌خانه","prompts/"],["ژورنال","journal/"],["کاربرگ‌ها","kits/"],["خواندنی‌ها","reading/"],["نقدهای نیما","reviews/"],["جست‌وجو","search/"]];
+  const nav=[["خانه",""],["کتابخانه","library/"],["دانشنامه","guides/"],["ابزارها","tools/"],["پرامپت‌خانه","prompts/"],["ژورنال","journal/"],["کاربرگ‌ها","kits/"],["خواندنی‌ها","reading/"],["نقدهای نیما","reviews/"],["از داینر بپرس","search/"]];
   const navHTML=`<nav class="nav" aria-label="ناوبری اصلی">${nav.map(([l,p])=>`<a href="${link(p)}">${esc(l)}</a>`).join("")}</nav>`;
   const header=`<header class="topbar"><div class="wrap top-inner"><a class="brand" href="${BASE}" aria-label="خانه نیما داینر"><span>نیما داینر<span class="brand-dot">.</span></span><small dir="ltr">NIMA'S DINER</small></a>${navHTML}<div class="header-actions"><a class="get-link" href="${link("library/")}">سفارش کتاب</a><a class="get-link get-link-consultation" href="${link("consultation/")}">درخواست مشاوره</a></div></div></header>`;
   const footer=`<footer class="footer"><div class="wrap footer-grid"><div><strong>نیما داینر</strong><p>دانش، ابزار و تصمیم بهتر برای کسب‌وکار غذا.</p></div><div><a href="${link("library/")}">کتابخانه</a><a href="${link("magazine/")}">مجله</a><a href="${link("guides/")}">دانشنامه</a><a href="${link("glossary/")}">فرهنگ اصطلاحات</a><a href="${link("prompts/")}">پرامپت‌خانه</a><a href="${link("services/")}">خدمات مشاوره</a><a href="${link("consultation/")}">مشاورهٔ ۹۰ دقیقه‌ای</a></div><div><a href="https://www.instagram.com/nimasdiner" rel="noopener">اینستاگرام</a><a href="https://t.me/nimasdiner" rel="noopener">تلگرام</a><a href="${link("about/")}">درباره داینر</a><a href="${link("privacy.html")}">حریم خصوصی</a><a href="mailto:nimania@gmail.com">تماس</a></div></div><div class="wrap footer-end">© نیما داینر · محتوای تخصصی برای صاحبان کسب‌وکار غذا</div></footer>`;
@@ -238,8 +238,30 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
     +section("روش کار","از کتاب تا ابزار و داده",`<p class="rich">کتابخانه، مجله تک‌موضوعی، راهنماهای عملی، محاسبه‌گرها و تحلیل صنعت به یکدیگر متصل هستند تا موضوعی که می‌خوانید به اقدام مشخص ختم شود.</p>`)
     +section("سیاست انتشار","منبع و تاریخ قابل بررسی",`<p class="rich">خبر باید منبع اصلی و تاریخ داشته باشد؛ داده بازار کشورهای دیگر نباید بی‌دلیل به ایران تعمیم داده شود. مثال‌های عددی فرضی مشخص شده‌اند. محتوای مقررات و بهداشت پیش از تبدیل‌شدن به دستورالعمل باید با مرجع رسمی به‌روز بررسی شود.</p><p class="rich">برای گزارش خطا، پیشنهاد موضوع یا ارسال تجربه از راه ایمیل درج‌شده در پانوشت ارتباط بگیرید.</p>`);
   add("about/","درباره نیما داینر و سیاست انتشار","مأموریت نیما داینر، ساخت کتابخانه و رسانه تخصصی کسب‌وکار غذا؛ با روش مستندسازی خبر، تحلیل کاربردی و بازبینی محتوا.",about);
-  const search=`<section class="pagehead wrap">${crumbs([["جست‌وجو",null]])}<p class="eyebrow">جست‌وجوی داینر</p><h1>در کتابخانه، مجله و دانشنامه بگرد</h1><p class="lead">جست‌وجوی داخلی روی محتوای منتشرشده انجام می‌شود؛ موضوعات پیشنهادی انتشارنیافته وارد نتیجه‌ها نمی‌شوند.</p><form action="${link("search/")}" method="get" class="search-form"><label for="local-search">عبارت موردنظر</label><div class="search-controls"><input id="local-search" name="q" type="search" autocomplete="off" placeholder="مثلاً فودکاست، مجوز، مهندسی منو"><button class="button button-dark" type="submit">جست‌وجو</button></div></form><p id="search-status" class="muted" role="status" aria-live="polite">عبارت را وارد کنید.</p><div id="search-results" class="cards two"></div></section>`;
-  add("search/","جست‌وجوی داخلی نیما داینر","جست‌وجوی کتاب‌ها، مجله و دانشنامه نیما داینر؛ پیدا کردن راهنماهای تخصصی مدیریت رستوران و کافه.",search,{noindex:true,script:"site-v2.js"});
+  const search=`<section class="pagehead wrap diner-os-search" aria-labelledby="diner-os-heading">
+ ${crumbs([["جست‌وجو",null]])}
+ <div class="diner-os-eyebrow"><span class="diner-os-pulse" aria-hidden="true"></span> DINER OS · راهنمای دانش داینر</div>
+ <h1 id="diner-os-heading">از داینر بپرس؛ جواب و منبعش را پیدا کن.</h1>
+ <p class="lead">مسئله رستوران یا کافه‌ات را به زبان خودت بنویس. از میان مقاله‌ها، مجله‌ها، نقدها، کتابخانه و ابزارهای منتشرشده نیمانیا، نزدیک‌ترین پاسخ‌ها و مسیرهای اجرایی را نشان می‌دهیم.</p>
+ <form action="${link("search/")}" method="get" id="diner-os-form" class="search-form diner-os-form" role="search">
+  <label for="local-search">سؤال یا عبارت موردنظر</label>
+  <div class="search-controls"><input id="local-search" name="q" type="search" enterkeyhint="search" autocomplete="off" maxlength="240" placeholder="مثلاً رستورانم شلوغه ولی سود نمی‌کنم…"><button class="button button-dark" type="submit">پیدا کن ←</button></div>
+ </form>
+ <div class="diner-os-examples" aria-label="پرسش‌های پیشنهادی"><span>از اینجا شروع کن:</span><button type="button" data-diner-example="چطور فودکاست را حساب کنم؟">محاسبه فودکاست</button><button type="button" data-diner-example="رستورانم شلوغه ولی سود ندارم">شلوغی بدون سود</button><button type="button" data-diner-example="چرا مشتری‌های کافه برنمی‌گردن؟">وفاداری مشتری</button><button type="button" data-diner-example="برای راه‌اندازی رستوران از کجا شروع کنم؟">شروع رستوران</button></div>
+ <p class="diner-os-disclosure">این نسخه از محتوای واقعی و عمومی نیمانیا راهنمایی می‌سازد؛ گفت‌وگوی زنده و بررسی اطلاعات اختصاصی کسب‌وکار هنوز فعال نیست.</p>
+</section>
+<section class="block wrap diner-os-output" aria-label="پاسخ و منابع جست‌وجو">
+ <p id="search-status" class="muted" role="status" aria-live="polite">برای شروع سؤال بپرس یا یکی از موضوع‌ها را انتخاب کن.</p>
+ <section id="diner-os-answer" class="diner-os-answer" hidden aria-labelledby="diner-os-answer-title">
+  <span class="diner-os-answer-label">نزدیک‌ترین پاسخ از آرشیو نیمانیا</span><h2 id="diner-os-answer-title"></h2>
+  <p id="diner-os-answer-summary"></p><a id="diner-os-answer-source" class="button button-outline" href="${link("reading/")}">مطالعه منبع ←</a>
+  <p class="diner-os-answer-footnote">این چکیده بر اساس توضیح صفحه منتشرشده است؛ جایگزین بررسی اختصاصی کسب‌وکار نیست.</p>
+ </section>
+ <div id="diner-os-results-wrap" hidden><div class="diner-os-results-heading"><h2>مطالب و ابزارهای مرتبط</h2><p>نتایج از صفحات منتشرشده و دارای نشانی مستقل انتخاب شده‌اند.</p></div><div id="diner-os-filters" class="diner-os-filters" aria-label="فیلتر نوع محتوا"></div><div id="search-results" class="cards two diner-os-results"></div></div>
+ <div id="diner-os-empty" class="diner-os-empty" hidden><strong>پاسخ دقیقی در آرشیو پیدا نشد.</strong><p>سؤال را کوتاه‌تر بنویس یا از موضوع‌های پیشنهادی استفاده کن. محتوای منتشرنشده به‌عنوان پاسخ نمایش داده نمی‌شود.</p></div>
+ <div class="diner-os-next"><div><strong>مسئله‌ات به عدد و تصمیم نیاز دارد؟</strong><p>برای محاسبه هزینه، حاشیه مشارکت، قیمت‌گذاری و بررسی فرآیند، از ابزارهای اجرایی داینر استفاده کن.</p></div><a class="button button-outline" href="${link("tools/")}">ورود به ابزارهای داینر ←</a></div>
+</section>`;
+  add("search/","از داینر بپرس | جست‌وجوی دانش نیما داینر","جست‌وجوی ترکیبی در مقاله‌ها، کتاب‌ها، مجله‌ها، نقدهای نیما و ابزارهای منتشرشده؛ پاسخ کوتاه همراه با لینک منبع واقعی.",search,{noindex:true,script:"site-v2.js"});
   
   // خواندنی‌های داینر: خبر موثق، تحلیل کاربردی و پرونده تک‌موضوعی.
   const artItems=(editorial.articles||[]).filter(a=>a.status==="published");

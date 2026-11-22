@@ -746,3 +746,40 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 
 /* Diner Magazine issue layout, reusable editorial system */
 .diner-issue-card{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap}.diner-issue-card>a{flex:0 0 135px}.diner-issue-card img{width:100%;border-radius:10px;aspect-ratio:9/16;object-fit:cover;box-shadow:0 10px 24px #220b1930}.diner-issue-card>div{flex:1;min-width:170px}.magazine-issue-intro{display:grid;grid-template-columns:minmax(150px,230px) 1fr;align-items:start;gap:25px}.magazine-issue-intro img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:12px}.magazine-issue-intro .actions{display:flex;flex-wrap:wrap;gap:10px}.magazine-pdf-frame{max-width:850px;margin:18px auto}.magazine-pdf-frame iframe{width:100%;height:min(85vh,960px);min-height:500px;display:block;border:1px solid #e3d2cb;border-radius:12px;background:#272222}.magazine-article-banner{padding:22px;background:#fff6f3;border-inline-start:4px solid #b91b39;margin:22px 0;border-radius:12px}.magazine-article-banner .button{margin:5px}@media(max-width:680px){.magazine-issue-intro{grid-template-columns:1fr}.magazine-issue-intro img{max-width:220px}.magazine-pdf-frame iframe{min-height:450px;height:72vh}}
+
+
+/* Diner OS: grounded hybrid search, original /search/ route retained */
+.diner-os-search{position:relative;isolation:isolate;padding:clamp(30px,5vw,65px) clamp(16px,3vw,38px);margin-block:18px 0;background:#181817;color:#fff;border:1px solid #3c3933;border-radius:22px;overflow:hidden}
+.diner-os-search::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 5% 95%,#f8c82e30,transparent 54%),radial-gradient(ellipse at 96% 0%,#ffce2514,transparent 42%)}
+.diner-os-search .breadcrumbs,.diner-os-search .breadcrumbs a{color:#dedbd4}
+.diner-os-search h1{color:#fff;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.5;max-width:780px;margin:12px 0}
+.diner-os-search .lead{color:#dfddd3;max-width:790px;line-height:2}
+.diner-os-eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.04em;color:#ffce25;display:flex;align-items:center;gap:8px;margin-block:16px}
+.diner-os-pulse{width:8px;height:8px;background:#ffce25;border-radius:50%;box-shadow:0 0 0 5px #ffce2519}
+.diner-os-form{padding:15px;background:#fff;border:2px solid #ffce25;max-width:900px;border-radius:15px;margin-top:23px;box-shadow:0 12px 30px #0003}
+.diner-os-form label{font-size:.9rem;color:#28251e}
+.diner-os-form .search-controls input{font:inherit;font-size:1rem;padding:13px;border-radius:8px;background:#faf9f6;min-width:0}
+.diner-os-form .search-controls .button{white-space:nowrap;border-radius:8px;background:#ffce25;color:#151515;font-weight:800}
+.diner-os-form .search-controls .button:hover{background:#f2bb08}
+.diner-os-examples{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:19px}
+.diner-os-examples>span{color:#dad7cc;font-size:.85rem;margin-inline-end:5px}
+.diner-os-examples button,.diner-os-filter{font:inherit;cursor:pointer;border:1px solid #756d5f;border-radius:30px;padding:7px 13px;background:#ffffff0c;color:#fff}
+.diner-os-examples button:hover,.diner-os-examples button:focus-visible{background:#ffce25;color:#151515;border-color:#ffce25}
+.diner-os-disclosure{font-size:.78rem;color:#bcb7a9;margin:20px 0 0}
+.diner-os-output{padding-top:22px}
+.diner-os-answer{border:1px solid #d5c7a9;background:#fffdf7;border-inline-start:5px solid #ffce25;border-radius:15px;padding:clamp(16px,3vw,28px);margin-block:22px}
+.diner-os-answer-label{color:#755300;font-size:.8rem;font-weight:800}
+.diner-os-answer h2{margin:7px 0;font-size:1.35rem;line-height:1.6}
+.diner-os-answer p{line-height:2;max-width:850px}
+.diner-os-answer .button{margin-top:6px;max-width:100%;white-space:normal;text-align:right}
+.diner-os-answer-footnote{color:#666;font-size:.75rem;margin-bottom:0}
+.diner-os-results-heading{margin-block:20px}.diner-os-results-heading h2{margin-bottom:4px}.diner-os-results-heading p{color:#606060}
+.diner-os-filters{display:flex;gap:7px;flex-wrap:wrap;margin-block:16px}
+.diner-os-filter{border-color:#c3beb2;color:#262626;background:#fff;font-size:.86rem;padding:7px 12px}
+.diner-os-filter.is-active,.diner-os-filter:hover{background:#161616;color:#fff;border-color:#161616}
+.diner-os-result{border-radius:13px}.diner-os-result h3{line-height:1.7}.diner-os-result p{line-height:1.9}
+.diner-os-empty{background:#fff5ec;border:1px solid #f0c29c;border-radius:12px;padding:18px;margin:20px 0}
+.diner-os-next{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid #ddd;margin-top:26px;padding-block:24px}
+.diner-os-next p{margin:5px 0 0;color:#656565}.diner-os-next .button{white-space:normal}
+.diner-os-output [hidden]{display:none!important}
+@media(max-width:700px){.diner-os-search{border-radius:12px;margin-block:0 10px}.diner-os-form{padding:12px}.diner-os-form .search-controls{flex-direction:column}.diner-os-form .button{width:100%}.diner-os-examples button{font-size:.82rem}.diner-os-answer .button{width:100%}.diner-os-next .button{width:100%}}
