@@ -108,8 +108,8 @@ assert.match(read("feed.xml"),/<rss version="2\.0">/,"valid RSS root missing");
 assert.ok(items.some(i=>i.url.includes("/reading/")),"editorial article not searchable");
 assert.ok(items.some(i=>i.url.includes("/guides/restaurant-management/")),"SEO guide not searchable");
 const mapping=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/seo-keywords.json"),"utf8"));
-assert.equal(mapping.meta.keywords,305);
-assert.equal(mapping.meta.targets,44);
+assert.equal(mapping.meta.keywords,317);
+assert.equal(mapping.meta.targets,46);
 const editorial=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/editorial.json"),"utf8"));
 assert.ok(editorial.articles.filter(a=>a.status==="published").every(a=>a.type!=="news"||(a.sourcePublishedAt&&a.sources?.length)),"unsourced published news");
 assert.match(read("get-book/index.html"),/href="\/privacy\.html"/,"privacy link broken");
@@ -466,6 +466,43 @@ for(const p of ["b5/","b5/3/","b5/4/","b5/7/","b5/8/","b5/10/","b5/13/"]){
  assert.match(read("library/01/index.html"),/\/library\/05\//,"book pages must link to book 05");
 }
 console.log("Book 05 companion pages and tools checked.");
+
+// Book 12 «دخل»: e-book only; /b7/ routes are printed as QR codes in the book and must exist.
+for(const p of ["b7/","b7/2/","b7/4/","b7/5/","b7/6/","b7/9/","b7/10/","b7/11/","b7/12/"]){
+ const html=read(p+"index.html");
+ assert.match(html,/persian-digits\.js/,"localization script missing on "+p);
+ assert.match(html,/href="\/library\/12\/"/,p+" must link to /library/12/");
+ if(p!=="b7/")assert.match(html,/assets\/b7-tools\.js/,"tool script missing on "+p);
+}
+{
+ const e12=read("library/12/index.html");
+ assert.match(e12,/چاپی به‌زودی/,"book 12 must say print is coming");
+ assert.match(e12,/۵۰۰٬۰۰۰/,"book 12 must show the e-book price");
+ assert.doesNotMatch(e12,/سفارش چاپی ←/,"book 12 must not offer a print order");
+ assert.match(e12,/href="\/b7\/"/,"book 12 must link to its companion tools");
+ assert.match(read("sitemap.xml"),/\/library\/12\//,"book 12 must be indexed");
+ assert.match(read("sitemap.xml"),/\/b7\/10\//,"b7 pages must be indexed");
+ for(const f of ["assets/b7/dakhl-daftar-dakhl.xlsx","assets/b7/dakhl-taghvim-pardakht.xlsx","assets/b7/dakhl-dashboard.xlsx","assets/b7/dakhl-forms.pdf","assets/b7-tools.js","assets/book-12.webp"])assert.ok(fs.existsSync(path.join(dist,f)),"missing "+f);
+ assert.match(read("guides/restaurant-cost-control/index.html"),/\/library\/12\//,"cost guide must recommend book 12");
+ assert.match(read("tools/breakeven/index.html"),/\/library\/12\//,"break-even tool must recommend book 12");
+}
+console.log("Book 12 «دخل» and /b7/ companion pages checked.");
+
+// Book 06 «شف»: QR-printed companion routes and the seven chapter readings must exist.
+for(const p of ["b6/","b6/1/","b6/2/","b6/3/","b6/4/","b6/5/","b6/6/","b6/9/","b6/10/","b6/12/"]){
+ const html=read(p+"index.html");
+ assert.match(html,/persian-digits\.js/,"localization script missing on "+p);
+ assert.match(html,/href="\/library\/06\/"/,p+" must link to /library/06/");
+ if(["b6/2/","b6/4/","b6/6/"].includes(p))assert.match(html,/assets\/b6-tools\.js/,"tool script missing on "+p);
+}
+for(const s of ["escoffier-brigade-lesson","cronut-hybrid-lesson","elbulli-workshop-lesson","pepsi-challenge-tasting-lesson","cheesecake-factory-standards-lesson","wasted-dan-barber-lesson","plate-color-taste-lesson"]){
+ const html=read("reading/"+s+"/index.html");
+ assert.match(html,/href="\/library\/06\/"/,"reading "+s+" must credit book 06");
+ assert.match(read("sitemap.xml"),new RegExp("/reading/"+s+"/"),"reading "+s+" must be indexed");
+}
+assert.ok(fs.existsSync(path.join(dist,"assets/b6/shef-forms.pdf")),"missing chef forms PDF");
+assert.match(read("library/06/index.html"),/href="\/b6\/"/,"book 06 must link to its companion pages");
+console.log("Book 06 «شف» /b6/ companion pages and chapter readings checked.");
 
 
 // Prompt library: accessible illustrated examples, honest labeling, and stable routes.

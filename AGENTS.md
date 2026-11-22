@@ -59,7 +59,7 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - Published at `/library/06/` to `/library/10/` with `formats: ["digital"]` in `content/catalog.json`, at the single digital price from `content/book-pricing.json`; print shown as «به‌زودی». Bundles remain books 01–03 only.
 - 06 «شف» (chefs' book, purple cover); 07–10 «مرجع جامع راه‌اندازی و مدیریت رستوران در …» country editions: 07 Sweden, 08 Turkey, 09 USA (California focus), 10 UK (London focus), each with a cover in its flag colours.
 - Covers are `assets/book-06.webp` … `assets/book-10.webp`, rendered from the final e-book PDFs; five-page samples are page images in `assets/samples/` recorded in `content/book-samples.json`. The complete paid PDFs are not in this repository.
-- The planned roadmap was renumbered 12–17 (after book 11); it has no public URLs.
+- The planned roadmap was renumbered after each new book; it now starts at 13 and has no public URLs.
 
 ## Homepage hero shelf (owner instruction, 19 Nov 2026)
 - The homepage hero shows the library as a hierarchy: the yellow main book «مرجع جامع مدیریت رستوران» largest in the centre, flanked by «کوچک شروع کن» and «دوام بیاور»; below them «شف» and «منوی سودده»; and in the margin the five country guides in this order: ترکیه، آمریکا، انگلستان، ایتالیا، سوئد. Built by `heroShelf()` in `tools/build-site.mjs`, styled under `.hero-shelf` in `site-v2.css`.
@@ -69,3 +69,16 @@ Read `docs/URL-STABILITY.md` before any routing, SEO, navigation or deployment c
 - «مرجع جامع راه‌اندازی و مدیریت رستوران در ایتالیا» (Milan focus, green/white/red cover) is published at `/library/11/` with `formats: ["digital"]`, at the single digital price from `content/book-pricing.json`; print shown as «به‌زودی». Bundles remain books 01–03 only.
 - Cover `assets/book-11.webp` and five sample page images `assets/samples/book-11-p1…p5.webp` are rendered from the final e-book PDF; the complete paid PDF is not in this repository.
 - Site copy counts: eleven published books, five country guides, eight e-book-only titles. The planned roadmap starts at 12 and has no public URLs.
+
+## Book 12 «دخل» — e-book only, with /b7/ companion tools (owner instruction, 23 Nov 2026)
+- «دخل» (bookkeeping and cost control for small 4–5 person restaurants; navy cover) is published at `/library/12/` with `formats: ["digital"]`, at the single digital price from `content/book-pricing.json`; print shown as «به‌زودی». Bundles remain books 01–03 only. The book calls itself «کتاب هفتم» of the series; on the site it is library number 12.
+- Cover `assets/book-12.webp` and five sample page images `assets/samples/book-12-p1…p5.webp` are rendered from the final e-book PDF; the complete paid PDF is not in this repository.
+- `/b7/` and its sub-pages (`2`, `4`, `5`, `6`, `9`, `10`, `11`, `12`) are printed as QR codes in the book. Never rename or remove them. They are built by `tools/book7-pages.mjs`; interactive logic is in `assets/b7-tools.js` (state stays in the visitor's browser). Downloads in `assets/b7/`: three Excel templates and `dakhl-forms.pdf` (only the seven appendix form pages, which the book says are free to use).
+- The homepage hero shelf shows «دخل» in the second tier next to «شف» and «منوی سودده». Site copy counts: twelve published books, five country guides, nine e-book-only titles.
+- Finance, cost, stock, staff and delivery guides, and most calculators under `/tools/`, recommend book 12 via `guideBooks()` / `toolBooks` in `tools/build-site.mjs`.
+
+## Book 06 «شف» companion pages and chapter readings (owner instruction, 23 Nov 2026)
+- `/b6/` and its sub-pages (`1`, `2`, `3`, `4`, `5`, `6`, `9`, `10`, `12`) and seven `/reading/` articles (`escoffier-brigade-lesson`, `cronut-hybrid-lesson`, `elbulli-workshop-lesson`, `pepsi-challenge-tasting-lesson`, `cheesecake-factory-standards-lesson`, `wasted-dan-barber-lesson`, `plate-color-taste-lesson`) are printed as QR codes in the book «شف». Never rename or remove them.
+- Built by `tools/book6-pages.mjs`; interactive logic (idea filter, tasting averages, yield) in `assets/b6-tools.js`; `assets/b6/shef-forms.pdf` holds only the book's appendix form pages (79–86). The readings are `analysis` articles in `content/editorial.json` with `bookSources` pointing to book 06; their facts are sourced.
+- The planned roadmap title «خرید، انبار و کنترل ضایعات» was removed on the owner's instruction because «دخل» covers it; the roadmap is now 13–17.
+
