@@ -64,7 +64,83 @@ def build(book):
                 ET.fromstring(z.read(name))
     print("EPUB",path.relative_to(OUT),path.stat().st_size)
 
+def build_reader():
+    entries=[{"slug":b["slug"],"group":b["group"],"title":b["title"],"author":b["author"]} for b in books]
+    catalog=json.dumps(entries,ensure_ascii=False).replace("<","\\u003c")
+    page=r'''<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>کتابخوان EPUB فارسی | نیما داینر</title>
+<meta name="description" content="مطالعه آنلاین و رایگان مرورهای تحلیلی کتابخانه جهان غذا">
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{font-family:Vazirmatn,Tahoma,sans-serif;margin:0;background:#f4f1e8;color:#242424}
+header{background:#ffce28;padding:12px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header a{color:inherit;font-weight:700}header strong{margin-left:auto}
+button,select{font:inherit;padding:8px 12px;border:1px solid #aaa;border-radius:9px;background:white;color:#222}
+button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+#book{background:white;max-width:850px;height:calc(100dvh - 135px);min-height:320px;margin:15px auto;border-radius:12px;box-shadow:0 3px 18px #0001;overflow:hidden}
+#message{text-align:center;padding:18px}.tools{display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap}
+footer{text-align:center;padding:4px 12px;font-size:12px;color:#666}
+@media(max-width:650px){#book{height:calc(100dvh - 175px);margin:6px;border-radius:4px}header{padding:8px}header strong{width:100%}}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/epubjs@0.3.93/dist/epub.min.js"></script>
+</head><body>
+<header><a href="/books/">کتابخانه جهان غذا</a><strong>کتابخوان فارسی نیما داینر</strong>
+<label for="books">کتاب</label><select id="books" aria-label="انتخاب کتاب"></select>
+<button id="smaller" aria-label="کوچک کردن قلم">الف −</button><button id="larger" aria-label="بزرگ کردن قلم">الف +</button>
+<button id="night">حالت شب</button></header>
+<div id="message" role="status">در حال آماده‌سازی کتابخوان...</div>
+<main id="book" aria-label="متن کتاب"></main>
+<div class="tools"><button id="prev">صفحه قبل</button><span id="progress">—</span><button id="next">صفحه بعد</button><a id="download" download>دریافت EPUB</a></div>
+<footer>مرور مستقل تحریریه نیما داینر؛ برای خواندن کتاب اصلی به ناشر مراجعه کنید. پیشرفت مطالعه در همین مرورگر ذخیره می‌شود.</footer>
+<script>
+const catalog=__CATALOG__;
+const select=document.getElementById('books');
+for(const item of catalog){const opt=document.createElement('option');opt.value=item.slug;opt.textContent=item.title+' — '+item.author;select.append(opt)}
+const params=new URLSearchParams(location.search);
+let chosen=catalog.find(x=>x.slug===params.get('book'))||catalog[0];
+select.value=chosen.slug;
+let book=null,rendition=null,size=100,night=false,saveKey='';
+const message=document.getElementById('message');
+async function openBook(slug){
+  const item=catalog.find(x=>x.slug===slug);if(!item)return;
+  chosen=item;select.value=slug;saveKey='diner-epub-'+slug;
+  history.replaceState(null,'','?book='+encodeURIComponent(slug));
+  if(book){try{book.destroy()}catch(e){}book=null}
+  document.getElementById('book').replaceChildren();
+  message.textContent='در حال باز کردن مرور «'+item.title+'»...';
+  const url='/books/'+item.group+'/'+item.slug+'/summary.epub';
+  document.getElementById('download').href=url;
+  try{
+    if(typeof ePub!=='function')throw new Error('کتابخوان بارگذاری نشد؛ فایل EPUB را دریافت کنید.');
+    book=ePub(url);
+    rendition=book.renderTo('book',{width:'100%',height:'100%',flow:'paginated',spread:'none'});
+    rendition.themes.fontSize(size+'%');
+    rendition.themes.default({'body':{'direction':'rtl','text-align':'right'}});
+    await rendition.display();
+    rendition.on('relocated',loc=>{
+      document.getElementById('progress').textContent='در حال مطالعه';
+      if(loc?.start?.cfi){try{localStorage.setItem(saveKey,loc.start.cfi)}catch(e){}}
+    });
+    let previous=null;try{previous=localStorage.getItem(saveKey)}catch(e){}
+    if(previous){try{await rendition.display(previous)}catch(e){}}
+    message.textContent='';
+  }catch(err){message.textContent=err.message||'خطا در باز کردن کتاب؛ از لینک دریافت EPUB استفاده کنید.'}
+}
+select.addEventListener('change',()=>openBook(select.value));
+document.getElementById('next').onclick=()=>rendition?.next();
+document.getElementById('prev').onclick=()=>rendition?.prev();
+document.getElementById('larger').onclick=()=>{size=Math.min(180,size+10);rendition?.themes.fontSize(size+'%')};
+document.getElementById('smaller').onclick=()=>{size=Math.max(70,size-10);rendition?.themes.fontSize(size+'%')};
+document.getElementById('night').onclick=()=>{night=!night;document.getElementById('book').style.background=night?'#191919':'white';rendition?.themes.override('color',night?'#f0e8d6':'#242424');rendition?.themes.override('background',night?'#191919':'white')};
+window.addEventListener('load',()=>openBook(chosen.slug));
+</script></body></html>'''
+    path=OUT/"books"/"reader"/"index.html"
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(page.replace("__CATALOG__",catalog),encoding="utf-8")
+    print("Reader",path.relative_to(OUT))
+
 if __name__=="__main__":
     assert len(books)==10 and len(reviews)==10
     assert set(b["slug"] for b in books)==set(reviews)
     for book in books:build(book)
+    build_reader()
