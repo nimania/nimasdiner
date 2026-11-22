@@ -52,11 +52,11 @@ for(const b of worldCatalog.books){
   assert.ok(epub.length>1500,"Unexpectedly small EPUB: "+epubPath);
   assert.equal(epub.toString("ascii",0,2),"PK","Invalid EPUB archive: "+epubPath);
   const html=read("books/"+b.group+"/"+b.slug+"/index.html");
-  assert.match(html,/summary\\.epub/,"EPUB download link missing: "+b.slug);
-  assert.match(html,/books\\/reader\\/\\?book=/,"EPUB reader link missing: "+b.slug);
+  assert.match(html,/summary\.epub/,"EPUB download link missing: "+b.slug);
+  assert.match(html,/books\/reader\/\?book=/,"EPUB reader link missing: "+b.slug);
 }
 const readerHtml=read("books/reader/index.html");
-assert.match(readerHtml,/epub\\.min\\.js/);
+assert.match(readerHtml,/epub\.min\.js/);
 assert.match(readerHtml,/diner-epub-/);
 console.log("Ten EPUB files and browser reader links passed");
 
