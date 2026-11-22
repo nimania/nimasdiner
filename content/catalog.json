@@ -329,8 +329,8 @@
       "summary": "پرونده مصور و رایگان درباره یارعلی پورمقدم و کافه شوکا؛ شناخت مشتری، قصه‌گویی غذا، عکس‌های دیوار، ساختن حس تعلق و وفاداری مشتری.",
       "pages": 16,
       "issueDate": "آذر ۱۴۰۵",
-      "cover": "https://solar-loop.space.fast/assets/mag2.png",
-      "pdf": "https://solar-loop.space.fast/assets/diner-mag-02.pdf",
+      "cover": "https://nimania.net/assets/magazine/02-cover.png",
+      "pdf": "https://nimania.net/assets/magazine/02.pdf",
       "photosCredit": "نیما افشارنادری",
       "instagramReel": {
         "url": "https://www.instagram.com/reel/DgCHZL7MzMI/",
@@ -354,7 +354,8 @@
         "برنامه ۳۰ روزه",
         "منابع و پیوندها"
       ],
-      "analysis": "reading/yarali-pourmoghadam-shooka-cafe-management/"
+      "analysis": "reading/yarali-pourmoghadam-shooka-cafe-management/",
+      "assetStorage": "GitHub Pages; primary nimania.net site"
     }
   ],
   "guides": [

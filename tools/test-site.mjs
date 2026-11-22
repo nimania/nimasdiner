@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import {renderBrandTopicPages} from "./brand-topic-pages.mjs";
 import {persianDigits, persianizeHTML} from "./persian-digits-html.mjs";
 import fs from "node:fs";
@@ -549,3 +550,29 @@ for(const oldRoute of ["shooka-cafe","shooka-cafe-1405","gandhi-shopping-center"
  assert.match(old,/\/reading\/yarali-pourmoghadam-shooka-cafe-management\//,"Historic or related review must link to Shooka analysis: "+oldRoute);
 }
 console.log("Shooka case study SEO, source attribution and archival links passed");
+
+
+ // Mag 02 public assets: stable, same-origin PDFs and exact SHA-256-verified inputs.
+ const issue02Dir="assets/magazine/";
+ const issuePdf=fs.readFileSync(path.join(dist,issue02Dir+"02.pdf"));
+ const issueCover=fs.readFileSync(path.join(dist,issue02Dir+"02-cover.png"));
+ assert.equal(issuePdf.length,5600477,"Diner 02 PDF size changed unexpectedly");
+ assert.equal(issueCover.length,1919074,"Diner 02 cover size changed unexpectedly");
+ assert.equal(issuePdf.toString("ascii",0,5),"%PDF-","Magazine 02 must be an actual PDF");
+ assert.equal(issueCover.toString("hex",0,8),"89504e470d0a1a0a","Magazine 02 must be a PNG");
+ assert.equal(crypto.createHash("sha256").update(issuePdf).digest("hex"),"025d5b5d6b32d5de157211b4e937f66e68df4db3e685f4bb976853c795170f3b");
+ assert.equal(crypto.createHash("sha256").update(issueCover).digest("hex"),"2877d4c1199bd00fe4e4395fcf19832af0a22438d79cec51e732b57146a407de");
+ const issuePage=read("magazine/02/index.html");
+ const magazineArchivePage=read("magazine/index.html");
+ const shookaArticlePage=read("reading/yarali-pourmoghadam-shooka-cafe-management/index.html");
+ for(const h of [issuePage,magazineArchivePage,shookaArticlePage]){
+   assert.doesNotMatch(h,/solar-loop\.space\.fast/i,"Old temporary host leaked into published pages");
+ }
+ assert.match(issuePage,/https:\/\/nimania\.net\/assets\/magazine\/02\.pdf/);
+ assert.match(issuePage,/https:\/\/nimania\.net\/assets\/magazine\/02-cover\.png/);
+ assert.match(shookaArticlePage,/\/magazine\/02\//,"Shooka article must link to magazine");
+ assert.match(shookaArticlePage,/https:\/\/nimania\.net\/assets\/magazine\/02\.pdf/);
+ assert.match(magazineArchivePage,/\/magazine\/01\//,"Croissant magazine 01 must remain available");
+ assert.match(magazineArchivePage,/\/magazine\/02\//,"New magazine 02 must be discoverable");
+ assert.match(read("sitemap.xml"),/\/magazine\/02\//,"New magazine must appear in sitemap");
+ console.log("Diner magazine 02 verified: original binary assets, canonical URLs, archive, SEO, and no temporary host");
