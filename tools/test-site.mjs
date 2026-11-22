@@ -45,6 +45,22 @@ for(const b of worldCatalog.books){
 }
 console.log("Ten sourced, full editorial reviews and Persian PDFs passed");
 
+for(const b of worldCatalog.books){
+  const epubPath=path.join(dist,"books",b.group,b.slug,"summary.epub");
+  assert.ok(fs.existsSync(epubPath),"Missing EPUB: "+epubPath);
+  const epub=fs.readFileSync(epubPath);
+  assert.ok(epub.length>1500,"Unexpectedly small EPUB: "+epubPath);
+  assert.equal(epub.toString("ascii",0,2),"PK","Invalid EPUB archive: "+epubPath);
+  const html=read("books/"+b.group+"/"+b.slug+"/index.html");
+  assert.match(html,/summary\.epub/,"EPUB download link missing: "+b.slug);
+  assert.match(html,/books\/reader\/\?book=/,"EPUB reader link missing: "+b.slug);
+}
+const readerHtml=read("books/reader/index.html");
+assert.match(readerHtml,/epub\.min\.js/);
+assert.match(readerHtml,/diner-epub-/);
+console.log("Ten EPUB files and browser reader links passed");
+
+
 console.log("World food books index and individual pages passed");
 const orderPage=read("get-book/index.html");
 assert.match(orderPage,/سفارش کتاب/);
