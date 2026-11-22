@@ -534,3 +534,18 @@ console.log("Book 05 companion pages and tools checked.");
  assert.doesNotMatch(js,/localStorage|sessionStorage/);
  console.log("Prompt Studio v2, before-after samples and transparent quality profiles checked.");
 }
+
+// Long-form Shooka case study remains crawlable and connected to its archival sources.
+const shookaCasePath="reading/yarali-pourmoghadam-shooka-cafe-management/index.html";
+const shookaCase=read(shookaCasePath);
+assert.match(shookaCase,/یارعلی پورمقدم/,"Shooka case study must name its subject");
+assert.match(shookaCase,/کافه شوکا/,"Shooka case study must identify the cafe");
+assert.match(shookaCase,/هریسه/,"Shooka case study must include archival product evidence");
+assert.match(shookaCase,/وفاداری مشتری/,"Shooka case study must include customer loyalty analysis");
+assert.match(shookaCase,/انسان‌شناسی و فرهنگ/,"Shooka case study must credit historical primary interview");
+assert.match(read("sitemap.xml"),/\/reading\/yarali-pourmoghadam-shooka-cafe-management\//,"Shooka case must enter sitemap");
+for(const oldRoute of ["shooka-cafe","shooka-cafe-1405","gandhi-shopping-center"]){
+ const old=read("reviews/"+oldRoute+"/index.html");
+ assert.match(old,/\/reading\/yarali-pourmoghadam-shooka-cafe-management\//,"Historic or related review must link to Shooka analysis: "+oldRoute);
+}
+console.log("Shooka case study SEO, source attribution and archival links passed");
