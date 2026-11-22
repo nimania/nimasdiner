@@ -34,6 +34,15 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const badge=(s,type="")=>`<span class="chip ${type}">${esc(s)}</span>`;
   const card=(href,kicker,title,description)=>`<article class="card"><span class="kicker">${esc(kicker)}</span><h3>${href?`<a href="${link(href)}">${esc(title)}</a>`:esc(title)}</h3><p>${esc(description)}</p>${href?`<a class="textlink" href="${link(href)}">مشاهده و مطالعه ←</a>`:""}</article>`;
   const section=(eyebrow,title,body)=>`<section class="block wrap"><p class="eyebrow">${esc(eyebrow)}</p><h2>${esc(title)}</h2>${body}</section>`;
+  const instagramEmbed=(item,fallbackTitle="ویدئوی همراه پرونده")=>{
+    const raw=typeof item==="string"?item:item?.url;
+    const match=/^https:\/\/www\\.instagram\\.com\/(reel|p)\/([A-Za-z0-9_-]+)\/?/i.exec(String(raw||""));
+    if(!match)return "";
+    const permalink="https://www.instagram.com/"+match[1]+"/"+match[2]+"/";
+    const title=typeof item==="object"&&item?.title?item.title:fallbackTitle;
+    const description=typeof item==="object"&&item?.description?item.description:"این ویدئو از حساب اینستاگرام داینر نیما منتشر شده است.";
+    return '<section class="instagram-feature" aria-label="'+esc(title)+'"><div class="instagram-feature-copy"><span class="eyebrow">ویدئوی همراه پرونده</span><h2>'+esc(title)+'</h2><p>'+esc(description)+'</p><a class="textlink" href="'+esc(permalink)+'" target="_blank" rel="noopener noreferrer">مشاهده در اینستاگرام ←</a></div><div class="instagram-feature-frame"><blockquote class="instagram-media" data-instgrm-permalink="'+esc(permalink)+'" data-instgrm-version="14"><a href="'+esc(permalink)+'" target="_blank" rel="noopener noreferrer">مشاهده ریل در اینستاگرام</a></blockquote></div></section><script async src="https://www.instagram.com/embed.js"></script>';
+  };
   const comment=(subject,{kind="general",venue=""}={})=>{
     const isReview=kind==="review";
     const title=isReview?"تو از این رستوران چه خاطره‌ای داری؟":"چیزی برای اضافه کردن داری؟";
@@ -67,7 +76,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
     const searchable=content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi," ").replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," ").replace(/&(?:nbsp|amp|quot|lt|gt);/g," ").replace(/\s+/g," ").slice(0,24000);
     pages.push({path:path?path+"index.html":"index.html",content:html,index:!noindex,title,description,lastmod,searchText:[keywords,searchable,...terms].join(" ")});
   }
-  const reviewArchive=renderReviews({reviews,add,section,crumbs,link,esc,comment});
+  const reviewArchive=renderReviews({reviews,add,section,crumbs,link,esc,comment,instagramEmbed});
   const bs=data.books.filter(b=>b.status==="published");
   const planned=data.books.filter(b=>b.status!=="published");
   // A book with formats:["digital"] is sold as PDF only until its print edition exists (owner, 18 Nov 2026).
@@ -158,6 +167,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
       +section("پرسش محوری","پشت ویترین چه می‌گذرد؟",`<p class="rich">${esc(m.summary)}</p><p class="rich">در این شماره، روایت تاریخی محصول از تصمیم‌های واقعی کسب‌وکار تفکیک می‌شود: انتخاب مدل تولید، تأمین مواد، ثبات کیفیت، محاسبه هزینه و آزمون بازار.</p>`)
       +section("فهرست پرونده","شش محور این شماره",`<ol class="topics">${m.sections.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`)
       +section("درس مدیریتی","محصول خوب، سیستم خوب می‌خواهد",`<p class="rich">در مقایسه تولید کامل در محل، نیمه‌آماده و مرکز تولید، هیچ مدلی ذاتاً برای همه مناسب نیست. توان تیم، ظرفیت، کیفیت هدف، هزینه‌های پنهان و ریسک تأمین تعیین‌کننده‌اند.</p><p class="rich">در مثال آموزشی خود مجله، محاسبات مالی فرضی‌اند و حاشیه مشارکت با سود خالص تفاوت دارد. این تفکیک در تصمیم‌گیری درباره توسعه محصول اهمیت دارد.</p><p><a class="textlink" href="${link("guides/menu-engineering/")}">راهنمای مهندسی منو ←</a></p>`)
+      +(m.instagramReel?instagramEmbed(m.instagramReel):"")
       +`<div class="wrap">${comment(`مجله داینر شماره ${num(m.n)}: ${m.title}`)}</div>`;
     add(mgURL(m),`مجله داینر شماره ${num(m.n)}: ${m.title}`,m.summary,body,{structured:{"@context":"https://schema.org","@type":"CreativeWork",name:`مجله داینر شماره ${num(m.n)}: ${m.title}`,description:m.summary,inLanguage:"fa",publisher:{"@type":"Organization",name:"نیما داینر",logo:{"@type":"ImageObject",url:ORIGIN+"/assets/logo-512.png"}},isPartOf:{"@type":"Periodical",name:"مجله داینر"}}});
   }
@@ -266,7 +276,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
     const relatedTitles={"reviews/shooka-cafe/":"آرشیو ۱۳۸۵: میهمانی دانگی در کافه شوکا","reviews/shooka-cafe-1405/":"کافه شوکا، بیست سال بعد","reviews/gandhi-shopping-center/":"پرونده مرکز خرید گاندی"};
     const links=(a.related||[]).map(u=>`<a href="${link(u)}">${esc((relatedTitles[u]||{"tools/":"محاسبه‌گرهای داینر","journal/":"ژورنال مدیر","magazine/01/":"مجلهٔ کرواسان"}[u]||data.guides.find(g=>"guides/"+g.slug+"/"===u)?.title||"مطالعهٔ مرتبط"))}</a>`).join("");
     const body=`<section class="pagehead wrap">${crumbs([["خواندنی‌ها","reading/"],[a.type==="news"?"رادار صنعت":"تحلیل و تجربه",a.type==="news"?"reading/news/":"reading/analysis/"],[a.title,null]])}<p class="eyebrow">${esc(a.type==="news"?"خبر و تفسیر برای مدیران":"تحلیل کسب‌وکار غذا")} · ${esc(a.topic)}</p><h1>${esc(a.title)}</h1><p class="lead">${esc(a.excerpt)}</p><div class="chips"><span class="chip">تدوین: ${esc(a.byline)}</span><span class="chip">انتشار در داینر: <time datetime="${esc(a.publishedAt)}">${esc(a.publishedAt)}</time></span>${a.sourcePublishedAt?`<span class="chip">تاریخ خبر اصلی: <time datetime="${esc(a.sourcePublishedAt)}">${esc(a.sourcePublishedAt)}</time></span>`:""}</div></section>
-    <article class="article wrap knowledge-layout">${articleSidebar}<div class="article-body">${a.heroImage?`<figure class="review-photo"><img src="${esc(a.heroImage)}" alt="${esc(a.heroAlt||a.title)}" loading="eager" decoding="async"><figcaption>${esc(a.heroCaption||"تصویر آرشیوی کافه شوکا")}</figcaption></figure>`:""}${a.sections.map((s,i)=>`<section id="section-${i+1}"><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}
+    <article class="article wrap knowledge-layout">${articleSidebar}<div class="article-body">${a.heroImage?`<figure class="review-photo"><img src="${esc(a.heroImage)}" alt="${esc(a.heroAlt||a.title)}" loading="eager" decoding="async"><figcaption>${esc(a.heroCaption||"تصویر آرشیوی کافه شوکا")}</figcaption></figure>`:""}${a.instagramReel?instagramEmbed(a.instagramReel):""}${a.sections.map((s,i)=>`<section id="section-${i+1}"><h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>`).join("")}
     <aside class="source-note"><strong>منابع و شیوه تدوین</strong><p>${a.type==="news"?"گزارش خبری بر پایه منبع اصلی و تحلیل عملی داینر تهیه شده است. دامنه جغرافیایی داده‌ها در متن مشخص است.":"این یادداشت تحلیلی و آموزشی است. مثال‌های عددی فرضی هستند و نباید داده مشاهده‌شده از بازار تلقی شوند."}</p>${sourceLinks?`<ul class="source-links">${sourceLinks}</ul>`:"<p>روش: تحلیل مفهومی و مثال محاسباتی؛ بدون ادعای انجام پژوهش میدانی.</p>"}</aside>
     <div class="related"><h2>مطالعه و ابزار مرتبط</h2>${links}${brandTopic.articleLinks(a)}</div>${calcArticle(a.slug)}${articleTools[a.slug]?`<p><a class="button button-outline" href="${link("tools/"+articleTools[a.slug][0]+"/")}">صفحه مستقل این محاسبه‌گر ←</a></p>`:""}${sourceBooks(a.bookSources||[])}${articleBookAd()}${comment(a.title)}</div></article>`;
     const articleSchema={"@context":"https://schema.org","@type":a.type==="news"?"NewsArticle":"Article",headline:a.title,description:a.excerpt,datePublished:a.publishedAt,author:{"@type":a.byline==="نیما افشارنادری"?"Person":"Organization",name:a.byline},publisher:{"@type":"Organization",name:"نیما داینر",logo:{"@type":"ImageObject",url:ORIGIN+"/assets/logo-512.png"}},inLanguage:"fa",mainEntityOfPage:ORIGIN+"/"+artPath(a)};

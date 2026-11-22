@@ -731,3 +731,15 @@ select,textarea{border:1px solid #b9bfc3;background:#fff;border-radius:6px;paddi
 .world-book-detail .actions{align-items:stretch}
 .world-book-detail .actions a[type="application/pdf"]{background:#ffcf22;border-color:#ffcf22;color:#222}
 @media(max-width:780px){.world-book-analysis{grid-template-columns:1fr}}
+
+
+/* Responsive official Instagram reel embeds for Shooka editorial pages */
+.instagram-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,540px);gap:24px;align-items:center;margin:32px 0;padding:clamp(16px,3vw,28px);border:1px solid #eaded7;border-radius:18px;background:linear-gradient(135deg,#fff9f5,#f7f0ec)}
+.instagram-feature-copy{min-width:0}
+.instagram-feature-copy .eyebrow{margin-bottom:8px}
+.instagram-feature-copy h2{font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.6;margin:0 0 8px}
+.instagram-feature-copy p{margin:0 0 14px;color:#66595a}
+.instagram-feature-frame{width:100%;max-width:540px;min-width:0;margin-inline:auto;overflow:hidden}
+.instagram-feature-frame .instagram-media{width:100% !important;max-width:540px !important;min-width:0 !important;margin:0 auto !important;border-radius:14px !important;box-shadow:0 6px 24px #2b171714 !important}
+.instagram-feature-frame .instagram-media iframe{max-width:100% !important}
+@media(max-width:760px){.instagram-feature{grid-template-columns:minmax(0,1fr);gap:12px}.instagram-feature-frame{max-width:480px}.instagram-feature-frame .instagram-media{width:100% !important}}

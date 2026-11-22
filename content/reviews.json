@@ -1316,7 +1316,12 @@
       "relatedSlugs": [
         "shooka-cafe-1405",
         "gandhi-shopping-center"
-      ]
+      ],
+      "instagramReel": {
+        "url": "https://www.instagram.com/reel/DgCHZL7MzMI/",
+        "title": "ریل داینر نیما؛ یارعلی پورمقدم و کافه شوکا",
+        "description": "روایت تصویری داینر نیما از یارعلی پورمقدم و کافه شوکا؛ همراه این پرونده تاریخی و مدیریتی."
+      }
     },
     {
       "status": "published",
@@ -3341,7 +3346,12 @@
         "menuNote": "قیمت امروز هنوز ثبت نشده است؛ میانگین قیمت در ۲۰۰۶: ۲۰۰۰ تومان.",
         "manager": "پسر یارعلی پورمقدم"
       },
-      "updatedAt": "2026-11-18"
+      "updatedAt": "2026-11-18",
+      "instagramReel": {
+        "url": "https://www.instagram.com/reel/DgCHZL7MzMI/",
+        "title": "ریل داینر نیما؛ یارعلی پورمقدم و کافه شوکا",
+        "description": "روایت تصویری داینر نیما از یارعلی پورمقدم و کافه شوکا؛ همراه این پرونده تاریخی و مدیریتی."
+      }
     },
     {
       "status": "published",
