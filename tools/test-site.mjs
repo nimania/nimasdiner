@@ -592,3 +592,28 @@ assert.match(read("site-v2.js"),/answerSummary\.textContent=best\.description/,"
 assert.match(read("site-v2.js"),/search-index\.json/,"Existing local search index must remain");
 assert.doesNotMatch(dinerSearch,/sk-proj-|OPENAI_API_KEY/i,"No credentials on public page");
 console.log("Diner OS hybrid search and SEO-preserving checks passed");
+
+
+// Academy: publish only released lessons, retain existing URLs, and index the course.
+const academyIndex=read("academy/index.html");
+const courseIndex=read("academy/restaurant-management-101/index.html");
+const academyLessonOne=read("academy/restaurant-management-101/lesson-01/index.html");
+const academySitemap=read("sitemap.xml");
+const academySearch=JSON.parse(read("search-index.json"));
+for(const url of ["/academy/","/academy/restaurant-management-101/","/academy/restaurant-management-101/lesson-01/"]){
+  assert.ok(academySitemap.includes("https://nimania.net"+url),"Academy page missing from sitemap: "+url);
+  assert.ok(academySearch.some(x=>x.url===url),"Academy page missing from search index: "+url);
+}
+assert.match(academyIndex,/restaurant-management-101/);
+assert.match(courseIndex,/قوانین ۱ تا ۱۵/);
+assert.match(courseIndex,/در برنامه/);
+assert.match(courseIndex,/schema.org/);
+assert.match(academyLessonOne,/www.youtube-nocookie.com\/embed\/P9y2UdNuztc/);
+assert.match(academyLessonOne,/www.aparat.com\/v\/rstd525/);
+assert.match(academyLessonOne,/قوانین ۱ تا ۱۵/);
+assert.match(academyLessonOne,/مرجع جامع مدیریت رستوران/);
+assert.ok(!fs.existsSync(path.join(dist,"academy/restaurant-management-101/lesson-02/index.html")),"Unreleased lesson should not create a thin page");
+assert.ok(read("index.html").includes("/academy/"),"Homepage lacks academy entry");
+assert.ok(read("library/01/index.html").includes("/academy/restaurant-management-101/"),"Yellow book lacks course entry");
+assert.ok(read("assets/academy.css").includes(".academy-video"),"Academy styling missing from output");
+console.log("Academy course, lesson, SEO, availability, and cross-links passed");
