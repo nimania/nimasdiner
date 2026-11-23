@@ -1,5 +1,9 @@
 # Repository instructions — Nima's Diner / nimania.net
 
+## CRITICAL — Owner-approved SEO change-control charter (23 Nov 2026)
+
+**Mandatory first read for ANY change affecting nimania.net:** [docs/SEO-CHANGE-POLICY.md](docs/SEO-CHANGE-POLICY.md). This owner-approved charter applies to ALL page, metadata, image, publishing, routing, navigation, photoblog and library changes. Follow its pre-change baseline, risk review, CI gates, rollback and post-launch monitoring. Protect existing SEO performance; do not remove, bypass or weaken URL stability, indexability, canonical, sitemap or structured-data checks. Never claim zero SEO risk or GSC verification without real evidence. High-risk changes require documented advance owner approval. If another host/repository deploys the live site, that deployment path must independently adopt and verify these gates; this file cannot enforce changes outside this repository.
+
 These instructions apply to all future changes in this repository, including automated/AI-assisted changes.
 
 ## CRITICAL: Keep all existing public page URLs stable
