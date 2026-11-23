@@ -62,7 +62,7 @@ function add(pages,route,title,description,content,{index=true,modified="",schem
 function teaser(entry){
  const first=entry.photographs[0];
  const target="/photography/"+entry.section+"/"+entry.slug+"/";
- return '<article class="ph-tile"><a href="'+target+'"><img loading="lazy" decoding="async" src="'+esc(first.src)+'" alt="'+esc(first.alt)+'" width="'+(first.width||1200)+'" height="'+(first.height||800)+'"></a><div class="ph-tile-body"><span class="ph-muted">'+esc(entry.publishedAt)+'</span><h3><a href="'+target+'">'+esc(entry.title)+'</a></h3><p>'+esc(entry.summary)+'</p></div></article>';
+ return '<article class="ph-tile"><a href="'+target+'"><img loading="lazy" decoding="async" src="'+esc(first.thumbnailSrc||first.src)+'" alt="'+esc(first.alt)+'" width="'+(first.thumbnailSrc?480:(first.width||1200))+'" height="'+(first.thumbnailSrc?319:(first.height||800))+'"></a><div class="ph-tile-body"><span class="ph-muted">'+esc(entry.publishedAt)+'</span><h3><a href="'+target+'">'+esc(entry.title)+'</a></h3><p>'+esc(entry.summary)+'</p></div></article>';
 }
 function emptyMessage(){
  return '<div class="ph-empty"><strong>آرشیو در حال تکمیل است.</strong><p>برای حفظ اصالت این مجموعه، فقط عکس‌ها و روایت‌های تأییدشده منتشر می‌شوند. تا ثبت نخستین آثار، این بخش بدون تصویر نمونه یا عکس منتسب‌نشده نمایش داده می‌شود.</p></div>';
@@ -102,8 +102,9 @@ export function renderPhotographyPages({pages,catalog}){
    throw Error("Published photo entries need date, narrative, and photographs: "+entry.slug);
   }
   for(const img of entry.photographs){
-   if(!/^\/assets\/photography\/[a-zA-Z0-9/_-]+\.(?:webp|jpg|jpeg|png)$/.test(img.src||"")||!img.alt||!img.credit||img.credit!=="نیما افشارنادری")throw Error("Photograph needs local image, alt and confirmed author credit: "+entry.slug);
+   if(!/^\/assets\/photography\/[a-zA-Z0-9/_-]+\.(?:webp|jpg|jpeg|png)$/.test(img.src||"")||!img.alt||!img.credit||img.credit!=="Nima Afshar Naderi")throw Error("Photograph needs local image, alt and confirmed author credit: "+entry.slug);
    if(!fs.existsSync(path.join(process.cwd(),img.src.slice(1))))throw Error("Missing photography image asset: "+img.src);
+   if(img.thumbnailSrc&&(!/^\/assets\/photography\/[a-zA-Z0-9/_-]+\.(?:webp|jpg|jpeg|png)$/.test(img.thumbnailSrc)||!fs.existsSync(path.join(process.cwd(),img.thumbnailSrc.slice(1)))))throw Error("Missing valid photo thumbnail: "+img.thumbnailSrc);
   }
   published.push(entry);
  }
