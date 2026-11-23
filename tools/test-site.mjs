@@ -42,8 +42,25 @@ assert.match(photohome,/href="\/photography\/collections\/"/);
 assert.match(read("media/index.html"),/href="\/photography\/"/,"Personal identity hub must link to photography");
 assert.match(read("jan-kalam/index.html"),/href="\/photography\/"/,"Personal menu must link to photography");
 assert.match(read("sitemap.xml"),/https:\/\/nimania\.net\/photography\/</,"Photography landing must be discoverable");
-assert.doesNotMatch(read("sitemap.xml"),/https:\/\/nimania\.net\/photography\/blog\/</,"Empty photoblog should not be indexed");
-for(const empty of [photoblog,photoCollections,photoArchive]){
+assert.match(read("sitemap.xml"),/https:\/\/nimania\.net\/photography\/blog\/</,"Published photoblog must be in sitemap");
+assert.match(read("sitemap.xml"),/https:\/\/nimania\.net\/photography\/blog\/station-in-the-rain\/</,"First photo must be in sitemap");
+assert.match(photoblog,/index,follow/,"Published blog index should be indexable");
+assert.match(photoblog,/ایستگاه در باران/);
+assert.match(photoblog,/station-in-the-rain-480\.webp/,"Photo listing must use optimized thumbnail");
+assert.match(photohome,/station-in-the-rain-480\.webp/,"Photo homepage must show published work");
+const firstPhoto=read("photography/blog/station-in-the-rain/index.html");
+assert.match(firstPhoto,/rel="canonical" href="https:\/\/nimania\.net\/photography\/blog\/station-in-the-rain\/"/);
+assert.match(firstPhoto,/Nima Afshar Naderi/,"Correct Latin photo credit required");
+assert.match(firstPhoto,/station-in-the-rain-1600\.webp/);
+assert.match(firstPhoto,/ایستگاه در باران/);
+assert.match(firstPhoto,/"@type":"BlogPosting"/);
+for(const file of ["station-in-the-rain-480.webp","station-in-the-rain-1600.webp"]){
+  const filePath=path.join(dist,"assets","photography",file);
+  assert.ok(fs.existsSync(filePath),"Missing optimized public photo: "+file);
+  assert.ok(fs.statSync(filePath).size<150000,"Photo should be optimized: "+file);
+}
+assert.ok(!fs.existsSync(path.join(dist,"assets","photography","DSC_0517.JPG")),"Never expose original photograph");
+for(const empty of [photoCollections,photoArchive]){
  assert.match(empty,/noindex,follow/,"Empty photo sections should not be indexed until works are added");
  assert.match(empty,/آرشیو در حال تکمیل است/);
  assert.doesNotMatch(empty,/class="ph-tile"/,"Never invent a photo portfolio entry");
