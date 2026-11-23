@@ -13,9 +13,10 @@ import {renderPromptPages} from "./prompt-pages.mjs";
 import {renderWorldBooks} from "./world-books.mjs";
 import {renderCoursePages} from "./course-pages.mjs";
 import {renderPersonalMediaPages} from "./personal-media-pages.mjs";
+import {renderPhotographyPages} from "./photography-pages.mjs";
 
 // Generated pages are the source of deployed HTML. Do not edit site-dist by hand.
-function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}, reviews = {reviews: []}, mediaCatalog = {schemaVersion:1,episodes:[]}) {
+function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}, reviews = {reviews: []}, mediaCatalog = {schemaVersion:1,episodes:[]}, photoCatalog = {schemaVersion:1,entries:[]}) {
   const BASE="/nimasdiner/";
   const ORIGIN="https://nimania.github.io/nimasdiner";
   const esc=(s)=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -317,6 +318,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
 
   renderPromptPages({add,esc,link,crumbs});
   renderPersonalMediaPages({pages,catalog:mediaCatalog});
+  renderPhotographyPages({pages,catalog:photoCatalog});
 
   // No separate indexable pages for keywords without complete content.
   const indexed=pages.filter(x=>x.index);
@@ -372,9 +374,10 @@ for(const a of editorial.articles.filter(a=>a.status==="published")){
 }
 const reviews=JSON.parse(fs.readFileSync(path.join(root,"content/reviews.json"),"utf8"));
 const mediaCatalog=JSON.parse(fs.readFileSync(path.join(root,"content/jan-kalam.json"),"utf8"));
+const photoCatalog=JSON.parse(fs.readFileSync(path.join(root,"content/photography.json"),"utf8"));
 const reviewSlugs=new Set();
 for(const r of reviews.reviews){if(reviewSlugs.has(r.slug))throw Error("Duplicate review slug: "+r.slug);reviewSlugs.add(r.slug);}
-const result=renderSite(data,editorial,seo,reviews,mediaCatalog);
+const result=renderSite(data,editorial,seo,reviews,mediaCatalog,photoCatalog);
 for(const item of result.generated){const target=path.join(out,item.path);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,item.content,"utf8");}
 
 // Keep typography and navigation consistent on every deployed HTML page.
