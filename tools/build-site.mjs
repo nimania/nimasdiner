@@ -12,9 +12,10 @@ import {renderBook5Pages} from "./book5-pages.mjs";
 import {renderPromptPages} from "./prompt-pages.mjs";
 import {renderWorldBooks} from "./world-books.mjs";
 import {renderCoursePages} from "./course-pages.mjs";
+import {renderPersonalMediaPages} from "./personal-media-pages.mjs";
 
 // Generated pages are the source of deployed HTML. Do not edit site-dist by hand.
-function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}, reviews = {reviews: []}) {
+function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}, reviews = {reviews: []}, mediaCatalog = {schemaVersion:1,episodes:[]}) {
   const BASE="/nimasdiner/";
   const ORIGIN="https://nimania.github.io/nimasdiner";
   const esc=(s)=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -30,7 +31,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const nav=[["خانه",""],["کتابخانه","library/"],["آکادمی","academy/"],["دانشنامه","guides/"],["ابزارها","tools/"],["پرامپت‌خانه","prompts/"],["ژورنال","journal/"],["کاربرگ‌ها","kits/"],["خواندنی‌ها","reading/"],["نقدهای نیما","reviews/"],["از داینر بپرس","search/"]];
   const navHTML=`<nav class="nav" aria-label="ناوبری اصلی">${nav.map(([l,p])=>`<a href="${link(p)}">${esc(l)}</a>`).join("")}</nav>`;
   const header=`<header class="topbar"><div class="wrap top-inner"><a class="brand" href="${BASE}" aria-label="خانه نیما داینر"><span>نیما داینر<span class="brand-dot">.</span></span><small dir="ltr">NIMA'S DINER</small></a>${navHTML}<div class="header-actions"><a class="get-link" href="${link("library/")}">سفارش کتاب</a><a class="get-link get-link-consultation" href="${link("consultation/")}">درخواست مشاوره</a></div></div></header>`;
-  const footer=`<footer class="footer"><div class="wrap footer-grid"><div><strong>نیما داینر</strong><p>دانش، ابزار و تصمیم بهتر برای کسب‌وکار غذا.</p></div><div><a href="${link("library/")}">کتابخانه</a><a href="${link("academy/")}">آکادمی</a><a href="${link("magazine/")}">مجله</a><a href="${link("guides/")}">دانشنامه</a><a href="${link("glossary/")}">فرهنگ اصطلاحات</a><a href="${link("prompts/")}">پرامپت‌خانه</a><a href="${link("services/")}">خدمات مشاوره</a><a href="${link("consultation/")}">مشاورهٔ ۹۰ دقیقه‌ای</a></div><div><a href="https://www.instagram.com/nimasdiner" rel="noopener">اینستاگرام</a><a href="https://t.me/nimasdiner" rel="noopener">تلگرام</a><a href="${link("about/")}">درباره داینر</a><a href="${link("privacy.html")}">حریم خصوصی</a><a href="mailto:nimania@gmail.com">تماس</a></div></div><div class="wrap footer-end">© نیما داینر · محتوای تخصصی برای صاحبان کسب‌وکار غذا</div></footer>`;
+  const footer=`<footer class="footer"><div class="wrap footer-grid"><div><strong>نیما داینر</strong><p>دانش، ابزار و تصمیم بهتر برای کسب‌وکار غذا.</p></div><div><a href="${link("library/")}">کتابخانه</a><a href="${link("academy/")}">آکادمی</a><a href="${link("magazine/")}">مجله</a><a href="${link("guides/")}">دانشنامه</a><a href="${link("glossary/")}">فرهنگ اصطلاحات</a><a href="${link("prompts/")}">پرامپت‌خانه</a><a href="${link("services/")}">خدمات مشاوره</a><a href="${link("consultation/")}">مشاورهٔ ۹۰ دقیقه‌ای</a></div><div><a href="https://www.instagram.com/nimasdiner" rel="noopener">اینستاگرام</a><a href="https://t.me/nimasdiner" rel="noopener">تلگرام</a><a href="${link("about/")}">درباره داینر</a><a href="/media/">دیگر آثار نیما</a><a href="${link("privacy.html")}">حریم خصوصی</a><a href="mailto:nimania@gmail.com">تماس</a></div></div><div class="wrap footer-end">© نیما داینر · محتوای تخصصی برای صاحبان کسب‌وکار غذا</div></footer>`;
   const crumbs=items=>`<nav class="breadcrumbs" aria-label="مسیر صفحه"><a href="${BASE}">خانه</a>${items.map(i=>`<span aria-hidden="true">/</span>${i[1]?`<a href="${link(i[1])}">${esc(i[0])}</a>`:`<span aria-current="page">${esc(i[0])}</span>`}`).join("")}</nav>`;
   const badge=(s,type="")=>`<span class="chip ${type}">${esc(s)}</span>`;
   const card=(href,kicker,title,description)=>`<article class="card"><span class="kicker">${esc(kicker)}</span><h3>${href?`<a href="${link(href)}">${esc(title)}</a>`:esc(title)}</h3><p>${esc(description)}</p>${href?`<a class="textlink" href="${link(href)}">مشاهده و مطالعه ←</a>`:""}</article>`;
@@ -315,6 +316,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
 
 
   renderPromptPages({add,esc,link,crumbs});
+  renderPersonalMediaPages({pages,catalog:mediaCatalog});
 
   // No separate indexable pages for keywords without complete content.
   const indexed=pages.filter(x=>x.index);
@@ -369,9 +371,10 @@ for(const a of editorial.articles.filter(a=>a.status==="published")){
  if(a.type==="news"&&(!a.sources?.length||!a.sourcePublishedAt))throw Error("News requires verifiable dated source: "+a.slug);
 }
 const reviews=JSON.parse(fs.readFileSync(path.join(root,"content/reviews.json"),"utf8"));
+const mediaCatalog=JSON.parse(fs.readFileSync(path.join(root,"content/jan-kalam.json"),"utf8"));
 const reviewSlugs=new Set();
 for(const r of reviews.reviews){if(reviewSlugs.has(r.slug))throw Error("Duplicate review slug: "+r.slug);reviewSlugs.add(r.slug);}
-const result=renderSite(data,editorial,seo,reviews);
+const result=renderSite(data,editorial,seo,reviews,mediaCatalog);
 for(const item of result.generated){const target=path.join(out,item.path);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,item.content,"utf8");}
 
 // Keep typography and navigation consistent on every deployed HTML page.
