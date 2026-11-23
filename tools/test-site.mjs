@@ -24,6 +24,34 @@ assert.match(read("sitemap.xml"),/https:\/\/nimania\.net\/jan-kalam\//);
 assert.ok(!fs.existsSync(path.join(dist,"jan-kalam/merchandise/index.html")),"Unverified draft must not publish");
 assert.match(read("index.html"),/href="\/media\/"/,"Diner must expose a restrained link to personal works");
 console.log("Personal media archive routes, draft exclusion, canonical, sitemap and Diner footer passed");
+
+const photoRoutes=["photography/index.html","photography/blog/index.html","photography/collections/index.html","photography/archive/index.html"];
+for(const filename of photoRoutes)assert.ok(fs.existsSync(path.join(dist,filename)),"Missing photography route: "+filename);
+const photohome=read("photography/index.html");
+const photoblog=read("photography/blog/index.html");
+const photoCollections=read("photography/collections/index.html");
+const photoArchive=read("photography/archive/index.html");
+assert.match(photohome,/دیدن، ثبت‌کردن، روایت‌کردن/);
+assert.match(photohome,/rel="canonical" href="https:\/\/nimania\.net\/photography\/"/);
+assert.match(photoblog,/rel="canonical" href="https:\/\/nimania\.net\/photography\/blog\/"/);
+assert.match(photoblog,/فوتوبلاگ/);
+assert.match(photoCollections,/مجموعه‌عکس‌ها/);
+assert.match(photoArchive,/آرشیو تصویری/);
+assert.match(photohome,/href="\/photography\/blog\/"/);
+assert.match(photohome,/href="\/photography\/collections\/"/);
+assert.match(read("media/index.html"),/href="\/photography\/"/,"Personal identity hub must link to photography");
+assert.match(read("jan-kalam/index.html"),/href="\/photography\/"/,"Personal menu must link to photography");
+assert.match(read("sitemap.xml"),/https:\/\/nimania\.net\/photography\/</,"Photography landing must be discoverable");
+assert.doesNotMatch(read("sitemap.xml"),/https:\/\/nimania\.net\/photography\/blog\/</,"Empty photoblog should not be indexed");
+for(const empty of [photoblog,photoCollections,photoArchive]){
+ assert.match(empty,/noindex,follow/,"Empty photo sections should not be indexed until works are added");
+ assert.match(empty,/آرشیو در حال تکمیل است/);
+ assert.doesNotMatch(empty,/class="ph-tile"/,"Never invent a photo portfolio entry");
+}
+const photoCatalog=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content/photography.json"),"utf8"));
+assert.ok(Array.isArray(photoCatalog.entries),"Photography catalog must be data-driven");
+assert.ok(photoCatalog.entries.every(item=>item.status!=="published"||item.photographs?.length),"Published photo entries must carry images");
+console.log("Photography portfolio, photoblog, collections, archive, canonical and non-indexing of empty galleries passed");
 const worldBookPages=["books/index.html","books/foreign/index.html","books/iranian/index.html","books/foreign/restaurant-success-by-the-numbers/index.html","books/foreign/setting-the-table/index.html","books/foreign/unreasonable-hospitality/index.html","books/foreign/the-e-myth-revisited/index.html","books/foreign/work-clean/index.html","books/iranian/ketab-mostatab-ashpazi/index.html","books/iranian/honar-e-ashpazi/index.html","books/iranian/honar-e-ashpazi-dar-gilan/index.html","books/iranian/khuraki-haye-sarzamin-baran/index.html","books/iranian/kuchak-khanom/index.html"];
 for(const p of worldBookPages){ assert.ok(fs.existsSync(path.join(dist,p)),p+" missing"); const html=read(p);assert.match(html,/rel="canonical"/);assert.match(html,/lang="fa" dir="rtl"/);}
 for(const url of ["/books/","/books/foreign/","/books/iranian/"]){assert.ok(read("sitemap.xml").includes(url),"World book index missing in sitemap: "+url);}
