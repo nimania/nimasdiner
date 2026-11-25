@@ -268,6 +268,20 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
  <div class="diner-os-next"><div><strong>مسئله‌ات به عدد و تصمیم نیاز دارد؟</strong><p>برای محاسبه هزینه، حاشیه مشارکت، قیمت‌گذاری و بررسی فرآیند، از ابزارهای اجرایی داینر استفاده کن.</p></div><a class="button button-outline" href="${link("tools/")}">ورود به ابزارهای داینر ←</a></div>
 </section>`;
   add("search/","از داینر بپرس | جست‌وجوی دانش نیما داینر","جست‌وجوی ترکیبی در مقاله‌ها، کتاب‌ها، مجله‌ها، نقدهای نیما و ابزارهای منتشرشده؛ پاسخ کوتاه همراه با لینک منبع واقعی.",search,{noindex:true,script:"site-v2.js"});
+
+  // Isolated beta entry point; keep /search/ and all existing navigation intact.
+  const chatBeta=`<section class="section"><div class="wrap"><div style="max-width:780px;margin:32px auto;padding:clamp(20px,5vw,48px);background:#fffdf5;border:1px solid #e5dba9;border-radius:24px;color:#171717">
+  <p style="font-weight:800;letter-spacing:.06em;color:#65550d">DINER OS · BETA</p>
+  <h1>امروز چه مسئله‌ای در رستورانت داری؟</h1>
+  <p>دستیار تخصصی داینر برای راه‌اندازی، مدیریت و بهبود کسب‌وکار غذا. این نسخه آزمایشی است و امکانات آن به‌تدریج تکمیل می‌شوند.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:24px 0">
+  ${["راه‌اندازی رستوران","محاسبه فودکاست","انتخاب تجهیزات","مهندسی منو","مدیریت کارکنان","پرسش از کتاب‌ها"].map(x=>`<div style="border:1px solid #e5dba9;border-radius:12px;padding:14px;background:#fff;font-weight:700">${esc(x)}</div>`).join("")}
+  </div>
+  <a href="https://app.nimania.net/coach" style="display:inline-block;background:#ffd100;color:#171717;border-radius:12px;padding:14px 24px;font-weight:800;text-decoration:none">ورود به گفت‌وگو با داینر ←</a>
+  <p style="font-size:.9rem;margin-top:18px">گفت‌وگو در برنامه داینر باز می‌شود. دسترسی مطابق سهمیه و حساب فعلی است. داده‌های زنده بازار هنوز در این نسخه فعال نیستند. اطلاعات محرمانه مشتریان، کارکنان و حساب‌های مالی را در پرسش‌ها وارد نکنید.</p>
+  <p><a href="${link("search/")}">جست‌وجو در آرشیو عمومی نیمانیا</a> · <a href="${link("tools/")}">ابزارهای محاسباتی داینر</a></p>
+  </div></div></section>`;
+  add("chat/","گفت‌وگو با داینر | Diner OS آزمایشی","ورودی نسخه آزمایشی دستیار تخصصی داینر برای کسب‌وکار غذا.",chatBeta,{noindex:true});
   
   // خواندنی‌های داینر: خبر موثق، تحلیل کاربردی و پرونده تک‌موضوعی.
   const artItems=(editorial.articles||[]).filter(a=>a.status==="published");
