@@ -3,6 +3,7 @@ import path from "node:path";
 import {renderReviews} from "./review-pages.mjs";
 import {renderManagerPages} from "./manager-pages.mjs";
 import {renderConsultation} from "./consultation-page.mjs";
+import {renderMenuQuestionnaire} from "./menu-questionnaire-page.mjs";
 import {renderBrandTopicPages} from "./brand-topic-pages.mjs";
 import {renderKnowledgeSidebar} from "./knowledge-sidebar.mjs";
 import {persianizeHTML} from "./persian-digits-html.mjs";
@@ -28,7 +29,7 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
   const OG_DEFAULT=ORIGIN+"/assets/og-cover.png";
   const BUILD_DATE=new Date().toISOString().slice(0,10);
   const absURL=u=>u?(u.startsWith("http")?u:HOST+u):OG_DEFAULT;
-  const crumbLabels={"":"خانه",b4:"دیده شو",b5:"منوی سودده",library:"کتابخانه",magazine:"مجله داینر",guides:"دانشنامه",tools:"ابزارها",journal:"ژورنال",kits:"کاربرگ‌ها",reading:"خواندنی‌ها",news:"رادار صنعت غذا",analysis:"تحلیل و تجربه",reviews:"نقدهای نیما",services:"خدمات",consultation:"مشاورهٔ ۹۰ دقیقه‌ای",glossary:"فرهنگ اصطلاحات",prompts:"پرامپت‌خانه",about:"درباره داینر","get-book":"سفارش کتاب",membership:"عضویت داینر",search:"جست‌وجو",academy:"آکادمی"};
+  const crumbLabels={"":"خانه",b4:"دیده شو",b5:"منوی سودده",library:"کتابخانه",magazine:"مجله داینر",guides:"دانشنامه",tools:"ابزارها",journal:"ژورنال",kits:"کاربرگ‌ها",reading:"خواندنی‌ها",news:"رادار صنعت غذا",analysis:"تحلیل و تجربه",reviews:"نقدهای نیما",services:"خدمات","menu-questionnaire":"پرسشنامهٔ ساخت منو",consultation:"مشاورهٔ ۹۰ دقیقه‌ای",glossary:"فرهنگ اصطلاحات",prompts:"پرامپت‌خانه",about:"درباره داینر","get-book":"سفارش کتاب",membership:"عضویت داینر",search:"جست‌وجو",academy:"آکادمی"};
   const nav=[["خانه",""],["کتابخانه","library/"],["آکادمی","academy/"],["دانشنامه","guides/"],["ابزارها","tools/"],["پرامپت‌خانه","prompts/"],["ژورنال","journal/"],["کاربرگ‌ها","kits/"],["خواندنی‌ها","reading/"],["نقدهای نیما","reviews/"],["از داینر بپرس","search/"]];
   const navHTML=`<nav class="nav" aria-label="ناوبری اصلی">${nav.map(([l,p])=>`<a href="${link(p)}">${esc(l)}</a>`).join("")}</nav>`;
   const header=`<header class="topbar"><div class="wrap top-inner"><a class="brand" href="${BASE}" aria-label="خانه نیما داینر"><span>نیما داینر<span class="brand-dot">.</span></span><small dir="ltr">NIMA'S DINER</small></a>${navHTML}<div class="header-actions"><a class="get-link" href="${link("library/")}">سفارش کتاب</a><a class="get-link get-link-consultation" href="${link("consultation/")}">درخواست مشاوره</a></div></div></header>`;
@@ -233,8 +234,10 @@ function renderSite(data, editorial = {articles: []}, keywordMap = {targets: {}}
     +section("مسیر عضویت","چه چیزی در برنامه است؟",`<div class="cards three">${card(null,"عضویت رایگان","کتابخانه من","مطالب ذخیره‌شده و ابزارهای پایه.")}${card(null,"عضویت حرفه‌ای","ژورنال و کیت‌ها","برنامه‌ریزی، پایش عملکرد و بسته‌های تخصصی.")}${card(null,"خدمات","مشاوره و ممیزی","پرونده اختصاصی با حفاظت داده و دسترسی مجاز.")}</div><p class="muted">اطلاعات مخاطبان ثبت‌شده در گذشته، بدون تبدیل خودکار به عضو حفظ می‌شوند و صرف داشتن اطلاعات تماس به معنای رضایت به خبرنامه نیست.</p>`),{noindex:true});
   add("services/","مشاوره و خدمات مدیریت رستوران و کافه","خدمات نیما داینر برای بررسی مسائل مالی، عملیات، مهندسی منو، مدیریت کارکنان و راه‌اندازی کسب‌وکار غذا.",
     `<section class="pagehead wrap">${crumbs([["خدمات",null]])}<p class="eyebrow">از آموزش تا اجرا</p><h1>خدمات و مشاوره داینر</h1><p class="lead">شناسایی مسئله واقعی کسب‌وکار، بررسی اطلاعات و پیشنهاد مسیر اصلاح. برای جلسهٔ تشخیصی ۹۰ دقیقه‌ای، شرح خدمات، تعرفه‌ها و مسیر رزرو به‌صورت شفاف در صفحهٔ اختصاصی آمده است.</p><div class="actions"><a class="button button-dark" href="${link("consultation/")}">جزئیات مشاورهٔ ۹۰ دقیقه‌ای ←</a><a class="button button-outline" href="https://t.me/nimaafsharnaderi" target="_blank" rel="noopener noreferrer">درخواست جلسه در تلگرام</a><a class="button button-outline" href="${link("consulting/")}">ابزار فعلی پرونده مشاوره</a></div><p class="muted">هشدار: نسخه فعلی ابزار پرونده مشاوره اطلاعات را بدون رمزگذاری در همین مرورگر نگه می‌دارد؛ روی دستگاه مشترک یا برای اطلاعات بسیار محرمانه از آن استفاده نکنید.</p></section>`
-    +section("حوزه‌های مسئله","چه موضوعاتی بررسی می‌شوند؟",`<div class="cards three">${card(null,"۱","اقتصاد و قیمت‌گذاری","فروش، بهای تمام‌شده، هزینه‌ها و جریان نقدی.")}${card(null,"۲","عملیات و کارکنان","رسپی، شیفت، تدارکات، کیفیت و ضایعات.")}${card(null,"۳","راه‌اندازی و توسعه","انتخاب مدل، بودجه، منو و برنامه رشد.")}</div>`));
+    +section("حوزه‌های مسئله","چه موضوعاتی بررسی می‌شوند؟",`<div class="cards three">${card(null,"۱","اقتصاد و قیمت‌گذاری","فروش، بهای تمام‌شده، هزینه‌ها و جریان نقدی.")}${card(null,"۲","عملیات و کارکنان","رسپی، شیفت، تدارکات، کیفیت و ضایعات.")}${card(null,"۳","راه‌اندازی و توسعه","انتخاب مدل، بودجه، منو و برنامه رشد.")}</div>`)
+    +section("ساخت منو از صفر","فست‌فود تازه راه می‌اندازید؟",`<div class="cards two">${card("services/menu-questionnaire/","پرسشنامه","پرسشنامهٔ ساخت منوی فست‌فود","برای خدمت ساخت منو، اول این پرسشنامه را پر کنید و متن پاسخ‌ها را در تلگرام بفرستید.")}</div>`));
   renderConsultation({add,section,crumbs,link,esc});
+  renderMenuQuestionnaire({add,crumbs,esc});
   renderBook4Pages({add,section,crumbs,link,esc,orderURL:pricing.orderChannel||"https://t.me/nimaafsharnaderi"});
   renderBook5Pages({add,section,crumbs,link,esc,orderURL:pricing.orderChannel||"https://t.me/nimaafsharnaderi"});
   renderGlossary({glossary:data.glossary,entries:data.glossaryEntries,add,crumbs,link,esc});
