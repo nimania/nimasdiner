@@ -677,3 +677,16 @@ assert.ok(read("index.html").includes("/academy/"),"Homepage lacks academy entry
 assert.ok(read("library/01/index.html").includes("/academy/restaurant-management-101/"),"Yellow book lacks course entry");
 assert.ok(read("assets/academy.css").includes(".academy-video"),"Academy styling missing from output");
 console.log("Academy course, lesson, SEO, availability, and cross-links passed");
+
+// Menu-building intake questionnaire (owner request, 27 Nov 2026): new indexable page, browser-only answers.
+{
+  const mq=read("services/menu-questionnaire/index.html");
+  assert.match(mq,/<link rel="canonical" href="https:\/\/nimania\.net\/services\/menu-questionnaire\/">/);
+  assert.match(mq,/content="index,follow"/);
+  assert.match(mq,/id="menu-questionnaire"/);
+  assert.match(mq,/assets\/menu-questionnaire\.js/);
+  assert.match(mq,/https:\/\/t\.me\/nimaafsharnaderi/);
+  assert.doesNotMatch(mq,/<form[^>]*\baction=/,"Questionnaire must not post answers anywhere");
+  assert.match(read("services/index.html"),/services\/menu-questionnaire\//);
+  console.log("Menu-building questionnaire page passed");
+}
